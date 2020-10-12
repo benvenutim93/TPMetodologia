@@ -40,9 +40,11 @@ class CinemaController
         $this->showCinemaList();
     }
 
-    public function Remove ($name, $address)
+    public function Remove ($name)
     {
-        #hacer formulario para remover un cine o varios.    
+            $this->cineRepo->Remove($name);
+
+            $this->showCinemaList();
     }
 
 

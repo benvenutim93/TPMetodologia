@@ -29,6 +29,17 @@
             return $this->cinemaList;
         }
 
+        public function Remove($name)
+        {
+            $this->RetrieveData();
+
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use($name){
+                return $cinema->getName() != $name;
+            });
+
+            $this->SaveData();
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();

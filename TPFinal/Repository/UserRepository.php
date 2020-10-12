@@ -30,6 +30,18 @@
             return $this->userList;
         }
 
+        
+        public function Remove($userName)
+        {
+            $this->RetrieveData();
+
+            $this->userList = array_filter($this->userList, function($users) use($userName){
+                return $users->getUsername() != $userName;
+            });
+
+            $this->SaveData();
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();

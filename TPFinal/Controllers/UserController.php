@@ -67,6 +67,20 @@ class UserController
         }
     }
 
+    public function Remove ($userName)
+    {
+            $this->userRepo->Remove($userName);
+
+            $this->showListUsersView();
+    }
+
+    public function showListUsersView()
+    {
+        $usersList = $this->userRepo->GetAll();
+        require_once(VIEWS_PATH . "userList.php");
+    }
+
+
 }
 
 
