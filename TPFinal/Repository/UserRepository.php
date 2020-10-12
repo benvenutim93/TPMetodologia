@@ -1,15 +1,16 @@
 <?php
-    namespace Repositories;
+    namespace Repository;
 
     use Models\User as User;
 
     class UserRepository
     {        
-        private $userList = array();
+        private $userList;
         private $fileName;
 
         public function __construct()
         {
+            $this->userList = array();
             $this->fileName = dirname(__DIR__)."/Data/users.json";
         }
 

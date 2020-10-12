@@ -14,9 +14,16 @@ class User
     private $birthDate;
     #private $tarjeta;
     
-    public function __construct()
+    public function __construct($name = "", $lastName = "", $userName = "", $pass = "", $mail = "", $dni = "", $birthDate = "")
     {
-        
+        $this->name = $name;
+        $this->lastName = $lastName;
+        $this->nauserName = $userName;
+        $this->pass = $pass;
+        $this->mail = $mail;
+        $this->dni = $dni;
+        $this->birthDate = $birthDate;
+
     }
     
 

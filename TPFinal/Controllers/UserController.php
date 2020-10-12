@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\User as User;
 use Repository\UserRepository as U_Repo;
 
 class UserController
@@ -15,7 +16,7 @@ class UserController
 
     public function showPrincipalView ()
     {
-        require_once(VIEWS_PATH."board.php");
+        require_once(VIEWS_PATH . "board.php");
     }
 
     public function login ($mail, $password)
@@ -29,6 +30,41 @@ class UserController
             }
         }
     }
+
+    public function userNameExists ($userName)
+    {
+        $array = $this->userRepo->GetAll();
+
+        foreach ($array as $user)
+        {
+            if($user->getUserName() == $userName)
+                return true;
+        }
+        return false;
+    }
+
+    public function showSingInView()
+    {
+        require_once(VIEWS_PATH . "signIn.php");
+    }
+
+    public function showLoginView ()
+    {
+        require_once(VIEWS_PATH . "login-form.php");
+    }
+
+    public function signIn ($name, $lastName, $userName, $pass, $mail, $dni, $birthDate)
+    {
+        if ($this->userNameExists($userName))
+            $this->showSingInView();
+        else 
+        {
+            $user = new User($name, $lastName, $userName, $pass, $mail, $dni, $birthDate);
+            $this->userRepo->Add($user);
+            $this->showLoginView();
+        }
+    }
+
 }
 
 

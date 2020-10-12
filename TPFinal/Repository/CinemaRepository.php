@@ -1,16 +1,16 @@
 <?php
-    namespace Repositories;
+    namespace Repository;
 
     use Models\Cinema as Cinema;
 
-    class StudentRepository 
+    class CinemaRepository 
     {        
         private $cinemaList = array();
         private $fileName;
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."/Data/students.json";
+            $this->fileName = dirname(__DIR__)."/Data/cinema.json";
         }
 
         public function Add(Cinema $cine)
