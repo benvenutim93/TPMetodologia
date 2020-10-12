@@ -2,7 +2,7 @@
 
 define("ROOT", dirname(__DIR__) . "/");
 //Path to your project's root folder
-define("FRONT_ROOT", "/Proyectos/TP6/ExerciseOne/");
+define("FRONT_ROOT", "/Proyectos/TPFinal");
 define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "layout/styles/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");

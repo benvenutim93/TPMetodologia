@@ -3,7 +3,7 @@ namespace Models;
 
 #use Models\Tarjeta as Tarjeta;
 
-class Client
+class User
 {
     private $name;
     private $lastName;
@@ -11,7 +11,7 @@ class Client
     private $pass;
     private $mail;
     private $dni;
-    private $dateOfBirth;
+    private $birthDate;
     #private $tarjeta;
     
     public function __construct()
@@ -141,22 +141,24 @@ class Client
         return $this;
     }
 
+
+
     /**
-     * Get the value of dateOfBirth
+     * Get the value of birthDate
      */ 
-    public function getDateOfBirth()
+    public function getBirthDate()
     {
-        return $this->dateOfBirth;
+        return $this->birthDate;
     }
 
     /**
-     * Set the value of dateOfBirth
+     * Set the value of birthDate
      *
      * @return  self
      */ 
-    public function setDateOfBirth($dateOfBirth)
+    public function setBirthDate($birthDate)
     {
-        $this->dateOfBirth = $dateOfBirth;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
