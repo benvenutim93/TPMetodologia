@@ -1,5 +1,5 @@
 <div class="user-register">
-    <form class="form-signin" action= <?php FRONT_ROOT . "User/signIn" ?> method="POST">
+    <form class="form-signin" action= "<?php FRONT_ROOT?>signIn" method="">
             <!--Cambiar logo -->
             <img class="mb-4" src="img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
@@ -26,15 +26,28 @@
                 <div class="col">
                 <label for="birthDateUser" >Fecha de nacimiento</label>
                     <!--I N P U T-->
-                    <input type="date" id="birthDateUser" class="form-control" placeholder="Fecha de nacimiento " name="birth" required autofocus>
+                    <input type="date" id="birthDateUser" class="form-control" placeholder="Fecha de nacimiento " name="birthDate" required autofocus>
 
                 </div>
             </div>
-            
-            <label for="inputPassword" >Ingrese contraseña</label>
+
+            <div class="row">
+                <label for="inputEmail"> Email </label>
+                <input type = "mail" id="inputEmail" class="form-control" placeholder="Email" name= "mail" required>
+            </div>
+            <div class="row">
+                <div class="col">
+            <label for="inputUserName" >Nombre Usuario</label>
             <!--I N P U T-->
-            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="password" required>
-        <!-- B O T O N -->
+            <input type="text" id="inputUserName" class="form-control" placeholder="UserName"  name="userName" required>
+</div>
+<div class="col">
+            <label for="inputPassword">Contraseña</label>
+            <!--I N P U T-->
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="pass" required>
+</div>
+        </div>
+            <!-- B O T O N -->
              <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
              
      </form>

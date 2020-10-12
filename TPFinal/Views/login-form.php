@@ -1,5 +1,5 @@
 <div class="content-login">
-    <form class="form-signin" action= <?php FRONT_ROOT . "User/login" ?> method="GET">
+    <form class="form-signin" action= "<?php FRONT_ROOT?>User/login" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
@@ -16,7 +16,7 @@
              <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
      </form>
          <!--R E G I S T R A R S E -->
-     <form class="form-signin" action= <?php FRONT_ROOT . "User/signIn" ?> method="GET">
+     <form class="form-signin" action= "<?php FRONT_ROOT?>User/showSingInFormView"  method="GET">
              <button class="btn btn-lg btn-info btn-block" type="submit"> Registrarse </button>
      </form>
          <!-- F A C E B O O K -->

@@ -18,6 +18,11 @@ class MoviesController
         require_once(VIEWS_PATH . "moviesView.php");
     }
 
+    public function showSearchMovieView()
+    {
+        require_once(VIEWS_PATH . "searchMovie.php");
+    }
+
     public function Add ($video, $adult, $original_language, $original_title, $genre_id, $title, $overview, $release_date)
     {
         $flag = 0;
@@ -48,6 +53,11 @@ class MoviesController
 
         $this->showMoviesListView();
 
+    }
+
+    public function searchMovie ($title)
+    {
+        echo "llego aca";
     }
 }
 

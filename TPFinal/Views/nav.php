@@ -7,11 +7,11 @@
     <ul class="navbar-nav mr-auto">
        <!-- LISTADO -->
       <li class="nav-item ">
-        <a class="nav-link" href= <?php VIEWS_PATH . "moviesView.php"?>>Cartelera</a>
+        <a class="nav-link" href= "<?php FRONT_ROOT?>Movies/showMoviesListView">Cartelera</a>
       </li>
       <!-- LISTADO -->
       <li class="nav-item ">
-        <a class="nav-link" href="#">Buscar película</a>
+        <a class="nav-link" href="<?php FRONT_ROOT?>Movies/showSearchMovieView">Buscar película</a>
       </li>
       <!-- DROPDOWN
       <li class="nav-item dropdown ">

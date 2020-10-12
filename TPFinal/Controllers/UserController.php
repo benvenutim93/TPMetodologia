@@ -24,7 +24,7 @@ class UserController
         $array = $this->userRepo->GetAll();
         foreach ($array as $user)
         {
-            if ($user->getMail() == $mail && $user->getPassword() == $password)
+            if ($user->getMail() == $mail && $user->getPass() == $password)
             {
                 $this->showPrincipalView();
             }
@@ -43,7 +43,7 @@ class UserController
         return false;
     }
 
-    public function showSingInView()
+    public function showSingInFormView()
     {
         require_once(VIEWS_PATH . "signIn.php");
     }
@@ -53,10 +53,12 @@ class UserController
         require_once(VIEWS_PATH . "login-form.php");
     }
 
-    public function signIn ($name, $lastName, $userName, $pass, $mail, $dni, $birthDate)
+
+
+    public function signIn ($name = "", $lastName = "", $userName = "", $pass = "", $mail = "", $dni = "", $birthDate = "")
     {
         if ($this->userNameExists($userName))
-            $this->showSingInView();
+            $this->showSingInFormView();
         else 
         {
             $user = new User($name, $lastName, $userName, $pass, $mail, $dni, $birthDate);
