@@ -6,9 +6,9 @@ include_once("nav.php");
 <div class="content-login">
     <!-- div para poner el fondo -->
     <div class="admin-login">
-        <form class="form-signin" action="<?php FRONT_ROOT?>login" method="POST">
+        <form class="form-signin" action="<?php echo FRONT_ROOT?>Admin/login" method="POST">
                 <!--Cambiar logo -->
-                <img class="mb-4" src="img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
+                <img class="mb-4" src="<?php echo FRONT_ROOT?>Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
                 <!--Sacando el sr-only te muestra el titulo(LABEL)-->
                 <!-- L A B E L -->

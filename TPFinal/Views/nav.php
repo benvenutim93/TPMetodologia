@@ -13,17 +13,10 @@
       <li class="nav-item ">
         <a class="nav-link" href="<?php echo FRONT_ROOT?>Movies/showSearchMovieView">Buscar película</a>
       </li>
-      <!-- DROPDOWN
-      <li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Seleccionar Cines</a>
-          
-          <div class="dropdown-menu" aria-labelledby="dropdown05">
-            <a class="dropdown-item" href="#">Nombre cine</a>
-            <a class="dropdown-item" href="#">Nombre cine</a>
-            <a class="dropdown-item" href="#">Nombre cine</a>
-          </div>
-      </li>-->
     </ul>
+    <a class="nav-link" href="#">Cerrar Sesion</a>
+    <a class="nav-link" href="#">Iniciar Sesion</a>
+
 
   </div>
 </nav>

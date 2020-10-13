@@ -24,7 +24,7 @@ include_once("nav.php");
                     <h2>Sinopsis</h2>
                     <ul>
                             <!-- S I N O P S I S-->
-                            <li> <p><?php echo $movie->getOverview();?></p> </li>
+                            <li> <p ><?php echo $movie->getOverview();?></p> </li>
                             <!-- A D U L T-->
                             <li> <p>Adult: <?php echo changeAdult($movie->getAdult());?></p>   </li>
                             <!-- L E N G U A J E -->

@@ -53,5 +53,6 @@ class AdminController
         $repo->Add($cinema);
         $this->showOPAdminsView();
     }
+
 }
 ?>

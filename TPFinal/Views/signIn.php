@@ -4,7 +4,7 @@ include_once("nav.php");
 ?>
 
 <div class="user-register">
-    <form class="form-signin" action= "<?php FRONT_ROOT?>signIn" method="POST">
+    <form class="form-signin" action= "<?php echo FRONT_ROOT?>signIn" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
