@@ -39,7 +39,7 @@ class Movie {
      */ 
     public function setPopularity($popularity)
     {
-        $this->populrity = $popularity;
+        $this->popularity = $popularity;
 
         return $this;
     }

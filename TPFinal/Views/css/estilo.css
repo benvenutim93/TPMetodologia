@@ -58,3 +58,38 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.cartelera-content{
+ 
+  width: 90%;
+  border: 1px  rgb(7, 1, 32);
+  box-shadow: 0px 0px 10px 10px  rgb(15, 0, 0);
+  background-color: hsl(0, 0%, 67%);
+
+  margin: auto;
+}
+.text-center{
+  text-align: center;
+}
+
+.imagen-cartelera{
+
+  width: 300px;
+  height: 550px;
+  border: 2px solid red ;
+}
+li .none{
+  margin-left: 2em;
+  list-style: none;
+}
+.user-register{
+  background-color: hsl(0, 0%, 67%);
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  width:1000px; 
+  margin: auto;
+  margin-top: 75px;
+  border-radius: 5%;
+  border: 1px  rgb(7, 1, 32);
+  box-shadow: 0px 0px 10px 0px  rgb(15, 0, 0);
+}

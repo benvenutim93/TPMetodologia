@@ -1,11 +1,11 @@
 [
     {
-        "name": "Mariana",
-        "lastName": "Benvenuti",
-        "userName": null,
-        "pass": "1993-05-10",
+        "name": "Marian",
+        "lastName": "Benve",
+        "dni": "123123",
+        "birthDate": "1993-05-10",
         "mail": "asd@asd",
-        "dni": "mbenve",
-        "birthDate": "asd"
+        "userName": "mbenve",
+        "pass": "asd"
     }
 ]

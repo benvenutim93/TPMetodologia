@@ -1,3 +1,8 @@
+<?php
+include_once("header.php");
+include_once("nav.php");
+?>
+
 <div class="content-login">
     <form class="form-signin" action= "<?php FRONT_ROOT?>User/login" method="POST">
             <!--Cambiar logo -->
@@ -23,6 +28,11 @@
      <form class="form-signin" action="" method="">
              <button class="btn btn-lg btn-info btn-block" type="submit"> Ingresar con Facebook</button>
      </form>
+     <p>¿Tienes cuenta Admin? <a href="<?php FRONT_ROOT?>Admin/loginForm">Click aqui</a></p>
     <p class="mt-5 mb-3 ">&copy;<strong> Los supervivientes</strong> -2020</p>
     
 </div>
+
+<?php
+include_once("footer.php");
+?>

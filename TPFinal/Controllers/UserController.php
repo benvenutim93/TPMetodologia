@@ -26,6 +26,7 @@ class UserController
         {
             if ($user->getMail() == $mail && $user->getPass() == $password)
             {
+                $_SERVER["logged"] = $user;
                 $this->showPrincipalView();
             }
         }

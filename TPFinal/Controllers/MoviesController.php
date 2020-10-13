@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Models\Movie as Movie;
 use Repository\MoviesRepository as M_Repo;
+use Repository\GenreRepository as G_Repo;
 
 class MoviesController
 {
@@ -15,6 +16,8 @@ class MoviesController
 
     public function showMoviesListView()
     {
+        $moviesList = $this->moviesDao->GetAll();
+        $genreRepo = new G_Repo();
         require_once(VIEWS_PATH . "moviesView.php");
     }
 

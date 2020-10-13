@@ -1,5 +1,10 @@
+<?php
+include_once("header.php");
+include_once("nav.php");
+?>
+
 <div class="user-register">
-    <form class="form-signin" action= "<?php FRONT_ROOT?>signIn" method="">
+    <form class="form-signin" action= "<?php FRONT_ROOT?>signIn" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
@@ -40,13 +45,13 @@
             <label for="inputUserName" >Nombre Usuario</label>
             <!--I N P U T-->
             <input type="text" id="inputUserName" class="form-control" placeholder="UserName"  name="userName" required>
-</div>
-<div class="col">
+            </div>
+            <div class="col">
             <label for="inputPassword">Contraseña</label>
             <!--I N P U T-->
             <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="pass" required>
-</div>
-        </div>
+            </div>
+            </div>
             <!-- B O T O N -->
              <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
              
@@ -56,3 +61,7 @@
     <p class="mt-5 mb-3 ">&copy;<strong> Los supervivientes</strong> -2020</p>
     
 </div>
+
+<?php
+include_once("footer.php");
+?>

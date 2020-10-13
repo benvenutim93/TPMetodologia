@@ -50,12 +50,13 @@
             {
                 $valuesArray["name"] = $user->getName();
                 $valuesArray["lastName"] = $user->getLastName();
-                $valuesArray["userName"] = $user->getUserName();
-                $valuesArray["pass"] = $user->getPass();
-                $valuesArray["mail"] = $user->getMail();
                 $valuesArray["dni"] = $user->getDni();
                 $valuesArray["birthDate"] = $user->getBirthDate();
-
+                $valuesArray["mail"] = $user->getMail();
+                $valuesArray["userName"] = $user->getUserName();
+                $valuesArray["pass"] = $user->getPass();
+                
+                
                 array_push($arrayToEncode, $valuesArray);
             }
 
@@ -79,11 +80,11 @@
                     $user = new User();
                     $user->setName($valuesArray["name"]);
                     $user->setLastName($valuesArray["lastName"]);
-                    $user->setUserName($valuesArray["userName"]);
-                    $user->setPass($valuesArray["pass"]);
-                    $user->setMail($valuesArray["mail"]);
                     $user->setDni($valuesArray["dni"]);
                     $user->setBirthDate($valuesArray["birthDate"]);
+                    $user->setMail($valuesArray["mail"]);
+                    $user->setUserName($valuesArray["userName"]);
+                    $user->setPass($valuesArray["pass"]);
 
                     array_push($this->userList, $user);
                 }
