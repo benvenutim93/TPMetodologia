@@ -36,11 +36,10 @@ class GenreRepository
 
             foreach ($this->genreList as $value)
             {
-                foreach ($value as $aux)
-                {
-                    if ($aux->getId() == $id)
-                        return $aux->getName();
-                }
+            
+                    if ($value->getId() == $id)
+                        return $value->getName();
+                
             }
             
         }

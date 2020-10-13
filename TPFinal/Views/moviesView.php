@@ -1,6 +1,7 @@
 <?php
 include_once("header.php");
 include_once("nav.php");
+
 ?>
 
 <div class="cartelera-content">
@@ -33,11 +34,14 @@ include_once("nav.php");
                             <!-- G E N E R O--> 
                                 <ul class="list-group list-group-horizontal ">
                                     <?php
-                                    $arrayGenres = $movie->getGenre_ids();
+                                  $arrayGenres = $movie->getGenre_ids();
+                                   
                                     foreach($arrayGenres as $genre)
                                     {?>
+                                    <!-- 
                                     <li class="none "> <?php echo $genreRepo->GetOne($genre);?></li>
-                                    <li class="none "> <strong>-</strong> </li>
+                                    <li class="none "> <strong>-</strong> </li> -->
+                                      <?php echo $genreRepo->GetOne($genre);?>-
                                     <?php }?>
                                 </ul> 
                             </li>
