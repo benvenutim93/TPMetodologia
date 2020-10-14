@@ -6,11 +6,11 @@ require_once("nav.php");
 
 
 <button class="btn btn-lg btn-dark btn-block" type="submit">
- <a href="<?php echo VIEWS_PATH?>showOPUsersView" style="black">Realizar Operaciones Admins</a></button>
+ <a href="<?php echo FRONT_ROOT?>Admin/showOPUsersView" style="black">Realizar Operaciones Admins</a></button>
 
 
 <button class="btn btn-lg btn-dark btn-block" type="submit">
- <a href="<?php echo VIEWS_PATH?>showOPUsersView" style="black">Realizar Operaciones de Usuarios</a></button>
+ <a href="<?php echo FRONT_ROOT?>Admin/showOPUsersView" style="black">Realizar Operaciones de Usuarios</a></button>
 
 
 <?php

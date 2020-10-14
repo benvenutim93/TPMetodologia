@@ -54,6 +54,11 @@ class UserController
         require_once(VIEWS_PATH . "login-form.php");
     }
 
+    public function showLogOutView()
+    {
+        require_once(VIEWS_PATH . "logOutView.php");
+    }
+
 
 
     public function signIn ($name = "", $lastName = "", $userName = "", $pass = "", $mail = "", $dni = "", $birthDate = "")
