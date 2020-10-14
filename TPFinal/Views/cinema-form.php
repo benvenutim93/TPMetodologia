@@ -1,5 +1,5 @@
 <div class="content-login">
-    <form class="form-signin" action= "<?php echo FRONT_ROOT?>Admin/registerCinema" method="POST">
+    <form class="form-signin" action= "<?php echo FRONT_ROOT?>Cinema/Add" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Cine</h1>

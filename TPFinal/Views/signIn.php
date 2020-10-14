@@ -6,7 +6,7 @@ include_once("nav.php");
 <div class="user-register">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>signIn" method="POST">
             <!--Cambiar logo -->
-            <img class="mb-4" src="img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
+            <img class="mb-4" src="<?php echo IMG_PATH;?>logo.jpeg" title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
             <!--Sacando el sr-only te muestra el titulo(LABEL)-->
             <!-- L A B E L -->

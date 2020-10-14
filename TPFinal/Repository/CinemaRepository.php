@@ -28,6 +28,17 @@
 
             return $this->cinemaList;
         }
+        
+        public function GetOne ($name)
+        {
+            $this->RetrieveData();
+
+            foreach ($this->cinemaList as $value)
+            {
+                    if ($value->getName() == $name)
+                        return $value;
+            }
+        }
 
         public function Remove($name)
         {
@@ -80,6 +91,12 @@
                     array_push($this->cinemaList, $cine);
                 }
             }
+        }
+
+        public function setCinemaList ($list)
+        {
+            $this->cinemaList = $list;
+            $this->SaveData();
         }
     }
 ?>

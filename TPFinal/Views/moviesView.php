@@ -16,7 +16,7 @@ include_once("nav.php");
                 <?php foreach ($moviesList as $movie){?>
                 <!-- Fotito facherita -->
                 <td><div class="imagen-cartelera">
-                Imagen facherita
+                <h1 class="text-center"> Imagen facherita</h1>
                 </div>
                 </td>
                 <!-- contenido -->

@@ -25,9 +25,22 @@ class CinemaController
         return false;
     }
 
-    public function showCinemaList()
+    public function showCinemaListAdmin()
     {
-        require_once(VIEWS_PATH . "cinemaList.php");
+        $arrayC= $this->cineRepo->GetAll();
+        require_once(VIEWS_PATH . "cinemaListAdmin.php");
+    }
+    public function showCinemaForm()
+    {
+        require_once(VIEWS_PATH. "cinema-form.php");
+    }
+
+    public function showCinemaDelete(){
+        require_once(VIEWS_PATH . "bajaCinema.php");
+    }
+    public function showCinemaModify($name){
+        $movie=$this->cineRepo->GetOne($name);
+        require_once(VIEWS_PATH . "modify-form-cinema.php");
     }
 
     public function Add ($name, $address, $capacity, $ticketValue)
@@ -37,18 +50,33 @@ class CinemaController
             $cine = new Cine($name, $address, $capacity, $ticketValue);
             $this->cineRepo->Add($cine);
         }
-        $this->showCinemaList();
+        $this->showCinemaListAdmin();
     }
 
+    
     public function Remove ($name)
     {
             $this->cineRepo->Remove($name);
 
-            $this->showCinemaList();
+            $this->showCinemaListAdmin();
     }
 
+    public function Modify($name, $address, $capacity,$ticketValue){
+       $todo = $this->cineRepo->GetAll();
 
+       foreach($todo as $aux)
+       {
+    
+            if($name==$aux->getName())
+            {
+                $aux->setName($name);
+                $aux->setAddress($address);
+                $aux->setCapacity($capacity);
+                $aux->setTicketValue($ticketValue);
+            }
+       }
+       $this->cineRepo->setCinemaList($todo);
+       $this->showCinemaListAdmin();
+    }
 }
-
-
 ?>

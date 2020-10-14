@@ -14,10 +14,7 @@ class AdminController
     {
         require_once(VIEWS_PATH . "eleccion.php");
     }
-    public function showCinemaForm()
-    {
-        require_once(VIEWS_PATH. "cinema-form.php");
-    }
+    
     public function showOPAdminsView()
     {
         require_once(VIEWS_PATH . "boardAdmin.php");
@@ -47,12 +44,5 @@ class AdminController
         }
 
     }
-    public function registerCinema($name,$address,$capacity,$ticketValue){
-        $repo= new C_Repo();
-        $cinema= new Cinema($name,$address,$capacity,$ticketValue);
-        $repo->Add($cinema);
-        $this->showOPAdminsView();
-    }
-
 }
 ?>

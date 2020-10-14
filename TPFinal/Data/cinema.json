@@ -1,14 +1,8 @@
 [
     {
         "name": "aldrey",
-        "address": "centro",
-        "capacity": "70",
-        "ticketValue": "400"
-    },
-    {
-        "name": "hola",
-        "address": "Espa\u00f1a 3571",
-        "capacity": "55",
-        "ticketValue": "450"
+        "address": "centro ",
+        "capacity": "60",
+        "ticketValue": "600  "
     }
 ]

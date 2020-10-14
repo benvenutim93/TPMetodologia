@@ -15,9 +15,6 @@ class Cinema {
         $this->capacity = $capacity;   
         $this->ticketValue = $ticketValue;
     }
-    
-
-
 
     /**
      * Get the value of name
