@@ -32,6 +32,7 @@ class MoviesController
     {
         $genreRepo = new G_Repo();
         $genreRepo = $genreRepo->GetAll();
+        $pelisDates = $this->fechasPelis();
         require_once(VIEWS_PATH . "searchMovie.php");
     }
 
@@ -128,32 +129,48 @@ class MoviesController
         $array = $this->moviesDao->GetAll();
         $moviesList=array(); 
 
-        foreach($array as $movie){
+     
 
-            $date = $movie->getRealease_date();
+            foreach($array as $movie){
+                $date = $movie->getRelease_date();
 
-            $año = array_shift(explode('-', $date)); //guarda el primer elemento (año) en la variable
+                $fecha = explode('-', $date);
+                $años = array_shift($fecha);
+                
+                
+                if($años == $year){
+                    array_push($moviesList, $movie);
+                }
 
-            if ($año == $year){
-                array_push($moviesList, $movie);
+                /* Muestra por fecha especifica
+                if ($date == $year){
+                    array_push($moviesList, $movie);
+                 }*/
+                
             }
 
-        }
+       $this->showOnlyMovie($moviesList);
 
-        $moviesList = $this->moviesDao->GetAll();
+    } 
+    public function fechasPelis(){
+
+        $repom= new M_Repo();
+        $moviesList = $repom->GetAll();
         $dates= array();
 
         foreach($moviesList as $movie){ 
-            $date = $movie->getRealease_date();
-            $año = array_shift(explode('-', $date)); //guarda el primer elemento (año) en la variable
-            array_push($dates, $año);
+            $date = $movie->getRelease_date();
+
+            
+            $fecha = explode('-', $date);
+            $años = array_shift($fecha);
+            
+            array_push($dates,$años);
+            //array_push($dates, $date); Muestra por fecha especifica
         }
-       $dates = array_unique($dates);
-
-
-        $this->showSearchMovieView();
-
-    } 
+        $nonRepeat = array_unique($dates);
+       return $nonRepeat;
+    }
 }
 
 

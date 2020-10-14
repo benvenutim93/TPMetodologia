@@ -1,5 +1,5 @@
 <div class="content-login">
-    <form class="form-signin" action= "<?php echo FRONT_ROOT?>registerCinema" method="POST">
+    <form class="form-signin" action= "<?php echo FRONT_ROOT?>Admin/registerCinema" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Cine</h1>
@@ -17,7 +17,7 @@
             <!--I N P U T-->
             <input type="text" id="capacity" class="form-control" placeholder="Capacidad"  name="capacity" required>
             <!-- L A B E L -->
-            <label for="valticketValueue" class="sr-only">Ingrese Valor de Entrada</label>
+            <label for="ticketValue" class="sr-only">Ingrese Valor de Entrada</label>
             <!--I N P U T-->
             <input type="text" id="ticketValue" class="form-control" placeholder="Valor Entrada"  name="ticketValue" required>
 

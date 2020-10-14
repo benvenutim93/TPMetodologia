@@ -1,7 +1,7 @@
 <?php
 include_once("header.php");
 include_once("nav.php");
-var_dump($dates);
+
 ?>
 <div class="content-login">
     <form action= "<?php echo FRONT_ROOT?>Movies/searchMovieTitle" method="GET">
@@ -42,7 +42,7 @@ var_dump($dates);
                 <select id="inputState" name="year" class="form-control">
                         <option value="" disabled selected> Seleccione uno </option>
                         <?php
-                             foreach($dates as $date){ ?>
+                             foreach($pelisDates as $date){ ?>
                                 <option value="<?php echo $date;?>"  > <?php echo $date;?></option>
                             <?php } ?>
 

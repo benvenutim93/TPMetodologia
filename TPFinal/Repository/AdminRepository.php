@@ -37,7 +37,7 @@ class AdminRepository{
         $this->RetrieveData();
 
         $this->adminlist = array_filter($this->adminlist, function($users) use($userName){
-            return $users->getUsername() != $userName;
+            return $users->getUsername() != $userName; //WTF
         });
 
         $this->SaveData();

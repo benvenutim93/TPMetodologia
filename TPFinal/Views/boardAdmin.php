@@ -4,8 +4,8 @@
     <ul>
         <li>Gestionar Cines
             <ul>
-                <li><a href="<?php echo FRONT_ROOT?>showCinemaForm">Alta cine</a> </li>
-                <li><a href="">Baja cine</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Admin/showCinemaForm">Alta cine</a> </li>
+                <li><a href="<?php echo FRONT_ROOT?>Admin/">Baja cine</a></li>
                 <li><a href="">Modificar cine</a></li>
             </ul>
         </li>
