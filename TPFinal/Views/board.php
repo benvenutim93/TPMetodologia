@@ -3,11 +3,10 @@ include_once("header.php");
 include_once("nav.php");
 ?>
 
-<?php
 
-echo "hola estoy aca";
-
-?>
+<div class="content-grande">
+<h1>VISTA PRINCIPAL</h1>
+</div>
 
 
 <?php

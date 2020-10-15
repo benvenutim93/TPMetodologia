@@ -28,6 +28,13 @@
                      <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Ingresar Pelicula a  Cartelera </a>
             </div>
         </div>
-
+        <div class="volver">
+        <div class="row">
+            <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView">
+            <button type="submit" class="btn btn-lg btn-light btn-block">VOLVER</button>
+            </form>
+        </div>
+        </div>
 </div>
+
 

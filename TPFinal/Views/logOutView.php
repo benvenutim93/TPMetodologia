@@ -2,11 +2,8 @@
 include_once("header.php");
 include_once("nav.php");
 ?>
-<?php
 
-echo "Adiocito";
-
-?>
+<p> VUELVA PRONTO! </p>
 
 <?php
 include_once("footer.php");
