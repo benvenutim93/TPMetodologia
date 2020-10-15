@@ -23,4 +23,10 @@
 
         <!-- B O T O N -->
              <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
+
      </form>
+     <div class="volver">
+    <div class="row">
+    <a class="btn btn-lg btn-light btn-block" href="<?php echo FRONT_ROOT ?>Cinema/showCinemaListAdmin" >Volver atras</a>
+    </div>
+</div>

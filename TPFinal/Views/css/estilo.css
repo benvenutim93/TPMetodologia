@@ -96,6 +96,10 @@ body {
 
   margin: auto;
 }
+.volver{
+  bottom: 0;
+  
+}
 
 .text-center{
   text-align: center;

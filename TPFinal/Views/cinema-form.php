@@ -1,7 +1,7 @@
 <div class="content-login">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>Cinema/Add" method="POST">
             <!--Cambiar logo -->
-            <img class="mb-4" src="Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
+            <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg"  title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Cine</h1>
             <!--Sacando el sr-only te muestra el titulo(LABEL)-->
             <!-- L A B E L -->

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    <!-- BIENVENIDO -->
-  <strong class="navbar-brand" >Los supervivientes </strong><span class="navbar-brand">Bienvenido</span>
+  <strong> <a class="navbar-brand" href="<?php echo FRONT_ROOT ;?>">Los supervivientes</a> </strong>  
+  <span class="navbar-brand">Bienvenido</span>
  
 
   <div class="collapse navbar-collapse" >

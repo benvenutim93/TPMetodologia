@@ -1,29 +1,33 @@
 
+<div class="content-chico">
+  
+        <h1 class="text-center">Gestionar Cines</h1>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-lg btn-success btn-block" href="<?php echo FRONT_ROOT?>Cinema/showCinemaForm">Alta cine</a>
+            </div>
+          
+            <div class="col">
+                <a class="btn btn-lg btn-success btn-block" href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin">Listar Cines </a>
+            </div>
+        </div>
+</div>      
+<div class="content-grande">
+        <div class="row">
+            
+            <div class="col">
+                    <h1 class="text-center">Entradas</h1>
+                    <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Consultar entradas VENDIDAS </a>
+            </div> 
+            <div class="col">
+                     <h1 class="text-center">Ventas</h1>
+                     <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Consultar Ventas </a>
+            </div>
+            <div class="col">
+                     <h1 class="text-center">Cartelera</h1>
+                     <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Ingresar Pelicula a  Cartelera </a>
+            </div>
+        </div>
 
-<div>
-    <ul>
-        <li>Gestionar Cines
-            <ul>
-                <li><a href="<?php echo FRONT_ROOT?>Cinema/showCinemaForm">Alta cine</a> </li>
-                <li><a href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin">Listar Cines</a></li>
-            </ul>
-        </li>
-        <li>Cartelera
-            <ul>
-                <li><a href="">Ingresar Pelicula Cartelera</a></li>
-            </ul>
-        </li>
-        <li>Entradas
-            <ul>
-                <li><a href="">Consultar Entradas Vendidas</a></li>
-            </ul>
-        </li>
-        <li>Ventas
-            <ul>
-                <li><a href="">Consultar Ventas</a></li>
-            </ul>
-        </li>
-    </ul>
 </div>
-
 

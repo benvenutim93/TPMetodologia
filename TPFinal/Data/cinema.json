@@ -1,8 +1,14 @@
 [
     {
-        "name": "aldrey",
-        "address": "centro ",
-        "capacity": "60",
-        "ticketValue": "600  "
+        "name": "Aldrey",
+        "address": "Centro",
+        "capacity": "600",
+        "ticketValue": "3500"
+    },
+    {
+        "name": "Amasaddor",
+        "address": "Cordoba",
+        "capacity": "10",
+        "ticketValue": "120"
     }
 ]
