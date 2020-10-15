@@ -6,72 +6,31 @@
     class MoviesRepository
     {        
         private $movieList;
-        private $fileName;
+        #private $fileName;
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."/Data/moviesNowPlaying.json";
-        }
-
-        public function Add(Movie $movie)
-        {
-            $this->RetrieveData();
-            
-            array_push($this->movieList, $movie);
-
-            $this->SaveData();
+            $this->movieList = array();
+            #$this->fileName = dirname(__DIR__)."/Data/moviesNowPlaying.json";
         }
 
         public function GetAll()
         {
-            $this->RetrieveData();
+            $this->retrieveApi();
 
             return $this->movieList;
         }
 
-        private function SaveData()
+
+        public function retrieveAPI()
         {
-            $arrayToEncode = array();
-
-            foreach($this->movieList as $movie)
+            $apiContent = file_get_contents(URL_NOWPLAYING);
+            if ($apiContent)
             {
-                $valuesArray["popularity"] = $movie->getPopularity();
-                $valuesArray["vote_count"] = $movie->getVote_count();
-                $valuesArray["video"] = $movie->getVideo();
-                $valuesArray["poster_path"] = $movie->getPoster_path();
-                $valuesArray["id"] = $movie->getId();
-                $valuesArray["adult"] = $movie->getAdult();
-                $valuesArray["backdrop_path"] = $movie->getBackdrop_path();
-                $valuesArray["original_language"] = $movie->getOriginal_language();
-                $valuesArray["original_title"] = $movie->getOriginal_title();
-                $valuesArray["genre_ids"] = $movie->getGenre_ids();
-                $valuesArray["title"] = $movie->getTitle();
-                $valuesArray["vote_average"] = $movie->getVote_average();
-                $valuesArray["overview"] = $movie->getOverview();
-                $valuesArray["release_date"] = $movie->getRelease_date();
+                $jsonDecode = json_decode($apiContent, true);
 
-                array_push($arrayToEncode, $valuesArray);
-            }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            file_put_contents($this->fileName, $jsonContent);
-        }
-
-        private function RetrieveData()
-        {
-            $this->movieList = array();
-
-            if(file_exists($this->fileName))
-            {
-                $jsonContent = file_get_contents($this->fileName);
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-                
-                foreach($arrayToDecode as $valuesArray)
+                foreach($jsonDecode["results"] as $value)
                 {
-                    foreach ($valuesArray as $value)
-                    {
                         $movie = new Movie();
                         $movie->setPopularity($value["popularity"]);
                         $movie->setVote_count($value["vote_count"]);
@@ -87,11 +46,11 @@
                         $movie->setVote_average($value["vote_average"]);
                         $movie->setOverview($value["overview"]);
                         $movie->setRelease_date($value["release_date"]);
-                    
-                    array_push($this->movieList, $movie);
-                    }
+
+                        array_push($this->movieList, $movie);
                 }
             }
         }
+
     }
 ?>

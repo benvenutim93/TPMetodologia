@@ -12,5 +12,12 @@
         "address": "Diagonal y Rivadavia",
         "capacity": "180",
         "ticketValue": "65"
+    },
+    {
+        "id": 3,
+        "name": "Cine falsa",
+        "address": "Calle falsa 123",
+        "capacity": "180",
+        "ticketValue": "90"
     }
 ]

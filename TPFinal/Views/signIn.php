@@ -4,7 +4,7 @@ include_once("nav.php");
 ?>
 
 <div class="user-register">
-    <form class="form-signin" action= "<?php echo FRONT_ROOT?>signIn" method="POST">
+    <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/signIn" method="POST">
             <!--Cambiar logo -->
             <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg" title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registrarse</h1>
@@ -19,19 +19,19 @@ include_once("nav.php");
                 <div class="col">
                     <label for="apellidoUser" >Apellido</label>
                     <!--I N P U T-->
-                    <input type="text" id="apellidoUser" class="form-control" placeholder="Apellido " name="lastName"  required minlength="3"required autofocus>
+                    <input type="text" id="apellidoUser" class="form-control" placeholder="Apellido " name="lastName"  required minlength="3"required >
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="dniUser" >Dni</label>
                     <!--I N P U T-->
-                    <input type="text" id="dniUser" class="form-control" placeholder="Dni " name="dni" required pattern="[0-9]{8}" title="Debe poner 8 números "autofocus>
+                    <input type="text" id="dniUser" class="form-control" placeholder="Dni " name="dni" required pattern="[0-9]{8}" title="Debe poner 8 números "required>
                 </div>
                 <div class="col">
                 <label for="birthDateUser" >Fecha de nacimiento</label>
                     <!--I N P U T-->
-                    <input type="date" id="birthDateUser" class="form-control" placeholder="Fecha de nacimiento " name="birthDate" required autofocus>
+                    <input type="date" id="birthDateUser" class="form-control" placeholder="Fecha de nacimiento " name="birthDate"  max= "<?php echo date("Y-m-d");?>" min="1930-1-1"required >
 
                 </div>
             </div>
