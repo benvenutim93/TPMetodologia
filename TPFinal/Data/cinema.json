@@ -2,19 +2,19 @@
     {
         "name": "Aldrey",
         "address": "Centro",
-        "capacity": "600",
-        "ticketValue": "3528"
-    },
-    {
-        "name": "Amasaddor",
-        "address": "Cordoba",
-        "capacity": "10",
-        "ticketValue": "120"
+        "capacity": "8",
+        "ticketValue": "8"
     },
     {
         "name": "Los Gallegos",
         "address": "San Martin 1466",
         "capacity": "100",
         "ticketValue": "800"
+    },
+    {
+        "name": "Cine falso",
+        "address": "Calle falsa 123",
+        "capacity": "150",
+        "ticketValue": "70"
     }
 ]
