@@ -18,6 +18,7 @@ include_once("nav.php");
                     </td>
                     <td>      
                         <ul>
+                              <li><h3> ID </h3><p><strong><?php echo $cine->getId(); ?></p></strong> </li> 
                               <li><h3> Direccion </h3><p><strong><?php echo $cine->getAddress(); ?></p></strong> </li> 
                               <li> <h3>Capacidad Maxima : </h3> <p ><strong><?php echo $cine->getCapacity(); ?></p></strong></li>
                               <li><h3>Valor de entrada :</h3> <p><strong><?php echo $cine->getTicketValue(); ?> </strong></p></li>         
@@ -34,7 +35,7 @@ include_once("nav.php");
                             </div>
                             <div class="col">
                                 <form action="<?php FRONT_ROOT?>showCinemaModify" method="GET">
-                                    <input type="hidden" value="<?php echo $cine->getName(); ?>" name="title">
+                                    <input type="hidden" value="<?php echo $cine->getId(); ?>" name="title">
                                     <button class="btn btn-lg btn-warning btn-block" type="submit">Modificar</button>
 
                                 </form>    

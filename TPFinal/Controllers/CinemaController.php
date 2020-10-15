@@ -48,9 +48,20 @@ class CinemaController
         if (!$this->repeatedName($name, $address))
         {
             $cine = new Cine($name, $address, $capacity, $ticketValue);
+            $cine->setId($this->getLastId());
             $this->cineRepo->Add($cine);
         }
         $this->showCinemaListAdmin();
+    }
+
+    public function getLastId()
+    {
+        $array = $this->cineRepo->GetAll();
+        if ($array)
+        {
+            return count($array)+1;
+        }
+        else return 1;
     }
 
     
@@ -61,13 +72,13 @@ class CinemaController
             $this->showCinemaListAdmin();
     }
 
-    public function Modify($name, $address, $capacity,$ticketValue){
+    public function Modify($id, $name, $address, $capacity,$ticketValue){
        $todo = $this->cineRepo->GetAll();
 
        foreach($todo as $aux)
        {
     
-            if($name==$aux->getName())
+            if($id==$aux->getId())
             {
                 $aux->setName($name);
                 $aux->setAddress($address);

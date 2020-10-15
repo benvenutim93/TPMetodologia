@@ -29,13 +29,13 @@
             return $this->cinemaList;
         }
         
-        public function GetOne ($name)
+        public function GetOne ($id)
         {
             $this->RetrieveData();
 
             foreach ($this->cinemaList as $value)
             {
-                    if ($value->getName() == $name)
+                    if ($value->getId() == $id)
                         return $value;
             }
         }
@@ -57,6 +57,7 @@
 
             foreach($this->cinemaList as $cine)
             {
+                $valuesArray["id"] = $cine->getId();
                 $valuesArray["name"] = $cine->getName();
                 $valuesArray["address"] = $cine->getAddress();
                 $valuesArray["capacity"] = $cine->getCapacity();
@@ -83,6 +84,7 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $cine = new Cinema();
+                    $cine->setId($valuesArray["id"]);
                     $cine->setName($valuesArray["name"]);
                     $cine->setAddress($valuesArray["address"]);
                     $cine->setCapacity($valuesArray["capacity"]);
