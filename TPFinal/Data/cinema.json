@@ -3,12 +3,18 @@
         "name": "Aldrey",
         "address": "Centro",
         "capacity": "600",
-        "ticketValue": "3500"
+        "ticketValue": "3528"
     },
     {
         "name": "Amasaddor",
         "address": "Cordoba",
         "capacity": "10",
         "ticketValue": "120"
+    },
+    {
+        "name": "Los Gallegos",
+        "address": "San Martin 1466",
+        "capacity": "100",
+        "ticketValue": "800"
     }
 ]
