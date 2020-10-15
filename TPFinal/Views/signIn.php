@@ -14,19 +14,19 @@ include_once("nav.php");
                 <div class="col">
                     <label for="nombreUser" >Nombre</label>
                     <!--I N P U T-->
-                    <input type="text" id="nombreUser" class="form-control" placeholder="Nombre " name="name" required autofocus>
+                    <input type="text" id="nombreUser" class="form-control" placeholder="Nombre " name="name" required minlength="3" required autofocus>
                 </div>
                 <div class="col">
                     <label for="apellidoUser" >Apellido</label>
                     <!--I N P U T-->
-                    <input type="text" id="apellidoUser" class="form-control" placeholder="Apellido " name="lastName" required autofocus>
+                    <input type="text" id="apellidoUser" class="form-control" placeholder="Apellido " name="lastName"  required minlength="3"required autofocus>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="dniUser" >Dni</label>
                     <!--I N P U T-->
-                    <input type="text" id="dniUser" class="form-control" placeholder="Dni " name="dni" required autofocus>
+                    <input type="text" id="dniUser" class="form-control" placeholder="Dni " name="dni" required pattern="[0-9]{8}" title="Debe poner 8 números "autofocus>
                 </div>
                 <div class="col">
                 <label for="birthDateUser" >Fecha de nacimiento</label>
@@ -44,12 +44,12 @@ include_once("nav.php");
                 <div class="col">
             <label for="inputUserName" >Nombre Usuario</label>
             <!--I N P U T-->
-            <input type="text" id="inputUserName" class="form-control" placeholder="UserName"  name="userName" required>
+            <input type="text" id="inputUserName" class="form-control" placeholder="UserName"  name="userName" required minlength="3" required>
             </div>
             <div class="col">
             <label for="inputPassword">Contraseña</label>
             <!--I N P U T-->
-            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="pass" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="pass" required minlength="6" required>
             </div>
             </div>
             <!-- B O T O N -->
