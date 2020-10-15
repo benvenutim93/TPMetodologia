@@ -15,8 +15,8 @@ include_once("nav.php");
             <tr>
                 <?php foreach ($moviesList as $movie){?>
                 <!-- Fotito facherita -->
-                <td><div class="imagen-cartelera">
-                <h1 class="text-center"> Imagen facherita</h1>
+                <td>    <div class="imagen-cartelera">
+                    <img width= "100%" height="100%" src=" <?php echo "https://image.tmdb.org/t/p/w200".$movie->getPoster_path();?>">
                 </div>
                 </td>
                 <!-- contenido -->
