@@ -1,8 +1,4 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
 
-?>
 <div class="content-login">
     <form action= "<?php echo FRONT_ROOT?>Movies/searchMovieTitle" method="GET">
         <div>
@@ -53,6 +49,3 @@ include_once("nav.php");
     </form>
 </div>
 
-<?php
-include_once("footer.php");
-?>

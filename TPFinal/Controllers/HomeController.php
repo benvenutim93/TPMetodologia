@@ -5,7 +5,7 @@
     {
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."login-form.php");
+            require_once(USER_VIEWS."login-form.php");
         }        
     }
 ?>

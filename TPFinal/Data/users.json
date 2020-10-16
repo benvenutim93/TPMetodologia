@@ -16,5 +16,23 @@
         "mail": "rope@rope",
         "userName": "krauser",
         "pass": "hola123"
+    },
+    {
+        "name": "Pedro",
+        "lastName": "Perez",
+        "dni": "37777777",
+        "birthDate": "1800-10-15",
+        "mail": "pedro@perez",
+        "userName": "pepe",
+        "pass": "pepe123"
+    },
+    {
+        "name": "Holi",
+        "lastName": "Manoli",
+        "dni": "12312123",
+        "birthDate": "1998-05-10",
+        "mail": "hola@manoli",
+        "userName": "holim",
+        "pass": "holimanoli"
     }
 ]

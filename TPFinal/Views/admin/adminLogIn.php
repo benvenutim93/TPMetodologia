@@ -1,7 +1,3 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
-?>
 
 <div class="content-login">
     <!-- div para poner el fondo -->
@@ -35,6 +31,3 @@ include_once("nav.php");
     </div>
 </div>
 
-<?php
-include_once("footer.php");
-?>

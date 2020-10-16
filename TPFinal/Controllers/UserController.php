@@ -16,7 +16,7 @@ class UserController
 
     public function showPrincipalView ()
     {
-        require_once(VIEWS_PATH . "board.php");
+        require_once(USER_VIEWS . "board.php");
     }
 
     public function login ($mail, $password)
@@ -46,17 +46,18 @@ class UserController
 
     public function showSingInFormView()
     {
-        require_once(VIEWS_PATH . "signIn.php");
+        require_once(USER_VIEWS . "signIn.php");
     }
 
     public function showLoginView ()
     {
-        require_once(VIEWS_PATH . "login-form.php");
+        require_once(USER_VIEWS . "login-form.php");
     }
 
     public function showLogOutView()
     {
-        require_once(VIEWS_PATH . "logOutView.php");
+        session_destroy();
+        require_once(USER_VIEWS . "logOutView.php");
     }
 
 

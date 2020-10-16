@@ -1,7 +1,3 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
-?>
 
 <div class="content-login">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/login" method="POST">
@@ -33,6 +29,3 @@ include_once("nav.php");
     
 </div>
 
-<?php
-include_once("footer.php");
-?>

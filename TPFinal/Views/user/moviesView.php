@@ -1,8 +1,4 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
 
-?>
 
 <div class="cartelera-content">
     <div class="table-responsive-lg">
@@ -103,5 +99,5 @@ function changeAdult ($adult)
     else return "ATP";
 }
 
-include_once("footer.php");
+
 ?>

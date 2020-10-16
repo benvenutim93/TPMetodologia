@@ -15,33 +15,9 @@ class GenreController
 
     public function showPrincipalView ()
     {
-        require_once(VIEWS_PATH . "board.php");
+        require_once(USER_VIEWS . "board.php");
     }
 
-    public function Add ($genre)
-    {
-        $array = $this->genreRepo->GetAll();
-        $flag = 0;
-        foreach($array as $valuesArray)
-        {
-            foreach($valuesArray as  $values)
-            {
-                if($values->getId() == $genre->getId())
-                $flag = 1;
-            }
-        }
-        if ($flag = 0)
-            $this->genreRepo->Add($genre);
-
-        $this->showPrincipalView();
-    }
-
-    public function Remove ($genre)
-    {
-        $this->genreRepo->Remove($genre);
-
-        $this->showPrincipalView();
-    }
 
     public function GetAll ()
     {

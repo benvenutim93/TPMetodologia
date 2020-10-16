@@ -28,19 +28,19 @@ class CinemaController
     public function showCinemaListAdmin()
     {
         $arrayC= $this->cineRepo->GetAll();
-        require_once(VIEWS_PATH . "cinemaListAdmin.php");
+        require_once(ADMIN_VIEWS . "cinemaListAdmin.php");
     }
     public function showCinemaForm()
     {
-        require_once(VIEWS_PATH. "cinema-form.php");
+        require_once(CINEMA_VIEWS. "cinema-form.php");
     }
 
     public function showCinemaDelete(){
-        require_once(VIEWS_PATH . "bajaCinema.php");
+        require_once(CINEMA_VIEWS . "bajaCinema.php");
     }
     public function showCinemaModify($name){
         $movie=$this->cineRepo->GetOne($name);
-        require_once(VIEWS_PATH . "modify-form-cinema.php");
+        require_once(CINEMA_VIEWS . "modify-form-cinema.php");
     }
 
     public function Add ($name, $address, $capacity, $ticketValue)

@@ -1,7 +1,4 @@
-<?php
-require_once("header.php");
-require_once("nav.php");
-?>
+
 <div class="content-grande">
 
 
@@ -20,6 +17,4 @@ require_once("nav.php");
 </div>
 
 <?php
-
-require_once("footer.php");
 ?>

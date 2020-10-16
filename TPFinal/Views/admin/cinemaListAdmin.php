@@ -1,7 +1,4 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
-?>
+
 
 <div class="cartelera-content">
     <div class="table-responsive-lg">
@@ -57,6 +54,3 @@ include_once("nav.php");
 
   
 
-<?php
-include_once("footer.php");
-?>

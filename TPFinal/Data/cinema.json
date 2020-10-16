@@ -17,7 +17,7 @@
         "id": 3,
         "name": "Cine falsa",
         "address": "Calle falsa 123",
-        "capacity": "180",
-        "ticketValue": "90"
+        "capacity": "150",
+        "ticketValue": "50"
     }
 ]

@@ -48,6 +48,7 @@
                         $movie->setRelease_date($value["release_date"]);
 
                         array_push($this->movieList, $movie);
+                        #return $movie;
                 }
             }
         }

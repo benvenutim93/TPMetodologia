@@ -19,13 +19,13 @@ class MoviesController
     {
         $moviesList = $this->moviesDao->GetAll();
         $genreRepo = new G_Repo();
-        require_once(VIEWS_PATH . "moviesView.php");
+        require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showOnlyMovie($moviesList)
     {
         $genreRepo = new G_Repo();
-        require_once(VIEWS_PATH . "moviesView.php");
+        require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showSearchMovieView()
@@ -36,38 +36,6 @@ class MoviesController
         require_once(VIEWS_PATH . "searchMovie.php");
     }
 
-
-    public function Add ($video, $adult, $original_language, $original_title, $genre_id, $title, $overview, $release_date)
-    {
-        $flag = 0;
-        $array = $this->moviesDao->GetAll();
-
-        foreach ($array as $movie)
-        {
-            if ($movie->getTitle() == $title)
-            {
-                $flag = 1;
-            }
-        }
-
-        if ($flag == 0)
-        {
-            $peli = new Movie();
-            $peli->setVideo($video);
-            $peli->setAdult($adult);
-            $peli->setOriginal_language ($original_language);
-            $peli->setGenre_ids($genre_id);
-            $peli->setOriginal_title($original_title);
-            $peli->setOverview($overview);
-            $peli->setTitle ($title);
-            $peli->setRelease_date($release_date);
-
-            $this->moviesDao->Add($peli);
-        }
-
-        $this->showMoviesListView();
-
-    }
 
     public function searchMovieTitle ($title)
     {

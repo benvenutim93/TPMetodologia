@@ -12,21 +12,21 @@ class AdminController
 
     public function showPrincipalView ()
     {
-        require_once(VIEWS_PATH . "eleccion.php");
+        require_once(ADMIN_VIEWS . "eleccion.php");
     }
     
     public function showOPAdminsView()
     {
-        require_once(VIEWS_PATH . "boardAdmin.php");
+        require_once(ADMIN_VIEWS . "boardAdmin.php");
     }
     public function showOPUsersView()
     {
-        require_once(VIEWS_PATH . "board.php");
+        require_once(USER_VIEWS . "board.php");
     }
 
     public function loginForm ()
     {
-        require_once(VIEWS_PATH . "adminLogIn.php");
+        require_once(ADMIN_VIEWS . "adminLogIn.php");
     }
 
     public function login($mail,$pass){
