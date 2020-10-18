@@ -1,5 +1,3 @@
-
-
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >

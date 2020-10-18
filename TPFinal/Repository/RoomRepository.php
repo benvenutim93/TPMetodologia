@@ -1,23 +1,23 @@
 <?php
     namespace Repository;
 
-    use Models\Cinema as Cinema;
+    use Models\Room as Room;
 
     class CinemaRepository 
     {        
-        private $cinemaList = array();
+        private $roomList = array();
         private $fileName;
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."/Data/cinema.json";
+            $this->fileName = dirname(__DIR__)."/Data/room.json";
         }
 
-        public function Add(Cinema $cine)
+        public function Add(Room $room)
         {
             $this->RetrieveData();
             
-            array_push($this->cinemaList, $cine);
+            array_push($this->roomList, $room);
 
             $this->SaveData();
         }
@@ -26,14 +26,14 @@
         {
             $this->RetrieveData();
 
-            return $this->cinemaList;
+            return $this->roomList;
         }
         
         public function GetOne ($id)
         {
             $this->RetrieveData();
 
-            foreach ($this->cinemaList as $value)
+            foreach ($this->roomList as $value)
             {
                     if ($value->getId() == $id)
                         return $value;
@@ -44,8 +44,8 @@
         {
             $this->RetrieveData();
 
-            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use($name){
-                return $cinema->getName() != $name;
+            $this->roomList = array_filter($this->roomList, function($room) use($name){
+                return $room->getName() != $name;
             });
 
             $this->SaveData();
@@ -55,15 +55,14 @@
         {
             $arrayToEncode = array();
 
-            foreach($this->cinemaList as $cine)
+            foreach($this->roomList as $room)
             {
-                $valuesArray["id"] = $cine->getId();
-                $valuesArray["name"] = $cine->getName();
-                $valuesArray["address"] = $cine->getAddress();
-                $valuesArray["capacity"] = $cine->getCapacity();
-                $valuesArray["ticketValue"] = $cine->getTicketValue();
-                $valuesArray["rooms"] = $cine->getRooms();
-
+                $valuesArray["id"] = $room->getId();
+                $valuesArray["name"] = $room->getName();
+                $valuesArray["numberSeats"] = $room->getNumberSeats();
+                $valuesArray["occupiedSeats"] = $room->getOccupiedSeats();
+                $valuesArray["idCinema"] = $room->getIdCinema();
+                $valuesArray["price"] = $room->getPrice();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -75,7 +74,7 @@
 
         private function RetrieveData()
         {
-            $this->cinemaList = array();
+            $this->roomList = array();
 
             if(file_exists($this->fileName))
             {
@@ -85,22 +84,22 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $cine = new Cinema();
-                    $cine->setId($valuesArray["id"]);
-                    $cine->setName($valuesArray["name"]);
-                    $cine->setAddress($valuesArray["address"]);
-                    $cine->setCapacity($valuesArray["capacity"]);
-                    $cine->setTicketValue($valuesArray["ticketValue"]);
-                    $cine->setRooms($valuesArray["rooms"]);
+                    $room = new Cinema();
+                    $room->setId($valuesArray["id"]);
+                    $room->setName($valuesArray["name"]);
+                    $room->setNumberSeats($valuesArray["numberSeats"]);
+                    $room->setOccupiedSeats($valuesArray["occupiedSeats"]);
+                    $room->setIdCinema($valuesArray["idCinema"]);
+                    $room->setPrice($valuesArray["price"]);
 
-                    array_push($this->cinemaList, $cine);
+                    array_push($this->roomList, $room);
                 }
             }
         }
 
-        public function setCinemaList ($list)
+        public function setRoomList ($list)
         {
-            $this->cinemaList = $list;
+            $this->roomList = $list;
             $this->SaveData();
         }
     }

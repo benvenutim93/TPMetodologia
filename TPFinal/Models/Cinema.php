@@ -8,6 +8,7 @@ class Cinema {
     private $address;
     private $capacity;
     private $ticketValue;
+    private $rooms;
 
     public function __construct($name = "", $address = "", $capacity = "", $ticketValue = "")
     {
@@ -15,6 +16,7 @@ class Cinema {
         $this->address = $address;        
         $this->capacity = $capacity;   
         $this->ticketValue = $ticketValue;
+        $this->rooms=array();
     }
 
     /**
@@ -113,6 +115,26 @@ class Cinema {
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rooms
+     */ 
+    public function getRooms()
+    {
+        return $this->rooms;
+    }
+
+    /**
+     * Set the value of rooms
+     *
+     * @return  self
+     */ 
+    public function setRooms($rooms)
+    {
+        $this->rooms = $rooms;
 
         return $this;
     }
