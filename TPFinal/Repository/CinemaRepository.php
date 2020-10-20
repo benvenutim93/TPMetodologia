@@ -16,6 +16,7 @@
         public function Add(Cinema $cine)
         {
             $this->RetrieveData();
+            $cine->setId($this->getLastId());
             
             array_push($this->cinemaList, $cine);
 
@@ -96,6 +97,19 @@
                     array_push($this->cinemaList, $cine);
                 }
             }
+        }
+
+        public function getLastId()
+        {
+            $array = $this->GetAll();
+            if ($array)
+            {
+                $pos= count($array);
+                $pos--;
+                $lastCine = $array[$pos];
+                return $lastCine->getId() + 1;
+            }
+            else return 1;
         }
 
         public function setCinemaList ($list)

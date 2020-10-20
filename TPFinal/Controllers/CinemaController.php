@@ -18,7 +18,7 @@ class CinemaController
         $array = $this->cineRepo->GetAll();
         foreach ($array as $cine)
         {
-            if ($cine->getName() == $name && $cine->getAddress() == $address)
+            if ($cine->getName() == $name || $cine->getAddress() == $address)
                 return true;
         }
         
@@ -48,7 +48,7 @@ class CinemaController
         if (!$this->repeatedName($name, $address))
         {
             $cine = new Cine($name, $address, $capacity, $ticketValue);
-            $cine->setId($this->getLastId());
+            
             $this->cineRepo->Add($cine);
         }
         $this->showCinemaListAdmin();
