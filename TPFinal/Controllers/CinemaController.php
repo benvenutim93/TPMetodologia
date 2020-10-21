@@ -3,19 +3,20 @@
 namespace Controllers;
 
 use Models\Cinema as Cine;
-use Repository\CinemaRepository as C_Repo;
+use DAO\CinemaDao as C_DAO;
+
 class CinemaController
 {
-    private $cineRepo;
+    private $cinemaDao;
 
     public function __construct()
     {
-        $this->cineRepo = new C_Repo();
+        $this->cinemaDao = new C_DAO();
     }
 
     public function repeatedName ($name, $address)
     {
-        $array = $this->cineRepo->GetAll();
+        $array = $this->cinemaDao->GetAll();
         foreach ($array as $cine)
         {
             if ($cine->getName() == $name || $cine->getAddress() == $address)
@@ -27,7 +28,7 @@ class CinemaController
 
     public function showCinemaListAdmin()
     {
-        $arrayC= $this->cineRepo->GetAll();
+        $arrayC= $this->cinemaDao->GetAll();
         require_once(ADMIN_VIEWS . "cinemaListAdmin.php");
     }
     public function showCinemaForm()
@@ -38,25 +39,25 @@ class CinemaController
     public function showCinemaDelete(){
         require_once(CINEMA_VIEWS . "bajaCinema.php");
     }
-    public function showCinemaModify($name){
-        $movie=$this->cineRepo->GetOne($name);
+
+    public function showCinemaModify($id){
+        $movie = $this->cinemaDao->GetOne($id);
         require_once(CINEMA_VIEWS . "modify-form-cinema.php");
     }
 
     public function Add ($name, $address, $capacity, $ticketValue)
     {
-        if (!$this->repeatedName($name, $address))
-        {
+        
             $cine = new Cine($name, $address, $capacity, $ticketValue);
             
-            $this->cineRepo->Add($cine);
-        }
+            $this->cinemaDao->Add($cine);
+    
         $this->showCinemaListAdmin();
     }
 
     public function getLastId()
     {
-        $array = $this->cineRepo->GetAll();
+        $array = $this->cinemaDao->GetAll();
         if ($array)
         {
             return count($array)+1;
@@ -65,29 +66,16 @@ class CinemaController
     }
 
     
-    public function Remove ($name)
+    public function Remove ($id)
     {
-            $this->cineRepo->Remove($name);
-
-            $this->showCinemaListAdmin();
+        $this->cinemaDao->Remove($id);
+        $this->showCinemaListAdmin();
     }
 
-    public function Modify($id, $name, $address, $capacity,$ticketValue){
-       $todo = $this->cineRepo->GetAll();
-
-       foreach($todo as $aux)
-       {
-    
-            if($id==$aux->getId())
-            {
-                $aux->setName($name);
-                $aux->setAddress($address);
-                $aux->setCapacity($capacity);
-                $aux->setTicketValue($ticketValue);
-            }
-       }
-       $this->cineRepo->setCinemaList($todo);
-       $this->showCinemaListAdmin();
+    public function Modify($id, $name, $address, $capacity,$ticketValue)
+    {
+        $this->cinemaDao->Modify($id, $name, $address, $capacity,$ticketValue);
+        $this->showCinemaListAdmin();
     }
 }
 ?>
