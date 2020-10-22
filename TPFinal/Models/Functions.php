@@ -4,75 +4,99 @@ namespace Models;
 
 
 class Functions{
-
     private $id;
-    private $hour;
-    private $day;
+    private $idRoom;
+    private $idMovie;
+    private $occupiedSeats;
+    private $date;
 
-    public function __construct($hour="",$day="")
+    public function __construct($idRoom="", $idMovie="", $occupiedSeats="", $date="")
     {
-        $this->hour=$hour;
-        $this->day=$day;
+        $this->idRoom=$idRoom;
+        $this->idMovie=$idMovie;
+        $this->occupiedSeats=$occupiedSeats;
+        $this->date=$date;
     }
     
 
+    
+
     /**
-     * Get the value of hour
+     * Get the value of idRoom
      */ 
-    public function getHour()
+    public function getIdRoom()
     {
-        return $this->hour;
+        return $this->idRoom;
     }
 
     /**
-     * Set the value of hour
+     * Set the value of idRoom
      *
-     * @return  self
+     * @return self
      */ 
-    public function setHour($hour)
+    public function setIdRoom($idRoom)
     {
-        $this->hour = $hour;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of day
-     */ 
-    public function getDay()
-    {
-        return $this->day;
-    }
-
-    /**
-     * Set the value of day
-     *
-     * @return  self
-     */ 
-    public function setDay($day)
-    {
-        $this->day = $day;
+        $this->idRoom = $idRoom;
 
         return $this;
     }
 
     /**
-     * Get the value of id
+     * Get the value of idMovie
      */ 
-    public function getId()
+    public function getIdMovie()
     {
-        return $this->id;
+        return $this->idMovie;
     }
 
     /**
-     * Set the value of id
+     * Set the value of idMovie
      *
-     * @return  self
+     * @return self
      */ 
-    public function setId($id)
+    public function setIdMovie($idMovie)
     {
-        $this->id = $id;
+        $this->idMovie = $idMovie;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of occupiedSeats
+     */ 
+    public function getOccupiedSeats()
+    {
+        return $this->occupiedSeats;
+    }
+
+    /**
+     * Set the value of occupiedSeats
+     *
+     * @return self
+     */ 
+    public function setOccupiedSeats($occupiedSeats)
+    {
+        $this->occupiedSeats = $occupiedSeats;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date
+     */ 
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @return self
+     */ 
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }

@@ -7,6 +7,7 @@ use DAO\RoomDao as R_DAO;
 class RoomController{
 
     private $roomDao;
+
     public function __construct()
     {
         $this->roomDao = new R_DAO();
@@ -17,6 +18,12 @@ class RoomController{
 
         require_once(ROOM_VIEWS. "index.php");
 
+    }
+
+    public function showRoomsListAdmin()
+    {
+        $arrayR= $this->roomDao->GetAll();
+        require_once(ROOM_VIEWS . "roomsListAdmin.php");
     }
   
     public function add($name,$capacity,$price,$idCinema){

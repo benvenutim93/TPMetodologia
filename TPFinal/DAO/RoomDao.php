@@ -34,8 +34,36 @@
            }
        }
 
+       public function GetAll()
+        {
+            try
+            {
+                $roomsList = array();
+                $query = "select * from $this->tableName";
+                $this->connection = Connection::GetInstance();
 
+                $result = $this->connection->Execute($query);
 
+                foreach($result as $value)
+                {
+                    $room = new Room();
+                    $room->setId($value["id_room"]);
+                    $room->setname($value["roomName"]);
+                    $room->setSeatsCapacity($value["seatsCapacity"]);
+                    $room->setTicketValue($value["ticketValue"]);
+                    $room->setIdCinema($value["id_cine"]);
+                    
+
+                    array_push($roomsList, $room);
+                }
+
+                return $roomsList;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
 
     }
 ?>

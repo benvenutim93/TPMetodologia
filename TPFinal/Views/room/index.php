@@ -1,4 +1,5 @@
 <div class="content-xxl">
+    <h1><?php echo $idCine?></h1>
   
     <div class="row">   
         <div class="col">
@@ -70,7 +71,7 @@
     <div class="row">
         <div class="col">
             <div class="content-chico">
-                    <form action="" class="form-signin"> 
+                    <form action="<?php echo FRONT_ROOT?>Room/showRoomsListAdmin" class="form-signin"> 
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Listar Salas</button>
                     </form>
              </div>

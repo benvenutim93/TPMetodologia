@@ -12,7 +12,7 @@ class Room{
 
  
 
-    public function __construct($name="",$seatsCapacity="",$ticketValue="",$idCinema)
+    public function __construct($name="",$seatsCapacity="",$ticketValue="",$idCinema="")
     {   
         $this->name=$name;
         $this->seatsCapacity=$seatsCapacity;
