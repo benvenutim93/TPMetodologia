@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models\Room as Room;
 use DAO\RoomDao as R_DAO;
-use Repository\MoviesRepository as M_Repo;
+use DAO\MovieDao as M_DAO;
 
 class RoomController{
 
@@ -18,10 +18,12 @@ class RoomController{
     public function index($idCinema){
         
         $arrayR= $this->roomDao->GetAll($idCinema);
-        $movie= new M_Repo();
-        $arrayMovie= $movie->GetAll();
+        $movie= new M_DAO();
+
+        $arrayMovie= $movie->GetMoviesNotFunction();
+        //var_dump($arrayMovie);
         $idCine = $idCinema;
-       require_once(ROOM_VIEWS. "index.php");
+        //require_once(ROOM_VIEWS. "index.php");
 
     }
 
@@ -62,7 +64,7 @@ class RoomController{
                 </script>
                  ';
         $idCine=$idCinema;
-        require_once(ROOM_VIEWS. "index.php");
+        $this->index($idCinema);
  
     }
     public function Modify($id,$name,$seatsCapacity,$ticketValue,$idCine)
@@ -89,7 +91,6 @@ class RoomController{
             }
         }
     }
-
 
 }
 

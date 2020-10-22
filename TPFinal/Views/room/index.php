@@ -46,7 +46,7 @@
                             <label for="movi" >Ingrese Pelicula</label>
                             <!--I N P U T-->
                             <select id="inputState" name="nameSalas" class="form-control">
-                             <option value="" disabled selected> Seleccione una sala </option>
+                             <option value="" disabled selected> Seleccione una pelicula </option>
 
                               <?php foreach($arrayMovie as $value){ ?>
                             <option value="<?php echo $value->getId();?>"  > <?php echo $value->getTitle();?></option>
