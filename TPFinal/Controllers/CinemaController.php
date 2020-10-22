@@ -39,6 +39,7 @@ class CinemaController
     public function showCinemaDelete(){
         require_once(CINEMA_VIEWS . "bajaCinema.php");
     }
+    
 
     public function showCinemaModify($id){
         $movie = $this->cinemaDao->GetOne($id);

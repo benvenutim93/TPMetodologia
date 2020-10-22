@@ -34,13 +34,13 @@
                 throw $ex;
             }
         }
-
+      
         public function GetAll()
         {
             try
             {
                 $cinemaList = array();
-                $query = "select * from $this->tableName";
+                $query = "select * from $this->tableName ";
                 $this->connection = Connection::GetInstance();
 
                 $result = $this->connection->Execute($query);
@@ -63,6 +63,7 @@
                 throw $ex;
             }
         }
+        
         
         public function GetOne ($id)
         {

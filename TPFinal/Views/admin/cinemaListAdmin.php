@@ -3,12 +3,12 @@
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >
-        <thead>
+           <thead>
                 <tr>
                     <th  colspan=2 ><h1 class="text-center ">Cines</h1> </th>
                 </tr>
-         </thead>
-            <?php foreach($arrayC as $cine) { ?> 
+             </thead>
+                        <?php foreach($arrayC as $cine) { ?> 
                 <tr>
                     <td>
                         <h2 class="text-center">  <?php echo $cine->getName(); ?></h2>
@@ -58,27 +58,28 @@
                                     <button class="btn btn-lg btn-success btn-block" type="submit">Seleccionar</button>
                                 </form>    
                           </div>
-                          <!-- 
-                          <div class="col">
-                          Formulario 
-                                <form action="<?php echo FRONT_ROOT?>" method="GET">
-                                    <button class="btn btn-lg btn-success btn-block" type="submit">Agregar Funcion</button>
-                                </form>    
-                          </div>-->
-                            
                       </div>
                               
                      </td>                
                 </tr>   
-            <?php } ?>    
-        </div>      
-    </div>  
-    <div class="volver">
-    <div class="row">
-    <a class="btn btn-lg btn-light btn-block" href="<?php echo FRONT_ROOT ?>Admin/showOPAdminsView" >Volver atras</a>
-    </div>
-</div>
+                 <?php } ?>  
+                 <tr>
+                <td colspan=2 >
+                <div class="row">
+                        
+                    <a class="btn btn-lg btn-light btn-block" href="<?php echo FRONT_ROOT ?>Admin/showOPAdminsView" >Volver atras</a>
+                 </div>
+    </div>  </td>
+                       
+                 </tr>  
+             
+        
+           
+
+        </table>
+       
+    
 </div>
 
-  
+
 

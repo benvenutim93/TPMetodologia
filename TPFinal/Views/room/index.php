@@ -1,5 +1,5 @@
 <div class="content-xxl">
-    <h1><?php echo $idCine?></h1>
+   <font color="white"> <h1 class="text-center" > ID Cine:<?php echo $idCine?></h1></font>
   
     <div class="row">   
         <div class="col">
@@ -28,7 +28,7 @@
 
                             <label for="" >    </label>
                         <!-- B O T O N -->
-                            <button class="btn btn-lg btn-success btn-block" type="submit">Ingresar</button>
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div>
         
@@ -60,7 +60,7 @@
 
                             <label for="" >    </label>
                         <!-- B O T O N -->
-                            <button class="btn btn-lg btn-danger btn-block" type="submit">Ingresar</button>
+                            <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
                 </form>
 
                 
@@ -72,7 +72,9 @@
         <div class="col">
             <div class="content-chico">
                     <form action="<?php echo FRONT_ROOT?>Room/showRoomsListAdmin" class="form-signin"> 
-                    <button class="btn btn-lg btn-danger btn-block" type="submit">Listar Salas</button>
+                    <!-- PASO EL ID DEL CINE -->
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Salas</button>
                     </form>
              </div>
         </div>
