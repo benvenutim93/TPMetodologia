@@ -89,7 +89,7 @@
                 throw $ex;
             }
         }
-        public function Modify ($id, $name, $address, $capacity,$ticketValue)
+        public function Modify ($id, $name, $address, $capacity)
         {
             try
             {

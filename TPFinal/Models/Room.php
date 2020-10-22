@@ -6,64 +6,33 @@ class Room{
 
     private $id;
     private $name;
-    private $numberSeats;
-    private $occupiedSeats;
+    private $seatsCapacity;
+    private $ticketValue;
     private $idCinema;
-    private $idFunction;
-    private $price;
 
-    public function __construct($name="",$numberSeats= "", $occupiedSeats="",$idCinema="",$price="",$idFunction)
+ 
+
+    public function __construct($name="",$seatsCapacity="",$ticketValue="",$idCinema)
     {   
         $this->name=$name;
-        $this->numberSeats=$numberSeats;
-        $this->occupiedSeats=$occupiedSeats;
+        $this->seatsCapacity=$seatsCapacity;
+        $this->ticketValue=$ticketValue;
         $this->idCinema=$idCinema;
-        $this->price=$price;
-        $this->idfunction=$idFunction;
     }
 
-    
-    public function getNumberSeats()
-    {
-        return $this->numberSeats;
-    }
-
-    public function setNumberSeats($numberSeats)
-    {
-        $this->numberSeats = $numberSeats;
-
-        return $this;
-    }
-
-    public function getOccupiedSeats()
-    {
-        return $this->occupiedSeats;
-    }
-
-    public function setOccupiedSeats($occupiedSeats)
-    {
-        $this->occupiedSeats = $occupiedSeats;
-
-        return $this;
-    }
-
-    public function getIdCinema()
-    {
-        return $this->idCinema;
-    }
-
-    public function setIdCinema($idCinema)
-    {
-        $this->idCinema = $idCinema;
-
-        return $this;
-    }
-
+    /**
+     * Get the value of id
+     */ 
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
     public function setId($id)
     {
         $this->id = $id;
@@ -71,46 +40,82 @@ class Room{
         return $this;
     }
 
-    public function getname()
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setname($name)
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getPrice()
+    /**
+     * Get the value of seatsCapacity
+     */ 
+    public function getSeatsCapacity()
     {
-        return $this->price;
+        return $this->seatsCapacity;
     }
 
-    public function setPrice($price)
+    /**
+     * Set the value of seatsCapacity
+     *
+     * @return  self
+     */ 
+    public function setSeatsCapacity($seatsCapacity)
     {
-        $this->price = $price;
+        $this->seatsCapacity = $seatsCapacity;
 
         return $this;
     }
 
     /**
-     * Get the value of idFunction
+     * Get the value of ticketValue
      */ 
-    public function getIdFunction()
+    public function getTicketValue()
     {
-        return $this->idFunction;
+        return $this->ticketValue;
     }
 
     /**
-     * Set the value of idFunction
+     * Set the value of ticketValue
      *
      * @return  self
      */ 
-    public function setIdFunction($idFunction)
+    public function setTicketValue($ticketValue)
     {
-        $this->idFunction = $idFunction;
+        $this->ticketValue = $ticketValue;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idCinema
+     */ 
+    public function getIdCinema()
+    {
+        return $this->idCinema;
+    }
+
+    /**
+     * Set the value of idCinema
+     *
+     * @return  self
+     */ 
+    public function setIdCinema($idCinema)
+    {
+        $this->idCinema = $idCinema;
 
         return $this;
     }

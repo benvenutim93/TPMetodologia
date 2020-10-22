@@ -15,6 +15,18 @@ body {
           background-size: cover;
   
 }
+.content-xxl{
+  background-color: hsl(0, 0%, 67%);
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  width:90%; 
+  margin: auto;
+  margin-top: 75px;
+  border-radius: 5%;
+  border: 1px solid rgb(7, 1, 32);
+  box-shadow: 0px 0px 10px 0px  rgb(15, 0, 0);
+}
 .content-grande{
   background-color: hsl(0, 0%, 67%);
   text-align: center;

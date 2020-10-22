@@ -45,10 +45,10 @@ class CinemaController
         require_once(CINEMA_VIEWS . "modify-form-cinema.php");
     }
 
-    public function Add ($name, $address, $capacity, $ticketValue)
+    public function Add ($name, $address, $capacity)
     {
         
-            $cine = new Cine($name, $address, $capacity, $ticketValue);
+            $cine = new Cine($name, $address, $capacity);
             
             $this->cinemaDao->Add($cine);
     
@@ -72,9 +72,9 @@ class CinemaController
         $this->showCinemaListAdmin();
     }
 
-    public function Modify($id, $name, $address, $capacity,$ticketValue)
+    public function Modify($id, $name, $address, $capacity)
     {
-        $this->cinemaDao->Modify($id, $name, $address, $capacity,$ticketValue);
+        $this->cinemaDao->Modify($id, $name, $address, $capacity);
         $this->showCinemaListAdmin();
     }
 }

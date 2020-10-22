@@ -1,3 +1,12 @@
+<div class="row">
+<form action="<?php echo FRONT_ROOT?>Admin/login" method="post">
+<input type="email" id="inputEmail" class="sr-only" name="email"  value="rope@rope" required autofocus>
+<input type="pass" id="inputEmail" class="sr-only"  name="pass" value="hola123"required autofocus>
+
+<button class="btn btn-lg btn-info btn-block" type="submit"> Admin de una pa</button>
+</form>
+</div>
+
 
 <div class="content-login">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/login" method="POST">

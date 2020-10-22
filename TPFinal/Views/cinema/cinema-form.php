@@ -16,11 +16,8 @@
             <label for="capacity" class="sr-only">Ingrese Capacidad</label>
             <!--I N P U T-->
             <input type="number" id="capacity" class="form-control" placeholder="Capacidad"  min="0" max="500" title ="Minimo 0 Maximo 500"name="capacity" required>
-            <!-- L A B E L -->
-            <label for="ticketValue" class="sr-only">Ingrese Valor de Entrada</label>
-            <!--I N P U T-->
-            <input type="number" id="ticketValue" class="form-control" placeholder="Valor Entrada" min="0" max="500"  name="ticketValue" required>
 
         <!-- B O T O N -->
              <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
      </form>
+</div>
