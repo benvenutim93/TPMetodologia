@@ -35,10 +35,9 @@
                                     <!-- G E N E R O--> 
                                         <ul class="list-group list-group-horizontal ">
                                             <?php
-                                            $arrayGenres = $movie->getGenre_ids();
-                                            foreach($arrayGenres as $genre)
+                                            foreach($movie->getGenre_ids() as $id)
                                             {?>
-                                            <li class="none"> <?php echo $genreRepo->GetOne($genre);?></li>
+                                            <li class="none"> <?php echo $genreRepo->GetOneName($id);?></li>
                                             <li class="none"> <strong>|</strong> </li>
                                             <?php }?>
                                         </ul> </li>

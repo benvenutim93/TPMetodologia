@@ -41,5 +41,34 @@ releaseDate date not null,
 constraint pk_movies primary key (id_movie),
 constraint unq_title unique (title));
 
+create table genres (
+id_genre int not null,
+genreName varchar (50),
+constraint pk_genres primary key (id_genre));
+
+create table userTypes (
+id_userType int not null auto_increment,
+nameType varchar (50),
+constraint pk_userTye primary key (id_userType));
+
+insert into userTypes (nameType) values ("Administrador"),("Usuario"),("Dueño cine");
+
+create table users (
+id_user int not null auto_increment,
+firstName varchar (50) not null, 
+lastName varchar (50) not null,
+userName varchar (50) not null,
+pass varchar (50) not null,
+mail varchar (50) not null,
+dni varchar (50) not null,
+birthDate date not null,
+id_userType int not null,
+constraint pk_users primary key (id_user),
+constraint fk_usersType foreign key (id_userType) references userTypes (id_userType) on update cascade on delete cascade);
+
+insert into users (firstName, lastName, userName, pass, mail, dni, birthDate, id_userType) VALUES
+("Rodrigo", "Perez", "ropeque19", "hola123", "rope@rope", "40123123", "2000-1-19", 1);
+
+
 
 

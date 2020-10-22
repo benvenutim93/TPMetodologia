@@ -3,34 +3,35 @@ namespace Controllers;
 
 use Models\Movie as Movie;
 use Repository\MoviesRepository as M_Repo;
-use Repository\GenreRepository as G_Repo;
+use DAO\GenreDAO as G_DAO;
 
 class MoviesController
 {
     private $moviesDao;
-
+    
 
     public function __construct()
     {
         $this->moviesDao = new M_Repo();
+        
     }
 
     public function showMoviesListView()
     {
         $moviesList = $this->moviesDao->GetAll();
-        $genreRepo = new G_Repo();
+        $genreRepo = new G_DAO();
         require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showOnlyMovie($moviesList)
     {
-        $genreRepo = new G_Repo();
+        $genreRepo = new G_DAO();
         require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showSearchMovieView()
     {
-        $genreRepo = new G_Repo();
+        $genreRepo = new G_DAO();
         $genreRepo = $genreRepo->GetAll();
         $pelisDates = $this->fechasPelis();
         require_once(VIEWS_PATH . "searchMovie.php");
@@ -62,7 +63,7 @@ class MoviesController
     public function searchMovieGenre($nameGenre)
     {
         $array = $this->moviesDao->GetAll();
-        $genres = new G_Repo(); $flag=false; $id=null;
+        $genres = new G_DAO(); $flag=false; $id=null;
         $arrayGenres = $genres->GetAll();
 
         foreach($arrayGenres as $genre){

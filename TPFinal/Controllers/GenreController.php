@@ -2,15 +2,16 @@
 namespace Controllers;
 
 use Models\Genre as Genre;
-use Repository\GenreRepository as G_Repo;
+use DAO\GenreDAO as G_DAO;
 
 class GenreController 
 {
-    private $genreRepo;
+    private $genreDao;
 
     public function __construct()
     {
-        $this->genreRepo = new G_Repo();
+        $this->genreDao = new G_DAO();
+
     }
 
     public function showPrincipalView ()
@@ -21,15 +22,7 @@ class GenreController
 
     public function GetAll ()
     {
-        $array = $this->genreRepo->GetAll();
+        $array = $this->genreDao->GetAll();
         return $array[0];
     }
-
-    public function GetOne ($name)
-    {
-        return $this->genreRepo->GetOne($name);
-    }
 }
-
-
-?>
