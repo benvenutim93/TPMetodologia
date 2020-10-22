@@ -100,4 +100,8 @@ class Functions{
 
         return $this;
     }
+
+    /**
+     * Get the value of hour
+     */ 
 }

@@ -131,5 +131,21 @@
             }
         }
 
+        public function countRooms($idCinema)
+        {
+            try
+            {
+                $query = "select count(id_room) as cantidad from $this->tableName where $this->tableName.id_cine =:id_cine";
+
+                $parameters["id_cine"] = $idCinema;
+                $this->connection = Connection :: GetInstance();
+                return $this->connection->Execute($query, $parameters);
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }   
+        }
+
     }
 ?>

@@ -11,6 +11,7 @@ define("ADMIN_VIEWS", VIEWS_PATH . "admin/");
 define("USER_VIEWS", VIEWS_PATH . "user/");
 define("CINEMA_VIEWS", VIEWS_PATH . "cinema/");
 define("ROOM_VIEWS", VIEWS_PATH . "room/");
+define("FUNCTION_VIEWS", VIEWS_PATH . "function/");
 define("API_KEY", "aa337b46aed830028b32fc244f2ba666");
 define("URL_NOWPLAYING", "https://api.themoviedb.org/3/movie/now_playing?api_key=" . API_KEY ."&language=en-US&page=1");
 define("URL_GENRES", "https://api.themoviedb.org/3/genre/movie/list?api_key=" . API_KEY . "&language=en-US");

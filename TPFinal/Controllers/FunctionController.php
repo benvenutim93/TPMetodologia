@@ -1,45 +1,41 @@
-<?php 
+<?php
 namespace Controllers;
 
-use Models\Room as Room;
-use DAO\RoomDao as R_DAO;
-use Repository\MoviesRepository as M_Repo;
+use Models\Functions as funct;
+use DAO\FunctionDao as F_DAO;
 
-class RoomController{
+class FunctionController{
 
-    private $roomDao;
+    private $funtionDao;
    
 
     public function __construct()
     {
-        $this->roomDao = new R_DAO();
+        $this->funtionDao = new F_DAO();
     }
 
-    public function index($idCinema){
+    public function index($id){
         
-        $arrayR= $this->roomDao->GetAll($idCinema);
-        $movie= new M_Repo();
-        $arrayMovie= $movie->GetAll();
-        $idCine = $idCinema;
-       require_once(ROOM_VIEWS. "index.php");
+        $idCine = $id; 
+        require_once(ROOM_VIEWS. "index.php");
 
     }
 
     public function showModifyRoom($id){
-        $room = $this->roomDao->GetOne($id);
-        require_once(ROOM_VIEWS . "modify-form-room.php");
+        $room = $this->funtionDao->GetOne($id);
+        require_once(FUNCTION_VIEWS . "modify-form-room.php");
     }
     public function showRoomsListAdmin($idCinema)
     {
 
-        $arrayR= $this->roomDao->GetAll($idCinema);
+        $arrayR= $this->funtionDao->GetAll($idCinema);
      
-        $cantidad=$this->roomDao->countRooms($idCinema);
+        $cantidad=$this->funtionDao->countRooms($idCinema);
 
             foreach($cantidad as $value)
             {
                 if($value["cantidad"] > 0)
-                require_once(ROOM_VIEWS . "roomsListAdmin.php");
+                require_once(FUNCTION_VIEWS . "roomsListAdmin.php");
                 else 
                 {
                     echo '<script>
@@ -56,26 +52,26 @@ class RoomController{
 
         $room = new Room($name,$capacity,$price,$idCinema);
 
-        $this->roomDao->Add($room);
+        $this->funtionDao->Add($room);
         echo '<script>
                 alert("La sala se agrego con Exito al cine");
                 </script>
                  ';
         $idCine=$idCinema;
-        require_once(ROOM_VIEWS. "index.php");
+        require_once(FUNCTION_VIEWS . "index.php");
  
     }
     public function Modify($id,$name,$seatsCapacity,$ticketValue,$idCine)
     {
         echo"entre";
-        $this->roomDao->Modify($id, $name, $seatsCapacity, $ticketValue,$idCine);
+        $this->funtionDao->Modify($id, $name, $seatsCapacity, $ticketValue,$idCine);
         $this->showRoomsListAdmin($idCine);
     }
 
     public function Remove($id,$idCinema)
     {
-        $this->roomDao->Remove($id);
-        $cantidad=$this->roomDao->countRooms($idCinema);
+        $this->funtionDao->Remove($id);
+        $cantidad=$this->funtionDao->countRooms($idCinema);
 
         foreach($cantidad as $value){ //Dato escalar, es decir es un unico dato
             if($value["cantidad"] > 0)
@@ -92,5 +88,4 @@ class RoomController{
 
 
 }
-
 ?>
