@@ -7,7 +7,6 @@ use DAO\FunctionDao as F_DAO;
 class FunctionController{
 
     private $funtionDao;
-   
 
     public function __construct()
     {
@@ -20,6 +19,7 @@ class FunctionController{
         require_once(ROOM_VIEWS. "index.php");
 
     }
+
 
     public function showModifyRoom($id){
         $room = $this->funtionDao->GetOne($id);

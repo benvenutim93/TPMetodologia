@@ -30,38 +30,10 @@
                             <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div>
-        
-            
         </div>
-        <div class="col"  >
+        <div class="col">
             <div class="content-chico">
-                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Function/Add" method="POST">
-                <h1>FALTA EL LISTADO DE LAS MOVIES QUE NO ESTEN EN FUNCIONES</h1>
-                            <!--Cambiar logo -->
-                            <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg"  title="Logo "alt="Logo del sistema" width="72" height="72">
-                            <h1 class="h3 mb-3 font-weight-normal">Agregar Funcion</h1>
-                            <!--Sacando el sr-only te muestra el titulo(LABEL)-->
-
-                            <!-- L A B E L -->
-                            <label for="movi" >Ingrese Pelicula</label>
-                            <!--I N P U T-->
-                            <select id="inputState" name="nameSalas" class="form-control">
-                             <option value="" disabled selected> Seleccione una pelicula </option>
-
-                              <?php foreach($arrayMovie as $value){ ?>
-                            <option value="<?php echo $value->getId();?>"  > <?php echo $value->getTitle();?></option>
-                                <?php } ?>
-                            </select>
-                            <!-- L A B E L -->
-                            <label for="capacity" >Seleccione sala </label>
-                            <!--I N P U T-->
-                            <select id="inputState" name="nameSalas" class="form-control">
-                             <option value="" disabled selected> Seleccione una sala </option>
-
-                              <?php foreach($arrayR as $value){ ?>
-                            <option value="<?php echo $value->getId();?>"  > <?php echo $value->getName();?></option>
-                                <?php } ?>
-                            </select>
+                            <form action="<?php echo FRONT_ROOT?> Room/showDateForm" method= "POST" class="form-signin">
                             <!-- L A B E L -->
                             <label for="date" >Ingrese Fecha </label>
                             <!--I N P U T-->
@@ -69,15 +41,15 @@
                             <label for="time" >Ingrese Horario </label>
                             <!--I N P U T-->
                             <input type="time" id="time" class="form-control" placeholder="Horario"  min= "15:00" max="23:00" name="time" required>
-                            <label for="" >    </label>
-                        <!-- B O T O N -->
-                            <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
-                </form>
-
-                
-            </div>
-           
+                            
+                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                             <!-- B O T O N -->
+                             <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
+                            </form>
+            </div> 
         </div>
+            
+
     </div>
     <div class="row">
         <div class="col">
@@ -101,11 +73,7 @@
 
     <a href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Volver Atras</button></a>
 
-
-    </div>
-            
-            
-        
+    </div>     
    
 </div>
 

@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Models\Room as Room;
+use Models\Functions as Functions;
 use DAO\RoomDao as R_DAO;
 use DAO\MovieDao as M_DAO;
 
@@ -18,13 +19,20 @@ class RoomController{
     public function index($idCinema){
         
         $arrayR= $this->roomDao->GetAll($idCinema);
-        $movie= new M_DAO();
+        
 
-        $arrayMovie= $movie->GetMoviesNotFunction();
-        //var_dump($arrayMovie);
         $idCine = $idCinema;
-        //require_once(ROOM_VIEWS. "index.php");
+        require_once(ROOM_VIEWS. "index.php");
 
+    }
+    public function showDateForm($date, $hour,$idCinema)
+    {
+        $movie= new M_DAO();
+        $arrayR=$this->roomDao->GetAll($idCinema);
+        $arrayMovie= $movie->GetMoviesNotFunction();
+        $arraMovieDate=$movie->GetMoviesNoRepeatDate();
+        $arrayMovieNoRepeatDate=$this->verifiMoviesNoRepeat($arrayMovie,$arraMovieDate,$date,$hour);
+        require_once(FUNCTION_VIEWS . "dateForm.php");
     }
 
     public function showModifyRoom($id){
@@ -92,6 +100,27 @@ class RoomController{
         }
     }
 
+    public function verifiMoviesNoRepeat($arrayM,$arrayMovieNoRepeat,$date,$hours)
+    {
+      foreach($arrayMovieNoRepeat as $fecha)
+      { 
+        $cant=count($fecha);
+          for($i=0;$i<$cant;$i++)
+          {echo $i;
+            echo $cant;
+            if($fecha[$i] instanceof functions)
+            {
+                ECHO "entro";
+                if( $fecha[$i]->getDate()!=$date)
+                {
+                    
+                array_push($arrayM,$fecha[$i+1]);
+                }
+            }   
+          }
+      }
+      return $arrayDefinitivo=$arrayM;
+    }
 }
 
 ?>

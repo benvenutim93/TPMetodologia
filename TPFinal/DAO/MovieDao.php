@@ -2,6 +2,7 @@
     namespace DAO;
 
     use Models\Movie as Movie;
+    use Models\Functions as Functions;
     use DAO\Connection as Connection;
     use \Exception as Exception;
 
@@ -174,23 +175,30 @@
             $movieListNotFunction= array();
             try
             {
-                $query ="select * from $this->tableName left join functions on movies.id_movie <>functions.id_movie;";
+                $query ="select
+                $this->tableName.id_movie,
+                $this->tableName.title,
+                functions.functionDate
+                from functions
+                right join $this->tableName
+                on functions.id_movie = $this->tableName.id_movie
+                 WHERE $this->tableName.id_movie not in (select functions.id_movie from functions);";
                 $this->connection = Connection::GetInstance();
 
                 $result = $this->connection->Execute($query);
 
+
                 foreach($result as $value)
                 {
                     $movie = new Movie();
+                    $function=new Functions();
+                    $movie->setId($value["id_movie"]);
                     $movie->setTitle($value["title"]);
-                    $movie->setOverview($value["overview"]);
-                    $movie->setOriginal_title($value["movieLanguage"]);
-                    $movie->setVote_average($value["vote_avg"]);
-                    $movie->setRelease_date($value["releaseDate"]);
+                    $function->setDate($value["functionDate"]);
+                    
 
                     array_push($movieListNotFunction, $movie);
                 }
-var_dump($movieListNotFunction);
                 return $movieListNotFunction;
             }
             catch (\PDOException $ex)
@@ -199,6 +207,43 @@ var_dump($movieListNotFunction);
             }
 
         }
-        #$query = "select * from $this->tableName where id_cine = $idMovie";
+
+        public function GetMoviesNoRepeatDate()
+        {
+            $arrayAux=array();
+            $movieListNoRepeatDate= array();
+            try
+            {
+                $query ="select
+                $this->tableName.title,
+                DATE_FORMAT( functions.functionDate, '%Y-%m-%d') fecha, 
+                DATE_FORMAT( functions.functionDate,'%H:%i:%s') hora
+                from functions
+                join $this->tableName
+                on functions.id_movie= movies.id_movie;";
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+
+                foreach($result as $value)
+                {
+                    $movie = new Movie();
+                    $function=new Functions();
+                    $movie->setTitle($value["title"]);
+                    $function->setDate($value["fecha"]);
+                    $function->setHour($value["hora"]);
+                    
+                    array_push($arrayAux,$function);
+                    array_push($arrayAux,$movie);
+                }
+                array_push($movieListNoRepeatDate,$arrayAux);
+                return $movieListNoRepeatDate;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>
