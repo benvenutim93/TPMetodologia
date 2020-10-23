@@ -14,7 +14,7 @@
 
         public function __construct()
         {
-            $this->Add();# Se hace solo una vez y listorti
+            #$this->Add();# Se hace solo una vez y listorti
         }
 
         public function Add()

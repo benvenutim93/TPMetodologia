@@ -3,36 +3,39 @@ namespace Controllers;
 
 use Models\Movie as Movie;
 use Repository\MoviesRepository as M_Repo;
-use DAO\GenreDAO as G_DAO;
+use Repository\GenreRepository as G_DAO;
 
 class MoviesController
 {
     private $moviesDao;
+    private $genreDao;
     
 
     public function __construct()
     {
         $this->moviesDao = new M_Repo();
-        
+        $this->genreDao = new G_DAO();
     }
+
+
 
     public function showMoviesListView()
     {
         $moviesList = $this->moviesDao->GetAll();
-        $genreRepo = new G_DAO();
+        $genreRepo = $this->genreDao->GetAll();
+        
         require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showOnlyMovie($moviesList)
     {
-        $genreRepo = new G_DAO();
+        $genreRepo = $this->genreDao->GetAll();
         require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showSearchMovieView()
     {
-        $genreRepo = new G_DAO();
-        $genreRepo = $genreRepo->GetAll();
+        $genreRepo = $this->genreDao->GetAll();
         $pelisDates = $this->fechasPelis();
         require_once(VIEWS_PATH . "searchMovie.php");
     }
@@ -45,7 +48,7 @@ class MoviesController
 
            foreach($array as $movie)
            {
-               if ($movie->getTitle() == $title)
+               if ($movie["title"] == $title)
                {
                     $flag = true;
                     array_push($moviesList, $movie);                    
@@ -55,6 +58,9 @@ class MoviesController
         
         if ($flag == false)
         {
+            echo '<script>
+                    alert("No se encontraron peliculas con ese titulo");
+                    </script>';
             $this->showSearchMovieView();
             
         }
@@ -63,13 +69,14 @@ class MoviesController
     public function searchMovieGenre($nameGenre)
     {
         $array = $this->moviesDao->GetAll();
-        $genres = new G_DAO(); $flag=false; $id=null;
-        $arrayGenres = $genres->GetAll();
+        $genresJson = $this->genreDao->GetAll(); 
+        $flag=false; $id=null;
+        
 
-        foreach($arrayGenres as $genre){
-            if($genre->getName() == $nameGenre){
+        foreach($genresJson as $genre){
+            if($genre["name"] == $nameGenre){
                 $flag = true;
-                $id= $genre->getId();
+                $id= $genre["id"];
             }
         }
 
@@ -77,7 +84,7 @@ class MoviesController
 
            foreach($array as $movie)
            {
-               foreach($movie->getGenre_ids() as $genre){
+               foreach($movie["genre_ids"] as $genre){
                 if($genre == $id){
                     array_push($moviesList, $movie);
                 }
@@ -101,7 +108,7 @@ class MoviesController
      
 
             foreach($array as $movie){
-                $date = $movie->getRelease_date();
+                $date = $movie["release_date"];
 
                 $fecha = explode('-', $date);
                 $años = array_shift($fecha);
@@ -123,14 +130,12 @@ class MoviesController
     } 
     public function fechasPelis(){
 
-        $repom= new M_Repo();
-        $moviesList = $repom->GetAll();
+        
+        $moviesList = $this->moviesDao->GetAll();
         $dates= array();
 
         foreach($moviesList as $movie){ 
-            $date = $movie->getRelease_date();
-
-            
+            $date = $movie["release_date"];
             $fecha = explode('-', $date);
             $años = array_shift($fecha);
             
@@ -140,6 +145,9 @@ class MoviesController
         $nonRepeat = array_unique($dates);
        return $nonRepeat;
     }
+
+
+ 
 }
 
 

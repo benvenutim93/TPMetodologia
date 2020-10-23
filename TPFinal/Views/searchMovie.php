@@ -20,7 +20,7 @@
                     <option value="" disabled selected> Seleccione uno </option>
 
                         <?php foreach($genreRepo as $genre){ ?>
-                            <option value="<?php echo $genre->getName();?>"  > <?php echo $genre->getName();?></option>
+                            <option value="<?php echo $genre["name"];?>"  > <?php echo $genre["name"];?></option>
                         <?php } ?>
 
                     </select>

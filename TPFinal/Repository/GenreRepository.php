@@ -18,19 +18,17 @@ class GenreRepository
 
         public function GetAll()
         {
-            $this->retrieveAPI();
+            $jsonGenres = $this->retrieveAPI();
 
-            return $this->genreList;
+            return $jsonGenres;
         }
 
-        public function GetOne ($id)
+        public function GetOneName ($genresJson, $id)
         {
-            $this->retrieveAPI();
-
-            foreach ($this->genreList as $value)
+            foreach ($genresJson as $value)
             {
-                    if ($value->getId() == $id)
-                        return $value->getName();
+                    if ($value["id"] == $id)
+                        return $value["name"];
             }
             
         }
@@ -42,15 +40,15 @@ class GenreRepository
             if ($apiContent)
             {
                 $jsonDecode = json_decode($apiContent, true);
-
-                foreach($jsonDecode["genres"] as $value)
+                return $jsonDecode["genres"];
+                /*foreach($jsonDecode["genres"] as $value)
                 {
                         $genre = new Genre();
                         $genre->setId($value["id"]);
                         $genre->setName($value["name"]);
 
                         array_push($this->genreList, $genre);
-                }
+                }*/
             }
         }
 
