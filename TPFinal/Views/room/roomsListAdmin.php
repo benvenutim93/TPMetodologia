@@ -31,9 +31,9 @@
                             </div>
                         </div>
                         
-                                <label for="idCine" >ID del Cine al que pertenece</label>
+                                <label for="idCine" >Nombre del Cine al que pertenece</label>
                                 <!--I N P U T-->
-                                <input type="text" id="idCine" class="form-control"   value="<?php echo $room->getIdCinema();?>" readonly>
+                                <input type="text" id="idCine" class="form-control"   value="<?php echo $nombre;?>" readonly>
 
    
                     </form>

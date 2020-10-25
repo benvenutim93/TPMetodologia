@@ -19,9 +19,9 @@ class RoomController{
     public function index($idCinema){
         
         $arrayR= $this->roomDao->GetAll($idCinema);
-        
+        $nombre= $this->getCinemaName($idCinema);
+        $idCine =$idCinema;
 
-        $idCine = $idCinema;
         require_once(ROOM_VIEWS. "index.php");
 
     }
@@ -32,6 +32,9 @@ class RoomController{
         $arrayMovie= $movie->GetMoviesNotFunction();
         $arraMovieDate=$movie->GetMoviesNoRepeatDate();
         $arrayMovieNoRepeatDate=$this->verifiMoviesNoRepeat($arrayMovie,$arraMovieDate,$date,$hour);
+        $fecha = $date." ".$hour;
+        var_dump($arrayMovie);
+       
         require_once(FUNCTION_VIEWS . "dateForm.php");
     }
 
@@ -43,6 +46,7 @@ class RoomController{
     {
 
         $arrayR= $this->roomDao->GetAll($idCinema);
+        $nombre= $this->getCinemaName($idCinema);
      
         $cantidad=$this->roomDao->countRooms($idCinema);
 
@@ -106,11 +110,11 @@ class RoomController{
       { 
         $cant=count($fecha);
           for($i=0;$i<$cant;$i++)
-          {echo $i;
-            echo $cant;
+          {
+            
             if($fecha[$i] instanceof functions)
             {
-                ECHO "entro";
+                
                 if( $fecha[$i]->getDate()!=$date)
                 {
                     
@@ -120,6 +124,12 @@ class RoomController{
           }
       }
       return $arrayDefinitivo=$arrayM;
+    }
+    public function getCinemaName($idCinema){
+        $nombrea = $this->roomDao->GetnameCinema($idCinema);
+        $nombreCine = $nombrea[0];
+        return $nombreCine;
+
     }
 }
 

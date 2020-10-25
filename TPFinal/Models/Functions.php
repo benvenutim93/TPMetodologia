@@ -9,15 +9,15 @@ class Functions{
     private $idMovie;
     private $occupiedSeats;
     private $date;
-    private $hour;
 
-    public function __construct($idRoom="", $idMovie="", $occupiedSeats="", $date="",$hour="")
+
+    public function __construct($idRoom="", $idMovie="", $occupiedSeats="", $date="")
     {
         $this->idRoom=$idRoom;
         $this->idMovie=$idMovie;
         $this->occupiedSeats=$occupiedSeats;
         $this->date=$date;
-        $this->hour=$hour;
+    
     }
     
 
@@ -103,27 +103,5 @@ class Functions{
         return $this;
     }
 
-    /**
-     * Get the value of hour
-     */ 
-
-    /**
-     * Get the value of hour
-     */ 
-    public function getHour()
-    {
-        return $this->hour;
-    }
-
-    /**
-     * Set the value of hour
-     *
-     * @return  self
-     */ 
-    public function setHour($hour)
-    {
-        $this->hour = $hour;
-
-        return $this;
-    }
+   
 }

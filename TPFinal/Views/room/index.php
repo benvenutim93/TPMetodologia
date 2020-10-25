@@ -1,5 +1,5 @@
 <div class="content-xxl">
-   <font color="white"> <h1 class="text-center" > ID Cine:<?php echo $idCine?></h1></font>
+   <font color="white"> <h1 class="text-center" > ID Cine:<?php echo $nombre;?></h1></font>
   
     <div class="row">   
         <div class="col">
@@ -44,7 +44,7 @@
                             
                             <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
                              <!-- B O T O N -->
-                             <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
+                             <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                             </form>
             </div> 
         </div>

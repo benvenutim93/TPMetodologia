@@ -187,6 +187,7 @@
 
                 $result = $this->connection->Execute($query);
 
+         
 
                 foreach($result as $value)
                 {
@@ -216,6 +217,7 @@
             {
                 $query ="select
                 $this->tableName.title,
+                $this->tableName.id_movie,
                 DATE_FORMAT( functions.functionDate, '%Y-%m-%d') fecha, 
                 DATE_FORMAT( functions.functionDate,'%H:%i:%s') hora
                 from functions
@@ -231,8 +233,10 @@
                     $movie = new Movie();
                     $function=new Functions();
                     $movie->setTitle($value["title"]);
-                    $function->setDate($value["fecha"]);
-                    $function->setHour($value["hora"]);
+                    $movie->setId($value["id_movie"]);
+                    $fecha = $value["fecha"].$value["hora"];
+                    $function->setDate($fecha);
+                   
                     
                     array_push($arrayAux,$function);
                     array_push($arrayAux,$movie);

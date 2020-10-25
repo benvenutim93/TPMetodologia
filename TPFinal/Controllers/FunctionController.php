@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use Models\Functions as funct;
+use Models\Functions as Funct;
 use DAO\FunctionDao as F_DAO;
 
 class FunctionController{
@@ -13,78 +13,26 @@ class FunctionController{
         $this->funtionDao = new F_DAO();
     }
 
-    public function index($id){
-        
-        $idCine = $id; 
-        require_once(ROOM_VIEWS. "index.php");
-
-    }
-
-
-    public function showModifyRoom($id){
-        $room = $this->funtionDao->GetOne($id);
-        require_once(FUNCTION_VIEWS . "modify-form-room.php");
-    }
-    public function showRoomsListAdmin($idCinema)
-    {
-
-        $arrayR= $this->funtionDao->GetAll($idCinema);
-     
-        $cantidad=$this->funtionDao->countRooms($idCinema);
-
-            foreach($cantidad as $value)
-            {
-                if($value["cantidad"] > 0)
-                require_once(FUNCTION_VIEWS . "roomsListAdmin.php");
-                else 
-                {
-                    echo '<script>
-                    alert("No se encontraron salas en el cine");
-                    </script>';
-                    $this->index($idCinema);
-                }
-            }
-            
-        
-    }
   
-    public function add($name,$capacity,$price,$idCinema){
+    
+  
+    public function Add($id_movie,$id_room,$seatsOcupped,$date){
 
-        $room = new Room($name,$capacity,$price,$idCinema);
 
-        $this->funtionDao->Add($room);
+        $function = new Funct($id_room,$id_movie,$seatsOcupped,$date);
+       
+
+        $this->funtionDao->Add($function);
         echo '<script>
-                alert("La sala se agrego con Exito al cine");
+                alert("La funcion se agrego con exito");
                 </script>
                  ';
-        $idCine=$idCinema;
-        require_once(FUNCTION_VIEWS . "index.php");
+        require_once(ADMIN_VIEWS . "boardAdmin.php");
  
     }
-    public function Modify($id,$name,$seatsCapacity,$ticketValue,$idCine)
-    {
-        echo"entre";
-        $this->funtionDao->Modify($id, $name, $seatsCapacity, $ticketValue,$idCine);
-        $this->showRoomsListAdmin($idCine);
-    }
+   
 
-    public function Remove($id,$idCinema)
-    {
-        $this->funtionDao->Remove($id);
-        $cantidad=$this->funtionDao->countRooms($idCinema);
 
-        foreach($cantidad as $value){ //Dato escalar, es decir es un unico dato
-            if($value["cantidad"] > 0)
-                $this->showRoomsListAdmin($idCinema);
-            else {
-                echo '<script>
-                alert("No se encontraron salas en el cine");
-                </script>
-                 ';
-                $this->index($idCinema);
-            }
-        }
-    }
 
 
 }

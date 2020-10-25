@@ -94,13 +94,36 @@
             }
 
         }
+
+        public function GetnameCinema($id)
+        {
+            try
+            {
+                
+                $roomsList = array();
+                $query = "select cinemas.cinemaName from $this->tableName inner join cinemas on $this->tableName.id_cine = cinemas.id_cine where rooms.id_cine = $id;";
+                
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+                
+                $nombre = $result[0];
+              
+
+                return $nombre;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
        public function Modify($id, $name, $seatsCapacity, $ticketValue,$idCine)
         {
             try
             {
-            $query = "update $this->tableName set roomName = :roomName, seatsCapacity = :seatsCapacity, ticketValue = :ticketValue where id_cine = :id_cine;";
+            $query = "update $this->tableName set roomName = :roomName, seatsCapacity = :seatsCapacity, ticketValue = :ticketValue where id_room = :id_room;";
             
-            $parameters["id_cine"] = $idCine;
+            $parameters["id_room"] = $id;
             $parameters["roomName"] = $name;
             $parameters["seatsCapacity"] = $seatsCapacity;
             $parameters["ticketValue"] = $ticketValue;

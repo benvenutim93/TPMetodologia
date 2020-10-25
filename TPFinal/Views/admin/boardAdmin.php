@@ -17,24 +17,26 @@
             
             <div class="col">
                     <h1 class="text-center">Entradas</h1>
-                    <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Consultar entradas VENDIDAS </a>
+                    <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>">Consultar entradas VENDIDAS </a>
             </div> 
             <div class="col">
                      <h1 class="text-center">Ventas</h1>
-                     <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Consultar Ventas </a>
+                     <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>">Consultar Ventas </a>
             </div>
             <div class="col">
                      <h1 class="text-center">Cartelera</h1>
-                     <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT?>">Ingresar Pelicula a  Cartelera </a>
+                     <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>">Ingresar Pelicula a  Cartelera </a>
             </div>
         </div>
-        <div class="volver">
+       
         <div class="row">
+        <div class="col">
             <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView">
-            <button type="submit" class="btn btn-lg btn-light btn-block">VOLVER</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
             </form>
+            </div>
         </div>
-        </div>
+        
 </div>
 
 
