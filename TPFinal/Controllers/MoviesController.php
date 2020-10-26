@@ -64,7 +64,12 @@ class MoviesController
         
     }
 
-
+    public function showMovieArray($movilist)
+    {
+       $moviesList = $movilist;
+      
+        require_once(USER_VIEWS . "moviesViewArray.php");
+    }
 
     public function searchMovieGenre($genre_id)
     {
@@ -78,20 +83,32 @@ class MoviesController
         {
             foreach($value->getGenre_ids() as $id)
             {
-                if($id == $genre_id)
-                    array_push($aux,$this->genreDao->GetOneName($this->genreDao, $id));
+                
+                
+                if($id == $genre_id){
+                    $aux=$this->genreDao->GetOneName($this->genreDao, $id);
+                    array_push($moviesList,$value);
+                   $value->setGenre_ids($aux);
+                }
+                  
             }
-            $value->setGenre_ids($aux);
-            array_push($moviesList, $value);
+            
+            
+                  
         }
+   
+
+       $this->showMovieArray($moviesList);
         
-        require_once(USER_VIEWS . "moviesViewArray.php");
+        
        
 
     }
 
     public function searchMovieDate($year){ //año - mes - dia
         $array = $this->moviesDao->GetAll();
+
+        
         $moviesList=array(); 
 
      
@@ -110,11 +127,11 @@ class MoviesController
                 /* Muestra por fecha especifica
                 if ($date == $year){
                     array_push($moviesList, $movie);
-                 }*/
+                }*/
                 
             }
 
-       $this->showOnlyMovie($moviesList);
+       $this->showMovieArray($moviesList);
 
     } 
     public function fechasPelis()

@@ -33,7 +33,7 @@ class RoomController{
         $arraMovieDate=$movie->GetMoviesNoRepeatDate();
         $arrayMovieNoRepeatDate=$this->verifiMoviesNoRepeat($arrayMovie,$arraMovieDate,$date,$hour);
         $fecha = $date." ".$hour;
-        
+           
        
         require_once(FUNCTION_VIEWS . "dateForm.php");
     }
@@ -68,15 +68,31 @@ class RoomController{
   
     public function add($name,$capacity,$price,$idCinema){
 
-        $room = new Room($name,$capacity,$price,$idCinema);
+        $capacidad = $this->roomDao->getRoomCapacity($idCinema);
+        
+  
+        foreach($capacidad as $value){
+    
+        if($value["capacidad"] >= ($value["capEnUso"]+$capacity) )
+        {
 
-        $this->roomDao->Add($room);
-        echo '<script>
-                alert("La sala se agrego con Exito al cine");
-                </script>
-                 ';
-        $idCine=$idCinema;
-        $this->index($idCinema);
+           $room = new Room($name,$capacity,$price,$idCinema);
+           $this->roomDao->Add($room);
+                echo '<script>
+                        alert("La sala se agrego con Exito al cine");
+                        </script>
+                        ';
+        }else
+        {
+            echo '<script>
+            alert("Se ha superado la capacidad del cine,vuelva a intentarlo.");
+            </script>
+            ';
+        }
+    }
+    $this->index($idCinema);
+       
+  
  
     }
     public function Modify($id,$name,$seatsCapacity,$ticketValue,$idCine)

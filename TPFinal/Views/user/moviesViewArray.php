@@ -1,3 +1,4 @@
+
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >
@@ -30,20 +31,7 @@
                             <li><p> <?php echo changeLanguage($movie->getOriginal_language());?></p> </li></ul> 
                             
                             <div class="row">
-                                <div class="col">
-                                    
-                                    <h5>Generos</h5><li>
-                                    <!-- G E N E R O--> 
-                                        <ul class="list-group list-group-horizontal ">
-                                            <?php
-                                            foreach($movie->getGenre_ids() as $genreID)
-                                            {?>
-                                            <li class="none"> <?php echo $genreID;?></li>
-                                            <li class="none"> <strong>|</strong> </li>
-                                            <?php }?>
-                                        </ul> </li>
-                                  
-                                </div>
+                                
                                
                                 <div class="col">
                                  <div class="row">

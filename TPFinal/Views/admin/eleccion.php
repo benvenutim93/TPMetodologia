@@ -1,21 +1,19 @@
-
 <div class="content-grande">
 
-
-<button class="btn btn-lg btn-dark btn-block" type="submit">
- <a href="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" style="black">Realizar Operaciones Admins</a></button>
-
-
-<button class="btn btn-lg btn-dark btn-block" type="submit">
- <a href="<?php echo FRONT_ROOT?>Admin/showOPUsersView" style="black">Realizar Operaciones de Usuarios</a></button>
- <div class="volver">
-    <div class="row">
-    <div class="col">
-    <form action= "<?php echo FRONT_ROOT?>Admin/loginForm">
-    <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
+<div class="form-signin">
+    <form action="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" >
+        <button class="btn btn-lg btn-dark btn-block" type="submit">
+        Realizar Operaciones Admins</button>
     </form>
-    </div>
-    </div>
+    <form action="<?php echo FRONT_ROOT?>Admin/showOPUsersView">
+    <button  class="btn btn-lg btn-dark btn-block" type="submit">
+                <font color="red"> Realizar Operaciones de Usuarios</font></button>
+    </form>
+        
+     <form action= "<?php echo FRONT_ROOT?>Admin/loginForm">
+         <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
+    </form>
+        
 </div>
 
 <?php

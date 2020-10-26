@@ -67,7 +67,7 @@
                 <td colspan=2 >
                 <div class="row">
                         
-                    <a class="btn btn-lg btn-light btn-block" href="<?php echo FRONT_ROOT ?>Admin/showOPAdminsView" >Volver atras</a>
+                    <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT ?>Admin/showOPAdminsView" >Volver atras</a>
                  </div>
     </div>  </td>
                        

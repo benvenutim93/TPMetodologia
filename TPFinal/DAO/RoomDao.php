@@ -14,6 +14,21 @@
        {
            
        }
+       public function getRoomCapacity($idCine){
+        try{
+            $query = "select cinemas.capacity as capacidad ,sum($this->tableName.seatsCapacity) as capEnUso from  $this->tableName inner join cinemas on $this->tableName.id_cine = :id_cine  ;
+            ";
+            $parameters["id_cine"] = $idCine;
+
+
+            $this->connection = Connection :: GetInstance();
+            return $this->connection->Execute($query, $parameters);
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+       }
        public function Add(Room $room)
        {
            try{
