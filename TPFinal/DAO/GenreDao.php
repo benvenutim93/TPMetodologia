@@ -11,12 +11,12 @@ class GenreDAO
 
         public function __construct()
         {
-            #$this->Add(); Se hace solo una vez y listorti
+            #$this->Add(); #Se hace solo una vez y listorti
         }
 
         public function Add ()
         {
-            $genreList = $this->retrieveAPI();
+            $genreList = $this->retrieveAPIArray();
             
             try{
                 foreach ( $genreList as $value)
@@ -43,23 +43,12 @@ class GenreDAO
         {
             try
             {
-                $genres = array();
                 $query = "select * from $this->tableName ";
                 $this->connection = Connection::GetInstance();
 
                 $result = $this->connection->Execute($query);
 
-                foreach($result as $value)
-                {
-                    $cinema = new Genre();
-                    $cinema->setId($value["id_genre"]);
-                    $cinema->setName($value["genreName"]);
-                    
-
-                    array_push($genres, $cinema);
-                }
-
-                return $genres;
+                return $result;
             }
             catch (\PDOException $ex)
             {
@@ -67,7 +56,7 @@ class GenreDAO
             }      
          }
 
-        public function GetOneName ($id)
+        public function GetOneName ($genreRepo,$id)
         {
             
             try
@@ -89,7 +78,7 @@ class GenreDAO
         }
 
 
-        public function retrieveAPI()
+        public function retrieveAPIArray()
         {
             $apiContent = file_get_contents(URL_GENRES);
             $genreList = array();
@@ -107,6 +96,16 @@ class GenreDAO
                 }
             }
             return $genreList;
+        }
+
+        public function retrieveAPIJson()
+        {
+            $apiContent = file_get_contents(URL_GENRES);
+            if ($apiContent)
+            {
+                $jsonDecode = json_decode($apiContent, true);
+                return $jsonDecode["genres"];
+            }
         }
 
 }

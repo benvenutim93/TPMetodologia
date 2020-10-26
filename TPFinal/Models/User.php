@@ -12,9 +12,9 @@ class User
     private $mail;
     private $dni;
     private $birthDate;
-    #private $tarjeta;
+    private $userType;
     
-    public function __construct($name = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "")
+    public function __construct($name = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "", $userType= "")
     {
         $this->name = $name;
         $this->lastName = $lastName;
@@ -23,6 +23,7 @@ class User
         $this->mail = $mail;
         $this->dni = $dni;
         $this->birthDate = $birthDate;
+        $this->userType = $userType;
 
     }
     
@@ -166,6 +167,26 @@ class User
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of userType
+     */ 
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    /**
+     * Set the value of userType
+     *
+     * @return  self
+     */ 
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
 
         return $this;
     }

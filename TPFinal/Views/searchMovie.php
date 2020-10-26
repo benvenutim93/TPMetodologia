@@ -10,6 +10,8 @@
     </form>
 </div>
 
+
+
 <div class="content-login">
     <form action= "<?php echo FRONT_ROOT?>Movies/searchMovieGenre" method="POST">
         <div>
@@ -20,7 +22,7 @@
                     <option value="" disabled selected> Seleccione uno </option>
 
                         <?php foreach($genreRepo as $genre){ ?>
-                            <option value="<?php echo $genre["name"];?>"  > <?php echo $genre["name"];?></option>
+                            <option value="<?php echo $genre["id_genre"];?>"  > <?php echo $genre["genreName"];?></option>
                         <?php } ?>
 
                     </select>
@@ -29,6 +31,7 @@
          <button class="btn btn-lg btn-info " type="submit">Buscar</button>
     </form>
 </div>
+
 
 <div class="content-login">
     <form action= "<?php echo FRONT_ROOT?>Movies/searchMovieDate" method="GET">
@@ -48,4 +51,3 @@
          <button class="btn btn-lg btn-info " type="submit">Buscar</button>
     </form>
 </div>
-

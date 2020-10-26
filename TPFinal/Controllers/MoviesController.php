@@ -2,8 +2,9 @@
 namespace Controllers;
 
 use Models\Movie as Movie;
-use Repository\MoviesRepository as M_Repo;
-use Repository\GenreRepository as G_DAO;
+use Models\Genre as Genre;
+use DAO\MovieDao as M_DAO;
+use DAO\GenreDAO as G_DAO;
 
 class MoviesController
 {
@@ -13,24 +14,21 @@ class MoviesController
 
     public function __construct()
     {
-        $this->moviesDao = new M_Repo();
+        $this->moviesDao = new M_DAO();
         $this->genreDao = new G_DAO();
     }
 
-
-
     public function showMoviesListView()
     {
-        $moviesList = $this->moviesDao->GetAll();
-        $genreRepo = $this->genreDao->GetAll();
-        
+        $moviesList = $this->moviesDao->retrieveAPIJson();
+        $genreRepo = $this->genreDao->retrieveAPIJson();
         require_once(USER_VIEWS . "moviesView.php");
     }
 
     public function showOnlyMovie($moviesList)
     {
         $genreRepo = $this->genreDao->GetAll();
-        require_once(USER_VIEWS . "moviesView.php");
+        require_once(USER_VIEWS. "moviesView.php");
     }
 
     public function showSearchMovieView()
@@ -43,20 +41,19 @@ class MoviesController
 
     public function searchMovieTitle ($title)
     {
-        $array = $this->moviesDao->GetAll();
-        $flag = false; $moviesList=array();
+        $movie = $this->moviesDao->GetOneName($title);
+        $peli = $movie[0];
 
-           foreach($array as $movie)
-           {
-               if ($movie["title"] == $title)
-               {
-                    $flag = true;
-                    array_push($moviesList, $movie);                    
-                    $this->showOnlyMovie($moviesList);
-               }  
-           }
-        
-        if ($flag == false)
+        $ids = explode("/", $peli["genre_ids"]);
+
+        $peli["genre_ids"] = $ids;
+
+        $movie[0] = $peli;
+
+
+        if ($movie)
+           $this->showOnlyMovie($movie);
+        else
         {
             echo '<script>
                     alert("No se encontraron peliculas con ese titulo");
@@ -64,40 +61,32 @@ class MoviesController
             $this->showSearchMovieView();
             
         }
+        
     }
 
-    public function searchMovieGenre($nameGenre)
+
+
+    public function searchMovieGenre($genre_id)
     {
-        $array = $this->moviesDao->GetAll();
-        $genresJson = $this->genreDao->GetAll(); 
-        $flag=false; $id=null;
-        
 
-        foreach($genresJson as $genre){
-            if($genre["name"] == $nameGenre){
-                $flag = true;
-                $id= $genre["id"];
-            }
-        }
+        $movies = $this->moviesDao->GetAll();
 
-        $moviesList=array();
+        $aux = array();
+        $moviesList = array();
 
-           foreach($array as $movie)
-           {
-               foreach($movie["genre_ids"] as $genre){
-                if($genre == $id){
-                    array_push($moviesList, $movie);
-                }
-               }
-
-           }
-           $this->showOnlyMovie($moviesList);
-        
-        if ($flag == false)
+        foreach ($movies as  $value)
         {
-            $this->showSearchMovieView();
-            
+            foreach($value->getGenre_ids() as $id)
+            {
+                if($id == $genre_id)
+                    array_push($aux,$this->genreDao->GetOneName($this->genreDao, $id));
+            }
+            $value->setGenre_ids($aux);
+            array_push($moviesList, $value);
         }
+        
+        require_once(USER_VIEWS . "moviesViewArray.php");
+       
 
     }
 
@@ -108,7 +97,7 @@ class MoviesController
      
 
             foreach($array as $movie){
-                $date = $movie["release_date"];
+                $date = $movie->getRelease_date();
 
                 $fecha = explode('-', $date);
                 $años = array_shift($fecha);
@@ -128,14 +117,14 @@ class MoviesController
        $this->showOnlyMovie($moviesList);
 
     } 
-    public function fechasPelis(){
-
-        
+    public function fechasPelis()
+    {
+   
         $moviesList = $this->moviesDao->GetAll();
         $dates= array();
 
         foreach($moviesList as $movie){ 
-            $date = $movie["release_date"];
+            $date = $movie->getRelease_date();
             $fecha = explode('-', $date);
             $años = array_shift($fecha);
             

@@ -1,6 +1,8 @@
 create database moviePass;
 use moviePass;
 
+#drop database moviePass;
+
 create table cinemas (
 id_cine int not null auto_increment,
 cinemaName varchar(50) not null,
@@ -31,15 +33,26 @@ constraint unq_movieRoom unique (id_room, functionDate)); #Para que en una sala,
 
 
 #------------------------------- Como guardar una imagen en BDD ------------------------ :) 
+
 create table movies (
 id_movie int not null auto_increment,
+id int not null, #del json
 title varchar (100) not null, 
+original_title varchar (100) not null,
 overview varchar (1000) not null,
-movieLanguage varchar (50) not null,
-vote_avg float not null,
-releaseDate date not null, 
+original_language varchar (50) not null,
+vote_average float not null,
+vote_count float not null,
+video boolean not null,
+release_date date not null, 
+popularity float not null,
+poster_path varchar(100) not null,
+backdrop_path varchar(100) not null,
+adult boolean not null,
+genre_ids varchar (50) not null, 
 constraint pk_movies primary key (id_movie),
 constraint unq_title unique (title));
+
 
 create table genres (
 id_genre int not null,
@@ -68,7 +81,3 @@ constraint fk_usersType foreign key (id_userType) references userTypes (id_userT
 
 insert into users (firstName, lastName, userName, pass, mail, dni, birthDate, id_userType) VALUES
 ("Rodrigo", "Perez", "ropeque19", "hola123", "rope@rope", "40123123", "2000-1-19", 1);
-
-
-
-

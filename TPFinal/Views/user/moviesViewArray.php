@@ -1,5 +1,3 @@
-
-
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >
@@ -13,23 +11,23 @@
                  ?>
                 <!-- Fotito facherita -->
                 <td>    <div class="imagen-cartelera">
-                    <img width= "100%" height="100%" src="<?php echo"https://image.tmdb.org/t/p/w200".$movie["poster_path"]?>">
+                    <img width= "100%" height="100%" src="<?php echo"https://image.tmdb.org/t/p/w200".$movie->getPoster_path()?>">
                 </div>
                 </td>
                 <!-- contenido -->
                 <td>
-                    <h2 class="text-center"><u><?php echo $movie["title"];?></u></h2>
+                    <h2 class="text-center"><u><?php echo $movie->getTitle();?></u></h2>
                     <h5>Sinopsis</h5>
                     <ul>
                             <!-- S I N O P S I S-->
                            
-                            <li> <p ><?php echo $movie["overview"];?></p> </li></ul> 
+                            <li> <p ><?php echo $movie->getOverview();?></p> </li></ul> 
                             <!-- A D U L T-->
                             <h5>Adult</h5><ul>
-                            <li> <p> <?php echo changeAdult($movie["adult"]);?></p>   </li></ul> 
+                            <li> <p> <?php echo changeAdult($movie->getAdult());?></p>   </li></ul> 
                             <!-- L E N G U A J E -->
                             <h5>Lenguaje</h5><ul>
-                            <li><p> <?php echo changeLanguage($movie["original_language"]);?></p> </li></ul> 
+                            <li><p> <?php echo changeLanguage($movie->getOriginal_language());?></p> </li></ul> 
                             
                             <div class="row">
                                 <div class="col">
@@ -38,9 +36,9 @@
                                     <!-- G E N E R O--> 
                                         <ul class="list-group list-group-horizontal ">
                                             <?php
-                                            foreach($movie["genre_ids"] as $genreID)
+                                            foreach($movie->getGenre_ids() as $genreID)
                                             {?>
-                                            <li class="none"> <?php echo $this->genreDao->GetOneName($genreRepo,$genreID);?></li>
+                                            <li class="none"> <?php echo $genreID;?></li>
                                             <li class="none"> <strong>|</strong> </li>
                                             <?php }?>
                                         </ul> </li>
@@ -52,15 +50,15 @@
                                     <!-- F E C H A-->
                                     <div class="col">
                                     <h5 class="text-center">Fecha de estreno:</h5>
-                                   <p class="text-center"> <?php echo  $movie["release_date"];?></p> </div>
+                                   <p class="text-center"> <?php echo  $movie->getRelease_date();?></p> </div>
                                     <!-- V O  T O S -->
                                     <div class="col">
                                     <h5 class="text-center" >Votos:</h5>
-                                    <P class="text-center"> <?php echo $movie["vote_average"];?></P>  </ul></div>
+                                    <P class="text-center"> <?php echo $movie->getVote_average();?></P>  </ul></div>
                                     <!-- P O P U L A R I D A D-->
                                     <div class="col">
                                     <h5 class="text-center">Popularidad:</h5>
-                                    <p class="text-center"> <?php echo $movie["popularity"];?></p>  </div>
+                                    <p class="text-center"> <?php echo $movie->getPopularity();?></p>  </div>
                                      </div>
                                 </div>
                     </div>

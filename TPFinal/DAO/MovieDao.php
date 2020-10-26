@@ -20,17 +20,24 @@
 
         public function Add()
         {
-            $this->retrieveAPI();
+            $this->retrieveAPIArray();
             
             try{
                 foreach($this->movieList as $movie){
-                $query = " insert into  $this->tableName (title, overview, movieLanguage,vote_avg,releaseDate ) VALUES (:title, :overview, :movieLanguage,:vote_avg,:releaseDate);";
+                $query = " insert into  $this->tableName (title, overview, original_language,vote_average,release_date, adult, popularity, poster_path, id, original_title, genre_ids ) VALUES (:title, :overview, :original_language,:vote_average,:release_date, :adult, :popularity, :poster_path, :id, :original_title, :genre_ids);";
                 
                 $parameters["title"] = $movie->getTitle();
                 $parameters["overview"] = $movie->getOverview();
-                $parameters["movieLanguage"] = $movie->getOriginal_language();
-                $parameters["vote_avg"] = $movie->getVote_average();
-                $parameters["releaseDate"] = $movie->getRelease_date();
+                $parameters["original_language"] = $movie->getOriginal_language();
+                $parameters["vote_average"] = $movie->getVote_average();
+                $parameters["release_date"] = $movie->getRelease_date();
+                $parameters["popularity"] = $movie->getPopularity();
+                $parameters["poster_path"] = $movie->getPoster_path();
+                $parameters["adult"] = $movie->getAdult();
+                $parameters["id"] = $movie->getId();
+                $parameters["original_title"] = $movie->getOriginal_title();
+                $ids = implode("/",$movie->getGenre_ids());
+                $parameters["genre_ids"] = $ids;
                     
 
                 $this->connection = Connection :: GetInstance();
@@ -57,10 +64,18 @@
                     $movie = new Movie();
                     $movie->setTitle($value["title"]);
                     $movie->setOverview($value["overview"]);
-                    $movie->setOriginal_title($value["movieLanguage"]);
-                    $movie->setVote_average($value["vote_avg"]);
-                    $movie->setRelease_date($value["releaseDate"]);
+                    $movie->setOriginal_language($value["original_language"]);
+                    $movie->setVote_average($value["vote_average"]);
+                    $movie->setRelease_date($value["release_date"]);
+                    $movie->setAdult($value["adult"]);
+                    $movie->setPopularity($value["popularity"]);
+                    $movie->setPoster_path($value["poster_path"]);
+                    $movie->setId($value["id"]);
+                    $movie->setOriginal_title($value["original_title"]);
+                    $ids = explode("/",$value["genre_ids"]);
+                    $movie->setGenre_ids($ids);
 
+                    
                     array_push($this->movieList, $movie);
                 }
 
@@ -71,13 +86,35 @@
                 throw $ex;
             }
         }
-        
-        
-        public function GetOne ($idMovie)
+
+        public function GetOneName ($title)
         {
             try
             {
-                $query = "select * from $this->tableName where id_cine = $idMovie";
+                $query = "select * from $this->tableName where title = :title";
+                $parameters["title"] = $title;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query, $parameters);
+
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+
+        
+        
+        public function GetOneId ($idMovie)
+        {
+            try
+            {
+                $query = "select * from $this->tableName where id_movie = $idMovie";
                 $this->connection = Connection::GetInstance();
 
                 $result = $this->connection->Execute($query);
@@ -87,9 +124,11 @@
                     $movie = new Movie();
                     $movie->setTitle($value["title"]);
                     $movie->setOverview($value["overview"]);
-                    $movie->setOriginal_title($value["movieLanguage"]);
-                    $movie->setVote_average($value["vote_avg"]);
-                    $movie->setRelease_date($value["releaseDate"]);
+                    $movie->setOriginal_title($value["original_language"]);
+                    $movie->setVote_average($value["vote_average"]);
+                    $movie->setRelease_date($value["release_date"]);
+                    $movie->setAdult($value["adult"]);
+                    $movie->setPopularity($value["popularity"]);
                 }
 
                 return $movie;
@@ -103,14 +142,14 @@
         {
             try
             {
-            $query = "update $this->tableName set title = :title, overview = :overview, movieLanguage = :movieLanguage,vote_avg= :vote_avg, releaseDate=:releaseDate where id_movie = :id_movie;";
+            $query = "update $this->tableName set title = :title, overview = :overview, movieLanguage = :movieLanguage,vote_average= :vote_average, release_date=:release_date where id_movie = :id_movie;";
             
             $parameters["id_movie"] = $id;
             $parameters["title"] = $title;
             $parameters["overview"] = $overview;
             $parameters["movieLanguage"] = $movieLanguage;
-            $parameters["vote_avg"] = $vote_avg;
-            $parameters["releaseDate"] = $releaseDate;
+            $parameters["vote_average"] = $vote_avg;
+            $parameters["release_date"] = $releaseDate;
 
 
                 $this->connection = Connection :: GetInstance();
@@ -137,7 +176,20 @@
                 throw $ex;
             }
         }
-        public function retrieveAPI()
+
+        
+        public function retrieveAPIJson()
+        {
+            $apiContent = file_get_contents(URL_NOWPLAYING);
+            if ($apiContent)
+            {
+                $jsonDecode = json_decode($apiContent, true);
+                return $jsonDecode["results"];
+
+            }
+        }
+        
+        public function retrieveAPIArray()
         {
             
             $apiContent = file_get_contents(URL_NOWPLAYING);

@@ -33,7 +33,7 @@ class RoomController{
         $arraMovieDate=$movie->GetMoviesNoRepeatDate();
         $arrayMovieNoRepeatDate=$this->verifiMoviesNoRepeat($arrayMovie,$arraMovieDate,$date,$hour);
         $fecha = $date." ".$hour;
-        var_dump($arrayMovie);
+        
        
         require_once(FUNCTION_VIEWS . "dateForm.php");
     }
@@ -108,23 +108,22 @@ class RoomController{
     {
       foreach($arrayMovieNoRepeat as $fecha)
       { 
-        $cant=count($fecha);
+        $cant = count($fecha);
           for($i=0;$i<$cant;$i++)
           {
-            
-            if($fecha[$i] instanceof functions)
+            if($fecha[$i] instanceof Functions)
             {
                 
                 if( $fecha[$i]->getDate()!=$date)
                 {
-                    
-                array_push($arrayM,$fecha[$i+1]);
+                    array_push($arrayM,$fecha[$i+1]);
                 }
             }   
           }
       }
-      return $arrayDefinitivo=$arrayM;
+      return $arrayM;
     }
+    
     public function getCinemaName($idCinema){
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
         $nombreCine = $nombrea[0];

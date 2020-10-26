@@ -22,7 +22,7 @@ class GenreController
 
     public function GetAll ()
     {
-        $array = $this->genreDao->GetAll();
-        return $array[0];
+        return $this->genreDao->retrieveAPIJson();
+       
     }
 }

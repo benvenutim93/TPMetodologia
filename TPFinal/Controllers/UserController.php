@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Models\User as User;
-use Repository\UserRepository as U_Repo;
+use Dao\UserDao as U_DAO;
 
 class UserController
 {
@@ -11,7 +11,7 @@ class UserController
 
     public function __construct()
     {
-        $this->userRepo = new U_Repo();
+        $this->userRepo = new U_DAO();
     }
 
     public function showPrincipalView ()
@@ -24,7 +24,7 @@ class UserController
         $array = $this->userRepo->GetAll();
         foreach ($array as $user)
         {
-            if ($user->getMail() == $mail && $user->getPass() == $password)
+            if ($user["mail"] == $mail && $user["pass"] == $password)
             {
                 $_SERVER["logged"] = $user;
                 $this->showPrincipalView();
@@ -38,7 +38,7 @@ class UserController
 
         foreach ($array as $user)
         {
-            if($user->getUserName() == $userName)
+            if($user["userName"] == $userName)
                 return true;
         }
         return false;
@@ -46,7 +46,7 @@ class UserController
 
     public function showSingInFormView()
     {
-        require_once(USER_VIEWS . "signIn.php");
+        require_once(FRONT_ROOT . "signIn.php");
     }
 
     public function showLoginView ()
@@ -83,9 +83,14 @@ class UserController
 
     public function showListUsersView()
     {
-        $usersList = $this->userRepo->GetAll();
-        require_once(VIEWS_PATH . "userList.php");
+        require_once(USER_VIEWS . "userList.php");
     }
+
+    public function viewProfile ($id_user)
+    {   
+        $user = $this->userRepo->GetOne($id_user);
+        $this->showListUsersView();
+    }   
 
 
 }
