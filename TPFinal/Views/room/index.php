@@ -23,7 +23,7 @@
                             <!--I N P U T-->
                             <input type="number" id="Valor" class="form-control" placeholder="Valor"  min="0" max="500" name="price" required>
                             <!-- ID cinema -->
-                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
 
                             <label for="" >    </label>
                         <!-- B O T O N -->

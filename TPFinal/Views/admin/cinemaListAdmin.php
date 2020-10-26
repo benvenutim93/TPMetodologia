@@ -1,5 +1,3 @@
-
-
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >
@@ -54,7 +52,7 @@
                           <div class="col">
                           <!-- Formulario -->
                                 <form action="<?php echo FRONT_ROOT?>Room/index" method="GET">
-                                <input type="hidden" value="<?php echo $cine->getId(); ?>" name="idCinema">
+                                <input type="hidden" value="<?php echo $cine->getId();?>" name="idCinema">
                                     <button class="btn btn-lg btn-success btn-block" type="submit">Seleccionar</button>
                                 </form>    
                           </div>

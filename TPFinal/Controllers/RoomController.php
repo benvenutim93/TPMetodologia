@@ -19,7 +19,8 @@ class RoomController{
     public function index($idCinema){
         
         $arrayR= $this->roomDao->GetAll($idCinema);
-        $nombre= $this->getCinemaName($idCinema);
+        $nombrea = $this->roomDao->GetnameCinema($idCinema);
+        $nombre=$nombrea[0];
         $idCine =$idCinema;
 
         require_once(ROOM_VIEWS. "index.php");
@@ -46,8 +47,8 @@ class RoomController{
     {
 
         $arrayR= $this->roomDao->GetAll($idCinema);
-        $nombre= $this->getCinemaName($idCinema);
-     
+        $nombre= $this->roomDao->GetnameCinema($idCinema);
+        
         $cantidad=$this->roomDao->countRooms($idCinema);
 
             foreach($cantidad as $value)
@@ -68,12 +69,16 @@ class RoomController{
   
     public function add($name,$capacity,$price,$idCinema){
 
-        $capacidad = $this->roomDao->getRoomCapacity($idCinema);
+        $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
+
+        $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
+
+        $capRooms=$sumCantsalas[0];
         
-  
-        foreach($capacidad as $value){
-    
-        if($value["capacidad"] >= ($value["capEnUso"]+$capacity) )
+        foreach($capacidadCine as $value){
+         $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity;
+
+        if($value["capacity"] >= ($capRooms["capEnUso"]))
         {
 
            $room = new Room($name,$capacity,$price,$idCinema);
@@ -91,15 +96,36 @@ class RoomController{
         }
     }
     $this->index($idCinema);
-       
-  
  
     }
-    public function Modify($id,$name,$seatsCapacity,$ticketValue,$idCine)
+    public function Modify($id,$name,$capacity,$ticketValue,$idCinema,$capacityAnterior)
     {
-        echo"entre";
-        $this->roomDao->Modify($id, $name, $seatsCapacity, $ticketValue,$idCine);
-        $this->showRoomsListAdmin($idCine);
+        
+        $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
+
+        $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
+
+        $capRooms=$sumCantsalas[0];
+        
+        foreach($capacidadCine as $value){
+         $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity-$capacityAnterior;
+
+        if($value["capacity"] >= ($capRooms["capEnUso"]))
+        {
+           $this->roomDao->Modify($id, $name, $capacity, $ticketValue,$idCinema);
+                echo '<script>
+                        alert("La sala se modifico con Exito al cine");
+                        </script>
+                        ';
+        }else
+        {
+            echo '<script>
+            alert("Se ha superado la capacidad del cine,vuelva a intentarlo.");
+            </script>
+            ';
+        }
+    }
+        $this->showRoomsListAdmin($idCinema);
     }
 
     public function Remove($id,$idCinema)
@@ -138,13 +164,6 @@ class RoomController{
           }
       }
       return $arrayM;
-    }
-    
-    public function getCinemaName($idCinema){
-        $nombrea = $this->roomDao->GetnameCinema($idCinema);
-        $nombreCine = $nombrea[0];
-        return $nombreCine;
-
     }
 }
 

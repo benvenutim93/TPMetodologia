@@ -33,7 +33,7 @@
                         
                                 <label for="idCine" >Nombre del Cine al que pertenece</label>
                                 <!--I N P U T-->
-                                <input type="text" id="idCine" class="form-control"   value="<?php echo $nombre;?>" readonly>
+                                <input type="text" id="idCine" class="form-control"   value="<?php echo $nombre[0];?>" readonly>
 
    
                     </form>

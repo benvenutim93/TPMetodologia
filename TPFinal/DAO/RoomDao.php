@@ -16,8 +16,7 @@
        }
        public function getRoomCapacity($idCine){
         try{
-            $query = "select cinemas.capacity as capacidad ,sum($this->tableName.seatsCapacity) as capEnUso from  $this->tableName inner join cinemas on $this->tableName.id_cine = :id_cine  ;
-            ";
+            $query ="select ifnull(sum($this->tableName.seatsCapacity),0) as capEnUso from  $this->tableName where $this->tableName.id_cine = $idCine;";
             $parameters["id_cine"] = $idCine;
 
 
@@ -29,6 +28,21 @@
             throw $ex;
         }
        }
+    
+    public function getCinemaCapacity($idCine){
+     try{
+         $query ="select cinemas.capacity from cinemas where cinemas.id_cine = $idCine;";
+
+         $parameters["id_cine"] = $idCine;
+
+         $this->connection = Connection :: GetInstance();
+         return $this->connection->Execute($query, $parameters);
+     }
+     catch (\PDOException $ex)
+     {
+         throw $ex;
+     }
+    }
        public function Add(Room $room)
        {
            try{
@@ -114,16 +128,13 @@
         {
             try
             {
-                
                 $roomsList = array();
-                $query = "select cinemas.cinemaName from $this->tableName inner join cinemas on $this->tableName.id_cine = cinemas.id_cine where rooms.id_cine = $id;";
+                $query ="select cinemas.cinemaName from cinemas where cinemas.id_cine=$id;";
                 
                 $this->connection = Connection::GetInstance();
-
                 $result = $this->connection->Execute($query);
                 
                 $nombre = $result[0];
-              
 
                 return $nombre;
             }
@@ -132,6 +143,7 @@
                 throw $ex;
             }
         }
+
        public function Modify($id, $name, $seatsCapacity, $ticketValue,$idCine)
         {
             try

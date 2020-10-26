@@ -21,6 +21,7 @@
             <input type="number"  id="price" class="form-control" value="<?php echo $room->getTicketValue()?>"  name="price" min="0" max="500" required>
             <label for="idCine">idCine</label>
             <input type="number"  id="idCine" class="form-control" value="<?php echo $room->getIdCinema()?>"  name="idCine" readonly>
+            <input type="number" id="cap" class="sr-only" value="<?php echo $room->getSeatsCapacity()?>"  name="capacityAnterior" readonly>
 
 
         <!-- B O T O N -->
