@@ -1,8 +1,3 @@
-<?php
-include_once("header.php");
-include_once("nav.php");
-?>
-
 <div class="user-register">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/signIn" method="POST">
             <!--Cambiar logo -->
@@ -14,7 +9,7 @@ include_once("nav.php");
                 <div class="col">
                     <label for="nombreUser" >Nombre</label>
                     <!--I N P U T-->
-                    <input type="text" id="nombreUser" class="form-control" placeholder="Nombre " name="name" required minlength="3" required autofocus>
+                    <input type="text" id="nombreUser" class="form-control" placeholder="Nombre " name="firstName" required minlength="3" required autofocus>
                 </div>
                 <div class="col">
                     <label for="apellidoUser" >Apellido</label>
@@ -50,6 +45,7 @@ include_once("nav.php");
             <label for="inputPassword">Contraseña</label>
             <!--I N P U T-->
             <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="pass" required minlength="6" required>
+            <input type="number" id="userType" class="sr-only" value = "2"  name="id_userType"  required>
             </div>
             </div>
             <!-- B O T O N -->
@@ -62,6 +58,3 @@ include_once("nav.php");
     
 </div>
 
-<?php
-include_once("footer.php");
-?>

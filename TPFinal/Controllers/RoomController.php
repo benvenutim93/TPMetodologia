@@ -62,9 +62,15 @@ class RoomController{
                     </script>';
                     $this->index($idCinema);
                 }
-            }
-            
-        
+            }   
+    }
+
+    public function showFunctionsList ($idCinema)
+    {
+        $functions = $this->roomDao->getFunctionsCinema($idCinema);
+    
+        var_dump($functions);
+        require_once(FUNCTION_VIEWS . "listFunctionsCinema.php");
     }
   
     public function add($name,$capacity,$price,$idCinema){

@@ -51,12 +51,12 @@
                                  <div class="row">
                                     <!-- F E C H A-->
                                     <div class="col">
-                                    <h5 class="text-center">Fecha de estreno:</h5>
-                                   <p class="text-center"> <?php echo  $movie["release_date"];?></p> </div>
+                                    <h5 class="text-center">Funcion:</h5>
+                                   <p class="text-center"> <?php echo  $movie["functionDate"];?></p> </div>
                                     <!-- V O  T O S -->
                                     <div class="col">
-                                    <h5 class="text-center" >Votos:</h5>
-                                    <P class="text-center"> <?php echo $movie["vote_average"];?></P>  </ul></div>
+                                    <h5 class="text-center" >Cine:</h5>
+                                    <P class="text-center"> <?php echo $movie["cinemaName"];?></P>  </ul></div>
                                     <!-- P O P U L A R I D A D-->
                                     <div class="col">
                                     <h5 class="text-center">Popularidad:</h5>

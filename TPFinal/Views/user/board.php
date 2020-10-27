@@ -1,5 +1,11 @@
 <?php
 print_r($_SESSION["logged"]) ;
+
+/*Botones de:
+Comprar entradas
+Listar entradas adquiridas
+Modificar perfil 
+Listar cines */
 ?>
 
 <div class="content-chico">

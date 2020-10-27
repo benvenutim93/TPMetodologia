@@ -5,7 +5,7 @@ namespace Models;
 
 class User
 {
-    private $name;
+    private $firstName;
     private $lastName;
     private $userName;
     private $pass;
@@ -14,9 +14,9 @@ class User
     private $birthDate;
     private $userType;
     
-    public function __construct($name = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "", $userType= "")
+    public function __construct($firstName = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "", $userType= "")
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->userName = $userName;
         $this->pass = $pass;
@@ -28,26 +28,6 @@ class User
     }
     
 
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /**
      * Get the value of lastName
@@ -187,6 +167,26 @@ class User
     public function setUserType($userType)
     {
         $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of firstName
+     */ 
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set the value of firstName
+     *
+     * @return  self
+     */ 
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
 
         return $this;
     }

@@ -46,7 +46,7 @@ class UserController
 
     public function showSingInFormView()
     {
-        require_once(FRONT_ROOT . "signIn.php");
+        require_once(USER_VIEWS . "signIn.php");
     }
 
     public function showLoginView ()
@@ -62,13 +62,13 @@ class UserController
 
 
 
-    public function signIn ($name = "", $lastName = "", $userName = "", $pass = "", $mail = "", $dni = "", $birthDate = "")
+    public function signIn ($firstName = "", $lastName = "", $userName = "", $pass = "", $mail = "", $dni = "", $birthDate = "", $userType = "")
     {
         if ($this->userNameExists($userName))
             $this->showSingInFormView();
         else 
         {
-            $user = new User($name, $lastName, $userName, $pass, $mail, $dni, $birthDate);
+            $user = new User($firstName, $lastName, $userName, $pass, $mail, $dni, $birthDate, $userType);
             $this->userRepo->Add($user);
             $this->showLoginView();
         }

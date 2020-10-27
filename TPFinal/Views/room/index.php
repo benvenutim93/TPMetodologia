@@ -63,8 +63,9 @@
         </div>
         <div class="col">
             <div class="content-chico">
-                    <form action="" class="form-signin"> 
-                    <button class="btn btn-lg btn-danger btn-block" type="submit">Listar Funciones</button>
+                    <form action="<?php echo FRONT_ROOT?>Room/showFunctionsList" class="form-signin">
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus> 
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Funciones</button>
                     </form>
              </div>
         </div>

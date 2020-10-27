@@ -14,6 +14,38 @@
        {
            
        }
+
+
+       /**Trae las funciones de un cine en particular */
+       public function getFunctionsCinema ($idCine)
+       {
+        try{
+            $query ="select 
+            movies.title as titulo,
+            functions.id_function as 'ID Funcion',
+            $this->tableName.roomName as 'Sala',
+            functions.functionDate as 'Fecha y hora',
+            cinemas.cinemaName as 'Nombre Cine',
+            rooms.id_cine as 'id_cine'
+             from functions
+            inner join $this->tableName
+            on functions.id_room = $this->tableName.id_room
+            inner join movies
+            on functions.id_movie = movies.id_movie
+            inner join cinemas
+            on $this->tableName.id_cine = cinemas.id_cine
+            where cinemas.id_cine = $idCine";
+
+            
+            $this->connection = Connection :: GetInstance();
+            $result = $this->connection->Execute($query);
+            return $result;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+       }
        public function getRoomCapacity($idCine){
         try{
             $query ="select ifnull(sum($this->tableName.seatsCapacity),0) as capEnUso from  $this->tableName where $this->tableName.id_cine = $idCine;";

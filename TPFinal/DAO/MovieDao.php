@@ -18,6 +18,42 @@
            // $this->Add();# Se hace solo una vez y listorti
         }
 
+        public function getMoviesFunctions()
+        {
+            try
+            {
+                $query = "select
+                $this->tableName.title,
+                $this->tableName.overview,
+                $this->tableName.adult,
+                $this->tableName.original_language,
+                $this->tableName.vote_average,
+                $this->tableName.popularity,
+                $this->tableName.poster_path,
+                cinemas.cinemaName,
+                rooms.roomName,
+                $this->tableName.genre_ids,
+                functions.functionDate
+                from $this->tableName
+                inner join functions
+                on $this->tableName.id_movie = functions.id_movie
+                inner join rooms
+                on functions.id_room = rooms.id_room
+                inner join cinemas
+                on cinemas.id_cine = rooms.id_cine;";
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function Add()
         {
             $this->retrieveAPIArray();

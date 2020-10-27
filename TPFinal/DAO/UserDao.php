@@ -21,16 +21,16 @@ class UserDao
             
             try{
                 
-                $query = " insert into  $this->tableName (name, lastName, userName, pass, mail, dni, birthDate, userType ) VALUES (:name, :lastName, :userName, :pass, :mail, :dni, :birthDate, :userType);";
+                $query = " insert into  $this->tableName (firstName, lastName, userName, pass, mail, dni, birthDate, id_userType ) VALUES (:firstName, :lastName, :userName, :pass, :mail, :dni, :birthDate, :id_userType);";
                 
-                $parameters["name"] = $user->getName();
+                $parameters["firstName"] = $user->getFirstName();
                 $parameters["lastName"] = $user->getLastName();
                 $parameters["userName"] = $user->getUserName();
                 $parameters["pass"] = $user->getPass();
                 $parameters["mail"] = $user->getMail();
                 $parameters["dni"] = $user->getDni();
                 $parameters["birthDate"] = $user->getBirthDate();
-                $parameters["userType"] = $user->getUserType();
+                $parameters["id_userType"] = $user->getUserType();
                     
 
                 $this->connection = Connection :: GetInstance();
@@ -56,8 +56,6 @@ class UserDao
                 $result = $this->connection->Execute($query);
 
                 return $result;
-
-                return $this->movieList;
             }
             catch (\PDOException $ex)
             {

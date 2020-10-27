@@ -20,8 +20,16 @@ class MoviesController
 
     public function showMoviesListView()
     {
-        $moviesList = $this->moviesDao->retrieveAPIJson();
+        /*$moviesList = $this->moviesDao->retrieveAPIJson();*/
         $genreRepo = $this->genreDao->retrieveAPIJson();
+        $moviesList = array();
+        $movies = $this->moviesDao->getMoviesFunctions();
+        foreach ($movies as $peli)
+        {
+            $ids = explode("/", $peli["genre_ids"]);
+            $peli["genre_ids"] = $ids;
+            array_push($moviesList, $peli);
+        }
         require_once(USER_VIEWS . "moviesView.php");
     }
 
