@@ -31,9 +31,8 @@
      </form>
          <!-- F A C E B O O K -->
      <form class="form-signin" action="" method="">
-             <button class="btn btn-lg btn-info btn-block" type="submit"> Ingresar con Facebook</button>
+             <button class="btn btn-lg btn-danger btn-block" type="submit"> Ingresar con Facebook</button>
      </form>
-     <p>¿Tienes cuenta Admin? <a href="<?php FRONT_ROOT?>Admin/loginForm">Click aqui</a></p>
     <p class="mt-5 mb-3 ">&copy;<strong> Los supervivientes</strong> -2020</p>
     
 </div>

@@ -88,7 +88,8 @@ class UserDao
         {
             try
             {
-                $query = "select * from $this->tableName where mail = :mail";
+                //,cast(aes_decrypt(pass,'llave') as char(50))as clave
+                $query = "select *  from $this->tableName where mail = :mail;";
                 $parameters["mail"] = $mail;
                 $this->connection = Connection::GetInstance();
 
@@ -102,21 +103,17 @@ class UserDao
             }
         }
 
-        public function Modify ($id_user, $name, $lastName, $userName, $pass, $mail, $dni, $birthDate, $userType)
+        public function Modify($firstname,$lastName,$userName,$mail,$id_user)
         {
             try
             {
-            $query = "update $this->tableName set name = :name, lastName = :lastName, userName = :userName, pass = :pass, mail = :mail, dni = :dni, birthDate = :birthDate, userType = :userType where id_user = :id_user;";
+            $query = "update $this->tableName set firstname = :firstname, lastName = :lastName, userName = :userName, mail = :mail where id_user = :id_user;";
             
-            $parameters["id_user"] = $id_user;
-            $parameters["name"] = $name;
+            $parameters["firstname"] = $firstname;
             $parameters["lastName"] = $lastName;
             $parameters["userName"] = $userName;
-            $parameters["pass"] = $pass;
             $parameters["mail"] = $mail;
-            $parameters["dni"] = $dni;
-            $parameters["birthDate"] = $birthDate;
-            $parameters["userType"] = $userType;
+            $parameters["id_user"] = $id_user;
 
 
                 $this->connection = Connection :: GetInstance();

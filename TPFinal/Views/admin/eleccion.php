@@ -10,7 +10,7 @@
                 <font color="red"> Realizar Operaciones de Usuarios</font></button>
     </form>
         
-     <form action= "<?php echo FRONT_ROOT?>Admin/loginForm">
+     <form action= "<?php echo FRONT_ROOT?>User/showLoginView">
          <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
     </form>
         

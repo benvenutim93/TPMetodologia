@@ -34,8 +34,6 @@ class AdminController
 
         $repo = new A_Repo();
         $array = $repo->GetOneMail($mail);
-        var_dump($array);
-
         foreach($array as $value)
         {
             if($value["pass"]== $pass && $value["mail"]== $mail && $value["id_userType"] == 1)

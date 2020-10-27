@@ -1,49 +1,66 @@
-<?php
-print_r($_SESSION["logged"]) ;
+<?php 
+$user = $_SESSION["logged"];
 
-/*Botones de:
-Comprar entradas
-Listar entradas adquiridas
-Modificar perfil 
-Listar cines */
 ?>
-
-<div class="content-chico">
-  
-        <h1 class="text-center">Gestionar Cines</h1>
-        <div class="row">
-            <div class="col">
-                <a class="btn btn-lg btn-success btn-block" href="<?php echo FRONT_ROOT?>Cinema/showCinemaForm">Alta cine</a>
-            </div>
-          
-            <div class="col">
-                <a class="btn btn-lg btn-success btn-block" href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin">Listar Cines </a>
-            </div>
-        </div>
-</div>      
 <div class="content-grande">
-        <div class="row">
-            
-            <div class="col">
-                    <h1 class="text-center">Perfil</h1>
-                    <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>User/viewProfile">Ver Perfil </a>
-            </div> 
-            <div class="col">
-                     <h1 class="text-center">Ventas</h1>
-                     <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>">Consultar Ventas </a>
-            </div>
-            <div class="col">
-                     <h1 class="text-center">Cartelera</h1>
-                     <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT?>">Ingresar Pelicula a  Cartelera </a>
-            </div>
-        </div>
-       
-        <div class="row">
+    <div class="row">
         <div class="col">
-            <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
-            </form>
-            </div>
+              <h1>Bienvenido-  <strong ><font color ="red"  ><?php echo $user["firstName"]?>  </strong><?php echo $user["lastName"]?></font>  -</h1> 
         </div>
-        
+    </div>
+    
+    <div class="row">
+
+            <div class="col">
+                     <!-- F O R M -->
+                    <form action="" class="form-singin">    
+                            <button  class="btn btn-lg btn-danger btn-block" type="submit"> Comprar entradas </button>
+                    </form>
+                     <!-- F O R M -->
+                    <form action="" class="form-singin">
+                        <button  class="btn btn-lg btn-danger btn-block" type="submit"> Listar entradas </button>
+                    </form>
+                    <!-- F O R M -->
+                    <form action=" <?php echo FRONT_ROOT?>User/showModifyView" class="form-singin">
+                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Modificar Perfil </button>
+                    </form>
+                    <!-- F O R M -->
+                    <form action="" class="form-singin">
+                        <button  class="btn btn-lg btn-danger btn-block" type="submit"> Listar Cines </button>
+                    </form>
+            </div>
+            <div class="col" >
+            <div class="col"><h5>Datos Del Usuario</h5></div>
+                 <div class="row">  
+                    <div class="col">
+                        <!-- F O R M  MOSTRAR DATOS -->
+                        <form action="" class="form-singin">
+                            <label for="m"> Mail </label>
+                            <input type="text"  id="m" class="form-control" value="<?php echo $user["mail"]?>"   readonly>
+                            <label for="c"> Cumpleaños </label>
+                            <input type="text"  id="c" class="form-control" value="<?php echo $user["birthDate"]?>"   readonly>
+                        
+                        </form>
+                    </div>
+                
+            
+                    <div class="col">
+                        <!-- F O R M  MOSTRAR DATOS -->
+                        <form action="" class="form-singin">
+
+                            <label for="u"> Nombre de usuario </label>
+                            <input type="text"  id="u" class="form-control" value="<?php echo $user["userName"]?>"   readonly>
+
+                            <label for="d"> Dni </label>
+                            <input type="text"  id="d" class="form-control" value="<?php echo $user["dni"]?>"   readonly>
+                            <label for="p"> pass </label>
+                            <input type="text"  id="p" class="form-control" value="<?php echo $user["pass"]?>"   readonly>
+
+                        </form>
+                    </div>
+                </div> 
+            
+            </div>
+    </div>
+
 </div>

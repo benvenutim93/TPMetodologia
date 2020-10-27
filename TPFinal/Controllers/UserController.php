@@ -13,25 +13,65 @@ class UserController
     {
         $this->userRepo = new U_DAO();
     }
+    public function showAdminView(){
+        require_once(ADMIN_VIEWS . "eleccion.php");
+
+    }
 
     public function showPrincipalView ()
     {
         require_once(USER_VIEWS . "board.php");
     }
+    public function showModifyView ()
+    {
+        require_once(USER_VIEWS . "modify-user-form.php");
+    }
+
 
     public function login ($mail, $password)
     {
-        $array = $this->userRepo->GetAll();
-        foreach ($array as $user)
-        {
-            if ($user["mail"] == $mail && $user["pass"] == $password)
-            {
-                $_SERVER["logged"] = $user;
-                $this->showPrincipalView();
+        $array = $this->userRepo->GetOneMail($mail);
+        $flag =0 ;
+        
+        
+        foreach($array as $user){
+
+            if ($user["mail"] == $mail && $user["pass"]== $password )  
+             { 
+                if($user["id_userType"]== 2){
+                  $flag =1;
+                  $_SESSION["logged"]=$user;
+                 $this->showPrincipalView();
+                }  
+                 if($user["id_userType"]== 1){
+                    $flag =1;
+                    $_SESSION["logged"]=$user;
+                    $this->showAdminView();
+                }
             }
+        }
+        if($flag == 0){
+                $this->showLoginView();
         }
     }
 
+  
+    public function showSingInFormView()
+    {
+        require_once(USER_VIEWS . "signIn.php");
+    }
+
+    public function showLoginView ()
+    {
+        require_once(USER_VIEWS . "login-form.php");
+    }
+
+    public function showLogOutView()
+    {   
+       
+        session_destroy();
+        require_once(USER_VIEWS . "logOutView.php");
+    }
     public function userNameExists ($userName)
     {
         $array = $this->userRepo->GetAll();
@@ -44,20 +84,58 @@ class UserController
         return false;
     }
 
-    public function showSingInFormView()
+    public function verificar_mod_user ($userName,$id)
     {
-        require_once(USER_VIEWS . "signIn.php");
-    }
+        $array = $this->userRepo->GetAll();
 
-    public function showLoginView ()
-    {
-        require_once(USER_VIEWS . "login-form.php");
+        foreach ($array as $user)
+        {
+            if($user["userName"] == $userName && $user["id_user"] != $id)
+                return true;
+        }
+        return false;
     }
-
-    public function showLogOutView()
+    public function verificar_mod_mail ($mail,$id)
     {
-        session_destroy();
-        require_once(USER_VIEWS . "logOutView.php");
+        $array = $this->userRepo->GetAll();
+
+        foreach ($array as $user)
+        {
+            if($user["mail"] == $mail && $user["id_user"] != $id)
+                return true;
+        }
+        return false;
+    }
+    public function modify($firstname,$lastName,$userName,$mail,$id_user){
+
+        if(!$this->verificar_mod_user($userName,$id_user)){
+            
+          if(!$this->verificar_mod_mail($mail,$id_user)){
+             $this->userRepo->Modify($firstname,$lastName,$userName,$mail,$id_user);
+                $aux = $this->userRepo->getOneMail($mail);
+                $_SESSION["logged"] = $aux[0];
+                echo '<script>
+                    alert("Se modifico con exito el Perfil.");
+                    </script>';
+                $this->showPrincipalView();
+          }else{
+            echo '<script>
+            alert("El mail  ya esta en uso.");
+            </script>';
+            $this->showModifyView();
+          }
+               
+
+        }
+        else{
+            
+            echo '<script>
+                    alert("El Nombre de Usuario ya esta en uso.");
+                    </script>';
+                    $this->showModifyView();
+        }
+
+
     }
 
 
