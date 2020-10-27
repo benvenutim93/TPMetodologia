@@ -36,7 +36,7 @@ class UserController
         
         foreach($array as $user){
 
-            if ($user["mail"] == $mail && $user["pass"]== $password )  
+            if ($user["mail"] == $mail && password_verify($password,$user["pass"] ))
              { 
                 if($user["id_userType"]== 2){
                   $flag =1;

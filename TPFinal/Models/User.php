@@ -19,7 +19,7 @@ class User
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->userName = $userName;
-        $this->pass = $pass;
+        $this->pass = password_hash($pass,PASSWORD_DEFAULT);
         $this->mail = $mail;
         $this->dni = $dni;
         $this->birthDate = $birthDate;
