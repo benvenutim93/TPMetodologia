@@ -3,8 +3,8 @@ namespace Controllers;
 
 Use Models\Admin as Admin;
 Use Models\Cinema as Cinema;
-Use Repository\AdminReposiToRy as A_Repo;
-Use Repository\CinemaRepository as C_Repo;
+Use DAO\UserDao as A_Repo;
+
 
 class AdminController
 {
@@ -29,14 +29,16 @@ class AdminController
         require_once(ADMIN_VIEWS . "adminLogIn.php");
     }
 
-    public function login($mail,$pass){
+    public function login($mail,$pass)
+    {
 
-        $repo= new A_Repo();
-        $array=$repo->GetALL();
+        $repo = new A_Repo();
+        $array = $repo->GetOneMail($mail);
+        var_dump($array);
 
         foreach($array as $value)
         {
-            if($value->getpass()== $pass && $value->getMail()== $mail && $value->getIsAdmin()== true)
+            if($value["pass"]== $pass && $value["mail"]== $mail && $value["id_userType"] == 1)
             {
                 $_SERVER["logger"]=$value;
                $this->showPrincipalView();

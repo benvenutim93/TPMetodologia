@@ -18,6 +18,13 @@ class MoviesController
         $this->genreDao = new G_DAO();
     }
 
+    public function showSearchMovieView()
+    {
+        $genreRepo = $this->genreDao->GetAll();
+        $pelisDates = $this->fechasPelis();
+        require_once(VIEWS_PATH . "searchMovie.php");
+    }
+
     public function showMoviesListView()
     {
         /*$moviesList = $this->moviesDao->retrieveAPIJson();*/
@@ -39,11 +46,10 @@ class MoviesController
         require_once(USER_VIEWS. "moviesView.php");
     }
 
-    public function showSearchMovieView()
+    public function showMoviesSearch($moviesList)
     {
         $genreRepo = $this->genreDao->GetAll();
-        $pelisDates = $this->fechasPelis();
-        require_once(VIEWS_PATH . "searchMovie.php");
+        require_once(USER_VIEWS. "movieViewSearch.php");
     }
 
 
@@ -51,16 +57,13 @@ class MoviesController
     {
         $movie = $this->moviesDao->GetOneName($title);
         $peli = $movie[0];
-
         $ids = explode("/", $peli["genre_ids"]);
-
         $peli["genre_ids"] = $ids;
-
         $movie[0] = $peli;
 
 
         if ($movie)
-           $this->showOnlyMovie($movie);
+           $this->showMoviesSearch($movie);
         else
         {
             echo '<script>

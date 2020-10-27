@@ -84,6 +84,24 @@ class UserDao
             }
         }
 
+        public function GetOneMail ($mail)
+        {
+            try
+            {
+                $query = "select * from $this->tableName where mail = :mail";
+                $parameters["mail"] = $mail;
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query,$parameters);
+
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function Modify ($id_user, $name, $lastName, $userName, $pass, $mail, $dni, $birthDate, $userType)
         {
             try
