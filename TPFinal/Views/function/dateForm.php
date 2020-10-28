@@ -13,32 +13,27 @@
                             <select id="inputState" name="movie" class="form-control">
                              <option value="" disabled selected> Seleccione una pelicula </option>
 
-                              <?php foreach($arrayAmostrar as $value){
-                                  var_dump($arrayAmostrar); ?>
+                              <?php foreach($arrayAmostrar as $value){ ?>
                             <option value="<?php echo $value["id_movie"];?>"> <?php echo $value["title"];?></option>
 
                                 <?php } ?>
                             </select>
-                     
-                            <label for="room" >Seleccione sala </label>
+                            <input type="number" id="id_room" class="form-control"  name="id_room"   value="<?php echo $idRoom?>" readonly>
                             <!--I N P U T-->
-                            <select id="inputState" name="room" class="form-control">
-                             <option value="" disabled selected> Seleccione una sala </option>
-
-                              <?php foreach($arrayR as $value){ ?>
-                            <option value="<?php echo $value->getId();?>"  required> <?php echo $value->getName();?>  </option>
-                                <?php } ?>
-                            </select>
-
-                            <!--I N P U T-->
-                            <input type="number" id="seatsOcupped" class="sr-only"  name="seatsOcupped"   value="0" readonly>
+                            <input type="number" id="seatsOcupped" class="form-control"  name="seatsOcupped"   value="0" readonly>
+                            
                             <label for="date">Fecha de la funcion</label>
                             <!--I N P U T-->
                             <input type="text" id="date" class="form-control"  name="date"   value="<?php echo $date;?>" readonly>
-                            <label for="date">Horario de la funcion</label>
-                            <input type="text" id="hour" class="form-control"  name="hour"   value="<?php echo $hour;?>" readonly>
-                            <label for="" >    </label>
+                            
+                            <select id="hora" name="hora" class="form-control">
+                             <option value="" disabled selected> Seleccione unhorario</option>
+                            <?php foreach($arrayHour as $value){ ?>
+                            <option value="<?php echo $value;?>"> <?php echo $value;?></option>
+                                <?php } ?>
+                            </select>
 
+                              
                         <!-- B O T O N -->
                             <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
                 </form>

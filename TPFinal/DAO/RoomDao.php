@@ -16,6 +16,25 @@
        }
 
 
+       public function getFunctionsRoom($idRoom, $fecha)
+       {
+        $fecha = "'".$fecha."'";
+        try{
+            $query = "select 
+                        functions.functionsHour
+                    from functions
+                    where functions.id_room = $idRoom and functions.functionDate =$fecha;";
+
+            $this->connection = Connection :: GetInstance();
+            $result = $this->connection->Execute($query);
+            return $result;
+
+        }
+        catch (\PDOException $ex)
+    {
+        throw $ex;
+    }
+       }
         public function roomsExists($idCinema)
         {
             try{

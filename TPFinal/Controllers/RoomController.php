@@ -21,21 +21,28 @@ class RoomController{
         
         $arrayR= $this->roomDao->GetAll($idCinema);
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
-        /*echo "<pre>";
-        print_r($arrayR);
-        echo "</pre>";*/
         $nombre=$nombrea[0];
         $idCine =$idCinema;
         $fechaActual=date("Y-m-j");
         require_once(ROOM_VIEWS. "index.php");
 
     }
-    public function showDateForm($date, $hour,$idCinema)
+    public function showDateForm($date,$idRoom,$idCinema)
     {   
         $movie= new M_DAO();
         $cine= new C_DAO();
-
+        
         $tienesalas= $this->roomDao->roomsExists($idCinema);
+
+       // var_dump($functionsRoom);
+       if($idRoom ==0)
+            $arrayHoras=$this->GetArrayHourCinemaIDpar();
+        else if($idRoom%2 ==0)
+            $arrayHoras=$this->GetArrayHourCinemaIDpar();
+        else
+            $arrayHoras=$this->GetArrayHourCinemaIDimpar();
+        $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($idRoom, $date);
+        $arrayHour=$this->VerifyHour($arrayHoras,$arrayFunctionRoom);
 
         foreach($tienesalas as $value){
             if($value["Cantidad Salas"] == 0){
@@ -48,13 +55,13 @@ class RoomController{
                 $arrayR=$this->roomDao->GetAll($idCinema);
                 $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
                 $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
-                $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$hour,$idCinema);
+                $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema);
                 require_once(FUNCTION_VIEWS . "dateForm.php");
                 }
         }
-            
-        
     }
+    
+    
 
     public function showModifyRoom($id){
         $room = $this->roomDao->GetOne($id);
@@ -170,7 +177,7 @@ class RoomController{
         }
     }
 
-    public function verifiMoviesNoRepeat($arraysinfunciones,$arrayconfunciones,$date,$hours,$idCinema)
+    public function verifiMoviesNoRepeat($arraysinfunciones,$arrayconfunciones,$date,$idCinema)
     {
        
         $array=array();
@@ -188,6 +195,69 @@ class RoomController{
             }
       }
       return $arraysinfunciones;
+    }
+    public function GetArrayHourCinemaIDpar(){
+        $array=array();
+        $date = date("H:i:s", strtotime("14:00:00"));
+        $date1 = date("H:i:s", strtotime("16:15:00"));
+        $date2 = date("H:i:s", strtotime("18:30:00"));
+        $date3 = date("H:i:s", strtotime("20:45:00"));
+        $date4 = date("H:i:s", strtotime("23:00:00"));
+        $array[0]=$date;
+        $array[1]=$date1;
+        $array[2]=$date2;
+        $array[3]=$date3;
+        $array[4]=$date4;
+
+        return $array;
+    }
+    public function GetArrayHourCinemaIDimpar(){
+        $array=array();
+        $date = date("H:i:s", strtotime("15:00:00"));
+        $date1 = date("H:i:s", strtotime("17:15:00"));
+        $date2 = date("H:i:s", strtotime("19:30:00"));
+        $date3 = date("H:i:s", strtotime("21:45:00"));
+        $date4 = date("H:i:s", strtotime("24:00:00"));
+        $array[0]=$date;
+        $array[1]=$date1;
+        $array[2]=$date2;
+        $array[3]=$date3;
+        $array[4]=$date4;
+
+        return $array;
+    }
+
+    public function VerifyHour($arrayHoras,$arrayFunctionRoom)
+    {
+        $array=array();
+        if($arrayFunctionRoom== null)
+        {
+            return $arrayHoras;
+        }
+        else{
+            foreach($arrayFunctionRoom as $value)
+            {
+                foreach($arrayHoras as $hora)
+                {
+                    if($value["functionsHour"] == $hora)
+                    {
+                        array_push($array,$hora);
+                    }
+                }
+            }
+             $cantidad= count($arrayHoras);
+            
+            for($i=0;$i<$cantidad;$i++)
+            {
+                foreach($array as $value)
+                {
+                    if($arrayHoras[$i]== $value)
+                        unset($arrayHoras[$i]);     
+                }
+            }
+           
+            return $arrayHoras;
+        }
     }
 }
 
