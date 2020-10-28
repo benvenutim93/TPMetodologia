@@ -1,5 +1,5 @@
 <div class="content-xxl">
-   <font color="white"> <h1 class="text-center" > ID Cine:<?php echo $nombre;?></h1></font>
+   <font color="white"> <h1 class="text-center" > Cine - <?php echo $nombre;?></h1></font>
   
     <div class="row">   
         <div class="col">
@@ -33,19 +33,27 @@
         </div>
         <div class="col">
             <div class="content-chico">
-                            <form action="<?php echo FRONT_ROOT?> Room/showDateForm" method= "POST" class="form-signin">
-                            <!-- L A B E L -->
-                            <label for="date" >Ingrese Fecha </label>
-                            <!--I N P U T-->
-                            <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo $fechaActual?> name="date" required>
-                            <label for="time" >Ingrese Horario </label>
-                            <!--I N P U T-->
-                            <input type="time" id="hour" class="form-control" placeholder="Horario"  min= "15:00" max="23:00" name="hour" required>
-                            
-                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
-                             <!-- B O T O N -->
-                             <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
-                            </form>
+                <form action="<?php echo FRONT_ROOT?> Room/showDateForm" method= "POST" class="form-signin">
+                <!-- L A B E L -->
+                <label for="date" >Ingrese Fecha </label>
+                <!--I N P U T-->
+                <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo $fechaActual?> name="date" required>
+                
+                <label for="time" >Seleccione Sala </label>
+                <!--I N P U T-->
+                <select id="inputState" name="room" class="form-control" required>
+                    <option value="" disabled selected> Seleccione Sala </option>
+                    <?php foreach($arrayR as $value){
+                        var_dump($arrayR); ?>
+                        <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>
+                    <?php } ?>
+                </select>
+
+                <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                    <!-- B O T O N -->
+
+                    <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
+                </form>
             </div> 
         </div>
             

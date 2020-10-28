@@ -16,6 +16,26 @@
        }
 
 
+        public function roomsExists($idCinema)
+        {
+            try{
+                $query = "select
+                    ifnull(count(rooms.id_room),0) as 'Cantidad Salas'
+                    from rooms
+                    where rooms.id_cine = $idCinema";
+
+                $this->connection = Connection :: GetInstance();
+                $result = $this->connection->Execute($query);
+                //var_dump($result);
+                return $result;
+
+            }
+            catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        }
        /**Trae las funciones de un cine en particular */
        public function getFunctionsCinema ($idCine)
        {
@@ -45,6 +65,7 @@
         {
             throw $ex;
         }
+
        }
        public function getRoomCapacity($idCine){
         try{

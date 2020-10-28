@@ -15,7 +15,8 @@
 
         public function __construct()
         {
-           #$this->Add();# Se hace solo una vez y listorti
+            if(!$this->GetAll())
+                $this->Add();# Se hace solo una vez y listorti
         }
 
         public function getMoviesFunctions()

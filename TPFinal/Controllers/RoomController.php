@@ -21,6 +21,9 @@ class RoomController{
         
         $arrayR= $this->roomDao->GetAll($idCinema);
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
+        /*echo "<pre>";
+        print_r($arrayR);
+        echo "</pre>";*/
         $nombre=$nombrea[0];
         $idCine =$idCinema;
         $fechaActual=date("Y-m-j");
@@ -28,20 +31,36 @@ class RoomController{
 
     }
     public function showDateForm($date, $hour,$idCinema)
-    {
+    {   
         $movie= new M_DAO();
         $cine= new C_DAO();
-        $arrayR=$this->roomDao->GetAll($idCinema);
-        $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
-        $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
-        $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$hour,$idCinema);
-        require_once(FUNCTION_VIEWS . "dateForm.php");
+
+        $tienesalas= $this->roomDao->roomsExists($idCinema);
+
+        foreach($tienesalas as $value){
+            if($value["Cantidad Salas"] == 0){
+            echo '<script>
+                    alert("No hay salas cargadas en el cine");
+                    </script>';
+                $this->index($idCinema);
+            }
+            else{
+                $arrayR=$this->roomDao->GetAll($idCinema);
+                $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
+                $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
+                $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$hour,$idCinema);
+                require_once(FUNCTION_VIEWS . "dateForm.php");
+                }
+        }
+            
+        
     }
 
     public function showModifyRoom($id){
         $room = $this->roomDao->GetOne($id);
         require_once(ROOM_VIEWS . "modify-form-room.php");
     }
+
     public function showRoomsListAdmin($idCinema)
     {
 
@@ -153,7 +172,7 @@ class RoomController{
 
     public function verifiMoviesNoRepeat($arraysinfunciones,$arrayconfunciones,$date,$hours,$idCinema)
     {
-       var_dump($arrayconfunciones);
+       
         $array=array();
 
       foreach($arrayconfunciones as $elemento) 
