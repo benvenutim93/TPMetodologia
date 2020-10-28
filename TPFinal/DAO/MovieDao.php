@@ -15,7 +15,7 @@
 
         public function __construct()
         {
-           # $this->Add();# Se hace solo una vez y listorti
+           #$this->Add();# Se hace solo una vez y listorti
         }
 
         public function getMoviesFunctions()
@@ -258,37 +258,28 @@
             
         }
 
-        public function GetMoviesNotFunction()
+        public function GetMoviesNotFunction($fecha)
         {
+            $fecha= "'".$fecha." "."00:00:00"."'";
             $movieListNotFunction= array();
             try
             {
-                $query ="select
-                $this->tableName.id_movie,
-                $this->tableName.title,
-                functions.functionDate
-                from functions
-                right join $this->tableName
-                on functions.id_movie = $this->tableName.id_movie
-                 WHERE $this->tableName.id_movie not in (select functions.id_movie from functions);";
+                $query ="select DISTINCT
+                tablaAux.title,
+                tablaAux.id_movie
+                from movies
+                inner join(
+                    select 
+                        movies.title,
+                        movies.id_movie,
+                        ifnull(functions.functionDate,0) as fecha
+                    from movies
+                    left join functions
+                    on movies.id_movie= functions.id_movie)tablaAux
+                on tablaAux.fecha <> $fecha ;";
                 $this->connection = Connection::GetInstance();
 
-                $result = $this->connection->Execute($query);
-
-         
-
-                foreach($result as $value)
-                {
-                    $movie = new Movie();
-                    $function=new Functions();
-                    $movie->setId($value["id_movie"]);
-                    $movie->setTitle($value["title"]);
-                    $function->setDate($value["functionDate"]);
-                    
-
-                    array_push($movieListNotFunction, $movie);
-                }
-                return $movieListNotFunction;
+                return $result = $this->connection->Execute($query);
             }
             catch (\PDOException $ex)
             {
@@ -297,45 +288,44 @@
 
         }
 
-        public function GetMoviesNoRepeatDate()
+        public function GetMoviesfunction($fecha)
         {
+            $fecha ="'".$fecha."'";
             $arrayAux=array();
             $movieListNoRepeatDate= array();
             try
             {
-                $query ="select
-                $this->tableName.title,
-                $this->tableName.id_movie,
+                $query ="select DISTINCT
+                movies.title,
+                movies.id_movie,
                 DATE_FORMAT( functions.functionDate, '%Y-%m-%d') fecha, 
-                DATE_FORMAT( functions.functionDate,'%H:%i:%s') hora
-                from functions
-                join $this->tableName
-                on functions.id_movie= movies.id_movie;";
+                DATE_FORMAT( functions.functionDate,'%H:%i:%s') hora,
+                tablaAux.id_room,
+                tablaAux.id_cine,
+                tablaAux.cinemaName
+                from functions as funciones
+                join movies
+                on funciones.id_movie= movies.id_movie
+                inner join(select cinemas.id_cine,
+                            cinemas.cinemaName,
+                            rooms.id_room
+                    from rooms
+                    inner join cinemas
+                    on rooms.id_cine = cinemas.id_cine)tablaAux
+                on funciones.id_room = tablaAux.id_room
+                join functions
+                on funciones.functionDate =  $fecha ";
                 $this->connection = Connection::GetInstance();
 
-                $result = $this->connection->Execute($query);
+                return $result = $this->connection->Execute($query);
 
-
-                foreach($result as $value)
-                {
-                    $movie = new Movie();
-                    $function=new Functions();
-                    $movie->setTitle($value["title"]);
-                    $movie->setId($value["id_movie"]);
-                    $fecha = $value["fecha"].$value["hora"];
-                    $function->setDate($fecha);
-                   
-                    
-                    array_push($arrayAux,$function);
-                    array_push($arrayAux,$movie);
-                }
-                array_push($movieListNoRepeatDate,$arrayAux);
-                return $movieListNoRepeatDate;
             }
             catch (\PDOException $ex)
             {
                 throw $ex;
             }
         }
+
+        
     }
 ?>

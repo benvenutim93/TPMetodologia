@@ -1,5 +1,5 @@
 <div class="row">
-<form action="<?php echo FRONT_ROOT?>Admin/login" method="post">
+<form action="<?php echo FRONT_ROOT?>User/login" method="post">
 <input type="email" id="inputEmail" class="sr-only" name="email"  value="rope@rope" required autofocus>
 <input type="pass" id="inputEmail" class="sr-only"  name="pass" value="hola123"required autofocus>
 

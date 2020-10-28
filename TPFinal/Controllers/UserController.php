@@ -32,8 +32,6 @@ class UserController
     {
         $array = $this->userRepo->GetOneMail($mail);
         $flag =0 ;
-        
-        
         foreach($array as $user){
 
             if ($user["mail"] == $mail && password_verify($password,$user["pass"] ))

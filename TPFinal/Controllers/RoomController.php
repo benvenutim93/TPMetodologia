@@ -5,6 +5,7 @@ use Models\Room as Room;
 use Models\Functions as Functions;
 use DAO\RoomDao as R_DAO;
 use DAO\MovieDao as M_DAO;
+use DAO\CinemaDao as C_DAO;
 
 class RoomController{
 
@@ -22,20 +23,18 @@ class RoomController{
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
         $nombre=$nombrea[0];
         $idCine =$idCinema;
-
+        $fechaActual=date("Y-m-j");
         require_once(ROOM_VIEWS. "index.php");
 
     }
     public function showDateForm($date, $hour,$idCinema)
     {
         $movie= new M_DAO();
+        $cine= new C_DAO();
         $arrayR=$this->roomDao->GetAll($idCinema);
-        $arrayMovie= $movie->GetMoviesNotFunction();
-        $arraMovieDate=$movie->GetMoviesNoRepeatDate();
-        $arrayMovieNoRepeatDate=$this->verifiMoviesNoRepeat($arrayMovie,$arraMovieDate,$date,$hour);
-        $fecha = $date." ".$hour;
-           
-       
+        $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
+        $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
+        $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$hour,$idCinema);
         require_once(FUNCTION_VIEWS . "dateForm.php");
     }
 
@@ -152,24 +151,24 @@ class RoomController{
         }
     }
 
-    public function verifiMoviesNoRepeat($arrayM,$arrayMovieNoRepeat,$date,$hours)
+    public function verifiMoviesNoRepeat($arraysinfunciones,$arrayconfunciones,$date,$hours,$idCinema)
     {
-      foreach($arrayMovieNoRepeat as $fecha)
-      { 
-        $cant = count($fecha);
-          for($i=0;$i<$cant;$i++)
-          {
-            if($fecha[$i] instanceof Functions)
+       var_dump($arrayconfunciones);
+        $array=array();
+
+      foreach($arrayconfunciones as $elemento) 
+      {  
+            if($elemento["fecha"] == $date)
             {
-                
-                if( $fecha[$i]->getDate()!=$date)
+                if($elemento["id_cine"] == $idCinema )
                 {
-                    array_push($arrayM,$fecha[$i+1]);
+                        $array["title"]=$elemento["title"];
+                        $array["id_movie"]=$elemento["id_movie"];
+                        array_push($arraysinfunciones,$array);
                 }
-            }   
-          }
+            }
       }
-      return $arrayM;
+      return $arraysinfunciones;
     }
 }
 

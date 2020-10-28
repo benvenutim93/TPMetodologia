@@ -37,10 +37,10 @@
                             <!-- L A B E L -->
                             <label for="date" >Ingrese Fecha </label>
                             <!--I N P U T-->
-                            <input type="date" id="date" class="form-control" placeholder="Fecha"  min= "2020-10-22"name="date" required>
+                            <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo $fechaActual?> name="date" required>
                             <label for="time" >Ingrese Horario </label>
                             <!--I N P U T-->
-                            <input type="time" id="time" class="form-control" placeholder="Horario"  min= "15:00" max="23:00" name="time" required>
+                            <input type="time" id="hour" class="form-control" placeholder="Horario"  min= "15:00" max="23:00" name="hour" required>
                             
                             <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
                              <!-- B O T O N -->

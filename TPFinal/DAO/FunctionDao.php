@@ -18,12 +18,13 @@
       public function Add(Funct $function)
        {
            try{
-               $query = " insert into  $this->tableName (id_room,id_movie,occupiedSeats,functionDate ) VALUES (:id_room, :id_movie, :occupiedSeats, :functionDate);";
+               $query = " insert into  $this->tableName (id_room,id_movie,occupiedSeats,functionDate,functionsHour ) VALUES (:id_room, :id_movie, :occupiedSeats, :functionDate,:functionsHour);";
                
                $parameters["id_room"] = $function->getIdRoom();
                $parameters["id_movie"] = $function->getIdMovie();
                $parameters["occupiedSeats"] = $function->getOccupiedSeats();
                $parameters["functionDate"] = $function->getDate();
+               $parameters["functionsHour"]=$function->getHour();
    
 
                $this->connection = Connection :: GetInstance();

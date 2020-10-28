@@ -14,12 +14,10 @@ class FunctionController{
     }
 
   
-    
-  
-    public function Add($id_movie,$id_room,$seatsOcupped,$date){
+    public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour){
 
 
-        $function = new Funct($id_room,$id_movie,$seatsOcupped,$date);
+        $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
        
 
         $this->funtionDao->Add($function);
