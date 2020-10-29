@@ -31,7 +31,8 @@ class MoviesController
         $moviesList = array();
         $movies = $this->moviesDao->getMoviesFunctions();
 
-
+        if ($movies)
+        {
         foreach ($movies as $peli)
         {
             $ids = explode("/", $peli["genre_ids"]);
@@ -39,6 +40,14 @@ class MoviesController
             array_push($moviesList, $peli);
         }
         require_once(USER_VIEWS . "moviesView.php");
+        }
+        else
+        {
+            echo '<script>
+                    alert("No hay funciones por el momento");
+                    </script>';
+            require_once(USER_VIEWS . "login-form.php");
+        }
     }
 
     public function showOnlyMovie($moviesList)
@@ -100,7 +109,18 @@ class MoviesController
                 }     
             }                   
         }
-       $this->showMovieArray($moviesList);
+
+        if (!empty($moviesList))
+        $this->showMovieArray($moviesList);
+        else
+        {
+            echo '<script>
+                    alert("No se encontraron peliculas con ese género");
+                    </script>';
+            $this->showSearchMovieView();
+            
+        }
+       
 
     }
 
@@ -108,7 +128,6 @@ class MoviesController
         $array = $this->moviesDao->getMoviesFunctions();        
         $moviesList=array(); 
         
-
             foreach($array as $value){
                 if ($value["functionDate"] == $date)
                 {
@@ -126,7 +145,18 @@ class MoviesController
                     array_push($moviesList, $movie);
                 }  
             }
-       $this->showMovieArray($moviesList);
+
+            if ($moviesList)
+                $this->showMovieArray($moviesList);
+            else
+            {
+                echo '<script>
+                        alert("No se encontraron peliculas en esa fecha");
+                        </script>';
+                $this->showSearchMovieView();
+                
+            }
+       
 
     } 
     public function fechasPelis()
