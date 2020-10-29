@@ -11,12 +11,12 @@
     {        
         private $tableName = "movies";
         private $connection;
-        private $movieList= array();
+        private $movieList = array();
 
         public function __construct()
         {
             if(!$this->GetAll())
-                $this->Add();# Se hace solo una vez y listorti
+                $this->Add();
         }
 
         public function getMoviesFunctions()
@@ -34,7 +34,8 @@
                 cinemas.cinemaName,
                 rooms.roomName,
                 $this->tableName.genre_ids,
-                functions.functionDate
+                DATE_FORMAT( functions.functionDate, '%Y-%m-%d') as functionDate, 
+                functions.functionsHour
                 from $this->tableName
                 inner join functions
                 on $this->tableName.id_movie = functions.id_movie
@@ -117,6 +118,33 @@
                 }
 
                 return $this->movieList;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetWithFunction ($title)
+        {
+            try
+            {
+                $query = "select * 
+                from $this->tableName
+                inner join functions
+                on movies.id_movie = functions.id_movie
+                inner join rooms
+                on functions.id_room = rooms.id_room
+                inner join cinemas
+                on rooms.id_cine = cinemas.id_cine
+                where movies.title = :title;";
+                $parameters["title"] = $title;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query, $parameters);
+
+                return $result;
             }
             catch (\PDOException $ex)
             {
@@ -225,6 +253,34 @@
 
             }
         }
+
+        public function retrieveUpcoming ()
+        {
+            $apiContent = file_get_contents(URL_UPCOMING);
+            if ($apiContent)
+            {
+                $jsonDecode = json_decode($apiContent, true);
+                $movieList = array();
+
+                foreach ($jsonDecode["results"] as $value)
+                {
+                    $movie = new Movie();
+                    $movie->setTitle($value["title"]);
+                    $movie->setOverview($value["overview"]);
+                    $movie->setOriginal_title($value["original_language"]);
+                    $movie->setVote_average($value["vote_average"]);
+                    $movie->setRelease_date($value["release_date"]);
+                    $movie->setAdult($value["adult"]);
+                    $movie->setPopularity($value["popularity"]);
+                    $movie->setPoster_path($value["poster_path"]);
+
+                    array_push($movieList, $movie);
+                }
+
+                return $movieList;
+
+            }
+        }
         
         public function retrieveAPIArray()
         {
@@ -300,7 +356,7 @@
                 movies.title,
                 movies.id_movie,
                 DATE_FORMAT( functions.functionDate, '%Y-%m-%d') fecha, 
-                DATE_FORMAT( functions.functionDate,'%H:%i:%s') hora,
+                DATE_FORMAT( functions.functionsHour,'%H:%i:%s') hora,
                 tablaAux.id_room,
                 tablaAux.id_cine,
                 tablaAux.cinemaName
@@ -320,6 +376,56 @@
 
                 return $result = $this->connection->Execute($query);
 
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetWithFunctionGenres ()
+        {
+            try
+            {
+                $query = "select * 
+                from $this->tableName
+                inner join functions
+                on movies.id_movie = functions.id_movie
+                inner join rooms
+                on functions.id_room = rooms.id_room
+                inner join cinemas
+                on rooms.id_cine = cinemas.id_cine";
+
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                $this->movieList = array();
+
+                foreach($result as $value)
+                {
+                        $movie = new Movie();
+                        $movie->setPopularity($value["popularity"]);
+                        $movie->setVote_count($value["vote_count"]);
+                        $movie->setVideo($value["video"]);
+                        $movie->setPoster_path($value["poster_path"]);
+                        $movie->setId($value["id"]);
+                        $movie->setAdult($value["adult"]);
+                        $movie->setBackdrop_path($value["backdrop_path"]);
+                        $movie->setOriginal_language($value["original_language"]);
+                        $movie->setOriginal_title($value["original_title"]);
+                        $ids = explode("/",$value["genre_ids"]);
+                        $movie->setGenre_ids($ids);
+                        $movie->setTitle($value["title"] );
+                        $movie->setVote_average($value["vote_average"]);
+                        $movie->setOverview($value["overview"]);
+                        $movie->setRelease_date($value["release_date"]);
+
+                        array_push($this->movieList, $movie);     
+                }
+
+                return $this->movieList;
             }
             catch (\PDOException $ex)
             {

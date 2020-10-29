@@ -6,6 +6,7 @@ use Models\Functions as Functions;
 use DAO\RoomDao as R_DAO;
 use DAO\MovieDao as M_DAO;
 use DAO\CinemaDao as C_DAO;
+use \Datetime as Datetime;
 
 class RoomController{
 
@@ -31,21 +32,8 @@ class RoomController{
     public function showDateForm($date,$idRoom,$idCinema)
     {   
         $movie= new M_DAO();
-        $cine= new C_DAO();
         
         $tienesalas= $this->roomDao->roomsExists($idCinema);
-
-       // var_dump($functionsRoom);
-       if($idRoom ==0)
-            $arrayHoras=$this->GetArrayHourCinemaIDpar();
-        else if($idRoom%2 ==0)
-            $arrayHoras=$this->GetArrayHourCinemaIDpar();
-        else
-            $arrayHoras=$this->GetArrayHourCinemaIDimpar();
-
-        $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($idRoom, $date); //devuelve las funciones de una sala en un dia determinado
-        echo "<pre>"; var_dump($arrayFunctionRoom); echo "</pre>";
-        $arrayHour=$this->VerifyHour($arrayHoras,$arrayFunctionRoom);
 
         foreach($tienesalas as $value){
             if($value["Cantidad Salas"] == 0){
@@ -96,10 +84,7 @@ class RoomController{
     public function showFunctionsList ($idCinema)
     {
         $functions = $this->roomDao->getFunctionsCinema($idCinema);
-    
-        /*echo"<pre>";
-        var_dump($functions);
-        echo"</pre>";*/
+        
         require_once(FUNCTION_VIEWS . "listFunctionsCinema.php");
     }
   
@@ -202,71 +187,7 @@ class RoomController{
       return $arraysinfunciones;
     }
 
-    public function GetArrayHourCinemaIDpar(){
-        $array=array();
-        $date = date("H:i:s", strtotime("14:00:00"));
-        $date1 = date("H:i:s", strtotime("16:15:00"));
-        $date2 = date("H:i:s", strtotime("18:30:00"));
-        $date3 = date("H:i:s", strtotime("20:45:00"));
-        $date4 = date("H:i:s", strtotime("23:00:00"));
-        $array[0]=$date;
-        $array[1]=$date1;
-        $array[2]=$date2;
-        $array[3]=$date3;
-        $array[4]=$date4;
-
-        return $array;
-    }
-
-    public function GetArrayHourCinemaIDimpar(){
-        $array=array();
-        $date = date("H:i:s", strtotime("15:00:00"));
-        $date1 = date("H:i:s", strtotime("17:15:00"));
-        $date2 = date("H:i:s", strtotime("19:30:00"));
-        $date3 = date("H:i:s", strtotime("21:45:00"));
-        $date4 = date("H:i:s", strtotime("24:00:00"));
-        $array[0]=$date;
-        $array[1]=$date1;
-        $array[2]=$date2;
-        $array[3]=$date3;
-        $array[4]=$date4;
-
-        return $array;
-    }
-
-    public function VerifyHour($arrayHoras,$arrayFunctionRoom)
-    {
-        $array=array();
-        //funciones de sala en un dia determinado
-        if($arrayFunctionRoom== null) //si no hay funciones ese dia
-        {
-            return $arrayHoras; //muestra todas las horas disponibles
-        }
-        else{
-            foreach($arrayFunctionRoom as $value)
-            {
-                foreach($arrayHoras as $hora)
-                {
-                    if($value["functionsHour"] == $hora)
-                    {
-                        array_push($array,$hora);
-                    }
-                }
-            }
-             $cantidad= count($arrayHoras);
-            
-            for($i=0;$i<$cantidad;$i++)
-            {
-                foreach($array as $value)
-                {
-                    if($arrayHoras[$i]== $value)
-                        unset($arrayHoras[$i]);     
-                }
-            }
-           
-            return $arrayHoras;
-        }
-    }
+    
 }
 
 ?>

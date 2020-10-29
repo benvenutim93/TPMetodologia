@@ -65,8 +65,8 @@
             movies.title as titulo,
             functions.id_function as 'ID Funcion',
             $this->tableName.roomName as 'Sala',
-            functions.functionDate as 'Fecha',
-            functions.functionHour as 'Hora',
+            DATE_FORMAT( functions.functionDate, '%Y-%m-%d') as 'Fecha', 
+            functions.functionsHour as 'Hora',
             cinemas.cinemaName as 'Nombre Cine',
             rooms.id_cine as 'id_cine'
              from functions

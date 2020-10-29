@@ -10,7 +10,7 @@
                             <label for="movi" >Ingrese Pelicula</label>
                             
                             <!--I N P U T-->
-                            <select id="inputState" name="movie" class="form-control">
+                            <select id="inputState" name="id_movie" class="form-control">
                              <option value="" disabled selected> Seleccione una pelicula </option>
 
                               <?php foreach($arrayAmostrar as $value){ ?>
@@ -18,20 +18,18 @@
 
                                 <?php } ?>
                             </select>
+                            <label>Id Sala</label>
                             <input type="number" id="id_room" class="form-control"  name="id_room"   value="<?php echo $idRoom?>" readonly>
                             <!--I N P U T-->
-                            <input type="number" id="seatsOcupped" class="form-control"  name="seatsOcupped"   value="0" readonly>
+                            <input type="number" id="seatsOcupped" class="sr-only"  name="seatsOcupped"   value="0" readonly>
                             
                             <label for="date">Fecha de la funcion</label>
                             <!--I N P U T-->
                             <input type="text" id="date" class="form-control"  name="date"   value="<?php echo $date;?>" readonly>
                             
-                            <select id="hora" name="hora" class="form-control">
-                             <option value="" disabled selected> Seleccione un horario</option>
-                            <?php foreach($arrayHour as $value){ ?>
-                            <option value="<?php echo $value;?>"> <?php echo $value;?></option>
-                                <?php } ?>
-                            </select>
+                            <label for="hour">Hora de la funcion</label>
+                            <!--I N P U T-->
+                            <input type="time" id="hour" class="form-control"  name="hour"  required>
 
                               
                         <!-- B O T O N -->

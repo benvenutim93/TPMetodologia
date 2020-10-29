@@ -27,10 +27,11 @@ class MoviesController
 
     public function showMoviesListView()
     {
-        /*$moviesList = $this->moviesDao->retrieveAPIJson();*/
         $genreRepo = $this->genreDao->retrieveAPIJson();
         $moviesList = array();
         $movies = $this->moviesDao->getMoviesFunctions();
+
+
         foreach ($movies as $peli)
         {
             $ids = explode("/", $peli["genre_ids"]);
@@ -55,13 +56,15 @@ class MoviesController
 
     public function searchMovieTitle ($title)
     {
-        $movie = $this->moviesDao->GetOneName($title);
-        $peli = $movie[0];
-        $ids = explode("/", $peli["genre_ids"]);
-        $peli["genre_ids"] = $ids;
-        $movie[0] = $peli;
-
-
+        $movie = $this->moviesDao->GetWithFunction($title);
+        $i = 0;
+        foreach($movie as $value)
+        {
+            $ids = explode("/", $value["genre_ids"]);
+            $value["genre_ids"] = $ids;
+            $movie[$i] = $value;
+            $i++;
+        }
         if ($movie)
            $this->showMoviesSearch($movie);
         else
@@ -72,7 +75,6 @@ class MoviesController
             $this->showSearchMovieView();
             
         }
-        
     }
 
     public function showMovieArray($movilist)
@@ -85,63 +87,45 @@ class MoviesController
     public function searchMovieGenre($genre_id)
     {
 
-        $movies = $this->moviesDao->GetAll();
-
-        $aux = array();
+        $movie = $this->moviesDao->GetWithFunctionGenres();
+        
         $moviesList = array();
 
-        foreach ($movies as  $value)
+        foreach ($movie as  $value)
         {
             foreach($value->getGenre_ids() as $id)
-            {
-                
-                
+            {    
                 if($id == $genre_id){
-                    $aux=$this->genreDao->GetOneName($this->genreDao, $id);
-                    array_push($moviesList,$value);
-                   $value->setGenre_ids($aux);
-                }
-                  
-            }
-            
-            
-                  
+                   array_push($moviesList,$value);
+                }     
+            }                   
         }
-   
-
        $this->showMovieArray($moviesList);
-        
-        
-       
 
     }
 
-    public function searchMovieDate($year){ //año - mes - dia
-        $array = $this->moviesDao->GetAll();
-
-        
+    public function searchMovieDate($date){ //año - mes - dia
+        $array = $this->moviesDao->getMoviesFunctions();        
         $moviesList=array(); 
+        
 
-     
+            foreach($array as $value){
+                if ($value["functionDate"] == $date)
+                {
+                    $movie = new Movie();
+                    $movie->setTitle($value["title"]);
+                    $movie->setOverview($value["overview"]);
+                    $movie->setOriginal_language($value["original_language"]);
+                    $movie->setVote_average($value["vote_average"]);
+                    $movie->setAdult($value["adult"]);
+                    $movie->setPopularity($value["popularity"]);
+                    $movie->setPoster_path($value["poster_path"]);
+                    $ids = explode("/",$value["genre_ids"]);
+                    $movie->setGenre_ids($ids);
 
-            foreach($array as $movie){
-                $date = $movie->getRelease_date();
-
-                $fecha = explode('-', $date);
-                $años = array_shift($fecha);
-                
-                
-                if($años == $year){
                     array_push($moviesList, $movie);
-                }
-
-                /* Muestra por fecha especifica
-                if ($date == $year){
-                    array_push($moviesList, $movie);
-                }*/
-                
+                }  
             }
-
        $this->showMovieArray($moviesList);
 
     } 
@@ -157,7 +141,6 @@ class MoviesController
             $años = array_shift($fecha);
             
             array_push($dates,$años);
-            //array_push($dates, $date); Muestra por fecha especifica
         }
         $nonRepeat = array_unique($dates);
        return $nonRepeat;

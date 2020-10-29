@@ -53,6 +53,10 @@
                                     <div class="col">
                                     <h5 class="text-center">Funcion:</h5>
                                    <p class="text-center"> <?php echo  $movie["functionDate"];?></p> </div>
+                                   <div class="col">
+                                       <h5 class="text-center">Hora Funcion</h5>
+                                       <p class="text-center"><?php echo  $movie["functionsHour"];?></p>
+                                   </div>
                                     <!-- V O  T O S -->
                                     <div class="col">
                                     <h5 class="text-center" >Cine:</h5>
@@ -63,7 +67,7 @@
                                     <p class="text-center"> <?php echo $movie["popularity"];?></p>  </div>
                                      </div>
                                 </div>
-                    </div>
+                            </div>
                 </td>
 
                 </tr>

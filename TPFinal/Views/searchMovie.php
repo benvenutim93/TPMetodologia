@@ -38,14 +38,7 @@
         <div>
             <h2 class="text-center"> Buscador de peliculas</h1>
             <label for="titleSearch">Ingrese Fecha</label>
-                <select id="inputState" name="year" class="form-control">
-                        <option value="" disabled selected> Seleccione uno </option>
-                        <?php
-                             foreach($pelisDates as $date){ ?>
-                                <option value="<?php echo $date;?>"  > <?php echo $date;?></option>
-                            <?php } ?>
-
-                </select>
+            <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo date("Y-m-d")?> name="date" required>
             
         </div>
          <button class="btn btn-lg btn-info " type="submit">Buscar</button>
