@@ -5,8 +5,6 @@
         <div class="col">
             <div class="content-chico">
                 <form class="form-signin" action= "<?php echo FRONT_ROOT?>Room/Add" method="POST">
-                            <!--Cambiar logo -->
-                            <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg"  title="Logo "alt="Logo del sistema" width="72" height="72">
                         <h1 class="h3 mb-3 font-weight-normal">Agregar Sala</h1>
                             <!--Sacando el sr-only te muestra el titulo(LABEL)-->
 
