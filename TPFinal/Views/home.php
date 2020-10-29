@@ -11,9 +11,9 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <h5><?php echo $pelis[0]->getTitle();?></h5>
+                        <h5><?php echo $pelis[6]->getTitle();?></h5>
                     <div class="content-hieght">
-                            <img src="<?php echo"https://image.tmdb.org/t/p/w200". $pelis[0]->getPoster_path(); ?>" alt="Imagn"     height="100%" width="100%" >
+                            <img src="<?php echo"https://image.tmdb.org/t/p/w200". $pelis[6]->getPoster_path(); ?>" alt="Imagn"     height="100%" width="100%" >
                         </div>
                     </div>
                     <div class="carousel-item">

@@ -8,6 +8,11 @@
 </div>
 
 
+
+
+
+
+
 <div class="content-login">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/login" method="POST">
             <!--Cambiar logo -->

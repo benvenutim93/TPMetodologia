@@ -15,6 +15,14 @@ body {
           background-size: cover;
   
 }
+.content-hieght{
+  padding: 1em;
+  margin:auto;
+  background-color: hsla(0, 1%, 53%, 0.356);
+  height: 600px;
+  width: 450px;
+
+}
 .content-xxl{
   background-color: hsl(0, 8%, 12%);
   text-align: center;
@@ -134,6 +142,13 @@ body {
   width: 100%; 
   border-radius: 5%;
    background: url(https://cdn.ticbeat.com/src/uploads/2018/07/hacker-810x540.jpg)no-repeat center center ;
+}
+.vuelvas-protos{
+  margin:auto;
+  width: 500px;
+  height: 500px;
+  border: 1px  rgb(7, 1, 32);
+  box-shadow: 0px 0px 10px 5px  rgb(15, 0, 0);
 }
 .imagen-cartelera{
 

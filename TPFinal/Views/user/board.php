@@ -1,7 +1,11 @@
 <?php 
 $user = $_SESSION["logged"];
-
 ?>
+
+
+
+
+
 <div class="content-grande">
     <div class="row">
         <div class="col">
