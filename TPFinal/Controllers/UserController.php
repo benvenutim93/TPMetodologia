@@ -9,6 +9,8 @@ class UserController
 {
     private $userRepo;
 
+  
+
     public function __construct()
     {
         $this->userRepo = new U_DAO();
@@ -16,6 +18,21 @@ class UserController
     public function showAdminView(){
         require_once(ADMIN_VIEWS . "eleccion.php");
 
+    }
+
+    public function setAdmin($id_userType, $id_user)
+    {
+        //echo "tipo usuario: $id_userType <br> id_user = $id_user";
+        $this->userRepo->modifyUserType($id_userType, $id_user);
+        $users = $this->userRepo->GetAll();        
+        require_once(ADMIN_VIEWS . "usersList.php");
+    }
+
+    public function viewSetAdmin ()
+    {
+        $users = $this->userRepo->GetAll();
+        //var_dump($users);
+        require_once(ADMIN_VIEWS . "usersList.php");
     }
 
     public function showPrincipalView ()

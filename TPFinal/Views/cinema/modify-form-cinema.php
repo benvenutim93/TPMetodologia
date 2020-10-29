@@ -18,6 +18,12 @@
             <label for="capacity" class="">Ingrese Nueva Capacidad</label>
             <!--I N P U T-->
             <input type="number"  id="capacity" class="form-control" value="<?php echo $movie->getCapacity()?>"  name="capacity" min="0" max="500" required>
+            <label for="capacity" class="">Ingrese Nuevo Horario Apertura</label>
+            <!--I N P U T-->
+            <input type="time"  id="aperHour" class="form-control" value="<?php echo $movie->getAperHour()?>"  name="aperHour" min="0" max="500" required>
+            <label for="capacity" class="">Ingrese Nuevo Horario Cierre</label>
+            <!--I N P U T-->
+            <input type="time"  id="closeHour" class="form-control" value="<?php echo $movie->getCloseHour()?>"  name="closeHour" min="0" max="500" required>
 
         <!-- B O T O N -->
              <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>

@@ -43,7 +43,9 @@ class RoomController{
                 $this->index($idCinema);
             }
             else{
+                $cineDao = new C_DAO();
                 $arrayR=$this->roomDao->GetAll($idCinema);
+                $cine = $cineDao->GetOne($idCinema);
                 $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
                 $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
                 $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema);

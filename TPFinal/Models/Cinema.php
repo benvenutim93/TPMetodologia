@@ -7,16 +7,16 @@ class Cinema {
     private $name;
     private $address;
     private $capacity;
-    private $ticketValue;
-    private $rooms;
+    private $aperHour;
+    private $closeHour;
 
-    public function __construct($name = "", $address = "", $capacity = "", $ticketValue = "")
+    public function __construct($name = "", $address = "", $capacity = "", $aperHour = "", $closeHour = "")
     {
         $this->name = $name;       
         $this->address = $address;        
         $this->capacity = $capacity;   
-        $this->ticketValue = $ticketValue;
-        $this->rooms=array();
+        $this->aperHour = $aperHour;
+        $this->closeHour = $closeHour;
     }
 
     /**
@@ -80,26 +80,6 @@ class Cinema {
     }
 
     /**
-     * Get the value of ticketValue
-     */ 
-    public function getTicketValue()
-    {
-        return $this->ticketValue;
-    }
-
-    /**
-     * Set the value of ticketValue
-     *
-     * @return  self
-     */ 
-    public function setTicketValue($ticketValue)
-    {
-        $this->ticketValue = $ticketValue;
-
-        return $this;
-    }
-
-    /**
      * Get the value of id
      */ 
     public function getId()
@@ -120,21 +100,41 @@ class Cinema {
     }
 
     /**
-     * Get the value of rooms
+     * Get the value of aperHour
      */ 
-    public function getRooms()
+    public function getAperHour()
     {
-        return $this->rooms;
+        return $this->aperHour;
     }
 
     /**
-     * Set the value of rooms
+     * Set the value of aperHour
      *
      * @return  self
      */ 
-    public function setRooms($rooms)
+    public function setAperHour($aperHour)
     {
-        $this->rooms = $rooms;
+        $this->aperHour = $aperHour;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of closeHour
+     */ 
+    public function getCloseHour()
+    {
+        return $this->closeHour;
+    }
+
+    /**
+     * Set the value of closeHour
+     *
+     * @return  self
+     */ 
+    public function setCloseHour($closeHour)
+    {
+        $this->closeHour = $closeHour;
 
         return $this;
     }

@@ -13,8 +13,16 @@
                     <button  class="btn btn-lg btn-success btn-block" type="submit">Listar Cines</button>
                 </form>
             </div>
+            
+            <div class="col">
+            <h1 class="text-center">Gestionar Usuarios</h1>
+                <form action="<?php echo FRONT_ROOT?>User/viewSetAdmin" class="form-signin">
+                 <button  class="btn btn-lg btn-success btn-block" type="submit">Modificar Usuarios</button>
+                </form>
+            </div>
         </div>
-</div>      
+</div>  
+       
 <div class="content-grande">
         <div class="row">
             

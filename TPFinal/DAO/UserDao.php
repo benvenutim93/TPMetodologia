@@ -63,6 +63,61 @@ class UserDao
             }
         }
 
+        public function modifyUserType($id_userType, $id_user)
+        {
+            try
+            {
+                $query = "update $this->tableName set id_userType = :id_userType where id_user = :id_user;";
+
+                $parameters["id_userType"] = $id_userType;
+                $parameters["id_user"] = $id_user;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query,$parameters);
+
+                
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetUsersType()
+        {
+            try
+            {
+                $query = "select * from userTypes ";
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function setAdmin($idUser)
+        {
+            try
+            {
+                $query = "select * from userTypes ";
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
         /**
          * Devuelve un array asociativo con el usuario buscado. 
          */

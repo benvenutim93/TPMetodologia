@@ -1,6 +1,6 @@
 
             <div class="content-chico">
-                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Function/Add" method="POST">
+                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Function/Add" method="GET">
                             <!--Cambiar logo -->
                             <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg"  title="Logo "alt="Logo del sistema" width="72" height="72">
                             <h1 class="h3 mb-3 font-weight-normal">Agregar Funcion</h1>
@@ -29,7 +29,7 @@
                             
                             <label for="hour">Hora de la funcion</label>
                             <!--I N P U T-->
-                            <input type="time" id="hour" class="form-control"  name="hour"  required>
+                            <input type="time" id="hour" class="form-control"  name="hour"  min="<?php echo $cine->getAperHour();?>" max="<?php echo $cine->getCloseHour()?>" value= ""required>
 
                               
                         <!-- B O T O N -->
