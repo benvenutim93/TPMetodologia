@@ -33,7 +33,7 @@
 
                               
                         <!-- B O T O N -->
-                            <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
 
                 

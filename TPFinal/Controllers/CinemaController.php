@@ -40,7 +40,12 @@ class CinemaController
         require_once(CINEMA_VIEWS . "bajaCinema.php");
     }
     
+    public function showCinemas_user()
+    {
+        $cines = $this->cinemaDao->GetALL();
+        require_once(CINEMA_VIEWS . "cinemaList.php");
 
+    }
     public function showCinemaModify($id){
         $movie = $this->cinemaDao->GetOne($id);
         require_once(CINEMA_VIEWS . "modify-form-cinema.php");

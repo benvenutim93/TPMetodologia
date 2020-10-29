@@ -7,12 +7,10 @@
     </form>
     <form action="<?php echo FRONT_ROOT?>Admin/showOPUsersView">
     <button  class="btn btn-lg btn-dark btn-block" type="submit">
-                <font color="red"> Realizar Operaciones de Usuarios</font></button>
+                 Realizar Operaciones de Usuarios</button>
     </form>
         
-     <form action= "<?php echo FRONT_ROOT?>User/showLoginView">
-         <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
-    </form>
+    
         
 </div>
 

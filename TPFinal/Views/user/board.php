@@ -29,8 +29,8 @@ $user = $_SESSION["logged"];
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Modificar Perfil </button>
                     </form>
                     <!-- F O R M -->
-                    <form action="" class="form-singin">
-                        <button  class="btn btn-lg btn-danger btn-block" type="submit"> Listar Cines </button>
+                    <form action=" <?php echo FRONT_ROOT?>Cinema/showCinemas_user" class="form-singin">
+                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Cines </button>
                     </form>
             </div>
             <div class="col" >
@@ -57,8 +57,6 @@ $user = $_SESSION["logged"];
 
                             <label for="d"> Dni </label>
                             <input type="text"  id="d" class="form-control" value="<?php echo $user["dni"]?>"   readonly>
-                            <label for="p"> pass </label>
-                            <input type="text"  id="p" class="form-control" value="<?php echo $user["pass"]?>"   readonly>
 
                         </form>
                     </div>

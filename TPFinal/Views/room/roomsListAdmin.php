@@ -39,11 +39,9 @@
                     </form>
                     <div class="row">
                             <div class="col">
-                            <form class="form-signin" action="<?php echo FRONT_ROOT?>Room/Remove">
-                            <input type="number"  class="sr-only"  name="id" value="<?php echo $room->getId();?>">
-                            <input type="number"  class="sr-only"  name="idCinema" value="<?php echo $room->getIdCinema();?>">
-                            <button class="btn btn-lg btn-danger btn-block" type="submit"> Eliminar</button>
-                        </form>
+                            <div class="form-signin">
+                            <button class="btn btn-lg btn-danger btn-block"data-toggle="modal" data-target="#borrarSala"> Eliminar</button>
+                            </div>
                             </div>
                             <div class="col">
                                 <form class="form-signin" action="<?php echo FRONT_ROOT?>Room/showModifyRoom">
@@ -55,6 +53,30 @@
                    
                   
                  </div>
+                      <!-- MODAL -->             
+                      <div class="modal fade" id="borrarSala" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cierresesionLabel">Eliminar Sala</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿ Esta seguro que quiere <font color="red"> eliminar</font> esta Sala?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <form  action="<?php echo FRONT_ROOT?>Room/Remove">
+                                                <input type="number"  class="sr-only"  name="id" value="<?php echo $room->getId();?>">
+                                                <input type="number"  class="sr-only"  name="idCinema" value="<?php echo $room->getIdCinema();?>">
+                                                <button type="sumbit" class="btn btn-primary">Aceptar</button>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
         <?php } ?>             
        
     
