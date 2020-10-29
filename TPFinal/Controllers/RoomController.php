@@ -27,6 +27,7 @@ class RoomController{
         require_once(ROOM_VIEWS. "index.php");
 
     }
+
     public function showDateForm($date,$idRoom,$idCinema)
     {   
         $movie= new M_DAO();
@@ -41,7 +42,9 @@ class RoomController{
             $arrayHoras=$this->GetArrayHourCinemaIDpar();
         else
             $arrayHoras=$this->GetArrayHourCinemaIDimpar();
-        $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($idRoom, $date);
+
+        $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($idRoom, $date); //devuelve las funciones de una sala en un dia determinado
+        echo "<pre>"; var_dump($arrayFunctionRoom); echo "</pre>";
         $arrayHour=$this->VerifyHour($arrayHoras,$arrayFunctionRoom);
 
         foreach($tienesalas as $value){
@@ -94,7 +97,9 @@ class RoomController{
     {
         $functions = $this->roomDao->getFunctionsCinema($idCinema);
     
+        /*echo"<pre>";
         var_dump($functions);
+        echo"</pre>";*/
         require_once(FUNCTION_VIEWS . "listFunctionsCinema.php");
     }
   
@@ -196,6 +201,7 @@ class RoomController{
       }
       return $arraysinfunciones;
     }
+
     public function GetArrayHourCinemaIDpar(){
         $array=array();
         $date = date("H:i:s", strtotime("14:00:00"));
@@ -211,6 +217,7 @@ class RoomController{
 
         return $array;
     }
+
     public function GetArrayHourCinemaIDimpar(){
         $array=array();
         $date = date("H:i:s", strtotime("15:00:00"));
@@ -230,9 +237,10 @@ class RoomController{
     public function VerifyHour($arrayHoras,$arrayFunctionRoom)
     {
         $array=array();
-        if($arrayFunctionRoom== null)
+        //funciones de sala en un dia determinado
+        if($arrayFunctionRoom== null) //si no hay funciones ese dia
         {
-            return $arrayHoras;
+            return $arrayHoras; //muestra todas las horas disponibles
         }
         else{
             foreach($arrayFunctionRoom as $value)

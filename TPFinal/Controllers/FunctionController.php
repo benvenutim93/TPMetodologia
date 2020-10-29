@@ -8,12 +8,12 @@ use DAO\RoomDao as R_DAO;
 
 class FunctionController{
 
-    private $funtionDao;
+    private $functionDao;
     private $roomDao;
 
     public function __construct()
     {
-        $this->funtionDao = new F_DAO();
+        $this->functionDao = new F_DAO();
         $this->roomDao= new R_DAO();
     }
 
@@ -25,7 +25,7 @@ class FunctionController{
         $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
        
 
-         $this->funtionDao->Add($function);
+         $this->functionDao->Add($function);
          echo '<script>
                 alert("La funcion se agrego con exito");
                 </script>

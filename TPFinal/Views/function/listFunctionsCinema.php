@@ -26,9 +26,15 @@
                      <input type="text" id="Capacidad" class="form-control"   value="<?php echo $function['titulo'];?>" readonly>
              </div>
              <div class="col">
-             <label for="precio" >Fecha y Hora</label>
+             <label for="precio" >Fecha</label>
                  <!--I N P U T-->
-                 <input type="text" id="precio" class="form-control"   value="<?php echo $function['Fecha y hora'];?>" readonly>
+                 <input type="text" id="precio" class="form-control"   value="<?php echo $function['Fecha'] ;?>" readonly>
+
+             </div>
+             <div class="col">
+             <label for="hora" >Hora</label>
+                 <!--I N P U T-->
+                 <input type="text" id="hora" class="form-control"   value="<?php echo $function['Hora'] ;?>" readonly>
 
              </div>
          </div>

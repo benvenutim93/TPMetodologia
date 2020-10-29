@@ -16,7 +16,7 @@
        }
 
 
-       public function getFunctionsRoom($idRoom, $fecha)
+       public function getFunctionsRoom($idRoom, $fecha) //devuelve las funciones de una sala en un dia determinado
        {
         $fecha = "'".$fecha."'";
         try{
@@ -50,11 +50,13 @@
 
             }
             catch (\PDOException $ex)
-        {
-            throw $ex;
-        }
+             {
+                throw $ex;
+             }
 
         }
+
+
        /**Trae las funciones de un cine en particular */
        public function getFunctionsCinema ($idCine)
        {
@@ -63,7 +65,8 @@
             movies.title as titulo,
             functions.id_function as 'ID Funcion',
             $this->tableName.roomName as 'Sala',
-            functions.functionDate as 'Fecha y hora',
+            functions.functionDate as 'Fecha',
+            functions.functionHour as 'Hora',
             cinemas.cinemaName as 'Nombre Cine',
             rooms.id_cine as 'id_cine'
              from functions

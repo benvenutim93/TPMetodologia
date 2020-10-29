@@ -27,7 +27,7 @@
                             <input type="text" id="date" class="form-control"  name="date"   value="<?php echo $date;?>" readonly>
                             
                             <select id="hora" name="hora" class="form-control">
-                             <option value="" disabled selected> Seleccione unhorario</option>
+                             <option value="" disabled selected> Seleccione un horario</option>
                             <?php foreach($arrayHour as $value){ ?>
                             <option value="<?php echo $value;?>"> <?php echo $value;?></option>
                                 <?php } ?>
