@@ -1,21 +1,22 @@
 <?php
-    namespace Repositories;
+    namespace Repository;
 
     use Models\Cinema as Cinema;
 
-    class StudentRepository 
+    class CinemaRepository 
     {        
         private $cinemaList = array();
         private $fileName;
 
         public function __construct()
         {
-            $this->fileName = dirname(__DIR__)."/Data/students.json";
+            $this->fileName = dirname(__DIR__)."/Data/cinema.json";
         }
 
         public function Add(Cinema $cine)
         {
             $this->RetrieveData();
+            $cine->setId($this->getLastId());
             
             array_push($this->cinemaList, $cine);
 
@@ -28,6 +29,28 @@
 
             return $this->cinemaList;
         }
+        
+        public function GetOne ($id)
+        {
+            $this->RetrieveData();
+
+            foreach ($this->cinemaList as $value)
+            {
+                    if ($value->getId() == $id)
+                        return $value;
+            }
+        }
+
+        public function Remove($name)
+        {
+            $this->RetrieveData();
+
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use($name){
+                return $cinema->getName() != $name;
+            });
+
+            $this->SaveData();
+        }
 
         private function SaveData()
         {
@@ -35,10 +58,13 @@
 
             foreach($this->cinemaList as $cine)
             {
+                $valuesArray["id"] = $cine->getId();
                 $valuesArray["name"] = $cine->getName();
                 $valuesArray["address"] = $cine->getAddress();
                 $valuesArray["capacity"] = $cine->getCapacity();
                 $valuesArray["ticketValue"] = $cine->getTicketValue();
+                $valuesArray["rooms"] = $cine->getRooms();
+
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -61,14 +87,35 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $cine = new Cinema();
+                    $cine->setId($valuesArray["id"]);
                     $cine->setName($valuesArray["name"]);
                     $cine->setAddress($valuesArray["address"]);
                     $cine->setCapacity($valuesArray["capacity"]);
                     $cine->setTicketValue($valuesArray["ticketValue"]);
+                    $cine->setRooms($valuesArray["rooms"]);
 
                     array_push($this->cinemaList, $cine);
                 }
             }
+        }
+
+        public function getLastId()
+        {
+            $array = $this->GetAll();
+            if ($array)
+            {
+                $pos= count($array);
+                $pos--;
+                $lastCine = $array[$pos];
+                return $lastCine->getId() + 1;
+            }
+            else return 1;
+        }
+
+        public function setCinemaList ($list)
+        {
+            $this->cinemaList = $list;
+            $this->SaveData();
         }
     }
 ?>

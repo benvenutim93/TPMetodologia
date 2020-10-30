@@ -1,7 +1,22 @@
+<div class="row">
+<form action="<?php echo FRONT_ROOT?>User/login" method="post">
+<input type="email" id="inputEmail" class="sr-only" name="email"  value="rope@rope" required autofocus>
+<input type="pass" id="inputEmail" class="sr-only"  name="pass" value="hola123"required autofocus>
+
+<button class="btn btn-lg btn-info btn-block" type="submit"> Admin de una pa</button>
+</form>
+</div>
+
+
+
+
+
+
+
 <div class="content-login">
-    <form class="form-signin" action= <?php FRONT_ROOT . "User/login" ?> method="">
+    <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/login" method="POST">
             <!--Cambiar logo -->
-            <img class="mb-4" src="Views/img/logo.jpg"  title="Logo "alt="Logo del sistema" width="72" height="72">
+            <img class="mb-4" src="https://cdn.discordapp.com/attachments/699330820523163761/766036137641902160/logo72.jpeg" title="Logo "alt="Logo del sistema" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
             <!--Sacando el sr-only te muestra el titulo(LABEL)-->
             <!-- L A B E L -->
@@ -16,13 +31,14 @@
              <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
      </form>
          <!--R E G I S T R A R S E -->
-     <form class="form-signin" action="" method="">
+     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/showSingInFormView"  method="GET">
              <button class="btn btn-lg btn-info btn-block" type="submit"> Registrarse </button>
      </form>
          <!-- F A C E B O O K -->
      <form class="form-signin" action="" method="">
-             <button class="btn btn-lg btn-info btn-block" type="submit"> Ingresar con Facebook</button>
+             <button class="btn btn-lg btn-danger btn-block" type="submit"> Ingresar con Facebook</button>
      </form>
     <p class="mt-5 mb-3 ">&copy;<strong> Los supervivientes</strong> -2020</p>
     
 </div>
+

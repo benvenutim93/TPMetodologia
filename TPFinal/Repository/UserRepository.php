@@ -1,15 +1,16 @@
 <?php
-    namespace Repositories;
+    namespace Repository;
 
     use Models\User as User;
 
     class UserRepository
     {        
-        private $userList = array();
+        private $userList;
         private $fileName;
 
         public function __construct()
         {
+            $this->userList = array();
             $this->fileName = dirname(__DIR__)."/Data/users.json";
         }
 
@@ -29,6 +30,18 @@
             return $this->userList;
         }
 
+        
+        public function Remove($userName)
+        {
+            $this->RetrieveData();
+
+            $this->userList = array_filter($this->userList, function($users) use($userName){
+                return $users->getUsername() != $userName;
+            });
+
+            $this->SaveData();
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();
@@ -37,12 +50,13 @@
             {
                 $valuesArray["name"] = $user->getName();
                 $valuesArray["lastName"] = $user->getLastName();
-                $valuesArray["userName"] = $user->getUserName();
-                $valuesArray["pass"] = $user->getPass();
-                $valuesArray["mail"] = $user->getMail();
                 $valuesArray["dni"] = $user->getDni();
                 $valuesArray["birthDate"] = $user->getBirthDate();
-
+                $valuesArray["mail"] = $user->getMail();
+                $valuesArray["userName"] = $user->getUserName();
+                $valuesArray["pass"] = $user->getPass();
+                
+                
                 array_push($arrayToEncode, $valuesArray);
             }
 
@@ -66,11 +80,11 @@
                     $user = new User();
                     $user->setName($valuesArray["name"]);
                     $user->setLastName($valuesArray["lastName"]);
-                    $user->setUserName($valuesArray["userName"]);
-                    $user->setPass($valuesArray["pass"]);
-                    $user->setMail($valuesArray["mail"]);
                     $user->setDni($valuesArray["dni"]);
                     $user->setBirthDate($valuesArray["birthDate"]);
+                    $user->setMail($valuesArray["mail"]);
+                    $user->setUserName($valuesArray["userName"]);
+                    $user->setPass($valuesArray["pass"]);
 
                     array_push($this->userList, $user);
                 }

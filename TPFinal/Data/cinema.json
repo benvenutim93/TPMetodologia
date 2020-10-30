@@ -1,0 +1,26 @@
+[
+    {
+        "id": 3,
+        "name": "Cine Diagonal",
+        "address": "Diagonal 1050",
+        "capacity": "150",
+        "ticketValue": "200",
+        "rooms": []
+    },
+    {
+        "id": 4,
+        "name": "cha ch",
+        "address": "ASDAF213",
+        "capacity": "120",
+        "ticketValue": "213",
+        "rooms": []
+    },
+    {
+        "id": 5,
+        "name": "Cine falso",
+        "address": "Calle falsa 123",
+        "capacity": "150",
+        "ticketValue": "200",
+        "rooms": []
+    }
+]

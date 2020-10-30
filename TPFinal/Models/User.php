@@ -5,41 +5,29 @@ namespace Models;
 
 class User
 {
-    private $name;
+    private $firstName;
     private $lastName;
     private $userName;
     private $pass;
     private $mail;
     private $dni;
     private $birthDate;
-    #private $tarjeta;
+    private $userType;
     
-    public function __construct()
+    public function __construct($firstName = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "", $userType= "")
     {
-        
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->userName = $userName;
+        $this->pass = password_hash($pass,PASSWORD_DEFAULT);
+        $this->mail = $mail;
+        $this->dni = $dni;
+        $this->birthDate = $birthDate;
+        $this->userType = $userType;
+
     }
     
 
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /**
      * Get the value of lastName
@@ -159,6 +147,46 @@ class User
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of userType
+     */ 
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    /**
+     * Set the value of userType
+     *
+     * @return  self
+     */ 
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of firstName
+     */ 
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set the value of firstName
+     *
+     * @return  self
+     */ 
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
 
         return $this;
     }
