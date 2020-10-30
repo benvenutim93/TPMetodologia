@@ -1,10 +1,11 @@
 <div class="content-xxl">
+
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
             <h2>Listado de Funciones [de una Pelicula]</h2>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
-            <!-- Funcion -->
+            <!-- ACA VA EL FOREARCH --> 
             <h4>Funcion (nombre de la Pelicula )</h4> 
                     <form action="<?php echo FRONT_ROOT?>"  class="list-group-item list-group-item-info ">
                         <div class="row">

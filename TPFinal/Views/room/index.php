@@ -22,16 +22,46 @@
                             <input type="number" id="Valor" class="form-control" placeholder="Valor"  min="0" max="500" name="price" required>
                             <!-- ID cinema -->
                             <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
-
+                            <br>
                             <label for="" >    </label>
                         <!-- B O T O N -->
                             <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div>
         </div>
+
+        <div class="col">
+            <div class="content-chico">
+                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Room/Add" method="POST">
+                        <h1 class="h3 mb-3 font-weight-normal">Agregar Descuento</h1>
+                            <!--Sacando el sr-only te muestra el titulo(LABEL)-->
+
+                            <!-- L A B E L -->
+                            <label for="name" >Ingrese Descripcion</label>
+                            <!--I N P U T-->
+                            <input type="text" id="name" class="form-control" placeholder="Descripcion " name="name"   required minlength="3"required autofocus>
+                            <!-- L A B E L -->
+                            <label for="capacity" >Ingrese Monto </label>
+                            <!--I N P U T-->
+                            <input type="number"  min="1" max="300" id="capacity" class="form-control" placeholder="Monto"  name="capacity"  required>
+                            <!-- L A B E L -->
+                            <label for="Valor" >Ingrese Cantidad </label>
+                            <!--I N P U T-->
+                            <input type="number" id="Valor" class="form-control" placeholder="Cantidad Minima de Tickets"  min="0" max="500" name="price" required>
+                            <!-- ID cinema -->
+                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
+                            <br>
+                            <label for="" >    </label>
+                        <!-- B O T O N -->
+                            <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
+                </form>
+            </div>
+        </div>
+
         <div class="col">
             <div class="content-chico">
                 <form action="<?php echo FRONT_ROOT?> Room/showDateForm" method= "POST" class="form-signin">
+                <h1 class="h3 mb-3 font-weight-normal">Agregar Función</h1>
                 <!-- L A B E L -->
                 <label for="date" >Ingrese Fecha </label>
                 <!--I N P U T-->
@@ -46,10 +76,10 @@
                         <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>
                     <?php } ?>
                 </select>
+                <br>
 
                 <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
                     <!-- B O T O N -->
-
                     <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div> 
@@ -59,11 +89,19 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="content-chico">
-                    <form action="<?php echo FRONT_ROOT?>Room/showRoomsListAdmin" class="form-signin"> 
+         <div class="content-chico">
+                <form action="<?php echo FRONT_ROOT?>Room/showRoomsListAdmin" class="form-signin"> 
                     <!-- PASO EL ID DEL CINE -->
                     <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Salas</button>
+                    </form>
+         </div>
+        </div>
+        <div class="col">
+            <div class="content-chico">
+                    <form action="<?php echo FRONT_ROOT?>Cinema/showDiscounts" class="form-signin">
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus> 
+                    <button class="btn btn-lg btn-danger btn-block" type="submit">Listar Descuentos</button>
                     </form>
              </div>
         </div>
@@ -83,6 +121,5 @@
     </div>     
    
 </div>
-
 
            
