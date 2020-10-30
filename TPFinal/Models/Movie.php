@@ -3,7 +3,7 @@
 namespace Models;
 
 class Movie {
-    private $popularity;
+    private $populrity;
     private $vote_count;
     private $video;
     private $poster_path;
@@ -27,9 +27,9 @@ class Movie {
     /**
      * Get the value of populrity
      */ 
-    public function getPopularity()
+    public function getPopulrity()
     {
-        return $this->popularity;
+        return $this->populrity;
     }
 
     /**
@@ -37,9 +37,9 @@ class Movie {
      *
      * @return  self
      */ 
-    public function setPopularity($popularity)
+    public function setPopulrity($populrity)
     {
-        $this->popularity = $popularity;
+        $this->populrity = $populrity;
 
         return $this;
     }

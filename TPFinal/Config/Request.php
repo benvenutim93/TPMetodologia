@@ -15,21 +15,17 @@
          
             $urlArray = array_filter($urlArray);
 
-
             if(empty($urlArray))
                 $this->controller = "Home";            
             else
                 $this->controller = ucwords(array_shift($urlArray));
-
 
             if(empty($urlArray))
                 $this->method = "Index";
             else
                 $this->method = array_shift($urlArray);
 
-
             $methodRequest = $this->getMethodRequest();
-
                         
             if($methodRequest == "GET")
             {

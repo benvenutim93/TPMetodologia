@@ -3,21 +3,18 @@ namespace Models;
 
 class Cinema {
 
-    private $id;
     private $name;
     private $address;
     private $capacity;
-    private $aperHour;
-    private $closeHour;
+    private $ticketValue;
 
-    public function __construct($name = "", $address = "", $capacity = "", $aperHour = "", $closeHour = "")
+    public function __construct()
     {
-        $this->name = $name;       
-        $this->address = $address;        
-        $this->capacity = $capacity;   
-        $this->aperHour = $aperHour;
-        $this->closeHour = $closeHour;
+        
     }
+    
+
+
 
     /**
      * Get the value of name
@@ -80,61 +77,21 @@ class Cinema {
     }
 
     /**
-     * Get the value of id
+     * Get the value of ticketValue
      */ 
-    public function getId()
+    public function getTicketValue()
     {
-        return $this->id;
+        return $this->ticketValue;
     }
 
     /**
-     * Set the value of id
+     * Set the value of ticketValue
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setTicketValue($ticketValue)
     {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of aperHour
-     */ 
-    public function getAperHour()
-    {
-        return $this->aperHour;
-    }
-
-    /**
-     * Set the value of aperHour
-     *
-     * @return  self
-     */ 
-    public function setAperHour($aperHour)
-    {
-        $this->aperHour = $aperHour;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of closeHour
-     */ 
-    public function getCloseHour()
-    {
-        return $this->closeHour;
-    }
-
-    /**
-     * Set the value of closeHour
-     *
-     * @return  self
-     */ 
-    public function setCloseHour($closeHour)
-    {
-        $this->closeHour = $closeHour;
+        $this->ticketValue = $ticketValue;
 
         return $this;
     }

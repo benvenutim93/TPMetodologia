@@ -1,51 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    <!-- BIENVENIDO -->
-  <strong> <a class="navbar-brand" href="<?php echo FRONT_ROOT ;?>">Los supervivientes</a> </strong>  
-  <span class="navbar-brand">Bienvenido</span>
+  <strong class="navbar-brand" >Los supervivientes </strong><span class="navbar-brand">Bienvenido (NOMBRE USUARIO )</span>
  
 
   <div class="collapse navbar-collapse" >
     <ul class="navbar-nav mr-auto">
        <!-- LISTADO -->
       <li class="nav-item ">
-        <a class="nav-link" href= "<?php echo FRONT_ROOT?>Movies/showMoviesListView">Cartelera</a>
+        <a class="nav-link" href="#">Datos de la cuenta</a>
       </li>
       <!-- LISTADO -->
       <li class="nav-item ">
-        <a class="nav-link" href="<?php echo FRONT_ROOT?>Movies/showSearchMovieView">Buscar película</a>
+        <a class="nav-link" href="#">Ingresar películas</a>
+      </li>
+      <!-- LISTADO -->
+      <li class="nav-item ">
+        <a class="nav-link" href="#">Administrar cines</a>
+      </li>
+      <!-- LISTADO -->
+      <li class="nav-item  ">
+        <a class="nav-link " href="#" >Modificar</a>
+      </li>
+      <!-- DROPDOWN-->
+      <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Seleccionar Cines</a>
+          <!-- opciones-->
+          <div class="dropdown-menu" aria-labelledby="dropdown05">
+            <a class="dropdown-item" href="#">Nombre cine</a>
+            <a class="dropdown-item" href="#">Nombre cine</a>
+            <a class="dropdown-item" href="#">Nombre cine</a>
+          </div>
       </li>
     </ul>
-    <a class="nav-link" href="<?php echo FRONT_ROOT?>User/showLoginView">Iniciar Sesion</a>
-    <a class="nav-link" data-toggle="modal" data-target="#cierresesion"  href="#">Cerrar Sesion</a>
-
-   
-
-
 
   </div>
 </nav>
-<!-- Modal de cierre de sesion-->
-
-
-
-<div class="modal fade" id="cierresesion" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cierresesionLabel">Cerrar Sesion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿ Esta seguro que quiere cerrar sesion?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <form action="<?php echo FRONT_ROOT?>User/showLogOutView">
-          <button type="sumbit" class="btn btn-primary">Aceptar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>

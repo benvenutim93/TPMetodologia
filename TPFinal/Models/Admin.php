@@ -2,16 +2,15 @@
 
 namespace Models;
 
-use Models\User as User;
+use Models\Client as Client;
 
-class Admin extends User {
+class Admin extends Client {
     
     private $isAdmin;
 
-    public function __construct($name = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "")
+    public function __construct()
     {
-        parent::__construct($name = "", $lastName = "",$dni = "", $birthDate = "", $mail = "", $userName = "", $pass = "");
-        $this->isAdmin=true;
+        
     }
 
     /**
