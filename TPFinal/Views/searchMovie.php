@@ -20,10 +20,11 @@
                     <label for="inputState">Seleccione Genero </label>
                     <select id="inputState" name="nameGenre" class="form-control">
                     <option value="" disabled selected> Seleccione uno </option>
-
-                        <?php foreach($genreRepo as $genre){ ?>
-                            <option value="<?php echo $genre["id_genre"];?>"  > <?php echo $genre["genreName"];?></option>
-                        <?php } ?>
+                    <?php
+                    foreach($genres as $genre)
+                    {?>
+                        <option value="<?php echo $genre["id_genre"];?>"  > <?php echo $genre["genreName"];?></option>
+                    <?php } ?>
 
                     </select>
           </div>

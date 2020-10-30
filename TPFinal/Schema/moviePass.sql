@@ -23,19 +23,6 @@ id_cine int not null,
 constraint pk_rooms primary key (id_room),
 constraint fk_cinemaRoom foreign key (id_cine) references cinemas(id_cine) on update cascade on delete cascade)engine=InnoDB;
 
-
-create table functions (
-id_function int not null auto_increment,
-id_room int not null,
-id_movie int not null, 
-occupiedSeats int not null default 0,
-functionDate datetime not null,
-functionsHour varchar (50) not null,
-constraint pk_function primary key (id_function),
-constraint fk_functionsRooms foreign key (id_room) references rooms (id_room) on update cascade on delete cascade,
-constraint fk_movieId foreign key (id_movie) references movies (id_movie) on update cascade on delete cascade,
-constraint unq_movieRoom unique (id_room, functionDate, functionsHour))engine=InnoDB; #Para que en una sala, en un dia determinado, no se puedan reproducir dos peliculas
-
 create table movies (
 id_movie int not null auto_increment,
 id int not null, #del json
@@ -54,6 +41,23 @@ adult boolean not null,
 constraint pk_movies primary key (id_movie),
 constraint unq_title unique (title))engine=InnoDB;
 
+create table functions (
+id_function int not null auto_increment,
+id_room int not null,
+id_movie int not null, 
+occupiedSeats int not null default 0,
+functionDate datetime not null,
+functionsHour varchar (50) not null,
+constraint pk_function primary key (id_function),
+constraint fk_functionsRooms foreign key (id_room) references rooms (id_room) on update cascade on delete cascade,
+constraint fk_movieId foreign key (id_movie) references movies (id_movie) on update cascade on delete cascade,
+constraint unq_movieRoom unique (id_room, functionDate, functionsHour))engine=InnoDB; #Para que en una sala, en un dia determinado, no se puedan reproducir dos peliculas
+
+create table genres (
+id_genre int not null,
+genreName varchar (50),
+constraint pk_genres primary key (id_genre))engine=InnoDB;
+
 create table genresXmovies(
 id_genre int not null,
 id_movie int not null,
@@ -61,10 +65,7 @@ constraint pk_gxm primary key (id_genre,id_movie),
 constraint fk_genre foreign key (id_genre) references genres(id_genre),
 constraint fk_movie foreign key (id_movie) references movies(id_movie))engine=InnoDB;
 
-create table genres (
-id_genre int not null,
-genreName varchar (50),
-constraint pk_genres primary key (id_genre))engine=InnoDB;
+
 
 create table userTypes (
 id_userType int not null auto_increment,
@@ -97,9 +98,17 @@ cardHolder varchar(255) not null,
 expiration date not null, 
 numberCC varchar(255) not null, 
 id_company int not null, 
+id_user int not null,
 constraint pk_creditCard primary key (id_creditCard),
+constraint fk_user foreign key (id_user) references users(id_user),
 constraint fk_company foreign key (id_company) references companies(id_company) on delete cascade on update cascade)engine=InnoDB;
 
+create table tickets(
+id_ticket int auto_increment not null,
+id_function int not null,
+qr int not null, #--------------- PREGUNTAR
+constraint pk_ticket primary key (id_ticket),
+constraint fk_function foreign key (id_function) references functions(id_function)on update cascade on delete cascade)engine=InnoDB;
 
 create table purchases(
 id_purchase int AUTO_INCREMENT not null,
@@ -111,14 +120,6 @@ purchaseDate date not null,
 constraint pk_purchase primary key (id_purchase),
 constraint fk_ticket foreign key (id_ticket) references tickets(id_ticket) on delete cascade,
 constraint fk_creditCard foreign key (id_creditCard) references creditCards (id_creditCard))engine=InnoDB;
-
-
-create table tickets(
-id_ticket int auto_increment not null,
-id_function int not null,
-qr int not null, #--------------- PREGUNTAR
-constraint pk_ticket primary key (id_ticket),
-constraint fk_function foreign key (id_function) references functions(id_function)on update cascade on delete cascade)engine=InnoDB;
 
 
 create table discounts (

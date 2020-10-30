@@ -24,6 +24,7 @@
             try
             {
                 $query = "select
+                $this->tableName.id_movie,
                 $this->tableName.title,
                 $this->tableName.overview,
                 $this->tableName.adult,
@@ -33,7 +34,6 @@
                 $this->tableName.poster_path,
                 cinemas.cinemaName,
                 rooms.roomName,
-                $this->tableName.genre_ids,
                 DATE_FORMAT( functions.functionDate, '%Y-%m-%d') as functionDate, 
                 functions.functionsHour
                 from $this->tableName
@@ -62,7 +62,7 @@
             
             try{
                 foreach($this->movieList as $movie){
-                $query = " insert into  $this->tableName (title, overview, original_language,vote_average,release_date, adult, popularity, poster_path, id, original_title, genre_ids ) VALUES (:title, :overview, :original_language,:vote_average,:release_date, :adult, :popularity, :poster_path, :id, :original_title, :genre_ids);";
+                $query = " insert into  $this->tableName (title, overview, original_language,vote_average,release_date, adult, popularity, poster_path, id, original_title) VALUES (:title, :overview, :original_language,:vote_average,:release_date, :adult, :popularity, :poster_path, :id, :original_title);";
                 
                 $parameters["title"] = $movie->getTitle();
                 $parameters["overview"] = $movie->getOverview();
@@ -74,9 +74,7 @@
                 $parameters["adult"] = $movie->getAdult();
                 $parameters["id"] = $movie->getId();
                 $parameters["original_title"] = $movie->getOriginal_title();
-                $ids = implode("/",$movie->getGenre_ids());
-                $parameters["genre_ids"] = $ids;
-                    
+                                    
 
                 $this->connection = Connection :: GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -110,8 +108,7 @@
                     $movie->setPoster_path($value["poster_path"]);
                     $movie->setId($value["id"]);
                     $movie->setOriginal_title($value["original_title"]);
-                    $ids = explode("/",$value["genre_ids"]);
-                    $movie->setGenre_ids($ids);
+
 
                     
                     array_push($this->movieList, $movie);
@@ -348,13 +345,16 @@
         public function GetMoviesfunction($fecha)
         {
             $fecha ="'".$fecha."'";
-            $arrayAux=array();
-            $movieListNoRepeatDate= array();
+
             try
             {
                 $query ="select DISTINCT
                 movies.title,
                 movies.id_movie,
+                movies.overview,
+                movies.adult,
+                movies.original_language,
+                movies.popularity,
                 DATE_FORMAT( functions.functionDate, '%Y-%m-%d') fecha, 
                 DATE_FORMAT( functions.functionsHour,'%H:%i:%s') hora,
                 tablaAux.id_room,
@@ -372,8 +372,9 @@
                 on funciones.id_room = tablaAux.id_room
                 join functions
                 on funciones.functionDate =  $fecha ";
+                
+                
                 $this->connection = Connection::GetInstance();
-
                 return $result = $this->connection->Execute($query);
 
             }
@@ -401,31 +402,49 @@
 
                 $result = $this->connection->Execute($query);
 
-                $this->movieList = array();
+                return $result;
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
 
-                foreach($result as $value)
-                {
-                        $movie = new Movie();
-                        $movie->setPopularity($value["popularity"]);
-                        $movie->setVote_count($value["vote_count"]);
-                        $movie->setVideo($value["video"]);
-                        $movie->setPoster_path($value["poster_path"]);
-                        $movie->setId($value["id"]);
-                        $movie->setAdult($value["adult"]);
-                        $movie->setBackdrop_path($value["backdrop_path"]);
-                        $movie->setOriginal_language($value["original_language"]);
-                        $movie->setOriginal_title($value["original_title"]);
-                        $ids = explode("/",$value["genre_ids"]);
-                        $movie->setGenre_ids($ids);
-                        $movie->setTitle($value["title"] );
-                        $movie->setVote_average($value["vote_average"]);
-                        $movie->setOverview($value["overview"]);
-                        $movie->setRelease_date($value["release_date"]);
+        public function GetMoviesfunctionDate($fecha)
+        {
+            $fecha ="'".$fecha."'";
 
-                        array_push($this->movieList, $movie);     
-                }
+            try
+            {
+                $query ="select DISTINCT
+                movies.title,
+                movies.id_movie,
+                movies.overview,
+                movies.adult,
+                movies.poster_path,
+                movies.original_language,
+                functions.functionDate, 
+                functions.functionsHour,
+                tablaAux.id_room,
+                tablaAux.id_cine,
+                tablaAux.cinemaName
+                from functions as funciones
+                join movies
+                on funciones.id_movie= movies.id_movie
+                inner join(select cinemas.id_cine,
+                            cinemas.cinemaName,
+                            rooms.id_room
+                    from rooms
+                    inner join cinemas
+                    on rooms.id_cine = cinemas.id_cine)tablaAux
+                on funciones.id_room = tablaAux.id_room
+                join functions
+                on funciones.functionDate =  $fecha ";
+                
+                
+                $this->connection = Connection::GetInstance();
+                return $result = $this->connection->Execute($query);
 
-                return $this->movieList;
             }
             catch (\PDOException $ex)
             {

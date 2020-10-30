@@ -35,16 +35,17 @@
                                 <div class="col">
                                     
                                     <h5>Generos</h5><li>
-                                    <!-- G E N E R O--> 
+                                     <!--G E N E R O-->
                                         <ul class="list-group list-group-horizontal ">
                                             <?php
-                                            foreach($movie["genre_ids"] as $genreID)
+                                            $result = $this->genreDao->getGenresForMovie($movie["id_movie"]);
+                                            foreach($result as $value)
                                             {?>
-                                            <li class="none"> <?php echo $this->genreDao->GetOneName($genreRepo,$genreID);?></li>
+                                            <li class="none"> <?php echo $value["genreName"];?></li>
                                             <li class="none"> <strong>|</strong> </li>
                                             <?php }?>
                                         </ul> </li>
-                                  
+                                        <br>
                                 </div>
                                
                                 <div class="col">

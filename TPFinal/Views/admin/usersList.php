@@ -1,7 +1,3 @@
-<?php 
-    $array=["pepe","Juan","Carlos"];
-?>
-
 <div class="content-xxl">
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
@@ -46,7 +42,7 @@
             <?php } ?>
         </a>
         <form action="<?php echo FRONT_ROOT?>/Admin/showOPAdminsView">
-        <button type="sumbit"  class="btn btn-lg btn-info btn-block" >Volver Atras</button>
+        <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >Volver Atras</button>
         </form>
     </div>
 <div>
