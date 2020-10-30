@@ -3,6 +3,7 @@
   
     <div class="row">   
         <div class="col">
+
             <div class="content-chico">
                 <form class="form-signin" action= "<?php echo FRONT_ROOT?>Room/Add" method="POST">
                         <h1 class="h3 mb-3 font-weight-normal">Agregar Sala</h1>
@@ -28,34 +29,38 @@
                             <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div>
+
         </div>
 
         <div class="col">
-            <div class="content-chico">
-                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Room/Add" method="POST">
-                        <h1 class="h3 mb-3 font-weight-normal">Agregar Descuento</h1>
-                            <!--Sacando el sr-only te muestra el titulo(LABEL)-->
 
+            <div class="content-chico">
+                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Discount/Add" method="POST">
+                        <h1 class="h3 mb-3 font-weight-normal">Agregar Descuento</h1>
+                            
                             <!-- L A B E L -->
-                            <label for="name" >Ingrese Descripcion</label>
+                            <label for="capacity" >Ingrese Porcentaje </label>
                             <!--I N P U T-->
-                            <input type="text" id="name" class="form-control" placeholder="Descripcion " name="name"   required minlength="3"required autofocus>
-                            <!-- L A B E L -->
-                            <label for="capacity" >Ingrese Monto </label>
-                            <!--I N P U T-->
-                            <input type="number"  min="1" max="300" id="capacity" class="form-control" placeholder="Monto"  name="capacity"  required>
+                            <input type="number"  min="0" max="100" id="capacity" class="form-control" placeholder="Porcentaje"  name="percentage"  required>
+                            
                             <!-- L A B E L -->
                             <label for="Valor" >Ingrese Cantidad </label>
                             <!--I N P U T-->
-                            <input type="number" id="Valor" class="form-control" placeholder="Cantidad Minima de Tickets"  min="0" max="500" name="price" required>
+                            <input type="number" id="Valor" class="form-control" placeholder="Cantidad Minima de Tickets"  min="0" max="500" name="minCant" required>
+                            
                             <!-- ID cinema -->
                             <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
-                            <br>
+                            
+                            <label for="name" >Ingrese Descripcion</label>
+                            <!--I N P U T-->
+                            <input type="text" id="name" class="form-control" placeholder="Descripcion" name="description"   required minlength="3"required autofocus><br>
+                            
                             <label for="" >    </label>
-                        <!-- B O T O N -->
-                            <button class="btn btn-lg btn-danger btn-block" type="submit">Agregar</button>
+                            <!-- B O T O N -->
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
             </div>
+
         </div>
 
         <div class="col">

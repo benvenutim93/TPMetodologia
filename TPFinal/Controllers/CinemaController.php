@@ -2,8 +2,11 @@
 
 namespace Controllers;
 
+use Models\Discount as Discount;
 use Models\Cinema as Cine;
 use DAO\CinemaDao as C_DAO;
+
+
 
 class CinemaController
 {
@@ -53,10 +56,10 @@ class CinemaController
 
     public function Add ($name, $address, $capacity, $aper, $cierre)
     {
-            $cine = new Cine($name, $address, $capacity, $aper, $cierre);
-            
-            $this->cinemaDao->Add($cine);
+        $cine = new Cine($name, $address, $capacity, $aper, $cierre);
         
+        $this->cinemaDao->Add($cine);
+    
         $this->showCinemaListAdmin();
     }
 
@@ -70,7 +73,6 @@ class CinemaController
         else return 1;
     }
 
-    
     public function Remove ($id)
     {
         $this->cinemaDao->Remove($id);

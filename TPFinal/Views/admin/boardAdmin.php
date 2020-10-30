@@ -1,6 +1,6 @@
 <div class="content-chico">
   
-        <h1 class="text-center">Gestionar Cines</h1>
+        <h1 class="text-center">Gestion de Cines</h1>
         <div class="row">
             <div class="col">
                 <form action="<?php echo FRONT_ROOT?>Cinema/showCinemaForm" class="form-signin">
@@ -14,8 +14,9 @@
                 </form>
             </div>
             
+            
             <div class="col">
-            <h1 class="text-center">Gestionar Usuarios</h1>
+            <h1 class="text-center">Gestion de Usuarios</h1>
                 <form action="<?php echo FRONT_ROOT?>User/viewSetAdmin" class="form-signin">
                  <button  class="btn btn-lg btn-success btn-block" type="submit">Modificar Usuarios</button>
                 </form>

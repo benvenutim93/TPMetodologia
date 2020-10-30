@@ -38,10 +38,9 @@
 
                 <div class="row">
 
-                <a href="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Cancelar</button></a>
+                    <a href="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Cancelar</button></a>
 
                 </div>     
 
-                
             </div>
            
