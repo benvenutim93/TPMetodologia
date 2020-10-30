@@ -4,21 +4,15 @@
     class Ticket
     {
         private $id;
-        private $cinemaName;
-        private $movieTitle;
-        private $functionDay;
-        private $functionHour;
-        private $room;
+        private $idFunction;
+        private $qr;
 
-        public function __construct($id="",$cinemaName= "", $movieTitle="",$functionDay="",$functionHour="",$room)
-    {   
-        $this->id=$id;
-        $this->cinemaName=$cinemaName;
-        $this->movieTitle=$movieTitle;
-        $this->functionDay=$functionDay;
-        $this->functionHour=$functionHour;
-        $this->room=$room;
-    }
+        public function __construct($id="",$idFunction="", $qr="")
+        {   
+                $this->id=$id;
+                $this->idFunction=$cinemaidFunctionName;
+                $this->qr=$qr;
+        }
 
         /**
          * Get the value of id
@@ -40,102 +34,44 @@
                 return $this;
         }
 
+       
+
         /**
-         * Get the value of movieTitle
+         * Get the value of idFunction
          */ 
-        public function getMovieTitle()
+        public function getIdFunction()
         {
-                return $this->movieTitle;
+                return $this->idFunction;
         }
 
         /**
-         * Set the value of movieTitle
+         * Set the value of idFunction
          *
          * @return self
          */ 
-        public function setMovieTitle($movieTitle)
+        public function setIdFunction($idFunction)
         {
-                $this->movieTitle = $movieTitle;
+                $this->idFunction = $idFunction;
 
                 return $this;
         }
 
         /**
-         * Get the value of cinemaName
+         * Get the value of qr
          */ 
-        public function getCinemaName()
+        public function getQr()
         {
-                return $this->cinemaName;
+                return $this->qr;
         }
 
         /**
-         * Set the value of cinemaName
+         * Set the value of qr
          *
          * @return self
          */ 
-        public function setCinemaName($cinemaName)
+        public function setQr($qr)
         {
-                $this->cinemaName = $cinemaName;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of functionDay
-         */ 
-        public function getFunctionDay()
-        {
-                return $this->functionDay;
-        }
-
-        /**
-         * Set the value of functionDay
-         *
-         * @return self
-         */ 
-        public function setFunctionDay($functionDay)
-        {
-                $this->functionDay = $functionDay;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of functionHour
-         */ 
-        public function getFunctionHour()
-        {
-                return $this->functionHour;
-        }
-
-        /**
-         * Set the value of functionHour
-         *
-         * @return self
-         */ 
-        public function setFunctionHour($functionHour)
-        {
-                $this->functionHour = $functionHour;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of room
-         */ 
-        public function getRoom()
-        {
-                return $this->room;
-        }
-
-        /**
-         * Set the value of room
-         *
-         * @return self
-         */ 
-        public function setRoom($room)
-        {
-                $this->room = $room;
+                $this->qr = $qr;
 
                 return $this;
         }
