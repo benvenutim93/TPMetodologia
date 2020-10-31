@@ -142,6 +142,22 @@ class MoviesController
             }
         }
     } 
+
+    public function showFunctionView(){
+        
+        $moviesList = array();
+        $moviesList = $this->moviesDao->getFunctionNoRepeat(); //Hacer query para q traiga la Peli con funcion (sin repetir)
+
+        if ($moviesList)
+            require_once(USER_VIEWS . "functionsView.php");
+        else
+        {           
+            echo '<script>
+                    alert("No hay funciones por el momento");
+                    </script>';
+            require_once(USER_VIEWS . "board.php");
+        }
+    }
 }
 
 ?>

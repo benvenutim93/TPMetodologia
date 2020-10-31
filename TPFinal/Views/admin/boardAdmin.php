@@ -42,7 +42,7 @@
 <br>
        
  
-<div class="col">
+<div class="centerbutton">
     <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView" class="form-signin">
         <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
     </form>

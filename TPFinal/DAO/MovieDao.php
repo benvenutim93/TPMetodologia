@@ -168,10 +168,6 @@
             }
         }
 
-
-
-        
-        
         public function GetOneId ($idMovie)
         {
             try
@@ -200,6 +196,7 @@
                 throw $ex;
             }
         }
+
         public function Modify ($id, $title, $overview, $movieLanguage,$vote_avg,$releaseDate)
         {
             try
@@ -450,6 +447,39 @@
             {
                 throw $ex;
             }
+        }
+
+        
+        public function getFunctionNoRepeat()
+        {
+          
+                try
+                {
+                    $query ="select
+                    $this->tableName.id_movie,
+                    $this->tableName.title,
+                    $this->tableName.overview,
+                    $this->tableName.adult,
+                    $this->tableName.original_language,
+                    $this->tableName.vote_average,
+                    $this->tableName.popularity,
+                    $this->tableName.poster_path
+                    from $this->tableName 
+                    inner join (select distinct fa.id_movie as id
+                                from functions as fa
+                                )as f
+                    on $this->tableName.id_movie = f.id ;";
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $result = $this->connection->Execute($query);
+    
+                    return $result;
+                }
+                catch (\PDOException $ex)
+                {
+                    throw $ex;
+                }
         }
 
         
