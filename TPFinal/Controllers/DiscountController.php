@@ -29,5 +29,15 @@
             $this->discountDao->addDiscountPerCinema($idDiscount,$idCinema); //agrega a tabla descuentosxcine
             $this->showOPAdminsView();
         }
+
+        public function showDiscountsList($idCinema)
+        {
+            $discountsList = $this->discountDao->GetAll($idCinema);
+            //echo "<pre>";
+            //var_dump($discountsList);
+            //echo "</pre>";
+            require_once(DISCOUNT_VIEWS . "discountsList.php");
+
+        }
     }
 ?>

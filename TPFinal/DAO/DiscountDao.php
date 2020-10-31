@@ -36,16 +36,22 @@
             }
         }
 
-        public function GetCinemaDiscounts($id) //listar despues
+        public function GetAll($idCinema) //listar despues
         {
             try
             {
-                $query = "select * from $this->tableName where $this->tableName.id_cine = :id_cine";
+                $query = "select distinct d.id_discount as 'id_discount',
+                                d.percentage as 'percentage',
+                                d.descript as 'descript',
+                                d.minCant as 'minCant'
+                            from $this->tableName d
+                            inner join $this->tableDiscountsXCinema dxc
+                            on dxc.id_cine = $idCinema;";
 
-                $parameters["id_cine"] = $id;
+            
                 $this->connection = Connection::GetInstance();
 
-                $result = $this->connection->Execute($query,$parameters);
+                $result = $this->connection->Execute($query);
 
                 return $result;
             }
