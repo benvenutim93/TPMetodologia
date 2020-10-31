@@ -18,16 +18,15 @@
                         </div>
                        
                         <div class="row">
-                            <div class="col">
-                                    <label for="Capacidad" >Capacidad</label>
-                                    <!--I N P U T-->
-                                    <input type="number" id="Capacidad" class="form-control"   value="<?php echo $room->getSeatsCapacity();?>" readonly>
-                            </div>
-                            <div class="col">
-                            <label for="precio" >Precio</label>
-                                <!--I N P U T-->
-                                <input type="text" id="precio" class="form-control"   value="<?php echo $room->getTicketValue();?>" readonly>
 
+                            <div class="col">
+                                <label for="Capacidad" >Capacidad</label>
+                                <input type="number" id="Capacidad" class="form-control"   value="<?php echo $room->getSeatsCapacity();?>" readonly>
+                            </div>
+
+                            <div class="col">
+                                <label for="precio" >Precio</label>
+                                <input type="text" id="precio" class="form-control"   value="<?php echo $room->getTicketValue();?>" readonly>
                             </div>
                         </div>
                         
@@ -37,11 +36,17 @@
 
    
                     </form>
+
                     <div class="row">
                             <div class="col">
-                            <div class="form-signin">
-                            <button class="btn btn-lg btn-danger btn-block"data-toggle="modal" data-target="#borrarSala"> Eliminar</button>
-                            </div>
+                               <!-- <div class="form-signin">
+                                    <button class="btn btn-lg btn-danger btn-block"data-toggle="modal" data-target="#borrarSala"> Eliminar</button>
+                                </div> -->
+                                    <form class="form-signin" action="<?php echo FRONT_ROOT?>Room/Remove">
+                                        <input type="number"  class="sr-only"  name="id" value="<?php echo $room->getId();?>">
+                                        <input type="number"  class="sr-only"  name="idCinema" value="<?php echo $room->getIdCinema();?>">
+                                    <button class="btn btn-lg btn-danger btn-block" type="submit">Eliminar</button>
+                                </form>
                             </div>
                             <div class="col">
                                 <form class="form-signin" action="<?php echo FRONT_ROOT?>Room/showModifyRoom">

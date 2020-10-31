@@ -30,13 +30,10 @@
             $this->showOPAdminsView();
         }
 
-        public function showDiscountsList($idCinema)
+        public function showDiscountsListCinema($idCinema)
         {
             $discountsList = $this->discountDao->GetAll($idCinema);
-            //echo "<pre>";
-            //var_dump($discountsList);
-            //echo "</pre>";
-            require_once(DISCOUNT_VIEWS . "discountsList.php");
+            require_once(DISCOUNT_VIEWS . "discountsListCinema.php");
 
         }
     }

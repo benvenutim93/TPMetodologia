@@ -244,11 +244,10 @@
         {
             try
             {
-                $query = "delete from $this->tableName where id_room = :id;";
+                $query = "delete from $this->tableName where id_room = $id;";
 
-                $parameters["id"] = $id;
                 $this->connection = Connection :: GetInstance();
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query);
             }
             catch (\PDOException $ex)
             {

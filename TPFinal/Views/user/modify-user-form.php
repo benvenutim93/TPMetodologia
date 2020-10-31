@@ -20,7 +20,7 @@ $user = $_SESSION["logged"];
              <label for="address" class="">Ingrese Nombre Usuario</label>
             <input type="text"  class="form-control" value="<?php echo $user["userName"]?>"  name="userName" required  minlength="5" required>
             <!--I N P U T-->
-            <label for="capacity" class="">Ingrese Mail</label>
+            <label for="capacity" class="">Ingrese Email</label>
             <input type="mail"   class="form-control" value="<?php echo $user["mail"]?>"  name="mail"   title="Debe tener almenos un @  " required>
            
             <div class="row">
@@ -37,11 +37,14 @@ $user = $_SESSION["logged"];
                 </div>
             </div>
 
-        <!-- B O T O N -->
-             <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
+            <br>
 
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
+
+            <br>
         <input type="number"  class="sr-only" value="<?php echo $user["id_user"]?>" name="id_user" readonly>
-        <a class="btn btn-lg btn-danger btn-block" href="<?php echo FRONT_ROOT ?>User/showPrincipalView" >Volver atras</a>
+
+        <a class="btn btn-lg btn-primary btn-block" href="<?php echo FRONT_ROOT ?>User/showPrincipalView" >VOLVER</a>
   
 
      </form>

@@ -121,6 +121,7 @@ class RoomController{
     $this->index($idCinema);
  
     }
+    
     public function Modify($id,$name,$capacity,$ticketValue,$idCinema,$capacityAnterior)
     {
         

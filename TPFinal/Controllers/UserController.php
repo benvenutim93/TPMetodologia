@@ -31,7 +31,6 @@ class UserController
     public function viewSetAdmin ()
     {
         $users = $this->userRepo->GetAll();
-        //var_dump($users);
         require_once(ADMIN_VIEWS . "usersList.php");
     }
 

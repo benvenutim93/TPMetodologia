@@ -36,7 +36,7 @@
             }
         }
 
-        public function GetAll($idCinema) //listar despues
+        public function GetAll($idCinema) 
         {
             try
             {

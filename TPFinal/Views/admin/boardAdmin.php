@@ -2,6 +2,7 @@
   
         <h1 class="text-center">Gestion de Cines</h1>
         <div class="row">
+
             <div class="col">
                 <form action="<?php echo FRONT_ROOT?>Cinema/showCinemaForm" class="form-signin">
                  <button  class="btn btn-lg btn-success btn-block" type="submit">Alta cine</button>
@@ -13,49 +14,37 @@
                     <button  class="btn btn-lg btn-success btn-block" type="submit">Listar Cines</button>
                 </form>
             </div>
-            
-            
+        </div>   
+
+        <h1 class="text-center">Gestion de Usuarios</h1>
+        <div class="row">  
             <div class="col">
-            <h1 class="text-center">Gestion de Usuarios</h1>
                 <form action="<?php echo FRONT_ROOT?>User/viewSetAdmin" class="form-signin">
-                 <button  class="btn btn-lg btn-success btn-block" type="submit">Modificar Usuarios</button>
+                    <button  class="btn btn-lg btn-success btn-block" type="submit">Modificar Usuarios</button>
+                </form>
+            </div>
+        </div>
+        
+        <h1 class="text-center">Gestion Contable</h1>
+        <div class="row">
+            <div class="col">
+                <form action="<?php echo FRONT_ROOT?> HOLA ACA TOY " class="form-signin">
+                    <button  class="btn btn-lg btn-danger btn-block" type="submit">Consultar Ventas</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="<?php echo FRONT_ROOT?>HOLA ACA SIGO" class="form-signin">
+                    <button  class="btn btn-lg btn-danger btn-block" type="submit">Tickets Vendidos</button>
                 </form>
             </div>
         </div>
 </div>  
+<br>
        
-<div class="content-grande">
-        <div class="row">
-            
-            <div class="col">
-                <form action="<?php echo FRONT_ROOT?>" class="form-signin">
-                <h1 class="text-center">Entradas</h1>
-                    <button  class="btn btn-lg btn-danger btn-block" type="submit">Consultar entradas VENDIDAS</button>
-                </form>
-            </div> 
-
-            <div class="col">
-                <form action="<?php echo FRONT_ROOT?>" class="form-signin">
-                    <h1 class="text-center">Ventas</h1>
-                        <button  class="btn btn-lg btn-danger btn-block" type="submit">Consultar Ventas</button>
-                </form>
-            </div>
-
-            <div class="col">
-                <form action="<?php echo FRONT_ROOT?>" class="form-signin">
-                        <h1 class="text-center">Cartelera</h1>
-                            <button  class="btn btn-lg btn-danger btn-block" type="submit">Ingresar Pelicula a  Cartelera</button>
-                </form>
-            </div>
-
-        </div>
-       
-        <div class="row">
-                <div class="col">
-                        <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView" class="form-signin">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
-                        </form>
-                    </div>
-        </div>
-        
+ 
+<div class="col">
+    <form action= "<?php echo FRONT_ROOT?>Admin/showPrincipalView" class="form-signin">
+        <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
+    </form>
 </div>
+

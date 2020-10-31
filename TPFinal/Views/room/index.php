@@ -105,7 +105,7 @@
         </div>
         <div class="col">
             <div class="content-chico">
-                    <form action="<?php echo FRONT_ROOT?>Discount/showDiscountsList" class="form-signin">
+                    <form action="<?php echo FRONT_ROOT?>Discount/showDiscountsListCinema" class="form-signin">
                     <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus> 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Descuentos</button>
                     </form>

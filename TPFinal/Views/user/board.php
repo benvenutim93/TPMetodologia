@@ -32,16 +32,10 @@ $user = $_SESSION["logged"];
                     <form action=" <?php echo FRONT_ROOT?>Cinema/showCinemas_user" class="form-singin">
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Cines </button>
                     </form>
-
-                    <?php if($user["id_userType"]==1){
-                        echo'
-                        <form action=" /Proyectos/TPFinal/Admin/showPrincipalView" class="form-singin">
-                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Volver Atras </button>
-                    </form>';
-                    }
-                    ?>
-
             </div>
+                    
+
+           
             <div class="col" >
             <div class="col"><h5>Datos Del Usuario</h5></div>
                  <div class="row">  
@@ -75,3 +69,12 @@ $user = $_SESSION["logged"];
     </div>
 
 </div>
+<br>
+<?php if($user["id_userType"]==1)
+{
+     echo'<div class="col">
+                <form action=" /Proyectos/TPFinal/Admin/showPrincipalView" class="form-singin">
+                    <button  class="btn btn-lg btn-primary btn-block" type="submit"> VOLVER </button>
+                </form>
+           </div>';
+            }?>

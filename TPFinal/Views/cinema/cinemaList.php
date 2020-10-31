@@ -19,5 +19,5 @@
             </div>
                      <?php } ?>   
  
-            <a href="<?php echo FRONT_ROOT?>User/showPrincipalView"  class="btn btn-lg btn-primary btn-block" >Volver Atras</a>
+            <a href="<?php echo FRONT_ROOT?>User/showPrincipalView"  class="btn btn-lg btn-primary btn-block" >VOLVER</a>
     </div>       
