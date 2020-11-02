@@ -4,115 +4,99 @@ namespace Models;
 
 class CreditCard {
 
-    private $owner;
-    private $cardNumber;
-    private $dateOfExpired;
-    private $securityCode;
-    private $dni;
 
-    public function __construct()
+    private $cardHolder;
+    private $expiration;
+    private $numberCC;
+    private $id_company;
+
+    public function __construct($cardHolder,$numberCC,$expiration,$company)
     {
-        
+        $this->cardHolder =$cardHolder;
+        $this->numberCC =$numberCC;
+        $this->expiration=$expiration;
+        $this->id_company=$company;
     }
 
 
 
+
     /**
-     * Get the value of owner
+     * Get the value of cardHolder
      */ 
-    public function getOwner()
+    public function getCardHolder()
     {
-        return $this->owner;
+        return $this->cardHolder;
     }
 
     /**
-     * Set the value of owner
+     * Set the value of cardHolder
      *
      * @return  self
      */ 
-    public function setOwner($owner)
+    public function setCardHolder($cardHolder)
     {
-        $this->owner = $owner;
+        $this->cardHolder = $cardHolder;
 
         return $this;
     }
 
     /**
-     * Get the value of cardNumber
+     * Get the value of expiration
      */ 
-    public function getCardNumber()
+    public function getExpiration()
     {
-        return $this->cardNumber;
+        return $this->expiration;
     }
 
     /**
-     * Set the value of cardNumber
+     * Set the value of expiration
      *
      * @return  self
      */ 
-    public function setCardNumber($cardNumber)
+    public function setExpiration($expiration)
     {
-        $this->cardNumber = $cardNumber;
+        $this->expiration = $expiration;
 
         return $this;
     }
 
     /**
-     * Get the value of dateOfExpired
+     * Get the value of numberCC
      */ 
-    public function getDateOfExpired()
+    public function getNumberCC()
     {
-        return $this->dateOfExpired;
+        return $this->numberCC;
     }
 
     /**
-     * Set the value of dateOfExpired
+     * Set the value of numberCC
      *
      * @return  self
      */ 
-    public function setDateOfExpired($dateOfExpired)
+    public function setNumberCC($numberCC)
     {
-        $this->dateOfExpired = $dateOfExpired;
+        $this->numberCC = $numberCC;
 
         return $this;
     }
 
     /**
-     * Get the value of securityCode
+     * Get the value of id_company
      */ 
-    public function getSecurityCode()
+    public function getId_company()
     {
-        return $this->securityCode;
+        return $this->id_company;
     }
 
     /**
-     * Set the value of securityCode
+     * Set the value of id_company
      *
      * @return  self
      */ 
-    public function setSecurityCode($securityCode)
+    public function setId_company($id_company)
     {
-        $this->securityCode = $securityCode;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of dni
-     */ 
-    public function getDni()
-    {
-        return $this->dni;
-    }
-
-    /**
-     * Set the value of dni
-     *
-     * @return  self
-     */ 
-    public function setDni($dni)
-    {
-        $this->dni = $dni;
+        $this->id_company = $id_company;
 
         return $this;
     }

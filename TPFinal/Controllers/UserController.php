@@ -3,17 +3,21 @@
 namespace Controllers;
 
 use Models\User as User;
+use Models\CreditCard as CreditCard;
 use Dao\UserDao as U_DAO;
+use Dao\CreditCardDao as CC_DAO;
 
 class UserController
 {
     private $userRepo;
+    private $creditCardDao;
 
   
 
     public function __construct()
     {
         $this->userRepo = new U_DAO();
+        $this->creditCardDao = new CC_DAO();
     }
     public function showAdminView(){
         require_once(ADMIN_VIEWS . "eleccion.php");
@@ -43,7 +47,13 @@ class UserController
         require_once(USER_VIEWS . "modify-user-form.php");
     }
 
+    public function addTarjeta($cardHolder,$numberCC,$expiration,$company,$idUser,$cantidad,$idFuncion){
+        
+        $tarjeta = new CreditCard($cardHolder,$numberCC,$expiration,$company);
+        $this->creditCardDao->Add($tarjeta,$idUser);
 
+        require_once(USER_VIEWS . "tarjeta-compra-form.php");
+    }
     public function login ($mail, $password)
     {
         $array = $this->userRepo->GetOneMail($mail);

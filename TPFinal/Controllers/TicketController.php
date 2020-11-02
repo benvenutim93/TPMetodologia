@@ -26,17 +26,24 @@ class TicketController
             $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
             foreach ($function as $value)
             {
-                var_dump($value);
-            
                 $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"]);
                 $imageString= $qr->writeString($value);
                 
                 $imageData = base64_encode($imageString);
                 //echo '<img src="data:image/png;base64,'.$imageData.'">';
             }
-        //$this->ticketDao->add($id_funcion);
+        //$this->ticketDao->add($id_funcion,$imageString);
         }
+    }
+    public function purchase($cantidad ,$idFuncion){
+        //Paso Cantidad y ID FUNCION   a la vista de cargar tarjeta
         
+        require_once(USER_VIEWS . "tarjeta-compra-form.php");
+    }
+    public function purchaseProcess($cantidad,$idFuncion,$idUser){
+
+
+
 
     }
 

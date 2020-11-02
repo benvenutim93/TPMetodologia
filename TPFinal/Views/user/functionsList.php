@@ -9,7 +9,7 @@
             <h4><?php echo $titulo;?></h4> 
             <?php foreach ($funciones as $movie){
             ?>
-                    <form action="<?php echo FRONT_ROOT?>Ticket/generateTicket"  class="list-group-item list-group-item-info ">
+                    <form action="<?php echo FRONT_ROOT?>Ticket/purchase"  class="list-group-item list-group-item-info ">
                         <div class="row">
                              <div class="col"> 
                                 <!-- Cine -->
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col">
                             <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>
-
+                            
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
                             </div>
                         </div>

@@ -1,21 +1,19 @@
 <?php
     namespace DAO;
-    use Models\Ticket as Ticket;
+    use Models\Pucharse as Pucharse;
     use DAO\Connection as Connection;
     use \Exception as Exception;
 
-    class TicketDao
+    class PurcharseDao
     {
-        private $tableName = "tickets";
+        private $tableName = "purchases";
         private $connection;
 
         public function add($idFuncion,$qr){
                 
             try{
-                $query = " insert into  $this->tableName (id_function,qr) VALUES (:id_function,:qr);";
-                
-                $parameters["id_function"] = $idFuncion;
-                $parameters["qr"] = $qr;
+                $query = " ";
+               
 
                 $this->connection = Connection :: GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
