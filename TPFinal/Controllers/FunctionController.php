@@ -75,7 +75,6 @@ class FunctionController{
         $titulo =$movieTitle;
         $funciones = $this->functionDao->getFunctionsMovie($id);
 
-        var_dump($funciones);
         require_once(USER_VIEWS . "functionsList.php");
 }   
 

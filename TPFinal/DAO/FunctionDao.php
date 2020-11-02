@@ -66,6 +66,40 @@
       }
      }
 
+
+     public function GetMovieDataForFunction ($idFunction)
+     {
+        try
+        {
+            $query ="select 
+            DATE_FORMAT(functions.functionDate, '%Y-%m-%d') as functionDate,
+            functions.functionsHour,
+            movies.title as title,
+            rooms.roomName as roomName,
+            cinemas.cinemaName as cinemaName
+            from $this->tableName
+            inner join movies
+            on functions.id_movie = movies.id_movie
+            inner join rooms
+            on rooms.id_room = functions.id_room
+            inner join cinemas
+            on cinemas.id_cine = rooms.id_cine
+            where functions.id_function = :id_function";
+
+            $parameters ["id_function"] = $idFunction; 
+  
+            $this->connection = Connection::GetInstance();
+  
+            $result = $this->connection->Execute($query, $parameters);
+  
+            return $result;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+     }
+
 }
 
 
