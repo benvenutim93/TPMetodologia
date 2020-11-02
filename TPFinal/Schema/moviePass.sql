@@ -109,11 +109,19 @@ id_function int not null,
 qr int not null, #--------------- PREGUNTAR
 constraint pk_ticket primary key (id_ticket),
 constraint fk_function foreign key (id_function) references functions(id_function)on update cascade on delete cascade)engine=InnoDB;
+  
+  create table ticketXpurchase(
+      id_txp int auto_increment,
+      id_ticket int not null,
+      id_purchase int not null
+      constraint pk_txP primary key (id_txp),
+      constraint fk_idTicket foreign key (id_ticket) references tickets(id_ticket)on update cascade on delete cascade,
+      constraint fk_idPurchase foreign key (id_purchase) references purchases(id_purchase)on update cascade on delete cascade
+
+  )engine=InnoDB;
 
 create table purchases(
 id_purchase int AUTO_INCREMENT not null,
-cantEntradas int not null,
-id_ticket int not null,
 total float not null, 
 id_creditCard int not null,
 purchaseDate date not null,

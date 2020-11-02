@@ -17,7 +17,7 @@ $user = $_SESSION["logged"];
 
             <div class="col">
                      <!-- F O R M -->
-                    <form action="" class="form-singin">    
+                    <form action="<?php echo FRONT_ROOT?>Movies/showFunctionView" class="form-singin">    
                             <button  class="btn btn-lg btn-danger btn-block" type="submit"> Comprar entradas </button>
                     </form>
                      <!-- F O R M -->
