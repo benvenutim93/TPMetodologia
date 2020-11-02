@@ -18,7 +18,7 @@ class RoomController{
         $this->roomDao = new R_DAO();
     }
 
-    public function index($idCinema){
+    public function index($idCinema, $msgError = ""){
         
         $arrayR= $this->roomDao->GetAll($idCinema);
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
@@ -75,10 +75,11 @@ class RoomController{
                 require_once(ROOM_VIEWS . "roomsListAdmin.php");
                 else 
                 {
-                    echo '<script>
+                    $msgError = "No se encontraron salas en el cine";
+                    /*echo '<script>
                     alert("No se encontraron salas en el cine");
-                    </script>';
-                    $this->index($idCinema);
+                    </script>';*/
+                    $this->index($idCinema, $msgError);
                 }
             }   
     }

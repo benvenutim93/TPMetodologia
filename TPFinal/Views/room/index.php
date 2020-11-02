@@ -1,3 +1,10 @@
+<?php if ($msgError){?>
+<div class="alert alert-danger"  align="center"role="alert">
+  <h1><?php echo $msgError; ?></h1>
+</div>
+<?php }?>
+
+
 <div class="content-xxl">
    <font color="white"> <h1 class="text-center" > Cine - <?php echo $nombre;?></h1></font>
   
