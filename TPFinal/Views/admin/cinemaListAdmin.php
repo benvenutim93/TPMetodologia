@@ -32,11 +32,8 @@
                        <div class="row">
                            <div class="col">
                            <!-- Formulario -->
-                                    <!--<button class="btn btn-lg btn-danger btn-block" value="<?php echo $cine->getId(); ?>" data-toggle="modal" data-target="#borrarCine">Eliminar</button> -->
-                                       <form action="<?php FRONT_ROOT?>Remove" method="GET">
-                                            <input type="hidden" value="<?php echo $cine->getId(); ?>" name="id">
-                                            <button type="sumbit" class="btn btn-lg btn-danger btn-block">Eliminar</button>
-                                        </form> 
+                                    <button class="btn btn-lg btn-danger btn-block" value="<?php echo $cine->getId(); ?>" data-toggle="modal" data-target="#borrarCine<?php echo $cine->getId()?>">Eliminar</button> 
+                                    
                             </div>
                             <div class="col">
                             <!-- Formulario -->
@@ -61,9 +58,8 @@
                      </td>                
                 </tr>   
 
-<!-- ARREGLAR ESTA HERMOSURA -->
                     <!-- MODAL -->             
-                    <div class="modal fade" id="borrarCine" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
+                    <div class="modal fade" id="borrarCine<?php echo $cine->getId()?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
