@@ -23,7 +23,7 @@
           $pelis = $this->movieDao->retrieveUpcoming();
             #paso cines Existentes
           $cines = $this->cinemaDao->GetALL();
-          require_once(VIEWS_PATH."prueba2.php");
+          require_once(VIEWS_PATH."home.php");
       }
   }
 ?>

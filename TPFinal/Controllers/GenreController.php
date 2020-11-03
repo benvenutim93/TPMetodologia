@@ -14,7 +14,7 @@ class GenreController
 
     }
 
-    public function showPrincipalView ()
+    public function showPrincipalView ($msgError = "")
     {
         require_once(USER_VIEWS . "board.php");
     }
@@ -22,7 +22,17 @@ class GenreController
 
     public function GetAll ()
     {
-        return $this->genreDao->retrieveAPIJson();
+        try
+        {
+            return $this->genreDao->retrieveAPIJson();
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->showPrincipalView();
+        }
        
     }
 }

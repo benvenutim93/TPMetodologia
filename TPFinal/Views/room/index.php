@@ -1,8 +1,5 @@
-<?php if ($msgError){?>
-<div class="alert alert-danger"  align="center"role="alert">
-  <h1><?php echo $msgError; ?></h1>
-</div>
-<?php }?>
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
 
 
 <div class="content-xxl">

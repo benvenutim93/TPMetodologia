@@ -1,4 +1,5 @@
-
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
 
 <div class="cartelera-content">
     <div class="table-responsive-lg">

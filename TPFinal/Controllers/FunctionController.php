@@ -21,27 +21,33 @@ class FunctionController{
   
     public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour){
 
-    
-       $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
-        if ($this->verifyHours($arrayFunctionRoom, $hour))
+        try
         {
-       $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
-       
+            $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
+            if ($this->verifyHours($arrayFunctionRoom, $hour))
+                {
+                    $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
+                
 
-         $this->functionDao->Add($function);
-         echo '<script>
-                alert("La funcion se agrego con exito");
-                </script>
-                 ';
+                    $this->functionDao->Add($function);
+                    $msgError = array( "description" => "La funcion se agrego con exito",
+                            "type" => 2);
+                }
+            else {
+                    $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);;
+                }
+            
         }
-        else {
-            echo '<script>
-            alert("La sala se encuentra ocupada en ese horario");
-            </script>
-             ';
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
         }
-        require_once(ADMIN_VIEWS . "boardAdmin.php");
- 
+        finally 
+        {
+            require_once(ADMIN_VIEWS . "boardAdmin.php");
+        }
     }
 
     public function verifyHours ($arrayFunciones, $hora)
@@ -55,7 +61,7 @@ class FunctionController{
             $horaFuncion = date ("H:i", strtotime($value["functionsHour"]));
             $hour = new Datetime($horaFuncion);
             $hourMax = new Datetime($horaFuncion);
-            $hourMax->modify("+2hours,+15minutes");
+            $hourMax->modify("+2hours,+14minutes");
 
             
             if($hourForm >= $hour && $hourForm <= $hourMax)

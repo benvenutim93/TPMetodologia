@@ -1,3 +1,6 @@
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
+
 <div class="row">
 <form action="<?php echo FRONT_ROOT?>User/login" method="post">
 <input type="email" id="inputEmail" class="sr-only" name="email"  value="rope@rope" required autofocus>

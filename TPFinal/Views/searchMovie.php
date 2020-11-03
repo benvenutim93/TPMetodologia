@@ -1,4 +1,6 @@
-
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
+    
 <div class="content-login">
     <form action= "<?php echo FRONT_ROOT?>Movies/searchMovieTitle" method="GET">
         <div>

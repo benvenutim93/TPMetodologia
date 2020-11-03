@@ -21,7 +21,7 @@
             try{
                 $query = " insert into  $this->tableName (cinemaName, cinemaAddress, capacity, aperHour, closeHour ) VALUES (:cinemaName, :cinemaAddress, :capacity, :aperHour, :closeHour);";
                 
-                $parameters["cinemaName"] = $cine->getName();
+                $parameters["ciinemaName"] = $cine->getName();
                 $parameters["cinemaAddress"] = $cine->getAddress();
                 $parameters["capacity"] = $cine->getCapacity();
                 $parameters["aperHour"] = $cine->getAperHour();
@@ -34,6 +34,7 @@
             catch (\PDOException $ex)
             {
                 throw $ex;
+               
             }
         }
 

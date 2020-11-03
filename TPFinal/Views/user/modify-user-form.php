@@ -1,6 +1,9 @@
 <?PHP 
 $user = $_SESSION["logged"];
+if ($msgError)
+    require_once(VIEWS_PATH . "errorView.php");
 ?>
+
 <div class="content-grande">
     <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/modify" method="POST">
             <!--Cambiar logo -->

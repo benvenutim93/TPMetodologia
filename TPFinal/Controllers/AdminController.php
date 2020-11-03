@@ -10,28 +10,28 @@ class AdminController
 {
 
 
-    public function showPrincipalView ()
+    public function showPrincipalView ($msgError = "")
     {
         require_once(ADMIN_VIEWS . "eleccion.php");
     }
     
-    public function showOPAdminsView()
+    public function showOPAdminsView($msgError = "")
     {
         require_once(ADMIN_VIEWS . "boardAdmin.php");
     }
-    public function showOPUsersView()
+    public function showOPUsersView($msgError = "")
     {
         require_once(USER_VIEWS . "board.php");
     }
 
-    public function loginForm ()
+    public function loginForm ($msgError = "")
     {
         require_once(ADMIN_VIEWS . "adminLogIn.php");
     }
 
     public function login($mail,$pass)
     {
-
+        
         $repo = new A_Repo();
         $array = $repo->GetOneMail($mail);
         foreach($array as $value)

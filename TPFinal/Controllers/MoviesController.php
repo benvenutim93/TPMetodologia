@@ -15,39 +15,78 @@ class MoviesController
     {
         $this->moviesDao = new M_DAO();
         $this->genreDao = new G_DAO();
-        $genresXmovie = $this->genreDao->GetGenresXmovies();
-        if (!$genresXmovie)
-            $this->setGenresToMovies();
+        try
+        {
+            $genresXmovie = $this->genreDao->GetGenresXmovies();
+            if (!$genresXmovie)
+                $this->setGenresToMovies();
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+        }
         
     }
 
-    public function showSearchMovieView()
+    public function showSearchMovieView($msgError = "")
     {
-        $pelisDates = $this->fechasPelis();
-        $genres = $this->genreDao->GetAll();
-        require_once(VIEWS_PATH . "searchMovie.php");
+        try
+        {
+            $pelisDates = $this->fechasPelis();
+            $genres = $this->genreDao->GetAll();
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+        }
+        finally
+        {
+            require_once(VIEWS_PATH . "searchMovie.php");
+        }
     }
 
     public function showMoviesListView()
     {
-        $moviesList = array();
-        $moviesList = $this->moviesDao->getMoviesFunctions();
+        try{    
+            $moviesList = array();
+            $moviesList = $this->moviesDao->getMoviesFunctions();
 
-        if ($moviesList)
-            require_once(USER_VIEWS . "moviesView.php");
-        else
-        {           
-            echo '<script>
-                    alert("No hay funciones por el momento");
-                    </script>';
+            if ($moviesList)
+                require_once(USER_VIEWS . "moviesView.php");
+            else
+            {      
+                $msgError = array( "description" => "No hay funciones por el momento",
+                    "type" => 3);     
+                require_once(USER_VIEWS . "login-form.php");
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
             require_once(USER_VIEWS . "login-form.php");
         }
     }
 
     public function showOnlyMovie($moviesList)
     {
-        $genreRepo = $this->genreDao->GetAll();
-        require_once(USER_VIEWS. "moviesView.php");
+        try
+        {
+            $genreRepo = $this->genreDao->GetAll();
+            require_once(USER_VIEWS. "moviesView.php");
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            require_once(USER_VIEWS . "login-form.php");
+        }
     }
 
     public function showMoviesSearch($moviesList)
@@ -58,61 +97,85 @@ class MoviesController
 
     public function searchMovieTitle ($title)
     {
-        $movie = $this->moviesDao->GetWithFunction($title);
-
-        if ($movie)
-           $this->showMoviesSearch($movie);
-        else
+        try
         {
-            echo '<script>
-                    alert("No se encontraron peliculas con ese titulo");
-                    </script>';
+            $movie = $this->moviesDao->GetWithFunction($title);
+
+            if ($movie)
+            $this->showMoviesSearch($movie);
+            else
+            {
+                $msgError = array( "description" => "No se encontraron peliculas con ese titulo",
+                    "type" => 1); 
+                $this->showSearchMovieView($msgError);
+                
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
             $this->showSearchMovieView();
-            
         }
     }
 
 
     public function searchMovieGenre($genre_id)
     {
-
-        $moviesList = $this->moviesDao->GetWithFunctionGenres();
-        
-        
-        if (!empty($moviesList))
-            $this->showMoviesSearch($moviesList);
-        else
+        try
         {
-            echo '<script>
-                    alert("No se encontraron peliculas con ese género");
-                    </script>';
-            $this->showSearchMovieView();
+            $moviesList = $this->moviesDao->GetWithFunctionGenres();
             
+            
+            if (!empty($moviesList))
+                $this->showMoviesSearch($moviesList);
+            else
+            {
+                $msgError = array( "description" => "No se encontraron peliculas con ese género",
+                "type" => 1); 
+                $this->showSearchMovieView($msgError);    
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->showSearchMovieView();
         }
        
 
     }
 
     public function searchMovieDate($date){ //año - mes - dia
-        $moviesList = $this->moviesDao->GetMoviesfunctionDate($date);        
+
+        try{
+            $moviesList = $this->moviesDao->GetMoviesfunctionDate($date);        
 
 
             if ($moviesList)
                 $this->showMoviesSearch($moviesList);
             else
             {
-                echo '<script>
-                        alert("No se encontraron peliculas en esa fecha");
-                        </script>';
-                $this->showSearchMovieView();
+                $msgError = array( "description" => "No se encontraron peliculas en esa fecha",
+                "type" => 1); 
+                $this->showSearchMovieView($msgError);
                 
             }
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->showSearchMovieView();
+        }
        
-
     } 
     public function fechasPelis()
     {
-   
+        
         $moviesList = $this->moviesDao->GetAll();
         $dates= array();
 
@@ -129,32 +192,49 @@ class MoviesController
 
     public function setGenresToMovies()
     {
-        $movies = $this->moviesDao->retrieveAPIJson();
-
-        foreach($movies as $value)
+        try
         {
-            $movie = $this->moviesDao->GetOneName($value["title"]);
-            
-            foreach($value["genre_ids"] as $id)
-            {   
-                foreach($movie as $aux)
-                    $this->genreDao->addGenreToMovie($aux["id_movie"], $id);
+            $movies = $this->moviesDao->retrieveAPIJson();
+
+            foreach($movies as $value)
+            {
+                $movie = $this->moviesDao->GetOneName($value["title"]);
+                
+                foreach($value["genre_ids"] as $id)
+                {   
+                    foreach($movie as $aux)
+                        $this->genreDao->addGenreToMovie($aux["id_movie"], $id);
+                }
             }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            require_once(USER_VIEWS . "login-form.php");
         }
     } 
 
     public function showFunctionView(){
-        
-        $moviesList = array();
-        $moviesList = $this->moviesDao->getFunctionNoRepeat(); //Hacer query para q traiga la Peli con funcion (sin repetir)
+        try{    
+            $moviesList = array();
+            $moviesList = $this->moviesDao->getFunctionNoRepeat(); //Hacer query para q traiga la Peli con funcion (sin repetir)
 
-        if ($moviesList)
-            require_once(USER_VIEWS . "functionsView.php");
-        else
-        {           
-            echo '<script>
-                    alert("No hay funciones por el momento");
-                    </script>';
+            if ($moviesList)
+                require_once(USER_VIEWS . "functionsView.php");
+            else
+            {           
+                $msgError = array( "description" => "No hay funciones por el momento",
+                "type" => 1);
+                require_once(USER_VIEWS . "board.php");
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
             require_once(USER_VIEWS . "board.php");
         }
     }

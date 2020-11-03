@@ -20,27 +20,39 @@ class RoomController{
 
     public function index($idCinema, $msgError = ""){
         
+        try
+        {
         $arrayR= $this->roomDao->GetAll($idCinema);
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
         $nombre=$nombrea[0];
         $idCine =$idCinema;
         $fechaActual=date("Y-m-j");
-        require_once(ROOM_VIEWS. "index.php");
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+        }
+        finally
+        {
+            require_once(ROOM_VIEWS. "index.php");
+        }
 
     }
 
     public function showDateForm($date,$idRoom,$idCinema)
     {   
         $movie= new M_DAO();
-        
+        try
+        {
         $tienesalas= $this->roomDao->roomsExists($idCinema);
 
         foreach($tienesalas as $value){
             if($value["Cantidad Salas"] == 0){
-            echo '<script>
-                    alert("No hay salas cargadas en el cine");
-                    </script>';
-                $this->index($idCinema);
+                $msgError = array( "description" => "No se encontraron salas en el cine",
+                "type" => 1);
+                $this->index($idCinema,$msgError);
             }
             else{
                 $cineDao = new C_DAO();
@@ -51,123 +63,192 @@ class RoomController{
                 $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema,$idRoom);
                 require_once(FUNCTION_VIEWS . "dateForm.php");
                 }
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
         }
     }
     
     
 
     public function showModifyRoom($id){
+        try
+        {
         $room = $this->roomDao->GetOne($id);
         require_once(ROOM_VIEWS . "modify-form-room.php");
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->showRoomsListAdmin($id);
+        }
     }
 
-    public function showRoomsListAdmin($idCinema)
+    public function showRoomsListAdmin($idCinema, $msgError = "")
     {
+        try
+        {
+            $arrayR= $this->roomDao->GetAll($idCinema);
+            $nombre= $this->roomDao->GetnameCinema($idCinema);
+            
+            $cantidad=$this->roomDao->countRooms($idCinema);
 
-        $arrayR= $this->roomDao->GetAll($idCinema);
-        $nombre= $this->roomDao->GetnameCinema($idCinema);
-        
-        $cantidad=$this->roomDao->countRooms($idCinema);
-
-            foreach($cantidad as $value)
-            {
-                if($value["cantidad"] > 0)
-                require_once(ROOM_VIEWS . "roomsListAdmin.php");
-                else 
+                foreach($cantidad as $value)
                 {
-                    $msgError = "No se encontraron salas en el cine";
-                    /*echo '<script>
-                    alert("No se encontraron salas en el cine");
-                    </script>';*/
-                    $this->index($idCinema, $msgError);
-                }
-            }   
+                    if($value["cantidad"] > 0)
+                    require_once(ROOM_VIEWS . "roomsListAdmin.php");
+                    else 
+                    {
+                        $msgError = array( "description" => "No se encontraron salas en el cine",
+                        "type" => 3);
+                        $this->index($idCinema, $msgError);
+                    }
+                } 
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
+        }
+
     }
 
     public function showFunctionsList ($idCinema)
     {
-        $functions = $this->roomDao->getFunctionsCinema($idCinema);
-        
-        require_once(FUNCTION_VIEWS . "listFunctionsCinema.php");
+        try
+        {
+            $functions = $this->roomDao->getFunctionsCinema($idCinema);   
+            if ($functions)
+            require_once(FUNCTION_VIEWS . "listFunctionsCinema.php");
+            else
+            {
+                $msgError = array( "description" => "No hay funciones para listar",
+                "type" => 3);
+                $this->index($idCinema, $msgError);
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
+        }
     }
   
     public function add($name,$capacity,$price,$idCinema){
 
-        $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
-
-        $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
-
-        $capRooms=$sumCantsalas[0];
-        
-        foreach($capacidadCine as $value){
-         $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity;
-
-        if($value["capacity"] >= ($capRooms["capEnUso"]))
+        try
         {
+            $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
 
-           $room = new Room($name,$capacity,$price,$idCinema);
-           $this->roomDao->Add($room);
-                echo '<script>
-                        alert("La sala se agrego con Exito al cine");
-                        </script>
-                        ';
-        }else
-        {
-            echo '<script>
-            alert("Se ha superado la capacidad del cine,vuelva a intentarlo.");
-            </script>
-            ';
+            $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
+
+            $capRooms=$sumCantsalas[0];
+            $msgError = "";
+            
+            foreach($capacidadCine as $value){
+            $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity;
+
+            if($value["capacity"] >= ($capRooms["capEnUso"]))
+            {
+
+            $room = new Room($name,$capacity,$price,$idCinema);
+            $this->roomDao->Add($room);
+            $msgError = array( "description" => "La sala se agrego con Exito al cine",
+                        "type" => 2);
+
+                    
+            }
+            else
+            {
+                $msgError = array( "description" => "Se ha superado la capacidad del cine,vuelva a intentarlo.",
+                        "type" => 3);
+                
+            }
+            }
+            $this->index($idCinema, $msgError);
         }
-    }
-    $this->index($idCinema);
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
+        }
+    
  
     }
     
     public function Modify($id,$name,$capacity,$ticketValue,$idCinema,$capacityAnterior)
     {
-        
-        $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
-
-        $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
-
-        $capRooms=$sumCantsalas[0];
-        
-        foreach($capacidadCine as $value){
-         $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity-$capacityAnterior;
-
-        if($value["capacity"] >= ($capRooms["capEnUso"]))
+        try
         {
-           $this->roomDao->Modify($id, $name, $capacity, $ticketValue,$idCinema);
-                echo '<script>
-                        alert("La sala se modifico con Exito al cine");
-                        </script>
-                        ';
-        }else
-        {
-            echo '<script>
-            alert("Se ha superado la capacidad del cine,vuelva a intentarlo.");
-            </script>
-            ';
+            $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
+
+            $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
+
+            $capRooms=$sumCantsalas[0];
+            $msgError ="";
+            
+            foreach($capacidadCine as $value){
+            $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity-$capacityAnterior;
+
+                if($value["capacity"] >= ($capRooms["capEnUso"]))
+                {
+                $this->roomDao->Modify($id, $name, $capacity, $ticketValue,$idCinema);
+                        $msgError = array( "description" => "La sala se ha modificado exitosamente",
+                            "type" => 2);
+                }else
+                {
+                    $msgError = array( "description" => "Se ha superado la capacidad del cine, vuelva a intentarlo",
+                            "type" => 3);
+                }
+            }
+            $this->showRoomsListAdmin($idCinema, $msgError);
         }
-    }
-        $this->showRoomsListAdmin($idCinema);
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
+        }
+
     }
 
     public function Remove($id,$idCinema)
     {
-        $this->roomDao->Remove($id);
-        $cantidad=$this->roomDao->countRooms($idCinema);
+        try
+        {
+            $this->roomDao->Remove($id);
+            $cantidad=$this->roomDao->countRooms($idCinema);
 
-        foreach($cantidad as $value){ //Dato escalar, es decir es un unico dato
-            if($value["cantidad"] > 0)
-                $this->showRoomsListAdmin($idCinema);
-            else {
-                echo '<script>
-                alert("No se encontraron salas en el cine");
-                </script>
-                 ';
-                $this->index($idCinema);
+            foreach($cantidad as $value){ //Dato escalar, es decir es un unico dato
+                if($value["cantidad"] > 0)
+                    $this->showRoomsListAdmin($idCinema);
+                else {
+                    $msgError = array( "description" =>"Ha eliminado todas las salas del cine",
+                    "type" => 3);
+                    $this->index($idCinema, $msgError);
+                }
             }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->index($idCinema);
         }
     }
 

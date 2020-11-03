@@ -1,3 +1,6 @@
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
+    
 <div class="content-chico">
   
         <h1 class="text-center">Gestion de Cines</h1>

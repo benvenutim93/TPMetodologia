@@ -1,7 +1,8 @@
-<?php 
+<?PHP 
 $user = $_SESSION["logged"];
+ if ($msgError)
+    require_once(VIEWS_PATH . "errorView.php");
 ?>
-
 
 
 
