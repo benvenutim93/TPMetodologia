@@ -13,7 +13,6 @@ closeHour varchar(50) not null,
 constraint pk_cines primary key (id_cine),
 constraint unq_cinemas unique (cinemaName, cinemaAddress))engine=InnoDB;
 
-
 create table rooms (
 id_room int not null auto_increment,
 roomName varchar (50) not null,
@@ -65,8 +64,6 @@ constraint pk_gxm primary key (id_genre,id_movie),
 constraint fk_genre foreign key (id_genre) references genres(id_genre),
 constraint fk_movie foreign key (id_movie) references movies(id_movie))engine=InnoDB;
 
-
-
 create table userTypes (
 id_userType int not null auto_increment,
 nameType varchar (50),
@@ -110,25 +107,21 @@ qr int not null, #--------------- PREGUNTAR
 constraint pk_ticket primary key (id_ticket),
 constraint fk_function foreign key (id_function) references functions(id_function)on update cascade on delete cascade)engine=InnoDB;
   
-  create table ticketXpurchase(
-      id_txp int auto_increment,
-      id_ticket int not null,
-      id_purchase int not null
-      constraint pk_txP primary key (id_txp),
-      constraint fk_idTicket foreign key (id_ticket) references tickets(id_ticket)on update cascade on delete cascade,
-      constraint fk_idPurchase foreign key (id_purchase) references purchases(id_purchase)on update cascade on delete cascade
-
-  )engine=InnoDB;
-
 create table purchases(
 id_purchase int AUTO_INCREMENT not null,
 total float not null, 
 id_creditCard int not null,
 purchaseDate date not null,
 constraint pk_purchase primary key (id_purchase),
-constraint fk_ticket foreign key (id_ticket) references tickets(id_ticket) on delete cascade,
 constraint fk_creditCard foreign key (id_creditCard) references creditCards (id_creditCard))engine=InnoDB;
-
+  
+create table ticketXpurchase(
+  id_txp int auto_increment,
+  id_ticket int not null,
+  id_purchase int not null,
+  constraint pk_txP primary key (id_txp),
+  constraint fk_idTicket foreign key (id_ticket) references tickets(id_ticket)on update cascade on delete cascade,
+  constraint fk_idPurchase foreign key (id_purchase) references purchases(id_purchase)on update cascade on delete cascade)engine=InnoDB;
 
 create table discounts (
 id_discount int auto_increment not null,
@@ -137,8 +130,6 @@ descript varchar (255) not null,
 minCant int not null, 
 constraint pk_discount primary key (id_discount))engine=InnoDB;
 
-
-
 create table discountsXcinema (
 id_dxc int AUTO_INCREMENT not null, 
 id_cine int not null,
@@ -146,7 +137,6 @@ id_discount int not null,
 constraint pk_dxc primary key (id_dxc),
 constraint fk_cine2 foreign key (id_cine) references cinemas (id_cine),
 constraint fk_discount foreign key (id_discount) references discounts (id_discount))engine=InnoDB;
-
 
 create table dayOfDiscount (
 id_dod int AUTO_INCREMENT not null,
