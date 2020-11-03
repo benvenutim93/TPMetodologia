@@ -1,7 +1,8 @@
 <?PHP 
 $user = $_SESSION["logged"];
- if ($msgError)
+ if ($msgError){
     require_once(VIEWS_PATH . "errorView.php");
+}
 ?>
 
 
@@ -19,11 +20,12 @@ $user = $_SESSION["logged"];
             <div class="col">
                      <!-- F O R M -->
                     <form action="<?php echo FRONT_ROOT?>Movies/showFunctionView" class="form-singin">    
-                            <button  class="btn btn-lg btn-danger btn-block" type="submit"> Comprar entradas </button>
+                            <button  class="btn btn-lg btn-primary btn-block" type="submit"> Comprar entradas </button>
                     </form>
                      <!-- F O R M -->
-                    <form action="" class="form-singin">
-                        <button  class="btn btn-lg btn-danger btn-block" type="submit"> Listar entradas </button>
+                    <form action="<?php echo FRONT_ROOT?>User/showPurchaseView" class="form-singin">
+                        <input type="number"  class="sr-only" name="id" value="<?php echo $user["id_user"]?>"   readonly>
+                        <button  class="btn btn-lg btn-warning btn-block" type="submit"> Listar entradas </button>
                     </form>
                     <!-- F O R M -->
                     <form action=" <?php echo FRONT_ROOT?>User/showModifyView" class="form-singin">

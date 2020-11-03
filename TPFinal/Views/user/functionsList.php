@@ -36,7 +36,7 @@
                             <div class="col">
                                 <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>
                                 <input class="sr-only" type="number" name="idUser" value="<?php echo $user?>" >
-                                <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
+                                <button type="sumbit" class="btn btn-lg btn-success btn-block" >Proceder a compra</button>
                             </div>
                         </div>
                     </form>

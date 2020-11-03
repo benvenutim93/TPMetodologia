@@ -270,6 +270,25 @@
                 throw $ex;
             }   
         }
+        public function getPriceRoom($idFunction)
+        {
+            try
+            {
+                $query = "select $this->tableName.ticketValue as Precio
+                from $this->tableName
+                inner join functions 
+                on functions.id_room = $this->tableName.id_room
+                where functions.id_function =$idFunction";
+
+               
+                $this->connection = Connection :: GetInstance();
+                return $this->connection->Execute($query);
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }   
+        }
 
     }
 ?>

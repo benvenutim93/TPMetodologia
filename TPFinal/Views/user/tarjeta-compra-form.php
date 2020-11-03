@@ -2,16 +2,11 @@
  $user =$_SESSION["logged"];
  
 ?>
-<div class="alert alert-primary" role="alert">
-   <?php echo "cantidad de entradas :".$cantidad ."<br>Id Funcion ".$idFuncion; ?>
-</div>
+
 <div class="content-chico">
     <div class="row">
         <div class="col">
             <h1 class="form-signin"><button class="btn btn-primary"  data-toggle="modal" data-target="#cargaTarjeta" type="button">Cargar Nueva  Tarjeta</button></h1>
-        </div>
-        <div class="col">
-
         </div>
     </div>
     
@@ -28,13 +23,14 @@
                     <form action="<?php echo FRONT_ROOT?>Ticket/purchaseProcess"  class="list-group-item list-group-item-info ">
                         <div class="row">
                              <div class="col"> 
-                                <!-- Cine -->
+                                <!-- Numbero -->
                                   <h4><font color ="black">Numero Tarjeta  </h4> 
                                   <h5><?php echo $card["numberCC"]?></h5>
                             </div>
                             <div class="col">
-                                <!-- Sala -->
-                                <h5></font> compania</h5>
+                                <!-- compania -->
+                                <h4>Compania </h4>
+                                <h5></font> <?php echo $card["companyName"]?></h5>
 
                             </div>
                             <div class="col">
@@ -42,7 +38,7 @@
                                 <input type="number" class="sr-only" value="<?php echo $idFuncion;?>" name="idFuncion">
                                 <input type="number" class="sr-only" value="<?php echo $card["id_creditCard"];?>" name="idCreditCard">
                                 <input type="date" class="sr-only" value="<?php echo date("Y-m-d")?>" name="date">                        
-                                <button type="sumbit" class="btn btn-lg btn-danger btn-block" >Seleccionar</button>
+                                <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
                             </div>
                         </div>
                     </form>

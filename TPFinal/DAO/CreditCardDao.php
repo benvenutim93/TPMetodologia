@@ -54,6 +54,30 @@
                 throw $ex;
             }
     }
+    public function getNumber_Company($idUser){
+        try
+        {
+            $query= "select cc.numberCC,
+                    cc.id_creditCard,
+            com.companyName
+            from $this->tableName as cc
+            inner join companies as com
+            on com.id_company = cc.id_company
+            where cc.id_user =$idUser;";
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query);
+
+            return $result;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+
+    }
 
   }
 

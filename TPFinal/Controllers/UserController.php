@@ -6,11 +6,13 @@ use Models\User as User;
 use Models\CreditCard as CreditCard;
 use Dao\UserDao as U_DAO;
 use Dao\CreditCardDao as CC_DAO;
+use Dao\PurchaseDao as P_DAO;
 
 class UserController
 {
     private $userRepo;
     private $creditCardDao;
+    private $purchaseDao;
 
   
 
@@ -18,6 +20,7 @@ class UserController
     {
         $this->userRepo = new U_DAO();
         $this->creditCardDao = new CC_DAO();
+        $this->purchaseDao = new P_DAO();
     }
     public function showAdminView(){
         require_once(ADMIN_VIEWS . "eleccion.php");
@@ -65,6 +68,7 @@ class UserController
     public function showPrincipalView ($msgError = "")
     {
         require_once(USER_VIEWS . "board.php");
+        
     }
     public function showModifyView ($msgError = "")
     {
@@ -285,6 +289,12 @@ class UserController
         $user = $this->userRepo->GetOne($id_user);
         $this->showListUsersView();
     }   
+   public function showPurchaseView($idUser){
+ 
+       $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
+       echo "FALTA HACER VISTA PARA LISTAR TODAS LAS COMPRAS DEL USUARIO-----";
+       var_dump($purchaseList);
+   }
 
 
 }
