@@ -1,3 +1,4 @@
+<?php $user = $_SESSION["logged"]["id_user"]?>
 <div class="content-xxl">
 
     <div class="list-group">
@@ -9,7 +10,7 @@
             <h4><?php echo $titulo;?></h4> 
             <?php foreach ($funciones as $movie){
             ?>
-                    <form action="<?php echo FRONT_ROOT?>Ticket/purchase"  class="list-group-item list-group-item-info ">
+                    <form action="<?php echo FRONT_ROOT?>Ticket/showListCards"  class="list-group-item list-group-item-info ">
                         <div class="row">
                              <div class="col"> 
                                 <!-- Cine -->
@@ -33,8 +34,8 @@
                                 <input class="form-control" type="number" name="cantidad" placeholder="Ingrese cantidad de entradas a comprar." min="0" required>
                             </div>
                             <div class="col">
-                            <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>
-                            
+                                <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>
+                                <input class="sr-only" type="number" name="idUser" value="<?php echo $user?>" >
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                     <?php }?>
            
         </a>
-        <form action="<?php echo FRONT_ROOT?>">
+        <form action="<?php echo FRONT_ROOT?>Movies/showFunctionView">
         <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >Volver Atras</button>
         </form>
     </div>

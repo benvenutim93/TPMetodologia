@@ -98,7 +98,7 @@ class CinemaController
     {
         try 
         {
-        $this->cinemaDao->Remove($id);
+            $this->cinemaDao->Remove($id);
         }
         catch (\PDOException $ex)
         {

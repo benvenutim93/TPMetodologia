@@ -25,8 +25,7 @@ class RoomController{
         $arrayR= $this->roomDao->GetAll($idCinema);
         $nombrea = $this->roomDao->GetnameCinema($idCinema);
         $nombre=$nombrea[0];
-        $idCine =$idCinema;
-        $fechaActual=date("Y-m-j");
+
         }
         catch (\PDOException $ex)
         {

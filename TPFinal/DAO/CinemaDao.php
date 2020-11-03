@@ -21,7 +21,7 @@
             try{
                 $query = " insert into  $this->tableName (cinemaName, cinemaAddress, capacity, aperHour, closeHour ) VALUES (:cinemaName, :cinemaAddress, :capacity, :aperHour, :closeHour);";
                 
-                $parameters["ciinemaName"] = $cine->getName();
+                $parameters["cinemaName"] = $cine->getName();
                 $parameters["cinemaAddress"] = $cine->getAddress();
                 $parameters["capacity"] = $cine->getCapacity();
                 $parameters["aperHour"] = $cine->getAperHour();

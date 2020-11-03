@@ -26,7 +26,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                             <!--I N P U T-->
                             <input type="number" id="Valor" class="form-control" placeholder="Valor"  min="0" max="500" name="price" required>
                             <!-- ID cinema -->
-                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
+                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema?>" required autofocus>
                             <br>
                             <label for="" >    </label>
                         <!-- B O T O N -->
@@ -40,7 +40,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
 
             <div class="content-chico">
                 <form class="form-signin" action= "<?php echo FRONT_ROOT?>Discount/Add" method="POST">
-                        <h1 class="h3 mb-3 font-weight-normal">Agregar Descuento</h1>
+                        <h1 class="h3 mb-3 font-weight-normal">CONSULTAR - Agregar Descuento</h1>
                             
                             <!-- L A B E L -->
                             <label for="capacity" >Ingrese Porcentaje </label>
@@ -53,7 +53,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                             <input type="number" id="Valor" class="form-control" placeholder="Cantidad Minima de Tickets"  min="0" max="500" name="minCant" required>
                             
                             <!-- ID cinema -->
-                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine?>" required autofocus>
+                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema?>" required autofocus>
                             
                             <label for="name" >Ingrese Descripcion</label>
                             <!--I N P U T-->
@@ -75,20 +75,20 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                 <br><br>
                 <label for="date" >Ingrese Fecha </label>
                 <!--I N P U T-->
-                <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo $fechaActual?> name="date" required>
+                <input type="date" id="date" class="form-control" placeholder="Fecha"  min=<?php echo date("Y-m-d")?> name="date" required>
                 
                 <label for="time" >Seleccione Sala </label>
                 <!--I N P U T-->
                 <select id="inputState" name="room" class="form-control" required>
                     <option value="" disabled selected> Seleccione Sala </option>
                     <?php foreach($arrayR as $value){
-                        var_dump($arrayR); ?>
+                        ?>
                         <option value="<?php echo $value->getId();?>"> <?php echo $value->getName();?> </option>
                     <?php } ?>
                 </select>
                 <br><br>
 
-                <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus>
                     <!-- B O T O N -->
                     <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
                 </form>
@@ -102,7 +102,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
          <div class="content-chico">
                 <form action="<?php echo FRONT_ROOT?>Room/showRoomsListAdmin" class="form-signin"> 
                     <!-- PASO EL ID DEL CINE -->
-                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus>
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Salas</button>
                     </form>
          </div>
@@ -110,7 +110,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <div class="col">
             <div class="content-chico">
                     <form action="<?php echo FRONT_ROOT?>Discount/showDiscountsListCinema" class="form-signin">
-                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus> 
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus> 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Descuentos</button>
                     </form>
              </div>
@@ -118,7 +118,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <div class="col">
             <div class="content-chico">
                     <form action="<?php echo FRONT_ROOT?>Room/showFunctionsList" class="form-signin">
-                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCine ?>" required autofocus> 
+                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus> 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Funciones</button>
                     </form>
              </div>

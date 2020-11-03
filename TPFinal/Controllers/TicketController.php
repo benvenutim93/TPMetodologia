@@ -7,16 +7,19 @@ use Models\Ticket as Ticket;
 use DAO\TicketDao as TicketDao;
 use Endroid\QrCode\QrCode;
 use DAO\FunctionDao as F_DAO;
+use DAO\CreditCardDao as C_DAO;
 
 class TicketController
 {
     private $ticketDao;
     private $functionDao;
+    private $creditCardDao;
 
     public function __construct()
     {
         $this->ticketDao = new TicketDao();
         $this->functionDao = new F_DAO();
+        $this->creditCardDao = new C_DAO();
     }
 
     public function generateTicket($cantidad ,$idFuncion){
@@ -32,19 +35,21 @@ class TicketController
                 $imageData = base64_encode($imageString);
                 //echo '<img src="data:image/png;base64,'.$imageData.'">';
             }
-        //$this->ticketDao->add($id_funcion,$imageString);
+        $this->ticketDao->add($id_funcion,$imageString);
+        //agregar a otra tabla
+
         }
     }
-    public function purchase($cantidad ,$idFuncion){
-        //Paso Cantidad y ID FUNCION   a la vista de cargar tarjeta
-        
+
+    public function showListCards($cantidad,$idFuncion, $idUser)
+    {
+        $cardsList = $this->creditCardDao->GetAll($idUser);
         require_once(USER_VIEWS . "tarjeta-compra-form.php");
     }
-    public function purchaseProcess($cantidad,$idFuncion,$idUser){
-
-
-
-
+    
+    public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date)
+    {
+        $this->generateTicket($cantidad, $idFuncion);
     }
 
 }

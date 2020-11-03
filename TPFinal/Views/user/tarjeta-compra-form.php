@@ -16,39 +16,37 @@
     </div>
     
 </div>
+
+<?php if(isset($cardsList)) { ?>
 <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
             <h2>Listado de Tarjetas (Falta hacer Query para traer tarjeta y la funcion para comprar)</h2>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
-            <!-- ACA VA EL FOREARCH --> 
+            <?php foreach($cardsList as $card) { ?>
           
-            
-            
-                    <form action="<?php echo FRONT_ROOT?>"  class="list-group-item list-group-item-info ">
+                    <form action="<?php echo FRONT_ROOT?>Ticket/purchaseProcess"  class="list-group-item list-group-item-info ">
                         <div class="row">
                              <div class="col"> 
                                 <!-- Cine -->
-                                  <h4><font color ="black"> Tarjeta  </h4> 
+                                  <h4><font color ="black">Numero Tarjeta  </h4> 
+                                  <h5><?php echo $card["numberCC"]?></h5>
                             </div>
                             <div class="col">
                                 <!-- Sala -->
                                 <h5></font> compania</h5>
+
                             </div>
                             <div class="col">
-                                <!-- Fecha -->
-                                <h3><font color ="red">Total</font></h3>
-                            </div>
-                            <div class="col">
-                                <!-- Horario -->
-                                <h5><font color ="red">Cantidad </font></h5> 
-                           </div>
-                            <div class="col">
-                            
-                                <button type="sumbit" class="btn btn-lg btn-danger btn-block" >Comprar</button>
+                                <input type="number" class="sr-only" value="<?php echo $cantidad;?>" name="cantidad">
+                                <input type="number" class="sr-only" value="<?php echo $idFuncion;?>" name="idFuncion">
+                                <input type="number" class="sr-only" value="<?php echo $card["id_creditCard"];?>" name="idCreditCard">
+                                <input type="date" class="sr-only" value="<?php echo date("Y-m-d")?>" name="date">                        
+                                <button type="sumbit" class="btn btn-lg btn-danger btn-block" >Seleccionar</button>
                             </div>
                         </div>
                     </form>
+            <?php }} ?>
                   
            
         </a>
@@ -89,7 +87,7 @@
                                         <div class="row">
                                                 <div class="col">
                                                 <h5 class="card-title">Numero de la tajeta</h5>
-                                                    <input class="form-control" type="text" name="numberCC"   minlength="16"pattern="[0-9]{16}" title="Deben ser [ NUMEROS ]. "required>
+                                                    <input class="form-control" type="text" name="numberCC"  minlength="16" pattern="[0-9]{16}" title="Deben ser [16 NUMEROS] "required>
                                                 </div>
                                                 <div class="col">  
                                                     <h5 class="card-title">Fecha de expiracion</h5>
@@ -101,7 +99,7 @@
                                         <label for="master">MasterdCard</label>
                                         <input type="radio" name="company" value="2" id="visa" required >
                                         <label for="visa">Visa</label>
-                                    <p class="card-text">Los datos proporcionados no seran divulgados,son  encriptados .</p>
+                                    <p class="card-text">Los datos proporcionados no seran divulgados, seran encriptados para su seguridad.</p>
                                  
                                     <label for="idUser">idUser </label>
                                     <input class="form-control" type="number" id="idUser"  name="idUser" value="<?php echo  $user["id_user"]?>"  readonly>

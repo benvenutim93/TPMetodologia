@@ -32,8 +32,11 @@
                        <div class="row">
                            <div class="col">
                            <!-- Formulario -->
-                                    <button class="btn btn-lg btn-danger btn-block" data-toggle="modal" data-target="#borrarCine">Eliminar</button>
-
+                                    <!--<button class="btn btn-lg btn-danger btn-block" value="<?php echo $cine->getId(); ?>" data-toggle="modal" data-target="#borrarCine">Eliminar</button> -->
+                                       <form action="<?php FRONT_ROOT?>Remove" method="GET">
+                                            <input type="hidden" value="<?php echo $cine->getId(); ?>" name="id">
+                                            <button type="sumbit" class="btn btn-lg btn-danger btn-block">Eliminar</button>
+                                        </form> 
                             </div>
                             <div class="col">
                             <!-- Formulario -->
@@ -58,30 +61,32 @@
                      </td>                
                 </tr>   
 
-                                <!-- MODAL -->             
-                                <div class="modal fade" id="borrarCine" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="cierresesionLabel">Eliminar Cine</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿ Esta seguro que quiere <font color="red"> eliminar</font> el cine?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <form action="<?php FRONT_ROOT?>Remove" method="GET">
-                                            <input type="hidden" value="<?php echo $cine->getId(); ?>" name="id">
-
-                                                <button type="sumbit" class="btn btn-primary">Aceptar</button>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
+<!-- ARREGLAR ESTA HERMOSURA -->
+                    <!-- MODAL -->             
+                    <div class="modal fade" id="borrarCine" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="cierresesionLabel">Eliminar Cine</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿ Esta seguro que quiere <font color="red"> eliminar</font> el cine?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            
+                                <form action="<?php FRONT_ROOT?>Remove" method="GET">
+                                    <input type="hidden" value="<?php echo $cine->getId(); ?>" name="id">
+                                        <!--<button type="sumbit" class="btn btn-primary">Aceptar</button>-->
+                                        <button type="sumbit" class="btn btn-primary">Eliminai ID <?php echo $cine->getId(); ?></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                  <?php } ?>  
                  <tr>
                 <td colspan=2 >
