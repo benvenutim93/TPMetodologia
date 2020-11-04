@@ -32,7 +32,7 @@ class TicketController
     }
 
     public function generateTicket($cantidad ,$idFuncion,$idPurchase){
-    
+    $array= array();
         for($i=0; $i < $cantidad;$i++){
             $id_funcion =$idFuncion;
             $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
@@ -41,13 +41,12 @@ class TicketController
                 $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"]);
                 $imageString= $qr->writeString($value);
                 
-                $imageData = base64_encode($imageString);
+                array_push($array,$imageData = base64_encode($imageString));
                 //echo '<img src="data:image/png;base64,'.$imageData.'">';
             }
-        $this->ticketDao->add($id_funcion,$imageString,$idPurchase);
-       
-
+        $this->ticketDao->add($id_funcion,$idPurchase);
         }
+        return $array;
     }
 
     public function showListCards($cantidad,$idFuncion, $idUser)
@@ -70,12 +69,11 @@ class TicketController
         $idUltimaCompra =$this->purchaseDao->getLastPurchaseID();//traigo la id de la ultima compra
     
         $idPurchase=$idUltimaCompra[0]["id_purchase"];
-        $this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
-        
+       $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
+        //devuelve un array que contiene los distintos qr de los tikects
         
         require_once(USER_VIEWS . "purchaseCompleted.php");
     }
-
 }
 
 ?>

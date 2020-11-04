@@ -79,7 +79,7 @@ class UserController
 
     public function addTarjeta($cardHolder,$numberCC,$expiration,$company,$idUser,$cantidad,$idFuncion){
         try
-        {
+        {  
             $tarjeta = new CreditCard($cardHolder,$numberCC,$expiration,$company);
             $this->creditCardDao->Add($tarjeta,$idUser);
         }
@@ -91,6 +91,7 @@ class UserController
         }
 
         $cardsList = $this->creditCardDao->GetAll($idUser);
+    
         require_once(USER_VIEWS . "tarjeta-compra-form.php");
  
     }

@@ -41,7 +41,17 @@
     {
         try
             {
-                $query= "select * from $this->tableName where $this->tableName.id_user = $id_user";
+                $query= "select creditCards.id_creditCard,
+                            creditCards.cardHolder,
+                            creditCards.expiration,
+                            creditCards.expiration,
+                            creditCards.numberCC,
+                            creditCards.id_user,
+                            companies.companyName
+                        from creditcards
+                        INNER join companies
+                        on companies.id_company= creditcards.id_company
+                        where creditcards.id_user= 1;";
 
                 $this->connection = Connection::GetInstance();
 

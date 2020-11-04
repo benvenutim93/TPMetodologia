@@ -9,13 +9,12 @@
         private $tableName = "tickets";
         private $connection;
 
-        public function add($idFuncion,$qr,$idPurchase){
+        public function add($idFuncion,$idPurchase){
                 
             try{
-                $query = " insert into  $this->tableName (id_function,qr,id_purchase) VALUES (:id_function,:qr,:id_purchase);";
+                $query = " insert into  $this->tableName (id_function,id_purchase) VALUES (:id_function,:id_purchase);";
                 
                 $parameters["id_function"] = $idFuncion;
-                $parameters["qr"] = $qr;
                 $parameters["id_purchase"] = $idPurchase;
 
                 $this->connection = Connection :: GetInstance();

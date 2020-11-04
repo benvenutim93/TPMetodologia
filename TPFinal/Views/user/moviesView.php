@@ -1,4 +1,4 @@
-<?php if ($msgError){
+<?php if (isset($msgError)){
 require_once(VIEWS_PATH . "errorView.php");}?>
 
 <div class="cartelera-content">
