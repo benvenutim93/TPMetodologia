@@ -293,8 +293,7 @@ class UserController
    public function showPurchaseView($idUser){
  
        $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
-       echo "FALTA HACER VISTA PARA LISTAR TODAS LAS COMPRAS DEL USUARIO-----";
-       var_dump($purchaseList);
+       require_once(PURCHASE_VIEWS . "purchase-view.php");
    }
 
 

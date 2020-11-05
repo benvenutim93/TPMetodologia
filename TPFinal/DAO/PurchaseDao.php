@@ -76,10 +76,12 @@
 
             try{
                 $query="select   p.purchaseDate as FechaCompra,
-            DATE_FORMAT(f.functionDate, '%Y-%m-%d') as FechaFuncion,
-           r.roomName,
-           c.cinemaName,
-           m.title
+                            DATE_FORMAT(f.functionDate, '%Y-%m-%d') as FechaFuncion,
+                        r.roomName,
+                        c.cinemaName,
+                        m.title,
+                        f.functionsHour,
+                        t.id_ticket
                 from purchases as p 
                 join tickets as t
                 on p.id_purchase = t.id_purchase

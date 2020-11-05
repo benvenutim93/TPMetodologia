@@ -20,12 +20,12 @@ $user = $_SESSION["logged"];
             <div class="col">
                      <!-- F O R M -->
                     <form action="<?php echo FRONT_ROOT?>Movies/showFunctionView" class="form-singin">    
-                            <button  class="btn btn-lg btn-primary btn-block" type="submit"> Comprar entradas </button>
+                            <button  class="btn btn-lg btn-warning btn-block" type="submit"> Comprar entradas </button>
                     </form>
                      <!-- F O R M -->
                     <form action="<?php echo FRONT_ROOT?>User/showPurchaseView" class="form-singin">
                         <input type="number"  class="sr-only" name="id" value="<?php echo $user["id_user"]?>"   readonly>
-                        <button  class="btn btn-lg btn-warning btn-block" type="submit"> Listar entradas </button>
+                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar entradas </button>
                     </form>
                     <!-- F O R M -->
                     <form action=" <?php echo FRONT_ROOT?>User/showModifyView" class="form-singin">
@@ -34,6 +34,11 @@ $user = $_SESSION["logged"];
                     <!-- F O R M -->
                     <form action=" <?php echo FRONT_ROOT?>Cinema/showCinemas_user" class="form-singin">
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Cines </button>
+                    </form>
+                     <!-- F O R M -->
+                     <form action=" <?php echo FRONT_ROOT?>Ticket/showCards" class="form-singin">
+                        <input type="number" class="sr-only" name ="idUser" value="<?php echo $user["id_user"]?>" readonly>
+                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Tarjetas </button>
                     </form>
             </div>
                     
