@@ -41,17 +41,16 @@
     {
         try
             {
-                $query= "select creditCards.id_creditCard,
-                            creditCards.cardHolder,
-                            creditCards.expiration,
-                            creditCards.expiration,
-                            creditCards.numberCC,
-                            creditCards.id_user,
+                $query= "select $this->tableName.id_creditCard,
+                            $this->tableName.cardHolder,
+                            $this->tableName.expiration,
+                            $this->tableName.numberCC,
+                            $this->tableName.id_user,
                             companies.companyName
-                        from creditcards
+                        from $this->tableName
                         INNER join companies
-                        on companies.id_company= creditcards.id_company
-                        where creditcards.id_user= 1;";
+                        on companies.id_company= $this->tableName.id_company
+                        where $this->tableName.id_user= $id_user;";
 
                 $this->connection = Connection::GetInstance();
 
@@ -69,7 +68,9 @@
         {
             $query= "select cc.numberCC,
                     cc.id_creditCard,
-            com.companyName
+                    cc.cardHolder,
+                    cc.expiration,
+                    com.companyName
             from $this->tableName as cc
             inner join companies as com
             on com.id_company = cc.id_company
@@ -85,9 +86,28 @@
         {
             throw $ex;
         }
+    }
 
+    public function removeCard($idCreditCard){
+        try
+        {
+            $query= "delete from $this->tableName where $this->tableName.id_creditCard = :id_creditCard;";
+            $parameters["id_creditCard"] = $idCreditCard;
+            
+            $this->connection = Connection::GetInstance();
+            
+
+             $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
 
     }
+
+
 
   }
 

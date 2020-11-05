@@ -49,23 +49,7 @@ class TicketController
         return $array;
     }
 
-    public function showListCards($cantidad,$idFuncion, $idUser)
-    {
 
-        $cardsList = $this->creditCardDao->getNumber_Company($idUser);
-        
-
-        require_once(USER_VIEWS . "tarjeta-compra-form.php");
-    }
-
-    public function showCards($idUser)
-    {
-
-        $cardsList = $this->creditCardDao->getNumber_Company($idUser);
-        
-
-        require_once(USER_VIEWS . "tarjeta-compra-form.php");
-    }
     
     public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date)
     {

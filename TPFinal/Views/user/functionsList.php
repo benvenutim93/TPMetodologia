@@ -1,4 +1,8 @@
 <?php $user = $_SESSION["logged"]["id_user"]?>
+
+<div class="content-grande">
+<font color="red"> <h1>Falta HACER  verificar Cantidad de lugares </h1></font>
+</div>
 <div class="content-xxl">
 
     <div class="list-group">
@@ -10,7 +14,7 @@
             <h4><?php echo $movieTitle;?></h4> 
             <?php foreach ($funciones as $movie){
             ?>
-                    <form action="<?php echo FRONT_ROOT?>Ticket/showListCards"  class="list-group-item list-group-item-info ">
+                    <form action="<?php echo FRONT_ROOT?>User/showListCards"  class="list-group-item list-group-item-info ">
                         <div class="row">
                              <div class="col"> 
                                 <!-- Cine -->

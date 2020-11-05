@@ -77,7 +77,7 @@
                                 <form action="<?php FRONT_ROOT?>Remove" method="GET">
                                     <input type="hidden" value="<?php echo $cine->getId(); ?>" name="id">
                                         <!--<button type="sumbit" class="btn btn-primary">Aceptar</button>-->
-                                        <button type="sumbit" class="btn btn-primary">Eliminai ID <?php echo $cine->getId(); ?></button>
+                                        <button type="sumbit" class="btn btn-primary">Eliminar</button>
                                 </form>
                             </div>
                         </div>

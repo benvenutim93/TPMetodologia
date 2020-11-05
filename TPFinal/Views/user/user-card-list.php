@@ -1,0 +1,143 @@
+<?php 
+ $user =$_SESSION["logged"];
+
+?>
+
+<div class="content-chico">
+
+    <div class="row">
+        <div class="col">
+            <h1 class="form-signin"><button class="btn btn-primary"  data-toggle="modal" data-target="#cargaTarjeta" type="button">Cargar Nueva  Tarjeta</button></h1>
+        </div>
+    </div>
+    
+</div>
+
+
+<?php if(isset($cardsList)) { 
+            
+?>
+
+ <?php foreach ($cardsList as $card) { ?>
+    <div class="content-chico">
+   
+        <form action="<?php echo FRONT_ROOT?>User/removeCreditCard" method="post" class="form-signin">
+            
+            <div class="row">
+                <div class="col">
+                    <label for="num">Titular</label>
+                    <input type="text" class="form-control" value="<?php echo $card["cardHolder"]?>" readonly>
+                </div>
+                <div class="col">
+                    <label for="num">Fecha de Expiracion</label>
+                    <input type="text" class="form-control" value="<?php echo $card["expiration"]?>"readonly>
+
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label for="num">Numero de Tarjeta</label>
+                    <input type="text" class="form-control" value="<?php echo $card["numberCC"]?>"readonly>
+                </div>
+                <div class="col">
+                    <label for="com">Compania </label>
+                    <input type="text" id="com" class="form-control" value="<?php echo $card["companyName"]?>"readonly>
+                  
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                <input type="number"  class="sr-only"  name="idCreditCard"value="<?php echo $card["id_creditCard"]?>"readonly>
+                <button  class="sr-only" type="submit"> Eliminar</button>
+                <!--btn btn-lg btn-danger btn-block -->
+                </div>
+            </div>
+        </form>
+     </div>
+    <?php } ?>
+<?php } ?>
+<div class="content-grande">
+    <form action="<?php echo FRONT_ROOT?>User/showPrincipalView">
+        <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >Volver Atras</button>
+        </form>
+</div>
+    
+    
+    
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MODAL-->
+
+    <div class="modal fade" id="cargaTarjeta"  tabindex="-1" aria-labelledby="cierresesionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" >Cargar Tarjeta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="content-grande">
+                            <div class="card">
+                            <h5 class="card-header">
+                            <a class="list-group-item list-group-item-action active">
+                                    <h5>Complete el Formulario</h5>
+                                </a>
+                            </h5>
+                            <div class="card-body">
+                                <form  method="post" action="<?php echo FRONT_ROOT?>User/addTarjeta">
+                                            <h5 class="card-title">Titular de la tarjeta</h5>
+                                            <input class="form-control" type="text" name="cardHolder"   minlength="6" required>
+                                        <div class="row">
+                                                <div class="col">
+                                                <h5 class="card-title">Numero de la tajeta</h5>           
+                                                       <th> <input class="form-control" type="text" name="numberCC1"  minlength="16" maxlength="16" pattern="[0-9]{16}" title="Deben ser [16 NUMEROS] "required></th>
+                                                </div>
+                                                <div class="col">  
+                                                    <h5 class="card-title">Fecha de expiracion</h5>
+                                                    <input class="form-control" type="date" name="expiration" required>
+                                                </div>
+                                        </div>
+                                        <h5 class="card-title">Compania</h5> 
+                                        <input type="radio" name="company" value="1"  id="master" required>
+                                        <label for="master">MasterdCard</label>
+                                        <input type="radio" name="company" value="2" id="visa" required >
+                                        <label for="visa">Visa</label>
+                         
+                                 
+                                    <label for="idUser">idUser </label>
+                                    <input class="form-control" type="number" id="idUser"  class="sr-only" name="idUser" value="<?php echo  $user["id_user"]?>"  readonly>
+                                    
+                                    <button  class="btn btn-lg btn-primary btn-block" type="submit"> Procesar Compra </button>
+                                </form>
+                            </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+        

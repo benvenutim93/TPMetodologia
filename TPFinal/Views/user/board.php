@@ -36,7 +36,7 @@ $user = $_SESSION["logged"];
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Cines </button>
                     </form>
                      <!-- F O R M -->
-                     <form action=" <?php echo FRONT_ROOT?>Ticket/showCards" class="form-singin">
+                     <form action=" <?php echo FRONT_ROOT?>User/showCards" class="form-singin">
                         <input type="number" class="sr-only" name ="idUser" value="<?php echo $user["id_user"]?>" readonly>
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Tarjetas </button>
                     </form>

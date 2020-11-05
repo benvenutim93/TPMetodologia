@@ -272,6 +272,23 @@ class UserController
             $this->showLoginView();
         }
     }
+    public function showListCards($cantidad,$idFuncion, $idUser)
+    {
+
+        $cardsList = $this->creditCardDao->getNumber_Company($idUser);
+        
+
+        require_once(USER_VIEWS . "tarjeta-compra-form.php");
+    }
+
+    public function showCards($idUser)
+    {
+
+        $cardsList = $this->creditCardDao->GetALL($idUser);
+        
+
+        require_once(USER_VIEWS . "user-card-list.php");
+    }
 
     public function Remove ($userName)
     {
@@ -290,10 +307,19 @@ class UserController
         $user = $this->userRepo->GetOne($id_user);
         $this->showListUsersView();
     }   
-   public function showPurchaseView($idUser){
+
+   public function showPurchaseView($idUser)
+   {
  
        $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
+
        require_once(PURCHASE_VIEWS . "purchase-view.php");
+   }
+
+   public function removeCreditCard ($idCreditCard)
+   {
+       $this->creditCardDao->removeCard($idCreditCard);
+       require_once(USER_VIEWS . "user-card-list.php");
    }
 
 

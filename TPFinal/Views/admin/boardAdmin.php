@@ -31,8 +31,8 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <h1 class="text-center">Gestion Contable</h1>
         <div class="row">
             <div class="col">
-                <form action="<?php echo FRONT_ROOT?>Admin/showCinemaListPurchase " class="form-signin">
-                    <button  class="btn btn-lg btn-warning btn-block" type="submit">Consultar Ventas</button>
+                <form  class="form-signin">
+                    <a  class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#consultar">Consultar Ventas</a>
                 </form>
             </div>
             <div class="col">
@@ -50,4 +50,30 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <button type="submit" class="btn btn-lg btn-primary btn-block">VOLVER</button>
     </form>
 </div>
+<!-- MODAL -->
+<div id="consultar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cierresesionLabel">Gestion Contable Ventas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿ Que criterio quiere consultar?
+            </div>
+            <div class="modal-footer">
+                    <form action="<?php FRONT_ROOT?>showCinemaListPurchase" method="GET">
+                        <button type="sumbit" class="btn btn-primary">Cines</button>
+                </form>
+            
+                <form action="<?php FRONT_ROOT?>" method="GET">
+                        <button type="sumbit" class="btn btn-danger">Peliculas</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
