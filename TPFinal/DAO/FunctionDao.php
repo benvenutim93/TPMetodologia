@@ -44,7 +44,7 @@
           $query ="select c.cinemaName,
           f.id_function,
           r.roomName,
-          r.id_room,
+          r.id_room as 'room',
           DATE_FORMAT(f.functionDate, '%Y-%m-%d') as functionDate,
           f.functionsHour 
           from $this->tableName as f

@@ -19,7 +19,7 @@ class FunctionController{
     }
 
   
-    public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour){
+    public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour, $idCinema){
 
         try
         {
@@ -28,7 +28,8 @@ class FunctionController{
                 {
                     $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
                 
-
+                    $nombre = $this->roomDao->GetnameCinema($idCinema)[0];//trae el nombre del cine para pasarle al index
+                    
                     $this->functionDao->Add($function);
                     $msgError = array( "description" => "La funcion se agrego con exito",
                             "type" => 2);
@@ -46,7 +47,8 @@ class FunctionController{
         }
         finally 
         {
-            require_once(ADMIN_VIEWS . "boardAdmin.php");
+            require_once(ROOM_VIEWS . "index.php");
+
         }
     }
 
@@ -77,8 +79,11 @@ class FunctionController{
 
     public function showFunctionList($idMovie,$movieTitle)
     {
-        $funciones = $this->functionDao->getFunctionsMovie($idMovie);
-
+        $funciones = $this->functionDao->getFunctionsMovie($idMovie); //todas las pelis con funcion
+        echo "<pre>";
+        var_dump($funciones);
+        echo "</pre>";
+        //$remaining= $this->functionDa0->getRemainingPlaces($SALA);
         require_once(USER_VIEWS . "functionsList.php");
     }   
 

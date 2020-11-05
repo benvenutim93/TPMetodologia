@@ -219,7 +219,7 @@ class MoviesController
     public function showFunctionView(){
         try{    
             $moviesList = array();
-            $moviesList = $this->moviesDao->getFunctionNoRepeat(); //Hacer query para q traiga la Peli con funcion (sin repetir)
+            $moviesList = $this->moviesDao->getFunctionNoRepeat(); 
 
             if ($moviesList)
                 require_once(USER_VIEWS . "functionsView.php");

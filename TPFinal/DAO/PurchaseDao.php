@@ -109,17 +109,14 @@
 
         public function getPurcharseCinema($dateInicial,$dateFinal,$idCinema)
         {
-           
-            var_dump($dateInicial);
-            var_dump($dateFinal);
-
-            try{
-                $query="select ifnull(avg(tablaAux.valor),0) as total
+                try{
+                $query="select ifnull(avg(tablaAux.valor),0) as total, tablaAux.name as 'cinemaName'
                 from (select 
                 cinemas.id_cine,
                 functions.id_function,
                 rooms.id_room,
-                rooms.ticketValue as valor
+                rooms.ticketValue as valor,
+                cinemas.cinemaName as name
                 from tickets 
                 inner join functions
                 on tickets.id_function = functions.id_function 

@@ -32,7 +32,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <div class="row">
             <div class="col">
                 <form action="<?php echo FRONT_ROOT?>Admin/showCinemaListPurchase " class="form-signin">
-                    <button  class="btn btn-lg btn-danger btn-block" type="submit">Consultar Ventas</button>
+                    <button  class="btn btn-lg btn-warning btn-block" type="submit">Consultar Ventas</button>
                 </form>
             </div>
             <div class="col">

@@ -45,22 +45,24 @@ class RoomController{
         $movie= new M_DAO();
         try
         {
-        $tienesalas= $this->roomDao->roomsExists($idCinema);
+            $tienesalas= $this->roomDao->roomsExists($idCinema);
 
-        foreach($tienesalas as $value){
-            if($value["Cantidad Salas"] == 0){
-                $msgError = array( "description" => "No se encontraron salas en el cine",
-                "type" => 1);
-                $this->index($idCinema,$msgError);
-            }
-            else{
-                $cineDao = new C_DAO();
-                $arrayR=$this->roomDao->GetAll($idCinema);
-                $cine = $cineDao->GetOne($idCinema);
-                $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
-                $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
-                $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema,$idRoom);
-                require_once(FUNCTION_VIEWS . "dateForm.php");
+            foreach($tienesalas as $value)
+            {
+                if($value["Cantidad Salas"] == 0)
+                {
+                    $msgError = array( "description" => "No se encontraron salas en el cine",
+                    "type" => 1);
+                    $this->index($idCinema,$msgError);
+                }
+                else{
+                    $cineDao = new C_DAO();
+                    $arrayR=$this->roomDao->GetAll($idCinema);
+                    $cine = $cineDao->GetOne($idCinema);
+                    $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
+                    $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
+                    $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema,$idRoom);
+                    require_once(FUNCTION_VIEWS . "dateForm.php");
                 }
             }
         }

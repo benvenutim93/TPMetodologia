@@ -33,7 +33,6 @@ class AdminController
     }
     public function showOPUsersView($msgError = "")
     {
-
         require_once(USER_VIEWS . "board.php");
     }
 
@@ -51,7 +50,7 @@ class AdminController
     public function showPurcharses($dateInicial,$dateFinal,$idCinema)
     {
         $salesList=$this->purchaseDao->getPurcharseCinema($dateInicial,$dateFinal,$idCinema);
-     
+        $sale = round($salesList[0]["total"],2); //saca decimales de la variable y desa solo 2
         require_once(PURCHASE_VIEWS ."salesList.php");
     }
 
