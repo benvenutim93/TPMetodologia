@@ -38,9 +38,12 @@ require_once(VIEWS_PATH . "errorView.php");}?>
              <button class="btn btn-lg btn-info btn-block" type="submit"> Registrarse </button>
      </form>
          <!-- F A C E B O O K -->
-     <form class="form-signin" action="" method="">
-             <button class="btn btn-lg btn-danger btn-block" type="submit"> Ingresar con Facebook</button>
+        <!--<form class="form-signin" action="" method="">
+             <button class="btn btn-lg btn-danger btn-block" type="submit"> Ingresar con Facebook</button>-->
+             <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v8.0&appId=426152348779421&autoLogAppEvents=1" nonce="znZ2gQYx"></script>
      </form>
+     <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
     <p class="mt-5 mb-3 ">&copy;<strong> Los supervivientes</strong> -2020</p>
     
 </div>

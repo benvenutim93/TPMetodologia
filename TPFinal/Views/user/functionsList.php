@@ -7,7 +7,7 @@
         </a>
         <a href="#" class="list-group-item list-group-item-action">
             <!-- ACA VA EL FOREARCH --> 
-            <h4><?php echo $titulo;?></h4> 
+            <h4><?php echo $movieTitle;?></h4> 
             <?php foreach ($funciones as $movie){
             ?>
                     <form action="<?php echo FRONT_ROOT?>Ticket/showListCards"  class="list-group-item list-group-item-info ">

@@ -1,4 +1,3 @@
-
             <div class="content-chico">
                 <form class="form-signin" action= "<?php echo FRONT_ROOT?>Function/Add" method="GET">
                             <!--Cambiar logo -->

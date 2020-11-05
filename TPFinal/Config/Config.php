@@ -11,6 +11,7 @@ define("ADMIN_VIEWS", VIEWS_PATH . "admin/");
 define("USER_VIEWS", VIEWS_PATH . "user/");
 define("CINEMA_VIEWS", VIEWS_PATH . "cinema/");
 define("ROOM_VIEWS", VIEWS_PATH . "room/");
+define("PURCHASE_VIEWS", VIEWS_PATH . "purcharse/");
 define("DISCOUNT_VIEWS", VIEWS_PATH . "discount/");
 define("FUNCTION_VIEWS", VIEWS_PATH . "function/");
 define("API_KEY", "aa337b46aed830028b32fc244f2ba666");

@@ -72,7 +72,7 @@ class TicketController
        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
         //devuelve un array que contiene los distintos qr de los tikects
         
-        require_once(USER_VIEWS . "purchaseCompleted.php");
+        require_once(USER_VIEWS . "board.php");
     }
 }
 

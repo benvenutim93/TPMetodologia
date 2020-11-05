@@ -77,12 +77,10 @@ class FunctionController{
 
     public function showFunctionList($idMovie,$movieTitle)
     {
-        $id =  $idMovie;
-        $titulo =$movieTitle;
-        $funciones = $this->functionDao->getFunctionsMovie($id);
+        $funciones = $this->functionDao->getFunctionsMovie($idMovie);
 
         require_once(USER_VIEWS . "functionsList.php");
-}   
+    }   
 
 
 

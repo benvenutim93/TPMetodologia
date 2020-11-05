@@ -3,11 +3,23 @@ namespace Controllers;
 
 Use Models\Admin as Admin;
 Use Models\Cinema as Cinema;
-Use DAO\UserDao as A_Repo;
+Use DAO\UserDao as U_DAO;
+use DAO\PurchaseDao as P_DAO;
+use DAO\CinemaDao as C_DAO;
+
 
 
 class AdminController
 {
+    private $userDao;
+    private $purchaseDao;
+    private $cinemaDao;
+    public function __construct()
+    {
+            $this->userDao= new U_DAO();
+            $this->purchaseDao= new P_DAO();
+            $this->cinemaDao = new C_DAO();
+    }
 
 
     public function showPrincipalView ($msgError = "")
@@ -21,7 +33,26 @@ class AdminController
     }
     public function showOPUsersView($msgError = "")
     {
+
         require_once(USER_VIEWS . "board.php");
+    }
+
+    public function showCinemaListPurchase()
+    {
+        $arrayC= $this->cinemaDao->GetAll();
+        require_once(PURCHASE_VIEWS . "eleccion-cinema.php");
+    }
+
+    public function showFormVentas($idCinema)
+    {
+        require_once(PURCHASE_VIEWS . "form-ventas.php");
+    }
+
+    public function showPurcharses($dateInicial,$dateFinal,$idCinema)
+    {
+        $salesList=$this->purchaseDao->getPurcharseCinema($dateInicial,$dateFinal,$idCinema);
+     
+        require_once(PURCHASE_VIEWS ."salesList.php");
     }
 
     public function loginForm ($msgError = "")
@@ -29,20 +60,5 @@ class AdminController
         require_once(ADMIN_VIEWS . "adminLogIn.php");
     }
 
-    public function login($mail,$pass)
-    {
-        
-        $repo = new A_Repo();
-        $array = $repo->GetOneMail($mail);
-        foreach($array as $value)
-        {
-            if($value["pass"]== $pass && $value["mail"]== $mail && $value["id_userType"] == 1)
-            {
-                $_SERVER["logger"]=$value;
-               $this->showPrincipalView();
-            }
-        }
-
-    }
 }
 ?>

@@ -10,6 +10,11 @@
         private $tableName = "purchases";
         private $connection;
 
+        public function __construct()
+        {
+              
+        }
+
         public function add($total,$idCreditCard,$date){
                 
             try{
@@ -100,6 +105,43 @@
                 throw $ex;
             }
             
+        }
+
+        public function getPurcharseCinema($dateInicial,$dateFinal,$idCinema)
+        {
+           
+            var_dump($dateInicial);
+            var_dump($dateFinal);
+
+            try{
+                $query="select ifnull(avg(tablaAux.valor),0) as total
+                from (select 
+                cinemas.id_cine,
+                functions.id_function,
+                rooms.id_room,
+                rooms.ticketValue as valor
+                from tickets 
+                inner join functions
+                on tickets.id_function = functions.id_function 
+                inner join rooms
+                on rooms.id_room = functions.id_room
+                inner join cinemas
+                on rooms.id_cine= cinemas.id_cine
+                inner join purchases
+                on purchases.id_purchase = tickets.id_purchase
+                where cinemas.id_cine=:idCinema  and purchases.purchaseDate between :dateInicial and :dateFinal)tablaAux;";
+                
+                        $parameters["idCinema"]= $idCinema;
+                        $parameters["dateInicial"]= $dateInicial;
+                        $parameters["dateFinal"]= $dateFinal;
+               
+                $this->connection = Connection :: GetInstance();
+                return $this->connection->Execute($query,$parameters);
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
         
 

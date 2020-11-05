@@ -31,7 +31,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         <h1 class="text-center">Gestion Contable</h1>
         <div class="row">
             <div class="col">
-                <form action="<?php echo FRONT_ROOT?> HOLA ACA TOY " class="form-signin">
+                <form action="<?php echo FRONT_ROOT?>Admin/showCinemaListPurchase " class="form-signin">
                     <button  class="btn btn-lg btn-danger btn-block" type="submit">Consultar Ventas</button>
                 </form>
             </div>

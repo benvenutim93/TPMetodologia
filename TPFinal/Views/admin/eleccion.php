@@ -1,3 +1,5 @@
+<?php if (isset($msgError)){
+require_once(VIEWS_PATH . "errorView.php");}?>
 <div class="content-grande">
 
 <div class="form-signin">
