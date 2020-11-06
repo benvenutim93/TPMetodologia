@@ -452,7 +452,6 @@
         
         public function getFunctionNoRepeat()
         {
-          
                 try
                 {
                     $query ="select
@@ -463,12 +462,23 @@
                     $this->tableName.original_language,
                     $this->tableName.vote_average,
                     $this->tableName.popularity,
-                    $this->tableName.poster_path
+                    $this->tableName.poster_path,
+                    functions.id_function,
+                    rooms.roomName,
+                    DATE_FORMAT(functions.functionDate, '%Y-%m-%d') as functionDate,
+                    functions.functionsHour,
+                    cinemas.cinemaName
                     from $this->tableName 
                     inner join (select distinct fa.id_movie as id
                                 from functions as fa
                                 )as f
-                    on $this->tableName.id_movie = f.id ;";
+                    on $this->tableName.id_movie = f.id 
+                    inner join functions
+                    on functions.id_movie = movies.id_movie
+                    inner join rooms
+                    on rooms.id_room = functions.id_room
+                    inner join cinemas
+                    on cinemas.id_cine = rooms.id_cine;";
     
                     $this->connection = Connection::GetInstance();
     
@@ -481,6 +491,53 @@
                     throw $ex;
                 }
         }
+
+        public function getMovieFunctions($movieTitle)
+        {
+                try
+                {
+                    $query ="select
+                    $this->tableName.id_movie,
+                    $this->tableName.title,
+                    $this->tableName.overview,
+                    $this->tableName.adult,
+                    $this->tableName.original_language,
+                    $this->tableName.vote_average,
+                    $this->tableName.popularity,
+                    $this->tableName.poster_path,
+                    functions.id_function,
+                    rooms.roomName,
+                    DATE_FORMAT(functions.functionDate, '%Y-%m-%d') as functionDate,
+                    functions.functionsHour,
+                    cinemas.cinemaName
+                    from $this->tableName 
+                    inner join (select distinct fa.id_movie as id
+                                from functions as fa
+                                )as f
+                    on $this->tableName.id_movie = f.id 
+                    inner join functions
+                    on functions.id_movie = movies.id_movie
+                    inner join rooms
+                    on rooms.id_room = functions.id_room
+                    inner join cinemas
+                    on cinemas.id_cine = rooms.id_cine
+                    where $this->tableName.title = :movieTitle
+                    order by functions.functionDate;";
+
+                    $parameters["movieTitle"]=$movieTitle;
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $result = $this->connection->Execute($query,$parameters);
+    
+                    return $result;
+                }
+                catch (\PDOException $ex)
+                {
+                    throw $ex;
+                }
+        }
+
 
         
     }

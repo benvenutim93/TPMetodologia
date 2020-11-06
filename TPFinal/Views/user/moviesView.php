@@ -47,29 +47,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                                             <?php }?>
                                         </ul> </li>
                                         <br>
-                                </div>
-                               
-                                <div class="col">
-                                 <div class="row">
-                                    <!-- F E C H A-->
-                                    <div class="col">
-                                    <h5 class="text-center">Funcion:</h5>
-                                   <p class="text-center"> <?php echo  $movie["functionDate"];?></p> </div>
-                                   <div class="col">
-                                       <h5 class="text-center">Hora Funcion</h5>
-                                       <p class="text-center"><?php echo  $movie["functionsHour"];?></p>
-                                   </div>
-                                    <!-- V O  T O S -->
-                                    <div class="col">
-                                    <h5 class="text-center" >Cine:</h5>
-                                    <P class="text-center"> <?php echo $movie["cinemaName"];?></P>  </ul></div>
-                                    <!-- P O P U L A R I D A D-->
-                                    <div class="col">
-                                    <h5 class="text-center">Popularidad:</h5>
-                                    <p class="text-center"> <?php echo $movie["popularity"];?></p>  </div>
-                                     </div>
-                                </div>
-                            </div>
+                                </div>    
                 </td>
 
                 </tr>

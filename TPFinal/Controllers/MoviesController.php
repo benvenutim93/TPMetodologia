@@ -4,17 +4,19 @@ namespace Controllers;
 use Models\Movie as Movie;
 use DAO\MovieDao as M_DAO;
 use DAO\GenreDAO as G_DAO;
+use DAO\FunctionDao as F_DAO;
 
 class MoviesController
 {
     private $moviesDao;
     private $genreDao;
-    
+    private $functionDao;
 
     public function __construct()
     {
         $this->moviesDao = new M_DAO();
         $this->genreDao = new G_DAO();
+        $this->functionDao=new F_DAO();
         try
         {
             $genresXmovie = $this->genreDao->GetGenresXmovies();
@@ -53,8 +55,8 @@ class MoviesController
     {
         try{    
             $moviesList = array();
-            $moviesList = $this->moviesDao->getMoviesFunctions();
-
+            $array = $this->moviesDao->getMoviesFunctions();
+            $moviesList=$this->verifyFucntions($array);
             if ($moviesList)
                 require_once(USER_VIEWS . "moviesView.php");
             else
@@ -217,14 +219,15 @@ class MoviesController
     } 
 
     public function showFunctionView(){
-        try{    
+        try{
             $moviesList = array();
-            $moviesList = $this->moviesDao->getFunctionNoRepeat(); 
+            $array = $this->moviesDao->getFunctionNoRepeat(); 
+            $moviesList = $this->verifyFucntions($array);
 
             if ($moviesList)
                 require_once(USER_VIEWS . "functionsView.php");
             else
-            {           
+            {
                 $msgError = array( "description" => "No hay funciones por el momento",
                 "type" => 1);
                 require_once(USER_VIEWS . "board.php");
@@ -238,6 +241,29 @@ class MoviesController
             require_once(USER_VIEWS . "board.php");
         }
     }
+    public function verifyFucntions($arrayF)
+    {
+        
+        $arrayNuevo= array();
+        array_push($arrayNuevo ,array_shift($arrayF));
+        $flag = false;
+        
+
+        foreach($arrayF as $value)
+        {
+            foreach($arrayNuevo as $aux)
+            {
+                if($aux["title"] == $value["title"])
+                    $flag = true;
+            }
+            if($flag == false)
+                array_push($arrayNuevo,$value);
+
+            $flag= false;
+        }
+        return $arrayNuevo;
+    }
+    
 }
 
 ?>

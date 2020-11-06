@@ -1,8 +1,6 @@
 <?php $user = $_SESSION["logged"]["id_user"]?>
 
-<div class="content-grande">
-<font color="red"> <h1>Falta HACER  verificar Cantidad de lugares </h1></font>
-</div>
+
 <div class="content-xxl">
 
     <div class="list-group">
@@ -35,7 +33,7 @@
                             <div class="col">
                                 <!-- Input Cantidad entradas -->
                                 <label for="">Entradas</label>
-                                <input class="form-control" type="number" min="1" max ="5" name="cantidad" placeholder="Ingrese cantidad de entradas a comprar." min="0" required>
+                                <input class="form-control" type="number" min="1" max=<?php echo $movie["disponible"];?> name="cantidad" placeholder="Entradas disponibles <?php echo $movie["disponible"];?>"  required>
                             </div>
                             <div class="col">
                                 <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>

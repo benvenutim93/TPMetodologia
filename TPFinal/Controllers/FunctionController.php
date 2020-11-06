@@ -5,17 +5,19 @@ use Models\Functions as Funct;
 use DAO\FunctionDao as F_DAO;
 use DAO\RoomDao as R_DAO;
 use \Datetime as Datetime;
-
+use DAO\MovieDao as M_DAO;
 
 class FunctionController{
 
     private $functionDao;
     private $roomDao;
+    private $movieDao;
 
     public function __construct()
     {
         $this->functionDao = new F_DAO();
         $this->roomDao= new R_DAO();
+        $this->movieDao = new M_DAO();
     }
 
   
@@ -79,11 +81,27 @@ class FunctionController{
 
     public function showFunctionList($idMovie,$movieTitle)
     {
-        $funciones = $this->functionDao->getFunctionsMovie($idMovie); //todas las pelis con funcion
-        echo "<pre>";
-        var_dump($funciones);
-        echo "</pre>";
+        //$funciones = $this->functionDao->getFunctionsMovie($idMovie); //todas las pelis con funcion
         //$remaining= $this->functionDa0->getRemainingPlaces($SALA);
+
+        $funciones = array();
+        $array = $this->movieDao->getMovieFunctions($movieTitle); 
+
+        $arrayCantidad=$this->functionDao->getCantTicketsFunctions();//devuelve la cantidad de tickets comprados de las diferentes funsiones
+        foreach($arrayCantidad as $value)
+        {
+            $resta=$value["seatsCapacity"]-$value["Cantidad"];
+            if($resta>0) 
+            {
+                foreach($array as $movie){
+                if($movie["id_function"] == $value["id_function"] && $movie["functionDate"] >= date("Y-m-d"))
+                {
+                        $movie["disponible"]=$resta;
+                        array_push($funciones,$movie);
+                }
+            }
+            }
+        }
         require_once(USER_VIEWS . "functionsList.php");
     }   
 

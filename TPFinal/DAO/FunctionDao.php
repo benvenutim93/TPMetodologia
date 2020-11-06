@@ -37,6 +37,37 @@
         }
      }
 
+     public function getCantTicketsFunctions()
+     {
+      
+        try{
+            $query = "  select 
+                            functions.id_function,
+                            ifnull(count(id_ticket),0) as Cantidad,
+                            rooms.seatsCapacity,
+                            cinemas.cinemaName,
+                            rooms.roomName,
+                            DATE_FORMAT(functions.functionDate, '%Y-%m-%d') as functionDate,
+                            functions.functionsHour
+                        from tickets
+                        right join functions
+                        on functions.id_function = tickets.id_function
+                        inner join rooms
+                        on rooms.id_room= functions.id_room
+                        inner join cinemas
+                        on cinemas.id_cine = rooms.id_cine
+                        group by functions.id_function;";
+            
+            $this->connection = Connection :: GetInstance();
+            return $this->connection->Execute($query);
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+     }
+
+     
      public function getFunctionsMovie($idMovie)
      {
       try
