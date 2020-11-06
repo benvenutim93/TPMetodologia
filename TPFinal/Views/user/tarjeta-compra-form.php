@@ -1,10 +1,10 @@
 <?php 
  $user =$_SESSION["logged"];
- 
+   
 ?>
 
 
-<?php if(isset($cardsList)) { ?>
+<?php if($cardsList) { ?>
 <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
             <h2>Listado de Tarjetas (Falta hacer Query para traer tarjeta y la funcion para comprar)</h2>
@@ -34,8 +34,8 @@
                             </div>
                         </div>
                     </form>
-            <?php }}
-            else echo"como no vas a tener tarjetas "; ?>
+            <?php } ?>
+         
                   
            
         </a>
@@ -43,7 +43,18 @@
         <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >Volver Atras</button>
         </form>
     </div>
+   <?php } else{ ?>
+                <div class="content-grande">
+                    <div class="row">
+                    <div class="col">
+                        <font color="red"> <h1>No Hay tarjetas cargadas</h1>
+                        <p>Carge alguna tarjeta</p></font></div>
+                    </div>
+                    <a href="<?php echo FRONT_ROOT?>User/showPrincipalView">Aceptar</a>
+                
+                </div>
 
+            <?php } ?>
 
 
            
