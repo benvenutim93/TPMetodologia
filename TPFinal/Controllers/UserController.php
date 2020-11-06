@@ -96,6 +96,23 @@ class UserController
  
     }
 
+    public function addOnlyTarjeta($cardHolder,$numberCC,$expiration,$company,$idUser){
+        try
+        {  
+            $tarjeta = new CreditCard($cardHolder,$numberCC,$expiration,$company);
+            $this->creditCardDao->Add($tarjeta,$idUser);
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+        }
+
+        $this->showCards($idUser);
+ 
+    }
+
     public function login ($mail, $password)
     {
         try
@@ -277,15 +294,13 @@ class UserController
 
         $cardsList = $this->creditCardDao->getNumber_Company($idUser);
         
-
         require_once(USER_VIEWS . "tarjeta-compra-form.php");
     }
 
     public function showCards($idUser)
     {
-
         $cardsList = $this->creditCardDao->GetALL($idUser);
-        
+        $companiesList= $this->creditCardDao->getCompanies();
 
         require_once(USER_VIEWS . "user-card-list.php");
     }

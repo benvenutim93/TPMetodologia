@@ -88,6 +88,23 @@
         }
     }
 
+    public function getCompanies(){
+        try
+        {
+            $query= "select * from companies;";
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query);
+
+            return $result;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+
     public function removeCard($idCreditCard){
         try
         {
