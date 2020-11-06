@@ -98,7 +98,7 @@
      }
 
 
-     public function GetMovieDataForFunction ($idFunction)
+     public function GetMovieDataForFunction ($idFunction,$cantidad)
      {
         try
         {
@@ -118,9 +118,12 @@
             on cinemas.id_cine = rooms.id_cine
             inner join tickets
             on tickets.id_function = functions.id_function
-            where functions.id_function = :id_function;";
+            where functions.id_function = :id_function
+            order by tickets.id_ticket desc
+            limit $cantidad;";
 
-            $parameters ["id_function"] = $idFunction; 
+            $parameters ["id_function"] = $idFunction;
+
   
             $this->connection = Connection::GetInstance();
   

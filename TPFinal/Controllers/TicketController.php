@@ -38,19 +38,23 @@ class TicketController
 
     public function generateTicket($cantidad ,$idFuncion,$idPurchase){
         $array= array();
+        
         for($i=0; $i < $cantidad;$i++){
-            $id_funcion =$idFuncion;
-            $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
+            $this->ticketDao->add($idFuncion,$idPurchase);
+        }
+        $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
             foreach ($function as $value)
             {
                 $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"],$value["id_ticket"]);
-                $imageString= $qr->writeString($value);
+                $qr->setEncoding('UTF-8');
+               
+                $path =ROOT.'png/qrcode'.$value["id_ticket"].'.png';
+                $qr->writeFile( $path);      
                 
-                array_push($array,$imageData = base64_encode($imageString));
-                //echo '<img src="data:image/png;base64,'.$imageData.'">';
+                array_push($array,$path);
             }
-        $this->ticketDao->add($id_funcion,$idPurchase);
-        }
+        
+
         return $array;
     }
 
@@ -69,7 +73,7 @@ class TicketController
         $idPurchase=$idUltimaCompra[0]["id_purchase"];
        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
         //devuelve un array que contiene los distintos qr de los tikects
-        $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
+        $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
         $this->sendMail($qrarray,$function);
         
         require_once(USER_VIEWS . "board.php");
@@ -98,15 +102,16 @@ class TicketController
             $mail->addAddress('benvenutim93@gmail.com', 'Marian');               // mail / nombre
             $mail->addAddress('lautarofullone@gmail.com', 'Lauta ');           // mail / nombre
             $mail->addAddress('ropeque19@hotmail.com', 'Rodri');               // mail / nombre
-            $mail->addAddress('nicolas-jbo@hotmail.com', 'Nico');               // mail / nombr
-        
+            $mail->addAddress('nicolas-jbo@hotmail.com', 'Nico'); 
+            foreach($qrArray as $qr)
+                $mail->addAttachment($qr);
         //
-         $html='<h1>Usted ah realizado una compra mediante la pagina Los Supervivientes</h1> <p>'. var_dump($function) . '<img src="data:image/png;base64,'.$qrArray[0].'">'; ;
+         $html='<h1>Usted ha realizado una compra mediante la pagina Los Supervivientes</h1>'; 
             // Content
             $mail->isHTML(true);                                  // Set email fo
             $mail->Subject = 'Asunto pruebita de mail con PHPMailer';// Asunto
             $mail->Body    = $html;                                     //Body del mail
-        
+            
             $mail->send();
             echo '<script>
             alert("El mensaje fue enviado correctamente");

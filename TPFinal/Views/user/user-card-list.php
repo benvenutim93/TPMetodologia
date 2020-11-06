@@ -93,7 +93,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title">Numero de la tajeta</h5>           
-                                            <th> <input class="form-control" type="text" name="numberCC1"  minlength="16" maxlength="16" pattern="[0-9]{16}" title="Deben ser [16 NUMEROS] "required></th>
+                                            <th> <input class="form-control" type="number" name="numberCC1"  min="0" max="9999999999999999" pattern="[0-9]{16}" title="Deben ser [16 NUMEROS] "required></th>
                                     </div>
                                     <div class="col">  
                                         <h5 class="card-title">Fecha de expiracion</h5>

@@ -112,7 +112,7 @@
         public function getPurcharseCinema($dateInicial,$dateFinal,$idCinema)
         {
                 try{
-                $query="select ifnull(avg(tablaAux.valor),0) as total, tablaAux.name as 'cinemaName'
+                $query="select ifnull(tablaAux.valor,0) as total, tablaAux.name as 'cinemaName'
                 from (select 
                 cinemas.id_cine,
                 functions.id_function,
