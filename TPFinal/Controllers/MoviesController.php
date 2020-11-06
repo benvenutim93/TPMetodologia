@@ -57,8 +57,15 @@ class MoviesController
             $moviesList = array();
             $array = $this->moviesDao->getMoviesFunctions();
             $moviesList=$this->verifyFucntions($array);
-            if ($moviesList)
+
+            if ($moviesList){
+                foreach ($moviesList as $movie)
+            {
+                $movie["adult"] = $this->changeAdult($movie["adult"]);
+                $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+            }
                 require_once(USER_VIEWS . "moviesView.php");
+            }
             else
             {      
                 $msgError = array( "description" => "No hay funciones por el momento",
@@ -171,7 +178,7 @@ class MoviesController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showSearchMovieView();
+            $this->showSearchMovieView($msgError);
         }
        
     } 
@@ -243,26 +250,52 @@ class MoviesController
     }
     public function verifyFucntions($arrayF)
     {
-        
-        $arrayNuevo= array();
-        array_push($arrayNuevo ,array_shift($arrayF));
-        $flag = false;
-        
-
-        foreach($arrayF as $value)
+        if ($arrayF)
         {
-            foreach($arrayNuevo as $aux)
-            {
-                if($aux["title"] == $value["title"])
-                    $flag = true;
-            }
-            if($flag == false)
-                array_push($arrayNuevo,$value);
+            $arrayNuevo= array();
+            array_push($arrayNuevo ,array_shift($arrayF));
+            $flag = false;
 
-            $flag= false;
+
+            foreach($arrayF as $value)
+            {
+                foreach($arrayNuevo as $aux)
+                {
+                    if($aux["title"] == $value["title"])
+                        $flag = true;
+                }
+                if($flag == false)
+                    array_push($arrayNuevo,$value);
+
+                $flag= false;
+            }
+            return $arrayNuevo;
         }
-        return $arrayNuevo;
+        else return false;
     }
+    function changeLanguage ($language)
+{
+    switch ($language)
+    {
+        case "en": return "English";
+            break;
+        case "ja": return "Japones";
+            break;
+        case "ko": return "Coreano";
+            break;
+        case "it": return "Italiano";
+            break;
+        case "es": return "Español";
+            break;
+    }
+}
+
+function changeAdult ($adult)
+{
+    if ($adult)
+    return "+18";
+    else return "ATP";
+}
     
 }
 

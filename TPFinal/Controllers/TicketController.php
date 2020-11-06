@@ -2,6 +2,9 @@
 namespace Controllers;
 
 require 'vendor/autoload.php';
+require('Phpmailer/Exception.php');
+require('Phpmailer/SMTP.php');
+require('Phpmailer/PHPMailer.php');
 
 use Models\Ticket as Ticket;
 use DAO\TicketDao as TicketDao;
@@ -11,6 +14,8 @@ use DAO\FunctionDao as F_DAO;
 use DAO\CreditCardDao as C_DAO;
 use DAO\PurchaseDao as P_DAO;
 use DAO\RoomDao as R_DAO;
+use PHPMailer\PHPMailer\PHPMailer as PHPMailer ;
+use PHPMailer\PHPMailer\Exception as MailException;
 
 
 class TicketController
@@ -32,13 +37,13 @@ class TicketController
     }
 
     public function generateTicket($cantidad ,$idFuncion,$idPurchase){
-    $array= array();
+        $array= array();
         for($i=0; $i < $cantidad;$i++){
             $id_funcion =$idFuncion;
             $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
             foreach ($function as $value)
             {
-                $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"]);
+                $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"],$value["id_ticket"]);
                 $imageString= $qr->writeString($value);
                 
                 array_push($array,$imageData = base64_encode($imageString));
@@ -64,8 +69,53 @@ class TicketController
         $idPurchase=$idUltimaCompra[0]["id_purchase"];
        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
         //devuelve un array que contiene los distintos qr de los tikects
+        $function = $this->functionDao->GetMovieDataForFunction($idFuncion);
+        $this->sendMail($qrarray,$function);
         
         require_once(USER_VIEWS . "board.php");
+    }
+
+    public function sendMail($qrArray,$function)
+    {
+        $mail= new PHPMailer(true);
+
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output                                                               | 0 PARA NO MOSTRAR ERRORES 
+            $mail->isSMTP();                                            // Send using SMTP                                                          | NO TOCAR
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through|NO TOCAR
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication                                               | NO TOCAR
+            $mail->Username   = 'supervivientes.iv.2020@gmail.com';         // SMTP username                                                        | MAIL DONDE INGRESA PARA ENVIAR LOS DEMAS
+            $mail->Password   = '123super456';                               // SMTP password                                                       | CONTRASEÑA DEL MAIL
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged          | NO TOCAR
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above  | NO TOCAR
+        
+            //Desde que mail se manda (TIENE QUE SER EL MISMO DE LA LINEA 18)
+           $mail->setFrom('supervivientes.iv.2020@gmail.com', 'Supervivientes 2020');
+           //A donde se manda 
+         
+            $mail->addAddress('benvenutim93@gmail.com', 'Marian');               // mail / nombre
+            $mail->addAddress('lautarofullone@gmail.com', 'Lauta ');           // mail / nombre
+            $mail->addAddress('ropeque19@hotmail.com', 'Rodri');               // mail / nombre
+            $mail->addAddress('nicolas-jbo@hotmail.com', 'Nico');               // mail / nombr
+        
+        //
+         $html='<h1>Usted ah realizado una compra mediante la pagina Los Supervivientes</h1> <p>'. var_dump($function) . '<img src="data:image/png;base64,'.$qrArray[0].'">'; ;
+            // Content
+            $mail->isHTML(true);                                  // Set email fo
+            $mail->Subject = 'Asunto pruebita de mail con PHPMailer';// Asunto
+            $mail->Body    = $html;                                     //Body del mail
+        
+            $mail->send();
+            echo '<script>
+            alert("El mensaje fue enviado correctamente");
+            </script>
+            ';// . REDIRECCIONAMIENTO;
+        } catch (MailException $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+        
     }
 }
 

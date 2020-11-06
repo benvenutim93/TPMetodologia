@@ -31,6 +31,10 @@
                                 <input type="number" class="sr-only" value="<?php echo $card["id_creditCard"];?>" name="idCreditCard">
                                 <input type="date" class="sr-only" value="<?php echo date("Y-m-d")?>" name="date">                        
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
+                                <form action="">
+                                <button type="sumbit" class="btn btn-lg btn-danger btn-block" >elimiinar</button>
+                                </form>
+
                             </div>
                         </div>
                     </form>

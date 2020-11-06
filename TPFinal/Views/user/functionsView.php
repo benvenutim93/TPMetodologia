@@ -34,10 +34,10 @@
                             <li> <p ><?php echo $movie["overview"];?></p> </li></ul> 
                             <!-- A D U L T-->
                             <h5>Adult</h5><ul>
-                            <li> <p> <?php echo changeAdult($movie["adult"]);?></p>   </li></ul> 
+                            <li> <p> <?php echo $movie["adult"];?></p>   </li></ul> 
                             <!-- L E N G U A J E -->
                             <h5>Lenguaje</h5><ul>
-                            <li><p> <?php echo changeLanguage($movie["original_language"]);?></p> </li></ul> 
+                            <li><p> <?php echo $movie["original_language"];?></p> </li></ul> 
                             
                             <div class="row">
                                 <div class="col">
@@ -74,29 +74,7 @@
 <?php
 
 
-function changeLanguage ($language)
-{
-    switch ($language)
-    {
-        case "en": return "English";
-            break;
-        case "ja": return "Japones";
-            break;
-        case "ko": return "Coreano";
-            break;
-        case "it": return "Italiano";
-            break;
-        case "es": return "Español";
-            break;
-    }
-}
 
-function changeAdult ($adult)
-{
-    if ($adult)
-    return "+18";
-    else return "ATP";
-}
 
 
 ?>

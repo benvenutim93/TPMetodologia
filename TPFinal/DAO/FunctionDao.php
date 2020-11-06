@@ -107,7 +107,8 @@
             functions.functionsHour,
             movies.title as title,
             rooms.roomName as roomName,
-            cinemas.cinemaName as cinemaName
+            cinemas.cinemaName as cinemaName,
+            tickets.id_ticket
             from $this->tableName
             inner join movies
             on functions.id_movie = movies.id_movie
@@ -115,7 +116,9 @@
             on rooms.id_room = functions.id_room
             inner join cinemas
             on cinemas.id_cine = rooms.id_cine
-            where functions.id_function = :id_function";
+            inner join tickets
+            on tickets.id_function = functions.id_function
+            where functions.id_function = :id_function;";
 
             $parameters ["id_function"] = $idFunction; 
   

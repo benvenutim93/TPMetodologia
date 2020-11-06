@@ -123,10 +123,10 @@ class QrCode implements QrCodeInterface
     /**
      * @param string $text
      */
-    public function __construct($movieName, $hour, $date, $roomName, $cinemaName)
+    public function __construct($movieName, $hour, $date, $roomName, $cinemaName,$id_ticket)
     {
 
-        $this->text = "Pelicula: $movieName Hora: $hour Fecha: $date Sala: $roomName Cine: $cinemaName";
+        $this->text = "Pelicula: $movieName - Hora: $hour - Fecha: $date - Sala: $roomName  - Cine: $cinemaName  - Ticket: $id_ticket";
         $this->size = 300;
         
         $this->errorCorrectionLevel = new ErrorCorrectionLevel(ErrorCorrectionLevel::LOW);
