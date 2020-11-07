@@ -62,8 +62,6 @@ class TicketController
     
     public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date)
     {
-      
-
         $price = $this->roomDao->getPriceRoom($idFuncion);
          
        $precioSala=$price[0]["Precio"];
@@ -74,11 +72,9 @@ class TicketController
     
         $idPurchase=$idUltimaCompra[0]["id_purchase"];
        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
- 
+        //devuelve un array que contiene los distintos qr de los tikects
         $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
-
-       
-       $this->sendMail($qrarray,$function);
+        $this->sendMail($qrarray,$function);
         
         require_once(USER_VIEWS . "board.php");
     }
@@ -86,7 +82,7 @@ class TicketController
     public function sendMail($qrArray,$function)
     {
         $mail= new PHPMailer(true);
-        $userlogged=$_SESSION["logged"];
+
 
         try {
             //Server settings
@@ -103,48 +99,20 @@ class TicketController
            $mail->setFrom('supervivientes.iv.2020@gmail.com', 'Supervivientes 2020');
            //A donde se manda 
          
-            //$mail->addAddress('benvenutim93@gmail.com', 'Marian');               // mail / nombre
-            //$mail->addAddress('lautarofullone@gmail.com', 'Lauta ');           // mail / nombre
-            //$mail->addAddress('ropeque19@hotmail.com', 'Rodri');               // mail / nombre
-            $mail->addAddress($userlogged["mail"], $userlogged["userName"]); 
-           
-            //QR's
+            $mail->addAddress('benvenutim93@gmail.com', 'Marian');               // mail / nombre
+            $mail->addAddress('lautarofullone@gmail.com', 'Lauta ');           // mail / nombre
+            $mail->addAddress('ropeque19@hotmail.com', 'Rodri');               // mail / nombre
+            $mail->addAddress('nicolas-jbo@hotmail.com', 'Nico'); 
             foreach($qrArray as $qr)
                 $mail->addAttachment($qr);
-   
-            
-       
-         $html='<h1>Usted ha realizado una compra mediante la pagina Los Supervivientes</h1><br>
-                <p>En el mail se adjuntaron los codigos <strong>QR</strong> que necesitara para acceder a la funcion.</p><br>'; 
-         $FuncionDatos = '<h1><strong><font color=red>Datos de la Compra</strong></font></h1><br>
-                            <h2>Pelicula : <font color=red><em>'. $function[0]['title'] .'</font></em></h2>'.
-                            '<h2>Cine: '. $function[0]['cinemaName'].'</h2>'.
-                            '<h2>Sala: '. $function[0]['roomName'] .'</h2>'.
-                            '<h2>Fecha de Funcion: '.$function[0]['functionDate'] .'</h2> '.
-                           ' <h2>Horario:<font color=red> '. $function[0]['functionsHour'] .'</font></h2>'.
-                           '<h4>Gracias por su compra.Disfrute de la funcion</h4>';
-        
-            $mail->isHTML(true);                                         // Set email fo
-            $mail->Subject = 'Compra Supervivientes Entradas';           // Asunto
-             $mail->Body    = $html.$FuncionDatos;                       //Body del mail
+        //
+         $html='<h1>Usted ha realizado una compra mediante la pagina Los Supervivientes</h1>'; 
+            // Content
+            $mail->isHTML(true);                                  // Set email fo
+            $mail->Subject = 'Asunto pruebita de mail con PHPMailer';// Asunto
+            $mail->Body    = $html;                                     //Body del mail
             
             $mail->send();
-
-            //Borro Qr generados
-            foreach($qrArray as $qr){
-                $filename = $qr;
-
-                if (file_exists($filename)) {
-                    $success = unlink($filename);
-
-                    if (!$success) {
-                        throw new Exception("Cannot delete $filename");
-                    }
-                }
-
-            }
-
-
             echo '<script>
             alert("El mensaje fue enviado correctamente");
             </script>
@@ -152,7 +120,6 @@ class TicketController
         } catch (MailException $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
- 
         
     }
 }
