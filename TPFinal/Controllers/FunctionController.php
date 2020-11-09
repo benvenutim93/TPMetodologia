@@ -48,7 +48,7 @@ class FunctionController{
             require_once(VIEWS_PATH . "errorView.php");
         }
         finally 
-        {
+        {   $arrayR=$this->roomDao->GetAll($idCinema);
             require_once(ROOM_VIEWS . "index.php");
 
         }

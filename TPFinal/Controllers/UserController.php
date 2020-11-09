@@ -331,14 +331,11 @@ class UserController
        require_once(PURCHASE_VIEWS . "purchase-view.php");
    }
 
-   public function removeCreditCard ($idCreditCard)
+   public function removeCreditCard ($idCreditCard,$idUser)
    {
        $this->creditCardDao->removeCard($idCreditCard);
+       $cardsList = $this->creditCardDao->GetALL($idUser);
        require_once(USER_VIEWS . "user-card-list.php");
    }
-
-
 }
-
-
 ?>

@@ -114,7 +114,7 @@
             $this->connection = Connection::GetInstance();
             
 
-             $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
 
         }
         catch (\PDOException $ex)

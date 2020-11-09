@@ -40,10 +40,7 @@ $user = $_SESSION["logged"];
                         <input type="number" class="sr-only" name ="idUser" value="<?php echo $user["id_user"]?>" readonly>
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Tarjetas </button>
                     </form>
-                    <form action=" <?php echo FRONT_ROOT?>Ticket/sendMail" class="form-singin">
-                        <input type="number" class="sr-only" name ="idUser" value="<?php echo $user["id_user"]?>" readonly>
-                        <button  class="btn btn-lg btn-primary btn-block" type="submit"> Mandar mail </button>
-                    </form>
+                   
             </div>
                     
 

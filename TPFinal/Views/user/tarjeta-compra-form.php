@@ -7,7 +7,7 @@
 <?php if($cardsList) { ?>
 <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
-            <h2>Listado de Tarjetas (Falta hacer Query para traer tarjeta y la funcion para comprar)</h2>
+            <h2>Listado de Tarjetas </h2>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
             <?php foreach($cardsList as $card) { ?>
@@ -31,10 +31,6 @@
                                 <input type="number" class="sr-only" value="<?php echo $card["id_creditCard"];?>" name="idCreditCard">
                                 <input type="date" class="sr-only" value="<?php echo date("Y-m-d")?>" name="date">                        
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
-                                <form action="">
-                                <button type="sumbit" class="btn btn-lg btn-danger btn-block" >elimiinar</button>
-                                </form>
-
                             </div>
                         </div>
                     </form>

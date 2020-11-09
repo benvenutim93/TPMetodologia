@@ -32,8 +32,10 @@
             </div>
 
             <div class="row">
+                <div class="col">
                 <label for="inputEmail"> Email </label>
                 <input type = "mail" id="inputEmail" class="form-control" placeholder="Email" name= "mail" required>
+                </div>
             </div>
             <div class="row">
                 <div class="col">

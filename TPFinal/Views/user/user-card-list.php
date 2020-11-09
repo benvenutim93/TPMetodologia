@@ -13,7 +13,6 @@
     
 </div>
 
-
 <?php if(isset($cardsList)) { 
             
 ?>
@@ -50,7 +49,8 @@
             <div class="row">
                 <div class="col">
                 <input type="number"  class="sr-only"  name="idCreditCard"value="<?php echo $card["id_creditCard"]?>"readonly>
-                <button  class="sr-only" type="submit"> Eliminar</button>
+                <input type="number" name ="idUser" value= "<?php echo $idUser; ?>" class="sr-only">
+                <button type="submit" class="btn btn-lg btn-primary btn-block"> Eliminar</button>
                 <!--btn btn-lg btn-danger btn-block -->
                 </div>
             </div>

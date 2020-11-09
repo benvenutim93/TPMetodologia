@@ -31,10 +31,12 @@ class RoomController{
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
+            $arrayR=$this->roomDao->GetAll($idCinema);
             require_once(VIEWS_PATH . "errorView.php");
         }
         finally
         {
+            $arrayR=$this->roomDao->GetAll($idCinema);
             require_once(ROOM_VIEWS. "index.php");
         }
 
@@ -70,8 +72,8 @@ class RoomController{
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            //require_once(VIEWS_PATH . "errorView.php");
+            //$this->index($idCinema);
         }
     }
     

@@ -45,7 +45,7 @@
 
                 $this->connection = Connection :: GetInstance();
                 $result = $this->connection->Execute($query);
-                //var_dump($result);
+                var_dump($result);
                 return $result;
 
             }

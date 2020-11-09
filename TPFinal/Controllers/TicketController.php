@@ -14,6 +14,7 @@ use DAO\FunctionDao as F_DAO;
 use DAO\CreditCardDao as C_DAO;
 use DAO\PurchaseDao as P_DAO;
 use DAO\RoomDao as R_DAO;
+use PDOException;
 use PHPMailer\PHPMailer\PHPMailer as PHPMailer ;
 use PHPMailer\PHPMailer\Exception as MailException;
 
@@ -62,7 +63,7 @@ class TicketController
     
     public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date)
     {
-      
+      try{
 
         $price = $this->roomDao->getPriceRoom($idFuncion);
          
@@ -78,7 +79,12 @@ class TicketController
         $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
 
        
-       $this->sendMail($qrarray,$function);
+       $msgError=$this->sendMail($qrarray,$function);
+      }
+      catch(PDOException $e) {
+        $msgError = array( "description" => "Error de conexión con la base de datos",
+        "type" => 1);
+      }
         
         require_once(USER_VIEWS . "board.php");
     }
@@ -144,14 +150,15 @@ class TicketController
 
             }
 
-
-            echo '<script>
-            alert("El mensaje fue enviado correctamente");
-            </script>
-            ';// . REDIRECCIONAMIENTO;
+            $msgError = array( "description" => "Las entradas fueron enviadas correctamente al mail",
+            "type" => 2);
+           
         } catch (MailException $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $msgError = array( "description" => "Las entradas no pudieron ser enviadas",
+            "type" => 1);
         }
+
+        return $msgError;
  
         
     }
