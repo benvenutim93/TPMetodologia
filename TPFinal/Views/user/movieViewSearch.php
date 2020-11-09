@@ -1,4 +1,4 @@
-<?php if ($msgError){
+<?php if (isset($msgError)){
 require_once(VIEWS_PATH . "errorView.php");}?>
 
 <div class="cartelera-content">
@@ -27,10 +27,10 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                             <li> <p ><?php echo $movie["overview"];?></p> </li></ul> 
                             <!-- A D U L T-->
                             <h5>Adult</h5><ul>
-                            <li> <p> <?php echo changeAdult($movie["adult"]);?></p>   </li></ul> 
+                            <li> <p> <?php echo $movie["adult"];?></p>   </li></ul> 
                             <!-- L E N G U A J E -->
                             <h5>Lenguaje</h5><ul>
-                            <li><p> <?php echo changeLanguage($movie["original_language"]);?></p> </li></ul> 
+                            <li><p> <?php echo $movie["original_language"];?></p> </li></ul> 
                             
                             <div class="row">
                                 <div class="col">
@@ -50,22 +50,6 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                                   
                                 </div>
                                
-                                <div class="col">
-                                 <div class="row">
-                                    <!-- F E C H A-->
-                                    <div class="col">
-                                    <h5 class="text-center">Fecha de Funcion:</h5>
-                                   <p class="text-center"> <?php echo  $movie["functionDate"];?></p> </div>
-                                    <!-- V O  T O S -->
-                                    <div class="col">
-                                    <h5 class="text-center" >Hora:</h5>
-                                    <P class="text-center"> <?php echo $movie["functionsHour"];?></P>  </ul></div>
-                                    <!-- P O P U L A R I D A D-->
-                                    <div class="col">
-                                    <h5 class="text-center">Cine:</h5>
-                                    <p class="text-center"> <?php echo $movie["cinemaName"];?></p>  </div>
-                                     </div>
-                                </div>
                     </div>
                 </td>
 

@@ -289,19 +289,35 @@ class UserController
             $this->showLoginView();
         }
     }
-    public function showListCards($cantidad,$idFuncion, $idUser)
+    public function showListCards($cantidad,$idFuncion, $idUser,$dateFunction)
     {
-
-        $cardsList = $this->creditCardDao->getNumber_Company($idUser);
+        $cardsList = array();
+        $list = $this->creditCardDao->getNumber_Company($idUser);
         
+        foreach($list as $value)
+        {
+            if($value["expiration"]> date("Y-m-d"))
+                array_push($cardsList,$value);
+        }
+        $cardsList=$this->encryptCards($cardsList);
+      
         require_once( USER_VIEWS . "tarjeta-compra-form.php");
     }
 
+    public function encryptCards($list)
+    {
+        $cantidad=count($list);
+        for($i=0;$i<$cantidad;$i++){
+            $list[$i]["numberCC"] = "************".substr($list[$i]["numberCC"],-4);
+        }
+        return $list;
+    }
     public function showCards($idUser)
     {
-        $cardsList = $this->creditCardDao->GetALL($idUser);
+        $list = $this->creditCardDao->GetALL($idUser);
         $companiesList= $this->creditCardDao->getCompanies();
-
+        
+        $cardsList=$this->encryptCards($list);
         require_once(USER_VIEWS . "user-card-list.php");
     }
 
@@ -327,15 +343,33 @@ class UserController
    {
  
        $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
-
        require_once(PURCHASE_VIEWS . "purchase-view.php");
+   }
+
+   public function showOrderTitlePurchases($idUser)
+   {
+    $purchaseList = $this->purchaseDao->getOrderTitlePurchases($idUser);
+    require_once(PURCHASE_VIEWS . "purchase-view.php");
+   }
+   
+   public function showOrderDatePurchases($idUser)
+   {
+    $purchaseList = $this->purchaseDao->getOrderDatePurchases($idUser);
+    require_once(PURCHASE_VIEWS . "purchase-view.php");
    }
 
    public function removeCreditCard ($idCreditCard,$idUser)
    {
        $this->creditCardDao->removeCard($idCreditCard);
-       $cardsList = $this->creditCardDao->GetALL($idUser);
-       require_once(USER_VIEWS . "user-card-list.php");
+       $this->showCards($idUser);
+   }
+
+   public function verifyLogin($msgError ="")
+   {
+       if(isset($_SESSION["logged"]))
+            require_once(USER_VIEWS ."board.php");
+       else 
+       require_once(USER_VIEWS ."login-form.php");
    }
 }
 ?>

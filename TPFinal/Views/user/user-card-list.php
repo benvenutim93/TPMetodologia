@@ -50,7 +50,7 @@
                 <div class="col">
                 <input type="number"  class="sr-only"  name="idCreditCard"value="<?php echo $card["id_creditCard"]?>"readonly>
                 <input type="number" name ="idUser" value= "<?php echo $idUser; ?>" class="sr-only">
-                <button type="submit" class="btn btn-lg btn-primary btn-block"> Eliminar</button>
+                <button type="submit" class="btn btn-lg btn-danger btn-block"> Eliminar</button>
                 <!--btn btn-lg btn-danger btn-block -->
                 </div>
             </div>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col">  
                                         <h5 class="card-title">Fecha de expiracion</h5>
-                                        <input class="form-control" type="date" name="expiration" required>
+                                        <input class="form-control" type="date" name="expiration" min=<?php echo date("Y-m-d")?> required>
                                     </div>
                                 </div>
                             <br>

@@ -109,6 +109,82 @@
             
         }
 
+        public function getOrderTitlePurchases($idUser){
+
+            try{
+                $query="select   p.purchaseDate as FechaCompra,
+                            DATE_FORMAT(f.functionDate, '%Y-%m-%d') as FechaFuncion,
+                        r.roomName,
+                        c.cinemaName,
+                        m.title,
+                        f.functionsHour,
+                        t.id_ticket
+                from purchases as p 
+                join tickets as t
+                on p.id_purchase = t.id_purchase
+                join functions as f
+                on t.id_function = f.id_function
+                    join rooms as r
+                    on f.id_room=r.id_room
+                    join cinemas as c
+                    on c.id_cine = r.id_cine
+                    join movies as m
+                    on f.id_movie = m.id_movie
+                join creditcards as cc
+                on cc.id_creditCard = p.id_creditCard
+                join users as u
+                on u.id_user=cc.id_user
+                where u.id_user = $idUser
+                order by m.title;";
+               
+                $this->connection = Connection :: GetInstance();
+                return $this->connection->Execute($query);
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+            
+        }
+
+        public function getOrderDatePurchases($idUser){
+
+            try{
+                $query="select   p.purchaseDate as FechaCompra,
+                            DATE_FORMAT(f.functionDate, '%Y-%m-%d') as FechaFuncion,
+                        r.roomName,
+                        c.cinemaName,
+                        m.title,
+                        f.functionsHour,
+                        t.id_ticket
+                from purchases as p 
+                join tickets as t
+                on p.id_purchase = t.id_purchase
+                join functions as f
+                on t.id_function = f.id_function
+                    join rooms as r
+                    on f.id_room=r.id_room
+                    join cinemas as c
+                    on c.id_cine = r.id_cine
+                    join movies as m
+                    on f.id_movie = m.id_movie
+                join creditcards as cc
+                on cc.id_creditCard = p.id_creditCard
+                join users as u
+                on u.id_user=cc.id_user
+                where u.id_user = $idUser
+                order by FechaFuncion desc;";
+               
+                $this->connection = Connection :: GetInstance();
+                return $this->connection->Execute($query);
+            }
+            catch (\PDOException $ex)
+            {
+                throw $ex;
+            }
+            
+        }
+
         public function getPurcharseCinema($dateInicial,$dateFinal,$idCinema)
         {
                 try{

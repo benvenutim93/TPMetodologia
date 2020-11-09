@@ -84,26 +84,43 @@ class FunctionController{
         //$funciones = $this->functionDao->getFunctionsMovie($idMovie); //todas las pelis con funcion
         //$remaining= $this->functionDa0->getRemainingPlaces($SALA);
 
-        $funciones = array();
-        $array = $this->movieDao->getMovieFunctions($movieTitle); 
-
-        $arrayCantidad=$this->functionDao->getCantTicketsFunctions();//devuelve la cantidad de tickets comprados de las diferentes funsiones
-        foreach($arrayCantidad as $value)
+        if($this->verifyLogin())
         {
-            $resta=$value["seatsCapacity"]-$value["Cantidad"];
-            if($resta>0) 
+            $funciones = array();
+            $array = $this->movieDao->getMovieFunctions($movieTitle); 
+
+            $arrayCantidad=$this->functionDao->getCantTicketsFunctions();//devuelve la cantidad de tickets comprados de las diferentes funsiones
+            foreach($arrayCantidad as $value)
             {
-                foreach($array as $movie){
-                if($movie["id_function"] == $value["id_function"] && $movie["functionDate"] >= date("Y-m-d"))
+                $resta=$value["seatsCapacity"]-$value["Cantidad"];
+                if($resta>0) 
                 {
-                        $movie["disponible"]=$resta;
-                        array_push($funciones,$movie);
+                    foreach($array as $movie){
+                    if($movie["id_function"] == $value["id_function"] && $movie["functionDate"] >= date("Y-m-d"))
+                    {
+                            $movie["disponible"]=$resta;
+                            array_push($funciones,$movie);
+                    }
+                }
                 }
             }
-            }
+    
+            require_once(USER_VIEWS . "functionsList.php");
         }
-        require_once(USER_VIEWS . "functionsList.php");
-    }   
+        else{
+            $msgError = array( "description" => "Necesita iniciar sesion para comprar una entrada",
+            "type" => 3);
+            require_once(USER_VIEWS . "login-form.php");
+        }
+    } 
+    
+    public function verifyLogin()
+    {
+        if(isset($_SESSION["logged"]))
+         return true;
+        else 
+        return false;
+    }
 
 
 

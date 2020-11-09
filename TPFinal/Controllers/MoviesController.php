@@ -60,11 +60,11 @@ class MoviesController
 
             if ($moviesList){
                 foreach ($moviesList as $movie)
-            {
+                {
                 $movie["adult"] = $this->changeAdult($movie["adult"]);
                 $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
-            }
-                require_once(USER_VIEWS . "moviesView.php");
+                }
+                require_once(USER_VIEWS . "functionsView.php");
             }
             else
             {      
@@ -109,9 +109,15 @@ class MoviesController
         try
         {
             $movie = $this->moviesDao->GetWithFunction($title);
+           
 
             if ($movie)
-            $this->showMoviesSearch($movie);
+            {
+                    $movie["adult"] = $this->changeAdult($movie["adult"]);
+                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                $this->showMoviesSearch($movie);  
+            }
+            
             else
             {
                 $msgError = array( "description" => "No se encontraron peliculas con ese titulo",
@@ -125,7 +131,7 @@ class MoviesController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showSearchMovieView();
+            $this->showSearchMovieView($msgError);
         }
     }
 
@@ -138,7 +144,14 @@ class MoviesController
             
             
             if (!empty($moviesList))
+            {
+                foreach ($moviesList as $movie)
+                {
+                    $movie["adult"] = $this->changeAdult($movie["adult"]);
+                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                }
                 $this->showMoviesSearch($moviesList);
+            } 
             else
             {
                 $msgError = array( "description" => "No se encontraron peliculas con ese género",
@@ -151,7 +164,7 @@ class MoviesController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showSearchMovieView();
+            $this->showSearchMovieView($msgError);
         }
        
 
@@ -162,9 +175,14 @@ class MoviesController
         try{
             $moviesList = $this->moviesDao->GetMoviesfunctionDate($date);        
 
-
             if ($moviesList)
+            {foreach ($moviesList as $movie)
+                {
+                    $movie["adult"] = $this->changeAdult($movie["adult"]);
+                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                }
                 $this->showMoviesSearch($moviesList);
+            }
             else
             {
                 $msgError = array( "description" => "No se encontraron peliculas en esa fecha",
@@ -273,7 +291,7 @@ class MoviesController
         }
         else return false;
     }
-    function changeLanguage ($language)
+   public function changeLanguage ($language)
 {
     switch ($language)
     {
@@ -290,7 +308,7 @@ class MoviesController
     }
 }
 
-function changeAdult ($adult)
+public function changeAdult ($adult)
 {
     if ($adult)
     return "+18";

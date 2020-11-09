@@ -20,7 +20,7 @@ $user = $_SESSION["logged"];
             <div class="col">
                      <!-- F O R M -->
                     <form action="<?php echo FRONT_ROOT?>Movies/showFunctionView" class="form-singin">    
-                            <button  class="btn btn-lg btn-warning btn-block" type="submit"> Comprar entradas </button>
+                            <button  class="btn btn-lg btn-primary btn-block" type="submit"> Comprar entradas </button>
                     </form>
                      <!-- F O R M -->
                     <form action="<?php echo FRONT_ROOT?>User/showPurchaseView" class="form-singin">

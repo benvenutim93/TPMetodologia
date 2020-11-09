@@ -8,12 +8,34 @@ require_once(VIEWS_PATH . "errorView.php");}?>
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
             <h2>Entradas vendidas</h2>
+            <div class="row">
+                             <div class="col"> 
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <h5>Entradas vendidas</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Entradas remanentes</h5>
+                            </div>
+                        </div>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
             <!-- ACA VA EL FOREARCH --> 
             <?php foreach ($funciones as $movie){
             ?>
                     <form action="<?php echo FRONT_ROOT?>User/showListCards"  class="list-group-item list-group-item-info ">
+                        <div class="row">
+                            <div class="col"> <em><h4><font color ="black">"
+                            <?php echo $movie["title"]?>"</font></h4></em>
+
+                            </div>
+                        </div>
                         <div class="row">
                              <div class="col"> 
                                 <!-- Cine -->
@@ -24,23 +46,20 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                                 <h5><?php echo $movie["roomName"] ?></font></h5>
                             </div>
                             <div class="col">
-                                <?php echo $movie["title"]?>
-                            </div>
-                            <div class="col">
                                 <!-- Fecha -->
-                                <h5><font color ="red"><?php echo $movie["functionDate"] ?></font></h5>
+                                <h5><?php echo $movie["functionDate"] ?></h5>
                             </div>
                             <div class="col">
                                 <!-- Horario -->
-                                <h5><font color ="red"><?php echo $movie["functionsHour"] ?></font></h5> 
+                                <h5><?php echo $movie["functionsHour"] ?></h5> 
                            </div>
                             <div class="col">
                                 <!-- Input Cantidad entradas -->
-                                <h5>Entradas vendidas: <font color="green"> <?php echo $movie["Cantidad"]?></font></h5>
+                                <h5> <font color="green"> <?php echo $movie["Cantidad"]?></font></h5>
                             </div>
                             <div class="col">
                                 <!-- Input Cantidad entradas -->
-                                <h5>Entradas remanentes: <font color="red"> <?php echo ($movie["seatsCapacity"] - $movie["Cantidad"])?></font></h5>
+                                <h5><font color="red"> <?php echo ($movie["seatsCapacity"] - $movie["Cantidad"])?></font></h5>
                             </div>
                         </div>
                     </form>
@@ -52,3 +71,5 @@ require_once(VIEWS_PATH . "errorView.php");}?>
         </form>
     </div>
     </div>
+
+    

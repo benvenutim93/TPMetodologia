@@ -29,7 +29,8 @@
                                 <input type="number" class="sr-only" value="<?php echo $cantidad;?>" name="cantidad">
                                 <input type="number" class="sr-only" value="<?php echo $idFuncion;?>" name="idFuncion">
                                 <input type="number" class="sr-only" value="<?php echo $card["id_creditCard"];?>" name="idCreditCard">
-                                <input type="date" class="sr-only" value="<?php echo date("Y-m-d")?>" name="date">                        
+                                <input type="date" class="sr-only" value="<?php echo date("Y-m-d");?>" name="date">
+                                <input type="date" class="sr-only" value="<?php echo $dateFunction;?>" name="dateFunction">
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Comprar</button>
                             </div>
                         </div>

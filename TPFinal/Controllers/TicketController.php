@@ -61,23 +61,28 @@ class TicketController
 
 
     
-    public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date)
+    public function purchaseProcess($cantidad,$idFuncion,$idCreditCard, $date,$dateFunction)
     {
       try{
 
         $price = $this->roomDao->getPriceRoom($idFuncion);
          
        $precioSala=$price[0]["Precio"];
+       
+        $dia =date("l",strtotime($dateFunction));
+      
+       if($cantidad >=2 && ($dia =="Tuesday" || $dia =="Wednesday")){
+            $total = ($cantidad * $precioSala) * 0.75;  
+       }
+       else
+        $total = ($cantidad * $precioSala);  
+       $this->purchaseDao->add($total,$idCreditCard,$date); //creo compra
+       $idUltimaCompra =$this->purchaseDao->getLastPurchaseID();//traigo la id de la ultima compra
+   
+       $idPurchase=$idUltimaCompra[0]["id_purchase"];
+       $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
 
-        $total = ($cantidad * $precioSala);
-        $this->purchaseDao->add($total,$idCreditCard,$date); //creo compra
-        $idUltimaCompra =$this->purchaseDao->getLastPurchaseID();//traigo la id de la ultima compra
-    
-        $idPurchase=$idUltimaCompra[0]["id_purchase"];
-        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
- 
-        $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
-
+       $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
        
        $msgError=$this->sendMail($qrarray,$function);
       }
@@ -85,8 +90,7 @@ class TicketController
         $msgError = array( "description" => "Error de conexión con la base de datos",
         "type" => 1);
       }
-        
-        require_once(USER_VIEWS . "board.php");
+        require_once(USER_VIEWS . "purchaseCompleted.php");
     }
 
     public function sendMail($qrArray,$function)

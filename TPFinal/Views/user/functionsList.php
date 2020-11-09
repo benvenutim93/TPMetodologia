@@ -5,7 +5,7 @@
 
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
-            <h2>Listado de Funciones [de una Pelicula]</h2>
+            <h2>Listado de Funciones</h2>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
             <!-- ACA VA EL FOREARCH --> 
@@ -38,6 +38,8 @@
                             <div class="col">
                                 <input class="sr-only" type="number" name="idFuncion" value="<?php echo $movie["id_function"] ?>" readonly>
                                 <input class="sr-only" type="number" name="idUser" value="<?php echo $user?>" >
+                                <input class="sr-only" type="date" name="dateFunction" value="<?php echo $movie["functionDate"]?>" >
+
                                 <button type="sumbit" class="btn btn-lg btn-success btn-block" >Proceder a compra</button>
                             </div>
                         </div>

@@ -69,12 +69,9 @@
                 <?php } ?>
         </table>
     </div>
+    <div class="row">
+
+    <a href="<?php echo FRONT_ROOT?>User/verifyLogin" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Volver Atras</button></a>
+
+    </div>     
 </div>
-
-<?php
-
-
-
-
-
-?>

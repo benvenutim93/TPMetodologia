@@ -7,7 +7,23 @@
     <div class="content-xxl">
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">
-            <h1>Listado de Tickets</h1>
+            <div class="row">
+                <div class="col">
+                    <form action="<?php echo FRONT_ROOT;?>User/showOrderTitlePurchases">
+                    <input type="text" value= "<?php echo $idUser;?>" name ="idUser" class="sr-only" >
+                    <button type="sumbit"  class="btn btn-lg btn-light btn-block" >Ordenar por titulo</button>
+                    </form>
+                </div>
+                <div class="col"><h1>Listado de Tickets</h1></div>
+                
+                <div class="col">
+                <form action="<?php echo FRONT_ROOT;?>User/showOrderDatePurchases">
+                <input type="text" value= "<?php echo $idUser;?>" name ="idUser" class="sr-only" >
+                 <button type="sumbit"  class="btn btn-lg btn-light btn-block" >Ordenar por fecha</button>
+                 </form>
+                 </div>
+            </div>
+            
             <br>
             <font color="black">
             <div class="row">
