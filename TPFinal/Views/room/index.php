@@ -36,37 +36,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
 
         </div>
 
-        <div class="col">
-
-            <div class="content-chico">
-                <form class="form-signin" action= "<?php echo FRONT_ROOT?>Discount/Add" method="POST">
-                        <h1 class="h3 mb-3 font-weight-normal">CONSULTAR - Agregar Descuento</h1>
-                            
-                            <!-- L A B E L -->
-                            <label for="capacity" >Ingrese Porcentaje </label>
-                            <!--I N P U T-->
-                            <input type="number"  min="0" max="100" id="capacity" class="form-control" placeholder="Porcentaje"  name="percentage"  required>
-                            
-                            <!-- L A B E L -->
-                            <label for="Valor" >Ingrese Cantidad </label>
-                            <!--I N P U T-->
-                            <input type="number" id="Valor" class="form-control" placeholder="Cantidad Minima de Tickets"  min="0" max="500" name="minCant" required>
-                            
-                            <!-- ID cinema -->
-                            <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema?>" required autofocus>
-                            
-                            <label for="name" >Ingrese Descripcion</label>
-                            <!--I N P U T-->
-                            <input type="text" id="name" class="form-control" placeholder="Descripcion" name="description"   required minlength="3"required autofocus><br>
-                            
-                            <label for="" >    </label>
-                            <!-- B O T O N -->
-                            <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
-                </form>
-            </div>
-
-        </div>
-
+        
         <div class="col">
             <div class="content-chico">
                 <form action="<?php echo FRONT_ROOT?> Room/showDateForm" method= "POST" class="form-signin">
@@ -107,14 +77,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                     </form>
          </div>
         </div>
-        <div class="col">
-            <div class="content-chico">
-                    <form action="<?php echo FRONT_ROOT?>Discount/showDiscountsListCinema" class="form-signin">
-                    <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus> 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Listar Descuentos</button>
-                    </form>
-             </div>
-        </div>
+
         <div class="col">
             <div class="content-chico">
                     <form action="<?php echo FRONT_ROOT?>Room/showFunctionsList" class="form-signin">

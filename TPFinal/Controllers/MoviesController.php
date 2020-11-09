@@ -59,10 +59,10 @@ class MoviesController
             $moviesList=$this->verifyFucntions($array);
 
             if ($moviesList){
-                foreach ($moviesList as $movie)
+                for($i = 0; $i < count($moviesList); $i++)
                 {
-                $movie["adult"] = $this->changeAdult($movie["adult"]);
-                $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                    $moviesList[$i]["adult"] = $this->changeAdult($moviesList[$i]["adult"]);
+                    $moviesList[$i]["original_language"] = $this->changeLanguage($moviesList[$i]["original_language"]);
                 }
                 require_once(USER_VIEWS . "functionsView.php");
             }
@@ -109,12 +109,10 @@ class MoviesController
         try
         {
             $movie = $this->moviesDao->GetWithFunction($title);
-           
-
             if ($movie)
             {
-                    $movie["adult"] = $this->changeAdult($movie["adult"]);
-                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                    $movie[0]["adult"] = $this->changeAdult($movie[0]["adult"]);
+                    $movie[0]["original_language"] = $this->changeLanguage($movie[0]["original_language"]);
                 $this->showMoviesSearch($movie);  
             }
             
@@ -145,10 +143,10 @@ class MoviesController
             
             if (!empty($moviesList))
             {
-                foreach ($moviesList as $movie)
+                for($i = 0; $i < count($moviesList); $i++)
                 {
-                    $movie["adult"] = $this->changeAdult($movie["adult"]);
-                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                    $moviesList[$i]["adult"] = $this->changeAdult($moviesList[$i]["adult"]);
+                    $moviesList[$i]["original_language"] = $this->changeLanguage($moviesList[$i]["original_language"]);
                 }
                 $this->showMoviesSearch($moviesList);
             } 
@@ -176,10 +174,11 @@ class MoviesController
             $moviesList = $this->moviesDao->GetMoviesfunctionDate($date);        
 
             if ($moviesList)
-            {foreach ($moviesList as $movie)
+            {
+                for($i = 0; $i < count($moviesList); $i++)
                 {
-                    $movie["adult"] = $this->changeAdult($movie["adult"]);
-                    $movie["original_language"] = $this->changeLanguage($movie["original_language"]);
+                    $moviesList[$i]["adult"] = $this->changeAdult($moviesList[$i]["adult"]);
+                    $moviesList[$i]["original_language"] = $this->changeLanguage($moviesList[$i]["original_language"]);
                 }
                 $this->showMoviesSearch($moviesList);
             }
@@ -292,21 +291,21 @@ class MoviesController
         else return false;
     }
    public function changeLanguage ($language)
-{
-    switch ($language)
     {
-        case "en": return "English";
-            break;
-        case "ja": return "Japones";
-            break;
-        case "ko": return "Coreano";
-            break;
-        case "it": return "Italiano";
-            break;
-        case "es": return "Español";
-            break;
+        switch ($language)
+        {
+            case "en": return "English";
+                break;
+            case "ja": return "Japones";
+                break;
+            case "ko": return "Coreano";
+                break;
+            case "it": return "Italiano";
+                break;
+            case "es": return "Español";
+                break;
+            }
     }
-}
 
 public function changeAdult ($adult)
 {
