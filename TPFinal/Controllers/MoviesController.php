@@ -138,7 +138,7 @@ class MoviesController
     {
         try
         {
-            $moviesList = $this->moviesDao->GetWithFunctionGenres();
+            $moviesList = $this->moviesDao->GetWithFunctionGenres($genre_id);
             
             
             if (!empty($moviesList))

@@ -381,18 +381,24 @@
             }
         }
 
-        public function GetWithFunctionGenres ()
+        public function GetWithFunctionGenres ($genreName)
         {
             try
             {
-                $query = "select * 
+                $query = "	select * 
                 from $this->tableName
                 inner join functions
                 on movies.id_movie = functions.id_movie
                 inner join rooms
                 on functions.id_room = rooms.id_room
                 inner join cinemas
-                on rooms.id_cine = cinemas.id_cine";
+                on rooms.id_cine = cinemas.id_cine
+                join genresxmovies
+                on genresxmovies.id_movie =movies.id_movie
+                join genres
+                on genres.id_genre = genresxmovies.id_genre
+                where genres.id_genre =$genreName;
+                ";
 
 
                 $this->connection = Connection::GetInstance();
