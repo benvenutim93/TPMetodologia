@@ -5,7 +5,7 @@
   
          <div class="row">
              <div class="col">
-            <h4> La compra se realizo con exito</h4>
+             <h4> La compra se realizo con exito</h4>
                  <label for="sala" >Nombre de la sala</label>
                  <!--I N P U T-->
                  <input type="text" id="sala" class="form-control"   value="<?php echo $function[0]['roomName'];?>" readonly>
@@ -46,13 +46,14 @@
         </div>
 
      </form>
+     
      </div>
 
 
 <div class="row">
     <div class="col">
 <form action="<?php echo FRONT_ROOT?>User/showPrincipalView" >
-<a class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Volver al Menu</button></a>
+    <a class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button></a>
 </form>
 </div>
 </div>

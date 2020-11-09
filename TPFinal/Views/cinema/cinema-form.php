@@ -30,7 +30,7 @@
              <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
      </form>
      <form action="<?php echo FRONT_ROOT ?>Admin/showOPAdminsView" class="form-signin">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Volver atras</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button>
         </form>
 </div>
 

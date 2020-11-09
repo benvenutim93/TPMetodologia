@@ -22,6 +22,7 @@ class UserController
         $this->creditCardDao = new CC_DAO();
         $this->purchaseDao = new P_DAO();
     }
+    
     public function showAdminView($msgError = ""){
         require_once(ADMIN_VIEWS . "eleccion.php");
 

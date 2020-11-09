@@ -1,4 +1,4 @@
-<?PHP 
+<?php
 $user = $_SESSION["logged"];
 if ($msgError)
     require_once(VIEWS_PATH . "errorView.php");
@@ -28,8 +28,8 @@ if ($msgError)
            
             <div class="row">
                 <div class="col">
-                            <label for="capacity" class="">Ingrese dni</label>
-                            <input type="number"   class="form-control" value="<?php echo $user["dni"]?>"  readonly>
+                    <label for="capacity" class="">Ingrese dni</label>
+                    <input type="number"   class="form-control" value="<?php echo $user["dni"]?>"  readonly>
 
                 </div>
                 <div class="col">
@@ -42,7 +42,7 @@ if ($msgError)
 
             <br>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
+        <button class="btn btn-lg btn-warning btn-block" type="submit">Modificar</button>
 
             <br>
         <input type="number"  class="sr-only" value="<?php echo $user["id_user"]?>" name="id_user" readonly>

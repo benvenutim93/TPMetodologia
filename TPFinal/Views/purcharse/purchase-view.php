@@ -93,6 +93,6 @@
        
         
     </div><form action="<?php echo FRONT_ROOT?>User/showPrincipalView">
-        <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >Volver Atras</button>
+        <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >VOLVER</button>
         </form>
 <div>

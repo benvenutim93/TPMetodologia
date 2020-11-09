@@ -89,6 +89,6 @@
 <div class="row">
     <form action="<?php echo FRONT_ROOT?> Room/index" class="form-signin">
     <input type="number"  class="sr-only"  name="id" value="<?php echo $idCinema;?>">
-        <a class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Volver Atras</button></a>
+        <a class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button></a>
     </form>
 </div>

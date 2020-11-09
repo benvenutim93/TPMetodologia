@@ -12,11 +12,11 @@ require_once(VIEWS_PATH . "errorView.php");}?>
             <label for="inputEmail" class="sr-only">Ingrese Usuario</label>
             <!--I N P U T-->
             <input type="email" id="inputEmail" class="form-control" placeholder="Email " name="mail" required autofocus>
-            <!-- L A B E L -->
+            <!-- L A B E L --><br>
             <label for="inputPassword" class="sr-only">Ingrese contraseña</label>
             <!--I N P U T-->
             <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña"  name="password" required>
-        <!-- B O T O N -->
+        <!-- B O T O N --><br>
              <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
      </form>
          <!--R E G I S T R A R S E -->

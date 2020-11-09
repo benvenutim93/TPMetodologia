@@ -89,7 +89,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
     </div>
     <div class="row">
 
-    <a href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Volver Atras</button></a>
+    <a href="<?php echo FRONT_ROOT?>Cinema/showCinemaListAdmin" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button></a>
 
     </div>     
    

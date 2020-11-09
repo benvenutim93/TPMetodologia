@@ -13,7 +13,7 @@
                
                 <br>
             <!-- B O T O N -->
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Volver</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button>
     </form>
 
 </div>
