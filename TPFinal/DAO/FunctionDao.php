@@ -37,6 +37,31 @@
         }
      }
 
+     public function getAllTitlesWithFunctions ()
+     {
+         try
+         {
+            $query ="select distinct
+                    movies.title 
+                    from $this->tableName
+                    inner join rooms
+                    on $this->tableName.id_room = rooms.id_room
+                    inner join cinemas
+                    on rooms.id_cine = cinemas.id_cine
+                    inner join movies
+                    on $this->tableName.id_movie = movies.id_movie;";
+
+            $this->connection = Connection :: GetInstance();
+            $result =$this->connection->Execute($query);
+            return $result;
+
+         }
+         catch(\PDOException $ex)
+         {
+             throw $ex;
+         }
+     }
+
      public function getCantTicketsFunctions()
      {
       
@@ -48,7 +73,8 @@
                             cinemas.cinemaName,
                             rooms.roomName,
                             DATE_FORMAT(functions.functionDate, '%Y-%m-%d') as functionDate,
-                            functions.functionsHour
+                            functions.functionsHour,
+                            movies.title
                         from tickets
                         right join functions
                         on functions.id_function = tickets.id_function
@@ -56,6 +82,8 @@
                         on rooms.id_room= functions.id_room
                         inner join cinemas
                         on cinemas.id_cine = rooms.id_cine
+                        inner join movies
+                        on functions.id_movie = movies.id_movie
                         group by functions.id_function;";
             
             $this->connection = Connection :: GetInstance();

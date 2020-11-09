@@ -294,7 +294,7 @@ class UserController
 
         $cardsList = $this->creditCardDao->getNumber_Company($idUser);
         
-        require_once(USER_VIEWS . "tarjeta-compra-form.php");
+        require_once( USER_VIEWS . "tarjeta-compra-form.php");
     }
 
     public function showCards($idUser)

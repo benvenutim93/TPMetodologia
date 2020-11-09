@@ -74,7 +74,7 @@ class TicketController
         $idUltimaCompra =$this->purchaseDao->getLastPurchaseID();//traigo la id de la ultima compra
     
         $idPurchase=$idUltimaCompra[0]["id_purchase"];
-       $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
+        $qrarray=$this->generateTicket($cantidad, $idFuncion,$idPurchase);//genero los tickets con la id de la compra
  
         $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
 

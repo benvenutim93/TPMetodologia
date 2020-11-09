@@ -36,7 +36,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                 </form>
             </div>
             <div class="col">
-                <form action="<?php echo FRONT_ROOT?>HOLA ACA SIGO" class="form-signin">
+                <form action="<?php echo FRONT_ROOT?>Admin/showRemainTickets" class="form-signin">
                     <button  class="btn btn-lg btn-danger btn-block" type="submit">Tickets Vendidos</button>
                 </form>
             </div>
@@ -68,8 +68,8 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                         <button type="sumbit" class="btn btn-primary">Cines</button>
                 </form>
             
-                <form action="<?php FRONT_ROOT?>" method="GET">
-                        <button type="sumbit" class="btn btn-danger">Peliculas</button>
+                <form action="<?php FRONT_ROOT?>showFormVentasTitle" method="GET">
+                        <button type="sumbit" class="btn btn-primary">Peliculas</button>
                 </form>
             </div>
         </div>
