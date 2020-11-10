@@ -48,7 +48,38 @@ class MoviesController
         }
     }
 
-    public function showMoviesListView()
+    public function showFunctionView(){ //COMPRAR ENTRADAS
+        try{
+            $moviesList = array();
+            $array = $this->moviesDao->getFunctionNoRepeat(); 
+            $moviesList = $this->verifyFucntions($array);
+
+            if ($moviesList)
+            {
+                for($i = 0; $i < count($moviesList); $i++)
+                {
+                    $moviesList[$i]["adult"] = $this->changeAdult($moviesList[$i]["adult"]);
+                    $moviesList[$i]["original_language"] = $this->changeLanguage($moviesList[$i]["original_language"]);
+                }
+                require_once(USER_VIEWS . "functionsView.php");
+            }
+            else
+            {
+                $msgError = array( "description" => "No hay funciones por el momento",
+                "type" => 3);
+                require_once(USER_VIEWS . "board.php");
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            require_once(USER_VIEWS . "board.php");
+        }
+    }
+
+    public function showMoviesListView() //CARTELERA
     {
         try
         {    
@@ -242,29 +273,16 @@ class MoviesController
         }
     } 
 
-    public function showFunctionView(){
-        try{
-            $moviesList = array();
-            $array = $this->moviesDao->getFunctionNoRepeat(); 
-            $moviesList = $this->verifyFucntions($array);
+    
 
-            if ($moviesList)
-                require_once(USER_VIEWS . "functionsView.php");
-            else
-            {
-                $msgError = array( "description" => "No hay funciones por el momento",
-                "type" => 3);
-                require_once(USER_VIEWS . "board.php");
-            }
-        }
-        catch(\PDOException $ex)
-        {
-            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
-            "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
-            require_once(USER_VIEWS . "board.php");
-        }
+    public function verifyLogin($msgError ="")
+    {
+        if(isset($_SESSION["logged"]))
+             require_once(USER_VIEWS ."board.php");
+        else 
+        require_once(USER_VIEWS ."login-form.php");
     }
+
     public function verifyFucntions($arrayF)
     {
         if ($arrayF)

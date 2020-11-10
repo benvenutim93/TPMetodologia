@@ -21,9 +21,10 @@
     </form>
 
     <div class="row">
-
-        <a href="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Cancelar</button></a>
-
+        <div class="col">
+        <form class="form-signin" action= "<?php echo FRONT_ROOT?>Admin/showOPAdminsView " method="GET">
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Cancelar</button>
+        </div>
     </div>     
 
 </div>

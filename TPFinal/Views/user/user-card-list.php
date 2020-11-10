@@ -4,16 +4,16 @@
     require_once(VIEWS_PATH . "errorView.php");}
 ?>
 
-<div class="content-chico">
 
+<br>
     <div class="row">
+        <div class="col">  </div>
         <div class="col">
-            <h1 class="form-signin"><button class="btn btn-primary"  data-toggle="modal" data-target="#cargaTarjeta" type="button">Cargar Nueva  Tarjeta</button></h1>
+            <button class="btn btn-lg btn-primary btn-block"   data-toggle="modal" data-target="#cargaTarjeta" type="button">Cargar Nueva  Tarjeta</button>
         </div>
+        <div class="col">  </div>
     </div>
     
-</div>
-
 <?php if(isset($cardsList)) { 
             
 ?>
@@ -59,10 +59,16 @@
      </div>
     <?php } ?>
 <?php } ?>
-<div class="content-grande">
-    <form action="<?php echo FRONT_ROOT?>User/showPrincipalView">
-        <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >VOLVER</button>
+
+<br>
+<div class="row">
+    <div class="col">  </div>
+    <div class="col">
+        <form action="<?php echo FRONT_ROOT?>User/showPrincipalView">
+            <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >VOLVER</button>
         </form>
+    </div>
+    <div class="col">  </div>
 </div>
     
     

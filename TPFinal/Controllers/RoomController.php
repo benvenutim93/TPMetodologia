@@ -57,7 +57,7 @@ class RoomController{
                     $arrayR=$this->roomDao->GetAll($idCinema);
                     $cine = $cineDao->GetOne($idCinema);
                     $arrayNoFunctions= $movie->GetMoviesNotFunction($date);//trae las peliculas que no estan en funcion en un dia determinado
-                    $arrayFunction=$movie->GetMoviesfunction($date);//trae las peliculas que si estan en funcion en un dia determinado
+                    $arrayFunction=$movie->GetMoviesfunction($date,$idRoom);//trae las peliculas que si estan en funcion en un dia determinado
                     $arrayAmostrar=$this->verifiMoviesNoRepeat($arrayNoFunctions,$arrayFunction,$date,$idCinema,$idRoom);
                     require_once(FUNCTION_VIEWS . "dateForm.php");
                 }
@@ -266,6 +266,8 @@ class RoomController{
                 }
             }
       }
+
+      
       return $arraysinfunciones;
     }
 

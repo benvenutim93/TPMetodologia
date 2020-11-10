@@ -79,11 +79,14 @@ $user = $_SESSION["logged"];
 
 </div>
 <br>
-<?php if($user["id_userType"]==1)
-{
-     echo'<div class="col">
-                <form action=" /Proyectos/TPFinal/Admin/showPrincipalView" class="form-singin">
-                    <button  class="btn btn-lg btn-primary btn-block" type="submit"> VOLVER </button>
-                </form>
-           </div>';
-            }?>
+    <?php if($user["id_userType"]==1) { ?>
+    <div class="row">
+        <div class="col">  </div>
+        <div class="col">
+            <form action=" /Proyectos/TPFinal/Admin/showPrincipalView" class="form-singin">
+                <button  class="btn btn-lg btn-primary btn-block" type="submit"> VOLVER </button>
+            </form>
+        </div>;
+        <div class="col">  </div>
+    </div>
+    <?php } ?>

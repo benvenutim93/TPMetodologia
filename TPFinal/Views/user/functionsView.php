@@ -4,9 +4,17 @@
     <div class="table-responsive-lg">
         <table class="table table-hover" >
             <thead>
-                <tr>
-                    <th  colspan=3 ><h1 class="text-center ">Cartelera</h1> </th>
-                </tr>
+                <div class="row">
+                        <div class="col"> </div>
+                        
+                        <div class="col"> <h1 class="text-center ">Cartelera</h1> </div>
+                        
+                        <div class="col">
+                            <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/verifyLogin" method="POST">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button>
+                            </form>
+                        </div>  
+                </div>  
             </thead>
             <tr>
                 <?php foreach ($moviesList as $movie){
@@ -16,9 +24,6 @@
                     <div class="imagen-cartelera">
                         <img width= "100%" height="100%" src="<?php echo"https://image.tmdb.org/t/p/w200".$movie["poster_path"]?>">
                     </div>
-                    
-               
-                    
                 </td>
             
                 <!-- contenido -->
@@ -74,9 +79,6 @@
                 <?php } ?>
         </table>
     </div>
-    <div class="row">
-
-    <a href="<?php echo FRONT_ROOT?>User/verifyLogin" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button></a>
-
-    </div>     
+    
+     
 </div>
