@@ -4,7 +4,7 @@
     use Models\Movie as Movie;
     use Models\Functions as Functions;
     use DAO\Connection as Connection;
-    use \Exception as Exception;
+    use \PDOException;
 
 
     class MovieDao
@@ -442,7 +442,8 @@
                     on rooms.id_cine = cinemas.id_cine)tablaAux
                 on funciones.id_room = tablaAux.id_room
                 join functions
-                on funciones.functionDate =  $fecha ";
+                on funciones.functionDate =  $fecha 
+                group by movies.title; ";
                 
                 
                 $this->connection = Connection::GetInstance();

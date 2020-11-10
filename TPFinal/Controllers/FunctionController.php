@@ -27,30 +27,25 @@ class FunctionController{
         {
             $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
             if ($this->verifyHours($arrayFunctionRoom, $hour))
-                {
-                    $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
-                
-                    $nombre = $this->roomDao->GetnameCinema($idCinema)[0];//trae el nombre del cine para pasarle al index
-                    
-                    $this->functionDao->Add($function);
-                    $msgError = array( "description" => "La funcion se agrego con exito",
-                            "type" => 2);
-                }
-            else {
-                    $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);;
-                }
-            
+            {
+                $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
+                $nombre = $this->roomDao->GetnameCinema($idCinema)[0];//trae el nombre del cine para pasarle al index
+                $this->functionDao->Add($function);
+                $msgError = array( "description" => "La funcion se agrego con exito",
+                        "type" => 2);
+                $arrayR=$this->roomDao->GetAll($idCinema);
+            }
+            else 
+                $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);      
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
         }
         finally 
-        {   $arrayR=$this->roomDao->GetAll($idCinema);
+        {   
             require_once(ROOM_VIEWS . "index.php");
-
         }
     }
 
@@ -66,8 +61,7 @@ class FunctionController{
             $hour = new Datetime($horaFuncion);
             $hourMax = new Datetime($horaFuncion);
             $hourMax->modify("+2hours,+14minutes");
-
-            
+  
             if($hourForm >= $hour && $hourForm <= $hourMax)
                 $flag=1;
         }
@@ -81,36 +75,42 @@ class FunctionController{
 
     public function showFunctionList($idMovie,$movieTitle)
     {
-        //$funciones = $this->functionDao->getFunctionsMovie($idMovie); //todas las pelis con funcion
-        //$remaining= $this->functionDa0->getRemainingPlaces($SALA);
-
-        if($this->verifyLogin())
+        try
         {
-            $funciones = array();
-            $array = $this->movieDao->getMovieFunctions($movieTitle); 
-
-            $arrayCantidad=$this->functionDao->getCantTicketsFunctions();//devuelve la cantidad de tickets comprados de las diferentes funsiones
-            foreach($arrayCantidad as $value)
+            if($this->verifyLogin())
             {
-                $resta=$value["seatsCapacity"]-$value["Cantidad"];
-                if($resta>0) 
+                $funciones = array();
+                $array = $this->movieDao->getMovieFunctions($movieTitle); 
+
+                $arrayCantidad=$this->functionDao->getCantTicketsFunctions();//devuelve la cantidad de tickets comprados de las diferentes funsiones
+                foreach($arrayCantidad as $value)
                 {
-                    foreach($array as $movie){
-                    if($movie["id_function"] == $value["id_function"] && $movie["functionDate"] >= date("Y-m-d"))
+                    $resta=$value["seatsCapacity"]-$value["Cantidad"];
+                    if($resta>0) 
                     {
-                            $movie["disponible"]=$resta;
-                            array_push($funciones,$movie);
+                        foreach($array as $movie){
+                        if($movie["id_function"] == $value["id_function"] && $movie["functionDate"] >= date("Y-m-d"))
+                        {
+                                $movie["disponible"]=$resta;
+                                array_push($funciones,$movie);
+                        }
+                    }
                     }
                 }
-                }
+        
+                require_once(USER_VIEWS . "functionsList.php");
             }
-    
-            require_once(USER_VIEWS . "functionsList.php");
+            else{
+                $msgError = array( "description" => "Necesita iniciar sesion para comprar una entrada",
+                "type" => 3);
+                require_once(USER_VIEWS . "login-form.php");
+            }
         }
-        else{
-            $msgError = array( "description" => "Necesita iniciar sesion para comprar una entrada",
-            "type" => 3);
-            require_once(USER_VIEWS . "login-form.php");
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
         }
     } 
     

@@ -83,6 +83,8 @@ class UserController
         {  
             $tarjeta = new CreditCard($cardHolder,$numberCC,$expiration,$company);
             $this->creditCardDao->Add($tarjeta,$idUser);
+            $cardsList = $this->creditCardDao->GetAll($idUser);
+            require_once(USER_VIEWS . "tarjeta-compra-form.php");
         }
         catch(\PDOException $ex)
         {
@@ -90,10 +92,6 @@ class UserController
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
         }
-
-        $cardsList = $this->creditCardDao->GetAll($idUser);
-    
-        require_once(USER_VIEWS . "tarjeta-compra-form.php");
  
     }
 
@@ -185,7 +183,7 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showLoginView();
+            $this->showLoginView($msgError);
         }
     }
 
@@ -207,7 +205,7 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showLoginView();
+            $this->showLoginView($msgError);
         }
     }
     public function verificar_mod_mail ($mail,$id)
@@ -228,7 +226,7 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showLoginView();
+            $this->showLoginView($msgError);
         }
     }
     public function modify($firstname,$lastName,$userName,$mail,$id_user){
@@ -261,7 +259,7 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showPrincipalView();
+            $this->showPrincipalView($msgError);
         }
     }
 
@@ -287,22 +285,32 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->showLoginView();
+            $this->showLoginView($msgError);
         }
     }
     public function showListCards($cantidad,$idFuncion, $idUser,$dateFunction)
     {
-        $cardsList = array();
-        $list = $this->creditCardDao->getNumber_Company($idUser);
-        
-        foreach($list as $value)
+        try
         {
-            if($value["expiration"]> date("Y-m-d"))
-                array_push($cardsList,$value);
+            $cardsList = array();
+            $list = $this->creditCardDao->getNumber_Company($idUser);
+            
+            foreach($list as $value)
+            {
+                if($value["expiration"]> date("Y-m-d"))
+                    array_push($cardsList,$value);
+            }
+            $cardsList=$this->encryptCards($cardsList);
+        
+            require_once( USER_VIEWS . "tarjeta-compra-form.php");
         }
-        $cardsList=$this->encryptCards($cardsList);
-      
-        require_once( USER_VIEWS . "tarjeta-compra-form.php");
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
+        }
+
     }
 
     public function encryptCards($list)
@@ -313,20 +321,47 @@ class UserController
         }
         return $list;
     }
+
     public function showCards($idUser)
     {
-        $list = $this->creditCardDao->GetALL($idUser);
-        $companiesList= $this->creditCardDao->getCompanies();
-        
-        $cardsList=$this->encryptCards($list);
-        require_once(USER_VIEWS . "user-card-list.php");
+        try
+        {
+            $list = $this->creditCardDao->GetALL($idUser);
+            $companiesList= $this->creditCardDao->getCompanies();
+            
+            $cardsList=$this->encryptCards($list);
+            if($cardsList)
+                require_once(USER_VIEWS . "user-card-list.php");
+            else
+            {
+                $msgError = array( "description" => "No posees tarjetas dadas de alta en el sistema",
+                "type" => 3);
+                require_once(USER_VIEWS . "board.php");
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
+        }
+
     }
 
     public function Remove ($userName)
     {
+        try
+        {
             $this->userRepo->Remove($userName);
-
             $this->showListUsersView();
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
+        }
+            
     }
 
     public function showListUsersView()
@@ -336,33 +371,80 @@ class UserController
 
     public function viewProfile ($id_user)
     {   
-        $user = $this->userRepo->GetOne($id_user);
-        $this->showListUsersView();
+        try
+        {
+            $user = $this->userRepo->GetOne($id_user);
+            $this->showListUsersView();
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
+        }
+        
     }   
 
    public function showPurchaseView($idUser)
    {
- 
-       $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
-       require_once(PURCHASE_VIEWS . "purchase-view.php");
+        try
+        {
+            $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
+            require_once(PURCHASE_VIEWS . "purchase-view.php");
+        }
+        catch(\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(USER_VIEWS . "board.php");
+        }
    }
 
    public function showOrderTitlePurchases($idUser)
    {
-    $purchaseList = $this->purchaseDao->getOrderTitlePurchases($idUser);
-    require_once(PURCHASE_VIEWS . "purchase-view.php");
+       try
+       {
+            $purchaseList = $this->purchaseDao->getOrderTitlePurchases($idUser);
+            require_once(PURCHASE_VIEWS . "purchase-view.php");
+       }
+       catch(\PDOException $ex)
+       {
+           $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+           "type" => 1);
+           require_once(USER_VIEWS . "board.php");
+       }
+ 
    }
    
    public function showOrderDatePurchases($idUser)
    {
-    $purchaseList = $this->purchaseDao->getOrderDatePurchases($idUser);
-    require_once(PURCHASE_VIEWS . "purchase-view.php");
+       try
+       {
+            $purchaseList = $this->purchaseDao->getOrderDatePurchases($idUser);
+            require_once(PURCHASE_VIEWS . "purchase-view.php");
+       }
+       catch(\PDOException $ex)
+       {
+           $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+           "type" => 1);
+           require_once(USER_VIEWS . "board.php");
+       }
+   
    }
 
    public function removeCreditCard ($idCreditCard,$idUser)
    {
-       $this->creditCardDao->removeCard($idCreditCard);
-       $this->showCards($idUser);
+       try
+       {
+            $this->creditCardDao->removeCard($idCreditCard);
+            $this->showCards($idUser);
+       }
+       catch(\PDOException $ex)
+       {
+           $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+           "type" => 1);
+           require_once(USER_VIEWS . "board.php");
+       }
    }
 
    public function verifyLogin($msgError ="")

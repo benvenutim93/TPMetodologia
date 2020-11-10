@@ -38,22 +38,20 @@ class MoviesController
         {
             $pelisDates = $this->fechasPelis();
             $genres = $this->genreDao->GetAll();
+            require_once(VIEWS_PATH . "searchMovie.php");
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
-        }
-        finally
-        {
-            require_once(VIEWS_PATH . "searchMovie.php");
+            require_once(USER_VIEWS . "login-form.php");
         }
     }
 
     public function showMoviesListView()
     {
-        try{    
+        try
+        {    
             $moviesList = array();
             $array = $this->moviesDao->getMoviesFunctions();
             $moviesList=$this->verifyFucntions($array);
@@ -77,7 +75,6 @@ class MoviesController
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
             require_once(USER_VIEWS . "login-form.php");
         }
     }
@@ -139,8 +136,6 @@ class MoviesController
         try
         {
             $moviesList = $this->moviesDao->GetWithFunctionGenres($genre_id);
-            
-            
             if (!empty($moviesList))
             {
                 for($i = 0; $i < count($moviesList); $i++)
@@ -201,19 +196,25 @@ class MoviesController
     } 
     public function fechasPelis()
     {
-        
-        $moviesList = $this->moviesDao->GetAll();
-        $dates= array();
+        try
+        {
+            $moviesList = $this->moviesDao->GetAll();
+            $dates= array();
 
-        foreach($moviesList as $movie){ 
-            $date = $movie->getRelease_date();
-            $fecha = explode('-', $date);
-            $años = array_shift($fecha);
-            
-            array_push($dates,$años);
+            foreach($moviesList as $movie){ 
+                $date = $movie->getRelease_date();
+                $fecha = explode('-', $date);
+                $años = array_shift($fecha);
+                
+                array_push($dates,$años);
+            }
+            $nonRepeat = array_unique($dates);
+        return $nonRepeat;
         }
-        $nonRepeat = array_unique($dates);
-       return $nonRepeat;
+        catch (\PDOException $ex)
+        {
+           throw $ex;
+        }
     }
 
     public function setGenresToMovies()
@@ -237,7 +238,6 @@ class MoviesController
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
             require_once(USER_VIEWS . "login-form.php");
         }
     } 

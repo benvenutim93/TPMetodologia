@@ -37,26 +37,34 @@ class TicketController
         $this->roomDao = new R_DAO();
     }
 
-    public function generateTicket($cantidad ,$idFuncion,$idPurchase){
-        $array= array();
-        
-        for($i=0; $i < $cantidad;$i++){
-            $this->ticketDao->add($idFuncion,$idPurchase);
-        }
-        $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
-            foreach ($function as $value)
-            {
-                $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"],$value["id_ticket"]);
-                $qr->setEncoding('UTF-8');
-               
-                $path =ROOT.'png/qrcode'.$value["id_ticket"].'.png';
-                $qr->writeFile( $path);      
-                
-                array_push($array,$path);
+    public function generateTicket($cantidad ,$idFuncion,$idPurchase)
+    {
+        try
+        {
+            $array= array();
+            
+            for($i=0; $i < $cantidad;$i++){
+                $this->ticketDao->add($idFuncion,$idPurchase);
             }
+            $function = $this->functionDao->GetMovieDataForFunction($idFuncion,$cantidad);
+                foreach ($function as $value)
+                {
+                    $qr = new QrCode($value["title"], $value["functionsHour"], $value["functionDate"], $value["roomName"], $value["cinemaName"],$value["id_ticket"]);
+                    $qr->setEncoding('UTF-8');
+                
+                    $path = ROOT .'png/qrcode'.$value["id_ticket"].'.png';
+                    $qr->writeFile( $path);      
+                    
+                    array_push($array,$path);
+                }
         
-
-        return $array;
+            return $array;
+        }catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            "type" => 1);
+           require_once(USER_VIEWS . "board.php");
+        }
     }
 
 

@@ -40,10 +40,26 @@ class CinemaController
         return false;
     }
 
-    public function showCinemaListAdmin()
+    public function showCinemaListAdmin($msgError = "")
     {
-        $arrayC= $this->cinemaDao->GetAll();
-        require_once(ADMIN_VIEWS . "cinemaListAdmin.php");
+        try
+        {
+            $arrayC= $this->cinemaDao->GetAll();
+            if($arrayC)
+                require_once(ADMIN_VIEWS . "cinemaListAdmin.php");
+            else
+            {
+                $msgError = array( "description" => "No hay cines para listar",
+                "type" => 3);
+                require_once(ADMIN_VIEWS . "boardAdmin.php");
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+                "type" => 1);
+            require_once(ADMIN_VIEWS . "boardAdmin.php");
+        }
     }
     public function showCinemaForm()
     {
@@ -56,13 +72,40 @@ class CinemaController
     
     public function showCinemas_user()
     {
-        $cines = $this->cinemaDao->GetALL();
-        require_once(CINEMA_VIEWS . "cinemaList.php");
+        try
+        {
+            $cines = $this->cinemaDao->GetALL();
+            if($cines)
+                require_once(CINEMA_VIEWS . "cinemaList.php");
+            else
+            {
+                $msgError = array( "description" => "No hay cines para listar",
+                "type" => 3);
+                require_once(USER_VIEWS . "board.php");
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+                "type" => 1);
+                require_once(USER_VIEWS . "board.php");
+        }
+        
+        
 
     }
     public function showCinemaModify($id){
-        $movie = $this->cinemaDao->GetOne($id);
-        require_once(CINEMA_VIEWS . "modify-form-cinema.php");
+        try
+        {
+            $movie = $this->cinemaDao->GetOne($id);
+            require_once(CINEMA_VIEWS . "modify-form-cinema.php");
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+                "type" => 1);
+                require_once(ADMIN_VIEWS . "boardAdmin.php");
+        }
     }
 
     public function Add ($name, $address, $capacity, $aper, $cierre)
@@ -70,28 +113,42 @@ class CinemaController
         
         try
         {
-            $cine = new Cine($name, $address, $capacity, $aper, $cierre);
-            $this->cinemaDao->Add($cine);
+            if(!$this->repeatedName($name, $address))
+            {
+                $cine = new Cine($name, $address, $capacity, $aper, $cierre);
+                $this->cinemaDao->Add($cine);
+            }
+            else
+            {
+                $msgError = array( "description" => "El cine no se ha agregado. Los datos se encuentran repetidos. Intente nuevamente",
+                "type" => 3);
+            }
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
-                "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
+                "type" => 1); 
         } 
         finally{
-            $this->showCinemaListAdmin();
+            $this->showCinemaListAdmin($msgError);
         }
     }
 
     public function getLastId()
     {
-        $array = $this->cinemaDao->GetAll();
-        if ($array)
+        try
         {
-            return count($array)+1;
+            $array = $this->cinemaDao->GetAll();
+            if ($array)
+            {
+                return count($array)+1;
+            }
+            else return 1;
         }
-        else return 1;
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
     public function Remove ($id)
@@ -104,10 +161,9 @@ class CinemaController
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
                 "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
         } 
         finally{
-            $this->showCinemaListAdmin();
+            $this->showCinemaListAdmin($msgError);
         }
     
         
@@ -117,16 +173,15 @@ class CinemaController
     {
         try
         {
-        $this->cinemaDao->Modify($id, $name, $address, $capacity,$aperHour, $closeHour);
+            $this->cinemaDao->Modify($id, $name, $address, $capacity,$aperHour, $closeHour);
         }
         catch (\PDOException $ex)
         {
-            $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
                 "type" => 1);
-            require_once(VIEWS_PATH . "errorView.php");
         } 
         finally{
-            $this->showCinemaListAdmin();
+            $this->showCinemaListAdmin($msgError);
         }
     }
 }

@@ -42,14 +42,49 @@ class AdminController
 
     public function showCinemaListPurchase()
     {
-        $arrayC= $this->cinemaDao->GetAll();
-        require_once(PURCHASE_VIEWS . "eleccion-cinema.php");
+        try
+        {
+            $arrayC= $this->cinemaDao->GetAll();
+            if($arrayC)
+                require_once(PURCHASE_VIEWS . "eleccion-cinema.php");
+            else
+            {
+                $msgError = array( "description" => "No hay cines cargados para ver las estadisticas",
+                "type" => 3);
+                $this->showOPAdminsView($msgError);
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+                "type" => 1);
+                $this->showOPAdminsView($msgError);
+        }
     }
     public function showCinemaListPurchaseTitle ($dateInicial,$dateFinal, $title)
     {
-        $salesList=$this->purchaseDao->getTotalTitleMovie($title,$dateInicial,$dateFinal);
-        $sale = round($salesList[0]["total"],2); //saca decimales de la variable y desa solo 2
-        require_once(PURCHASE_VIEWS ."salesList.php");
+        try
+        {   
+            $salesList=$this->purchaseDao->getTotalTitleMovie($title,$dateInicial,$dateFinal);
+            //Esta query no trae el nombre del Cine, trae un 0
+            if($salesList)
+            {
+                $sale = round($salesList[0]["total"],2); //saca decimales de la variable y desa solo 2
+                require_once(PURCHASE_VIEWS ."salesList.php");
+            }
+            else
+            {
+                $msgError = array( "description" => "No hay ventas en ese período de tiempo",
+                "type" => 3);
+                $this->showOPAdminsView($msgError);
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            $this->showOPAdminsView($msgError);
+        }
     }
 
     public function showFormVentas($idCinema)
@@ -59,8 +94,25 @@ class AdminController
 
     public function showFormVentasTitle()
     {
-        $arrayAmostrar = $this->functionDao->getAllTitlesWithFunctions();
-        require_once(ADMIN_VIEWS . "purchaseTitle.php");
+        try
+        {
+            
+            $arrayAmostrar = $this->functionDao->getAllTitlesWithFunctions();
+            if($arrayAmostrar)
+                require_once(ADMIN_VIEWS . "purchaseTitle.php");
+            else
+            {
+                $msgError = array( "description" => "No hay funciones cargadas para generar la busqueda",
+                "type" => 3);
+                $this->showOPAdminsView($msgError);
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            $this->showOPAdminsView($msgError);
+        }
     }
     public function showRemainTickets ($msgError = "")
     {  
@@ -88,9 +140,27 @@ class AdminController
 
     public function showPurcharses($dateInicial,$dateFinal,$idCinema)
     {
-        $salesList=$this->purchaseDao->getPurcharseCinema($dateInicial,$dateFinal,$idCinema);
-        $sale = round($salesList[0]["total"],2); //saca decimales de la variable y desa solo 2
-        require_once(PURCHASE_VIEWS ."salesList.php");
+        try
+        {
+            $salesList=$this->purchaseDao->getPurcharseCinema($dateInicial,$dateFinal,$idCinema);
+            if($salesList)
+            {
+                $sale = round($salesList[0]["total"],2); //saca decimales de la variable y desa solo 2
+                require_once(PURCHASE_VIEWS ."salesList.php");
+            }
+            else
+            {
+                $msgError = array( "description" => "No hay ventas para mostrar del cine seleccionado",
+                "type" => 3);
+                $this->showOPAdminsView($msgError);
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            $this->showOPAdminsView($msgError);
+        }
     }
 
     public function loginForm ($msgError = "")

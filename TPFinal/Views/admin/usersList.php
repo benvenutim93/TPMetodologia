@@ -1,3 +1,5 @@
+<?php if ($msgError){
+require_once(VIEWS_PATH . "errorView.php");}?>
 <div class="content-xxl">
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">

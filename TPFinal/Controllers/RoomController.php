@@ -22,22 +22,17 @@ class RoomController{
         
         try
         {
-        $arrayR= $this->roomDao->GetAll($idCinema);
-        $nombrea = $this->roomDao->GetnameCinema($idCinema);
-        $nombre=$nombrea[0];
-
+            $arrayR= $this->roomDao->GetAll($idCinema);
+            $nombrea = $this->roomDao->GetnameCinema($idCinema);
+            $nombre=$nombrea[0];
+            $arrayR=$this->roomDao->GetAll($idCinema);
+            require_once(ROOM_VIEWS. "index.php");
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
-            $arrayR=$this->roomDao->GetAll($idCinema);
-            require_once(VIEWS_PATH . "errorView.php");
-        }
-        finally
-        {
-            $arrayR=$this->roomDao->GetAll($idCinema);
-            require_once(ROOM_VIEWS. "index.php");
+            require_once(ADMIN_VIEWS . "boardAdmin.php");
         }
 
     }
@@ -72,8 +67,7 @@ class RoomController{
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
-            //require_once(VIEWS_PATH . "errorView.php");
-            //$this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
     }
     
@@ -82,8 +76,8 @@ class RoomController{
     public function showModifyRoom($id){
         try
         {
-        $room = $this->roomDao->GetOne($id);
-        require_once(ROOM_VIEWS . "modify-form-room.php");
+            $room = $this->roomDao->GetOne($id);
+            require_once(ROOM_VIEWS . "modify-form-room.php");
         }
         catch(\PDOException $ex)
         {
@@ -106,7 +100,7 @@ class RoomController{
                 foreach($cantidad as $value)
                 {
                     if($value["cantidad"] > 0)
-                    require_once(ROOM_VIEWS . "roomsListAdmin.php");
+                        require_once(ROOM_VIEWS . "roomsListAdmin.php");
                     else 
                     {
                         $msgError = array( "description" => "No se encontraron salas en el cine",
@@ -120,7 +114,7 @@ class RoomController{
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
 
     }
@@ -144,7 +138,7 @@ class RoomController{
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
     }
   
@@ -186,7 +180,7 @@ class RoomController{
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
     
  
@@ -224,7 +218,7 @@ class RoomController{
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
 
     }
@@ -251,7 +245,7 @@ class RoomController{
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-            $this->index($idCinema);
+            $this->index($idCinema, $msgError);
         }
     }
 

@@ -14,7 +14,9 @@
                 <label for="dateFinal" >Ingrese Fecha Final</label>
 
                 <input type="date" name="dateFinal" id= "dateFinal" min="2001-03-09" max="<?php echo date("Y-m-d")?>" class="form-control" placeholder="Ingrese Fecha" required>
+                <br>
                 <select id="inputState" name="id_movie" class="form-control">
+               
                 <option value="" disabled selected> Seleccione una pelicula </option>
                     <?php foreach($arrayAmostrar as $value){ ?>
                         <option value="<?php echo $value["title"];?>"> <?php echo $value["title"];?></option>
