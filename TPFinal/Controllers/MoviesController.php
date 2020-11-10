@@ -141,7 +141,7 @@ class MoviesController
             {
                     $movie[0]["adult"] = $this->changeAdult($movie[0]["adult"]);
                     $movie[0]["original_language"] = $this->changeLanguage($movie[0]["original_language"]);
-                $this->showMoviesSearch($movie);  
+                    $this->showMoviesSearch($movie);  
             }
             
             else
