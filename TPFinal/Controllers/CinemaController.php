@@ -174,15 +174,16 @@ class CinemaController
         try
         {
             $this->cinemaDao->Modify($id, $name, $address, $capacity,$aperHour, $closeHour);
+            $msgError = array( "description" => "El cine se ha modificado con éxito",
+                "type" => 2);
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
                 "type" => 1);
         } 
-        finally{
-            $this->showCinemaListAdmin($msgError);
-        }
+        $this->showCinemaListAdmin($msgError);
+        
     }
 }
 ?>
