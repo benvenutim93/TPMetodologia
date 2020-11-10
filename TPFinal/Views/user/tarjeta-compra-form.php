@@ -49,9 +49,25 @@
                     <div class="row">
                     <div class="col">
                         <font color="red"> <h1>No Hay tarjetas cargadas</h1>
-                        <p>Carge alguna tarjeta</p></font></div>
+                        <p>Carge alguna tarjeta</p></font>
                     </div>
-                    <a href="<?php echo FRONT_ROOT?>User/showPrincipalView">Aceptar</a>
+                    </div>
+                    <div class="row">
+                        <div class="col"><form class="form-signin" action= "<?php echo FRONT_ROOT?>User/showPrincipalView" method="POST">
+                            <button type="sumbit"  class="btn btn-lg btn-primary btn-block" >VOLVER</button>
+                            </form>  
+                        </div>
+
+                        
+                        <div class="col"> <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/showCards" method="POST">
+                            <input type="number" class="sr-only" value="<?php echo $user["id_user"];?>" name="idUser">
+                            
+                            <button type="sumbit"  class="btn btn-lg btn-success btn-block" >Agregar tarjeta</button>
+                            </form>
+                         </div>
+
+                    
+                    </div>
                 
                 </div>
 

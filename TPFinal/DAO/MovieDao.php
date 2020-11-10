@@ -397,7 +397,8 @@
                 on genresxmovies.id_movie =movies.id_movie
                 join genres
                 on genres.id_genre = genresxmovies.id_genre
-                where genres.id_genre =$genreName;
+                where genres.id_genre =$genreName
+                group by movies.title;
                 ";
 
 
