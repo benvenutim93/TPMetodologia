@@ -47,7 +47,7 @@ class UserController
         }
     }
 
-    public function viewSetAdmin ()
+    public function viewSetAdmin ($msgError = "")
     {
         try
         {
@@ -59,11 +59,7 @@ class UserController
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
         }
-        finally
-        {
-            require_once(ADMIN_VIEWS . "usersList.php"); 
-        }
-        
+            require_once(ADMIN_VIEWS . "usersList.php");     
     }
 
     public function showPrincipalView ($msgError = "")
@@ -100,6 +96,9 @@ class UserController
         {  
             $tarjeta = new CreditCard($cardHolder,$numberCC,$expiration,$company);
             $this->creditCardDao->Add($tarjeta,$idUser);
+            $msgError = array( "description" => "La tarjeta se ha agregado con éxito!",
+            "type" => 2);
+            require_once(VIEWS_PATH . "errorView.php");
         }
         catch(\PDOException $ex)
         {
@@ -330,16 +329,16 @@ class UserController
             $companiesList= $this->creditCardDao->getCompanies();
             
             $cardsList=$this->encryptCards($list);
-            if($cardsList)
-                require_once(USER_VIEWS . "user-card-list.php");
-            else
+            if(!$cardsList)
             {
                 $msgError = array( "description" => "No posees tarjetas dadas de alta en el sistema",
                 "type" => 3);
-                require_once(USER_VIEWS . "board.php");
+                
             }
+             require_once(USER_VIEWS . "user-card-list.php");
+            
         }
-        catch(\PDOException $ex)
+        catch(PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
@@ -390,7 +389,14 @@ class UserController
         try
         {
             $purchaseList = $this->purchaseDao->getAllPurchase($idUser);
-            require_once(PURCHASE_VIEWS . "purchase-view.php");
+            if($purchaseList)
+                require_once(PURCHASE_VIEWS . "purchase-view.php");
+            else
+            {
+                $msgError = array( "description" => "Aún no ha comprado ninguna entrada para ser listada",
+                "type" => 3);
+                require_once(USER_VIEWS . "board.php");
+            }
         }
         catch(\PDOException $ex)
         {

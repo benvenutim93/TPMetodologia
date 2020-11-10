@@ -253,7 +253,7 @@ class MoviesController
             else
             {
                 $msgError = array( "description" => "No hay funciones por el momento",
-                "type" => 1);
+                "type" => 3);
                 require_once(USER_VIEWS . "board.php");
             }
         }

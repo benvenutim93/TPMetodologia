@@ -1,6 +1,7 @@
 <?php 
  $user =$_SESSION["logged"];
-
+ if (isset($msgError)){
+    require_once(VIEWS_PATH . "errorView.php");}
 ?>
 
 <div class="content-chico">

@@ -49,8 +49,9 @@ class CinemaController
                 require_once(ADMIN_VIEWS . "cinemaListAdmin.php");
             else
             {
-                $msgError = array( "description" => "No hay cines para listar",
-                "type" => 3);
+                if(!isset($msgError))
+                    $msgError = array( "description" => "No hay cines para listar",
+                    "type" => 3);
                 require_once(ADMIN_VIEWS . "boardAdmin.php");
             }
         }
@@ -110,13 +111,14 @@ class CinemaController
 
     public function Add ($name, $address, $capacity, $aper, $cierre)
     {
-        
         try
         {
             if(!$this->repeatedName($name, $address))
             {
                 $cine = new Cine($name, $address, $capacity, $aper, $cierre);
                 $this->cinemaDao->Add($cine);
+                $msgError = array( "description" => "El cine se agregó con éxito",
+                "type" => 2);
             }
             else
             {
@@ -129,9 +131,7 @@ class CinemaController
             $msgError = array( "description" => "Error de conexión con la base de datos. El cine no se ha agregado. Intente nuevamente",
                 "type" => 1); 
         } 
-        finally{
-            $this->showCinemaListAdmin($msgError);
-        }
+        $this->showCinemaListAdmin($msgError);
     }
 
     public function getLastId()
@@ -156,15 +156,15 @@ class CinemaController
         try 
         {
             $this->cinemaDao->Remove($id);
+            $msgError = array( "description" => "El cine ha sido eliminado",
+                "type" => 2);
         }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
                 "type" => 1);
         } 
-        finally{
             $this->showCinemaListAdmin($msgError);
-        }
     
         
     }
