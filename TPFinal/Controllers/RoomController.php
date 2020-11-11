@@ -141,6 +141,16 @@ class RoomController{
             $this->index($idCinema, $msgError);
         }
     }
+
+    public function verifyRoomName($arraySalas, $name)
+    {   
+        foreach($arraySalas as $room)
+        {
+            if($room->getName() == $name)
+                return true;
+        }
+        return false;
+    }
   
     public function add($name,$capacity,$price,$idCinema){
 
@@ -149,29 +159,35 @@ class RoomController{
             $capacidadCine=$this->roomDao->getCinemaCapacity($idCinema);
 
             $sumCantsalas = $this->roomDao->getRoomCapacity($idCinema);
+            $salasCine = $this->roomDao->GetAll($idCinema);
 
             $capRooms=$sumCantsalas[0];
-            $msgError = "";
+           if (!$this->verifyRoomName($salasCine, $name))
+           {
             
-            foreach($capacidadCine as $value){
-            $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity;
+                foreach($capacidadCine as $value){
+                    $capRooms["capEnUso"]=$capRooms["capEnUso"]+$capacity;
 
-            if($value["capacity"] >= ($capRooms["capEnUso"]))
-            {
+                    if($value["capacity"] >= ($capRooms["capEnUso"]))
+                    {
 
-            $room = new Room($name,$capacity,$price,$idCinema);
-            $this->roomDao->Add($room);
-            $msgError = array( "description" => "La sala se agrego con Exito al cine",
-                        "type" => 2);
-
-                    
+                        $room = new Room($name,$capacity,$price,$idCinema);
+                        $this->roomDao->Add($room);
+                        $msgError = array( "description" => "La sala se agrego con Exito al cine",
+                                    "type" => 2);       
+                    }
+                    else
+                    {
+                        $msgError = array( "description" => "Se ha superado la capacidad del cine,vuelva a intentarlo.",
+                                "type" => 3);
+                        
+                    }
+                }
             }
             else
             {
-                $msgError = array( "description" => "Se ha superado la capacidad del cine,vuelva a intentarlo.",
-                        "type" => 3);
-                
-            }
+                $msgError = array( "description" => "El nombre de la sala se encuentra en uso. Intente nuevamente",
+                                "type" => 3);
             }
             $this->index($idCinema, $msgError);
         }

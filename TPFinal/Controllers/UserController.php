@@ -40,11 +40,9 @@ class UserController
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
             require_once(VIEWS_PATH . "errorView.php");
-        }   
-        finally
-        {     
-            require_once(ADMIN_VIEWS . "usersList.php");
-        }
+        }      
+        require_once(ADMIN_VIEWS . "usersList.php");
+        
     }
 
     public function viewSetAdmin ($msgError = "")

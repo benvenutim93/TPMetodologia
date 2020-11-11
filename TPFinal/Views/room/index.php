@@ -57,7 +57,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                     <?php } ?>
                 </select>
                 <br><br>
-
+                        
                 <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema ?>" required autofocus>
                     <!-- B O T O N -->
                     <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>

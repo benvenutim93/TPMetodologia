@@ -1,5 +1,6 @@
 <?php if (isset($msgError)){
 require_once(VIEWS_PATH . "errorView.php");}?>
+
 <div class="cartelera-content">
     <div class="table-responsive-lg">
         <table class="table table-hover" >
@@ -25,7 +26,8 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                             </div>
                             <div class="col">
                                     <ul>
-                                    <li><h3 > ID </h3><p ><strong><?php echo $cine->getId(); ?></p></strong></li>
+                                    <li><h3 > Horario Apertura </h3><p ><strong><?php echo $cine->getAperHour(); ?></p></strong></li>
+                                    <li><h3 > Horario Cierre </h3><p ><strong><?php echo $cine->getCloseHour(); ?></p></strong></li>
                                     </ul>
                             </div>
                         </div>  

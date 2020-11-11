@@ -26,14 +26,17 @@ class FunctionController{
         try
         {
             $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
+            $nombrea = $this->roomDao->GetnameCinema($idCinema);
+            $nombre = $nombrea[0];//trae el nombre del cine para pasarle al index
             if ($this->verifyHours($arrayFunctionRoom, $hour))
             {
                 $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
-                $nombre = $this->roomDao->GetnameCinema($idCinema)[0];//trae el nombre del cine para pasarle al index
+
                 $this->functionDao->Add($function);
                 $msgError = array( "description" => "La funcion se agrego con exito",
                         "type" => 2);
                 $arrayR=$this->roomDao->GetAll($idCinema);
+                
             }
             else 
                 $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);      
@@ -42,11 +45,9 @@ class FunctionController{
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-        }
-        finally 
-        {   
-            require_once(ROOM_VIEWS . "index.php");
-        }
+        } 
+        require_once(ROOM_VIEWS . "index.php");
+        
     }
 
     public function verifyHours ($arrayFunciones, $hora)
