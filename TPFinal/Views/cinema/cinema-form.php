@@ -15,7 +15,7 @@
             <!-- L A B E L -->
             <label for="capacity" class="sr-only">Ingrese Capacidad</label>
             <!--I N P U T-->
-            <input type="number" id="capacity" class="form-control" placeholder="Capacidad"  min="0" max="500" title ="Minimo 0 Maximo 500"name="capacity" required>
+            <input type="number" id="capacity" class="form-control" placeholder="Capacidad"  min="0"  title ="Minimo 0"name="capacity" required>
             <!-- L A B E L -->
             <label for="aper" class="">Horario Apertura</label>
              <!--I N P U T-->

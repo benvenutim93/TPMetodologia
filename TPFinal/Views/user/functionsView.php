@@ -11,10 +11,12 @@
                         
                         <div class="col">
                             <form class="form-signin" action= "<?php echo FRONT_ROOT?>User/verifyLogin" method="POST">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">VOLVER</button>
+                            <div class="col">
+                                <button class="btn btn-outline-warning btn-block" type="submit">VOLVER</button></div>
                             </form>
                         </div>  
-                </div>  
+
+                </div>  <br>
             </thead>
             <tr>
                 <?php foreach ($moviesList as $movie){
@@ -67,7 +69,6 @@
                                     <form action="<?php echo FRONT_ROOT?>Function/showFunctionList" method="POST">
                                             <input type="number" class="sr-only" name="idMovie" value ="<?php echo $movie["id_movie"];?>"readonly>
                                             <input type="text" class="sr-only" name="movieTitle" value ="<?php echo $movie["title"];?>"readonly>
-
                                             <button type="sumbit" class="btn btn-lg btn-success btn-block" >Seleccionar</button>
                                     </form>
                                 </div>

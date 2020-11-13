@@ -40,7 +40,7 @@ class CinemaController
         return false;
     }
 
-    public function showCinemaListAdmin($msgError = "")
+    public function showCinemaListAdmin()
     {
         try
         {

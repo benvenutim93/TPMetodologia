@@ -21,11 +21,7 @@
                                     <!-- Agregar cosas -->
                                     </ul>
                             </div>
-                            <div class="col">
-                                    <ul>
-                                    <li><h3 > ID </h3><p ><strong><?php echo $cine->getId(); ?></p></strong></li>
-                                    </ul>
-                            </div>
+                        
                         </div>  
             
                         <div class="row">

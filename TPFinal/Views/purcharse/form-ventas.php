@@ -9,11 +9,11 @@
                 <label for="dateInicial" >Ingrese Fecha Inicial</label>
                 
                 <!--I N P U T-->
-                <input type="date" name="dateInicial" id= "dateInicial" min="2001-03-09" max="<?php echo date("Y-m-d")?>"class="form-control" placeholder="Ingrese Fecha" required>
+                <input type="date" name="dateInicial" id= "dateInicial" min="2001-03-09" class="form-control" placeholder="Ingrese Fecha" required>
 
                 <label for="dateFinal" >Ingrese Fecha Final</label>
 
-                <input type="date" name="dateFinal" id= "dateFinal" min="2001-03-09" max="<?php echo date("Y-m-d")?>" class="form-control" placeholder="Ingrese Fecha" required>
+                <input type="date" name="dateFinal" id= "dateFinal" min="2001-03-09"  class="form-control" placeholder="Ingrese Fecha" required>
                 <input type="number" class="sr-only" name="IdCinema" value="<?php echo $idCinema;?>">
                 <br>
   

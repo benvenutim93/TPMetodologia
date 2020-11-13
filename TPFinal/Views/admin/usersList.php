@@ -22,8 +22,6 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                                     break;
                                 case 2: echo "Usuario regular";
                                     break;
-                                case 3: echo "Dueño de cine";
-                                    break;
                             } ?></i></h6>
                             </div>
                             <div class="col">
@@ -32,7 +30,6 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                                     <option value="" disabled selected> Seleccione nuevo Rol </option>
                                     <option value="1"> Administrador</option>
                                     <option value="2"> Usuario</option>
-                                    <option value="3"> Dueño de cine</option>
 
                                 </select>
                                 <input type="number" class="sr-only" id="id_user" name="id_user" value="<?php echo $value["id_user"]?>">

@@ -24,7 +24,7 @@ require_once(VIEWS_PATH . "errorView.php");}?>
                             <!-- L A B E L -->
                             <label for="Valor" >Ingrese Valor </label>
                             <!--I N P U T-->
-                            <input type="number" id="Valor" class="form-control" placeholder="Valor"  min="0" max="500" name="price" required>
+                            <input type="number" id="Valor" class="form-control" placeholder="Valor"  min="0" name="price" required>
                             <!-- ID cinema -->
                             <input type="number" id="idCinema" class="sr-only"  name="idCinema"   value="<?php echo $idCinema?>" required autofocus>
                             <br>

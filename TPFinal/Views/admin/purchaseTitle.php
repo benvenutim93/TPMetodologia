@@ -9,11 +9,11 @@
                 <label for="dateInicial" >Ingrese Fecha Inicial</label>
                 
                 <!--I N P U T-->
-                <input type="date" name="dateInicial" id= "dateInicial" min="2001-03-09" max="<?php echo date("Y-m-d")?>"class="form-control" placeholder="Ingrese Fecha" required>
+                <input type="date" name="dateInicial" id= "dateInicial" min="2001-03-09" class="form-control" placeholder="Ingrese Fecha" required>
 
                 <label for="dateFinal" >Ingrese Fecha Final</label>
 
-                <input type="date" name="dateFinal" id= "dateFinal" min="2001-03-09" max="<?php echo date("Y-m-d")?>" class="form-control" placeholder="Ingrese Fecha" required>
+                <input type="date" name="dateFinal" id= "dateFinal" min="2001-03-09"  class="form-control" placeholder="Ingrese Fecha" required>
                 <br>
                 <select id="inputState" name="id_movie" class="form-control">
                
@@ -28,7 +28,7 @@
                 <button class="btn btn-lg btn-success btn-block" type="submit">Confirmar</button>
     </form>
 
-    <div class="row">
+    <div class="col">
 
         <a href="<?php echo FRONT_ROOT?>Admin/showOPAdminsView" class="form-signin"><button class="btn btn-lg btn-primary btn-block" type="submit">Cancelar</button></a>
 
