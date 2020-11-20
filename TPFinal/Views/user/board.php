@@ -35,11 +35,11 @@ $user = $_SESSION["logged"];
                     <form action=" <?php echo FRONT_ROOT?>Cinema/showCinemas_user" class="form-singin">
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Cines </button>
                     </form>
-                     <!-- F O R M -->
+                     <!-- F O R M-->
                      <form action=" <?php echo FRONT_ROOT?>User/showCards" class="form-singin">
                         <input type="number" class="sr-only" name ="idUser" value="<?php echo $user["id_user"]?>" readonly>
                         <button  class="btn btn-lg btn-primary btn-block" type="submit"> Listar Tarjetas </button>
-                    </form>
+                    </form> 
                    
             </div>
                     

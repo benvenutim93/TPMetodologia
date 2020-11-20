@@ -20,7 +20,7 @@
     public function Add(CreditCard $tarjeta,$idUser)
     {
         try{
-            $query = " insert into  $this->tableName (cardHolder ,expiration,numberCC,id_company,id_user) VALUES (:cardHolder, :expiration, :numberCC, :id_company, :id_user);";
+            $query = " insert into  $this->tableName (cardHolder ,expiration,numberCC,id_company,id_user) VALUES (:cardHolder, :expiration, AES_ENCRYPT(:numberCC,'". ENCRYPT_KEY ."'), :id_company, :id_user);";
 
             $parameters["cardHolder"] = $tarjeta->getCardHolder();
             $parameters["expiration"] = $tarjeta->getExpiration();
@@ -44,7 +44,7 @@
                 $query= "select $this->tableName.id_creditCard,
                             $this->tableName.cardHolder,
                             $this->tableName.expiration,
-                            $this->tableName.numberCC,
+                            aes_decrypt($this->tableName.numberCC,'". ENCRYPT_KEY ."') as numberCC,
                             $this->tableName.id_user,
                             companies.companyName
                         from $this->tableName

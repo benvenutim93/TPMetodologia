@@ -84,7 +84,8 @@
                         on cinemas.id_cine = rooms.id_cine
                         inner join movies
                         on functions.id_movie = movies.id_movie
-                        group by functions.id_function;";
+                        group by functions.id_function
+                        order by functionDate;";
             
             $this->connection = Connection :: GetInstance();
             return $this->connection->Execute($query);

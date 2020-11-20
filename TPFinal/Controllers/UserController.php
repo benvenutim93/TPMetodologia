@@ -154,7 +154,7 @@ class UserController
 
     public function showLoginView ($msgError = "")
     {
-        require_once(USER_VIEWS . "login-form.php");
+        $this->verifyLogin($msgError);
     }
 
     public function showLogOutView()

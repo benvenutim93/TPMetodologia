@@ -15,7 +15,7 @@
         <a class="nav-link" href="<?php echo FRONT_ROOT?>Movies/showSearchMovieView">Buscar película</a>
       </li>
     </ul>
-    <a class="nav-link" href="<?php echo FRONT_ROOT?>User/showLoginView">Inicio Sesion</a>
+    <a class="nav-link" href="<?php echo FRONT_ROOT?>User/showLoginView">Menu Principal</a>
     <a class="nav-link" data-toggle="modal" data-target="#cierresesion"  href="#">Cerrar Sesion</a>
 
    

@@ -158,7 +158,7 @@ class TicketController
                     $success = unlink($filename);
 
                     if (!$success) {
-                        throw new Exception("Cannot delete $filename");
+                        throw new MailException("Cannot delete $filename");
                     }
                 }
 

@@ -236,6 +236,33 @@
             }
         }
 
+        public function getIDAPI ($id_movie)
+        {
+            try
+            {
+                $query = "select id from movies where id_movie = $id_movie";
+                $this->connection = Connection :: GetInstance();
+                $result = $this->connection->Execute($query);
+                return $result;
+
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function retrieveIDAPI( $id_movie)
+        {
+            $apiContent = file_get_contents("https://api.themoviedb.org/3/movie/".$id_movie."?api_key=". API_KEY . "&language=en-US");
+            if ($apiContent)
+            {
+                $jsonDecode = json_decode($apiContent, true);
+                return $jsonDecode;
+
+            }
+        }
+
         
         public function retrieveAPIJson()
         {
@@ -317,12 +344,14 @@
             {
                 $query ="select DISTINCT
                 tablaAux.title,
-                tablaAux.id_movie
+                tablaAux.id_movie,
+                tablaAux.id
                 from movies
                 inner join(
                     select 
                         movies.title,
                         movies.id_movie,
+                        movies.id,
                         ifnull(functions.functionDate,0) as fecha
                     from movies
                     left join functions
@@ -348,6 +377,7 @@
                 $query ="select DISTINCT
                 movies.title,
                 movies.id_movie,
+                movies.id,
                 movies.overview,
                 movies.adult,
                 movies.original_language,

@@ -37,7 +37,7 @@ class MoviesController
         try
         {
             $pelisDates = $this->fechasPelis();
-            $genres = $this->genreDao->GetAll();
+            //$genres = $this->genreDao->GetAll();
             require_once(VIEWS_PATH . "searchMovie.php");
         }
         catch (\PDOException $ex)
@@ -240,7 +240,7 @@ class MoviesController
                 array_push($dates,$años);
             }
             $nonRepeat = array_unique($dates);
-        return $nonRepeat;
+            return $nonRepeat;
         }
         catch (\PDOException $ex)
         {

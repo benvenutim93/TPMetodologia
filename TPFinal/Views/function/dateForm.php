@@ -11,7 +11,6 @@
 
             <?php foreach($arrayAmostrar as $value){ ?>
                 <option value="<?php echo $value["id_movie"];?>"> <?php echo $value["title"];?></option>
-
             <?php } ?>
         </select>
 
@@ -22,8 +21,7 @@
         <br>
         <label>Horario de la Funcion</label>        
         <input type="time" id="hour" class="form-control"  name="hour"  min="<?php echo $cine->getAperHour();?>" max="<?php echo $cine->getCloseHour()?>" value= ""required>
-        
-        <input type="number" id="id" class="sr-only" name="idCinema" value="<?php echo $idCinema;?>" readonly>
+        <input type="number" id="idCinema" class="sr-only" name="idCinema" value="<?php echo $idCinema;?>" readonly>
         <br>
         <button class="btn btn-lg btn-success btn-block" type="submit">Agregar</button>
     </form>

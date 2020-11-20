@@ -72,7 +72,7 @@ id_userType int not null auto_increment,
 nameType varchar (255),
 constraint pk_userTye primary key (id_userType))engine=InnoDB;
 
-insert into userTypes (nameType) values ("Administrador"),("Usuario"),("Dueño cine");
+insert into userTypes (nameType) values ("Administrador"),("Usuario");
 
 create table users (
 id_user int not null auto_increment,
@@ -100,12 +100,13 @@ create table creditCards (
 id_creditCard int AUTO_INCREMENT,
 cardHolder varchar(255) not null, 
 expiration date not null, 
-numberCC varchar(255) not null, 
+numberCC blob , 
 id_company int not null, 
 id_user int not null,
 constraint pk_creditCard primary key (id_creditCard),
 constraint fk_user foreign key (id_user) references users(id_user),
 constraint fk_company foreign key (id_company) references companies(id_company) on delete cascade on update cascade)engine=InnoDB;
+
 
 create table purchases(
 id_purchase int AUTO_INCREMENT not null,
@@ -122,26 +123,3 @@ id_purchase int not null,
 constraint pk_ticket primary key (id_ticket),
 constraint fk_purchase foreign key (id_purchase) references purchases(id_purchase),
 constraint fk_function foreign key (id_function) references functions(id_function)on update cascade on delete cascade)engine=InnoDB;
-  
-  
-create table discounts (
-id_discount int auto_increment not null,
-percentage int not null, 
-descript varchar (255) not null, 
-minCant int not null, 
-constraint pk_discount primary key (id_discount))engine=InnoDB;
-
-create table discountsXcinema (
-id_dxc int AUTO_INCREMENT not null, 
-id_cine int not null,
-id_discount int not null,
-constraint pk_dxc primary key (id_dxc),
-constraint fk_cine2 foreign key (id_cine) references cinemas (id_cine) on update cascade on delete cascade,
-constraint fk_discount foreign key (id_discount) references discounts (id_discount))engine=InnoDB;
-
-create table dayOfDiscount (
-id_dod int AUTO_INCREMENT not null,
-id_discount int not null,
-dia varchar (255) not null,
-constraint pk_dod primary key (id_dod),
-constraint fk_discount2 foreign key (id_discount) references discounts(id_discount))engine=InnoDB;

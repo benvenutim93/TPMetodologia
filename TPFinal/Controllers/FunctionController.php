@@ -23,45 +23,54 @@ class FunctionController{
   
     public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour, $idCinema){
 
-        try
-        {
+       /*try
+        {*/
             $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
             $nombrea = $this->roomDao->GetnameCinema($idCinema);
             $nombre = $nombrea[0];//trae el nombre del cine para pasarle al index
-            if ($this->verifyHours($arrayFunctionRoom, $hour))
+            $id = $this->movieDao->getIDAPI($id_movie);
+            var_dump($id);
+            echo "Movie ID: $id_movie";
+            $arrayR=$this->roomDao->GetAll($idCinema);
+           
+            if ($this->verifyHours($arrayFunctionRoom, $hour,$id))
             {
                 $function = new Funct($id_room,$id_movie,$seatsOcupped,$date,$hour);
 
                 $this->functionDao->Add($function);
                 $msgError = array( "description" => "La funcion se agrego con exito",
                         "type" => 2);
-                $arrayR=$this->roomDao->GetAll($idCinema);
+                
                 
             }
             else 
                 $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);      
-        }
+        /*}
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-        } 
+        } */
         require_once(ROOM_VIEWS . "index.php");
         
     }
 
-    public function verifyHours ($arrayFunciones, $hora)
+    public function verifyHours ($arrayFunciones, $hora, $id_movie)
     {
+        $movie = $this->movieDao->retrieveIDAPI($id_movie[0]['id']);
+
         $date = date("H:i", strtotime($hora));
         $hourForm = new Datetime ($hora);
         $flag = 0;
 
+        $minutes = $movie["runtime"] + 15;
+       
         foreach ($arrayFunciones as $value)
         {
             $horaFuncion = date ("H:i", strtotime($value["functionsHour"]));
             $hour = new Datetime($horaFuncion);
             $hourMax = new Datetime($horaFuncion);
-            $hourMax->modify("+2hours,+14minutes");
+            $hourMax->modify("+$minutes minutes");
   
             if($hourForm >= $hour && $hourForm <= $hourMax)
                 $flag=1;
