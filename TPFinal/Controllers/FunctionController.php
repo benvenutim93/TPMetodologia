@@ -23,14 +23,13 @@ class FunctionController{
   
     public function Add($id_movie,$id_room,$seatsOcupped,$date,$hour, $idCinema){
 
-       /*try
-        {*/
+       try
+        {
             $arrayFunctionRoom=$this->roomDao->getFunctionsRoom($id_room, $date);//Trae los horarios de las funciones que tiene una sala
             $nombrea = $this->roomDao->GetnameCinema($idCinema);
             $nombre = $nombrea[0];//trae el nombre del cine para pasarle al index
             $id = $this->movieDao->getIDAPI($id_movie);
-            var_dump($id);
-            echo "Movie ID: $id_movie";
+          
             $arrayR=$this->roomDao->GetAll($idCinema);
            
             if ($this->verifyHours($arrayFunctionRoom, $hour,$id))
@@ -45,12 +44,12 @@ class FunctionController{
             }
             else 
                 $msgError = array( "description" => "La sala se encuentra ocupada en ese horario","type" => 3);      
-        /*}
+        }
         catch (\PDOException $ex)
         {
             $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
             "type" => 1);
-        } */
+        } 
         require_once(ROOM_VIEWS . "index.php");
         
     }

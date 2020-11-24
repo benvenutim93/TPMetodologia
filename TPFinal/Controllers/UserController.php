@@ -184,6 +184,28 @@ class UserController
         }
     }
 
+    public function mailExists ($mail)
+    {
+        try
+        {
+            $array = $this->userRepo->GetAll();
+
+            foreach ($array as $user)
+            {
+                if($user["mail"] == $mail)
+                    return true;
+            }
+            return false;
+        }
+        catch (\PDOException $ex)
+        {
+            $msgError = array( "description" => "Error de conexión con la base de datos. Intente nuevamente",
+            "type" => 1);
+            require_once(VIEWS_PATH . "errorView.php");
+            $this->showLoginView($msgError);
+        }
+    }
+
     public function verificar_mod_user ($userName,$id)
     {
         try
@@ -266,7 +288,7 @@ class UserController
     {
         try
         {
-            if ($this->userNameExists($userName))
+            if ($this->userNameExists($userName) && $this->mailExists($mail))
                 $this->showSingInFormView();
             else 
             {

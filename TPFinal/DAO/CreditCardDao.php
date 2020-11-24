@@ -39,12 +39,13 @@
 
     public function GetAll($id_user)
     {
+        //cast(aes_decrypt(pass,"llave") as char(50))
         try
             {
                 $query= "select $this->tableName.id_creditCard,
                             $this->tableName.cardHolder,
                             $this->tableName.expiration,
-                            aes_decrypt($this->tableName.numberCC,'". ENCRYPT_KEY ."') as numberCC,
+                            cast(aes_decrypt($this->tableName.numberCC,'". ENCRYPT_KEY ."') as char(50)) as numberCC,
                             $this->tableName.id_user,
                             companies.companyName
                         from $this->tableName
@@ -66,7 +67,7 @@
     public function getNumber_Company($idUser){
         try
         {
-            $query= "select cc.numberCC,
+            $query= "select cast(aes_decrypt(cc.numberCC,'". ENCRYPT_KEY ."') as char(50)) as numberCC,
                     cc.id_creditCard,
                     cc.cardHolder,
                     cc.expiration,

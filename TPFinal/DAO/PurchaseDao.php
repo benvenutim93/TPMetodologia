@@ -188,23 +188,23 @@
         public function getPurcharseCinema($dateInicial,$dateFinal,$idCinema)
         {
                 try{
-                $query="select ifnull(tablaAux.valor,0) as total, tablaAux.name as 'cinemaName'
+                $query="select
+                sum(td.total) as total,
+                td.cinemaName
                 from (select 
-                cinemas.id_cine,
-                functions.id_function,
-                rooms.id_room,
-                rooms.ticketValue as valor,
-                cinemas.cinemaName as name
-                from tickets 
-                inner join functions
-                on tickets.id_function = functions.id_function 
-                inner join rooms
-                on rooms.id_room = functions.id_room
-                inner join cinemas
-                on rooms.id_cine= cinemas.id_cine
-                inner join purchases
-                on purchases.id_purchase = tickets.id_purchase
-                where cinemas.id_cine=:idCinema  and purchases.purchaseDate between :dateInicial and :dateFinal)tablaAux;";
+                        total,
+                        c.cinemaName as cinemaName
+                        from purchases p
+                        join tickets t
+                        on t.id_purchase = p.id_purchase
+                        join functions as f
+                        on f.id_function = t.id_function
+                        join rooms as r
+                        on f.id_room = r.id_room
+                        join cinemas as c
+                        on c.id_cine = r.id_cine
+                        where c.id_cine = :idCinema and p.purchaseDate BETWEEN :dateInicial and :dateFinal
+                        group by p.id_purchase) td";
                 
                         $parameters["idCinema"]= $idCinema;
                         $parameters["dateInicial"]= $dateInicial;
@@ -222,25 +222,27 @@
         public function getTotalTitleMovie ($title, $fechaInicial, $fechaFinal)
         {
             try{
-                $query = "select ifnull(sum(tablaAux.valor),0) total, ifnull(tablaAux.name,0) as 'cinemaName'
+                $query = "select
+                sum(td.total) as total,
+                td.title,
+                td.cinemaName
                 from (select 
-                cinemas.id_cine,
-                functions.id_function,
-                rooms.id_room,
-                rooms.ticketValue as valor,
-                cinemas.cinemaName as name
-                from tickets 
-                inner join functions
-                on tickets.id_function = functions.id_function 
-                inner join rooms
-                on rooms.id_room = functions.id_room
-                inner join cinemas
-                on rooms.id_cine= cinemas.id_cine
-                inner join purchases 
-                on purchases.id_purchase = tickets.id_purchase
-                 inner join movies
-                on functions.id_movie = movies.id_movie
-                where movies.title= :title and purchases.purchaseDate between :dateInicial and :dateFinal)tablaAux;";
+                        total,
+                        m.title as title,
+                        c.cinemaName as cinemaName
+                        from purchases p
+                        join tickets t
+                        on t.id_purchase = p.id_purchase
+                        join functions as f
+                        on f.id_function = t.id_function
+                        join rooms as r
+                        on f.id_room = r.id_room
+                        join cinemas as c
+                        on c.id_cine = r.id_cine
+                        join movies as m
+                        on f.id_movie = m.id_movie
+                        where m.title = :title  and p.purchaseDate BETWEEN :dateInicial and :dateFinal
+                        group by p.id_purchase) td;";
 
                 $parameters["title"] = $title;
                 $parameters["dateInicial"] = $fechaInicial;
